@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doubles.dao.ImageMapper">
+  <resultMap id="BaseResultMap" type="com.doubles.entity.Image">
+    <id column="img_id" jdbcType="VARCHAR" property="img_id" />
+    <result column="album_id" jdbcType="VARCHAR" property="album_id" />
+    <result column="img_path" jdbcType="VARCHAR" property="img_path" />
+    <result column="img_describe" jdbcType="VARCHAR" property="img_describe" />
+    <result column="like_number" jdbcType="INTEGER" property="like_number" />
+    <result column="collect_number" jdbcType="INTEGER" property="collect_number" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    img_id, album_id, img_path, img_describe, like_number, collect_number, create_time, 
+    update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.doubles.entity.ImageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from image
+    where img_id = #{img_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from image
+    where img_id = #{img_id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.doubles.entity.ImageExample">
+    delete from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.doubles.entity.Image">
+    insert into image (img_id, album_id, img_path, 
+      img_describe, like_number, collect_number, 
+      create_time, update_time)
+    values (#{img_id,jdbcType=VARCHAR}, #{album_id,jdbcType=VARCHAR}, #{img_path,jdbcType=VARCHAR}, 
+      #{img_describe,jdbcType=VARCHAR}, #{like_number,jdbcType=INTEGER}, #{collect_number,jdbcType=INTEGER}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.doubles.entity.Image">
+    insert into image
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="img_id != null">
+        img_id,
+      </if>
+      <if test="album_id != null">
+        album_id,
+      </if>
+      <if test="img_path != null">
+        img_path,
+      </if>
+      <if test="img_describe != null">
+        img_describe,
+      </if>
+      <if test="like_number != null">
+        like_number,
+      </if>
+      <if test="collect_number != null">
+        collect_number,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="img_id != null">
+        #{img_id,jdbcType=VARCHAR},
+      </if>
+      <if test="album_id != null">
+        #{album_id,jdbcType=VARCHAR},
+      </if>
+      <if test="img_path != null">
+        #{img_path,jdbcType=VARCHAR},
+      </if>
+      <if test="img_describe != null">
+        #{img_describe,jdbcType=VARCHAR},
+      </if>
+      <if test="like_number != null">
+        #{like_number,jdbcType=INTEGER},
+      </if>
+      <if test="collect_number != null">
+        #{collect_number,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.doubles.entity.ImageExample" resultType="java.lang.Long">
+    select count(*) from image
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update image
+    <set>
+      <if test="record.img_id != null">
+        img_id = #{record.img_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.album_id != null">
+        album_id = #{record.album_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img_path != null">
+        img_path = #{record.img_path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img_describe != null">
+        img_describe = #{record.img_describe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.like_number != null">
+        like_number = #{record.like_number,jdbcType=INTEGER},
+      </if>
+      <if test="record.collect_number != null">
+        collect_number = #{record.collect_number,jdbcType=INTEGER},
+      </if>
+      <if test="record.create_time != null">
+        create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.update_time != null">
+        update_time = #{record.update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update image
+    set img_id = #{record.img_id,jdbcType=VARCHAR},
+      album_id = #{record.album_id,jdbcType=VARCHAR},
+      img_path = #{record.img_path,jdbcType=VARCHAR},
+      img_describe = #{record.img_describe,jdbcType=VARCHAR},
+      like_number = #{record.like_number,jdbcType=INTEGER},
+      collect_number = #{record.collect_number,jdbcType=INTEGER},
+      create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      update_time = #{record.update_time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Image">
+    update image
+    <set>
+      <if test="album_id != null">
+        album_id = #{album_id,jdbcType=VARCHAR},
+      </if>
+      <if test="img_path != null">
+        img_path = #{img_path,jdbcType=VARCHAR},
+      </if>
+      <if test="img_describe != null">
+        img_describe = #{img_describe,jdbcType=VARCHAR},
+      </if>
+      <if test="like_number != null">
+        like_number = #{like_number,jdbcType=INTEGER},
+      </if>
+      <if test="collect_number != null">
+        collect_number = #{collect_number,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where img_id = #{img_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Image">
+    update image
+    set album_id = #{album_id,jdbcType=VARCHAR},
+      img_path = #{img_path,jdbcType=VARCHAR},
+      img_describe = #{img_describe,jdbcType=VARCHAR},
+      like_number = #{like_number,jdbcType=INTEGER},
+      collect_number = #{collect_number,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP}
+    where img_id = #{img_id,jdbcType=VARCHAR}
+  </update>
+</mapper>
