@@ -4,41 +4,40 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * collection
+ * @author 
  */
 public class Collection implements Serializable {
     private String collection_id;
 
     /**
-    * 收藏者id
-    **/
+     * 收藏者id
+     */
     private String user_id;
 
     /**
-    * 收藏内容的类型
-*             0-动态
-*             1-图片
-*             默认值为 0
-*             具体数据由前端判断之后发送到后台
-    **/
+     * 收藏内容的类型
+            0-动态
+            1-图片
+            默认值为 0
+            具体数据由前端判断之后发送到后台
+     */
     private Integer type;
 
     /**
-    * type为0时，表示动态id
-*             type为1时，表示图片id
-    **/
+     * type为0时，表示动态id
+            type为1时，表示图片id
+     */
     private String content_id;
 
     /**
-    * 该条记录的创建时间
-    **/
+     * 该条记录的创建时间
+     */
     private Date create_time;
 
     /**
-    * 该条记录的更新时间
-    **/
+     * 该条记录的更新时间
+     */
     private Date update_time;
 
     private static final long serialVersionUID = 1L;
@@ -47,35 +46,20 @@ public class Collection implements Serializable {
         return collection_id;
     }
 
-    public Collection withCollection_id(String collection_id) {
-        this.setCollection_id(collection_id);
-        return this;
-    }
-
     public void setCollection_id(String collection_id) {
-        this.collection_id = collection_id == null ? null : collection_id.trim();
+        this.collection_id = collection_id;
     }
 
     public String getUser_id() {
         return user_id;
     }
 
-    public Collection withUser_id(String user_id) {
-        this.setUser_id(user_id);
-        return this;
-    }
-
     public void setUser_id(String user_id) {
-        this.user_id = user_id == null ? null : user_id.trim();
+        this.user_id = user_id;
     }
 
     public Integer getType() {
         return type;
-    }
-
-    public Collection withType(Integer type) {
-        this.setType(type);
-        return this;
     }
 
     public void setType(Integer type) {
@@ -86,22 +70,12 @@ public class Collection implements Serializable {
         return content_id;
     }
 
-    public Collection withContent_id(String content_id) {
-        this.setContent_id(content_id);
-        return this;
-    }
-
     public void setContent_id(String content_id) {
-        this.content_id = content_id == null ? null : content_id.trim();
+        this.content_id = content_id;
     }
 
     public Date getCreate_time() {
         return create_time;
-    }
-
-    public Collection withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
     }
 
     public void setCreate_time(Date create_time) {
@@ -112,29 +86,8 @@ public class Collection implements Serializable {
         return update_time;
     }
 
-    public Collection withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", collection_id=").append(collection_id);
-        sb.append(", user_id=").append(user_id);
-        sb.append(", type=").append(type);
-        sb.append(", content_id=").append(content_id);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override
@@ -168,5 +121,22 @@ public class Collection implements Serializable {
         result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", collection_id=").append(collection_id);
+        sb.append(", user_id=").append(user_id);
+        sb.append(", type=").append(type);
+        sb.append(", content_id=").append(content_id);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

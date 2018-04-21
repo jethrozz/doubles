@@ -84,13 +84,6 @@ public class CommentExample {
         return offset;
     }
 
-    public void setPageInfo(Integer currentPage, Integer pageSize) {
-        if(pageSize<1) throw new IllegalArgumentException("页大小不能小于1！");
-        this.limit=pageSize;
-        if(currentPage<1) throw new IllegalArgumentException("页数不能小于1！");
-        this.offset=(currentPage-1)*pageSize;
-    }
-
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -472,6 +465,136 @@ public class CommentExample {
             return (Criteria) this;
         }
 
+        public Criteria andTo_userIsNull() {
+            addCriterion("to_user is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userIsNotNull() {
+            addCriterion("to_user is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userEqualTo(String value) {
+            addCriterion("to_user =", value, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userNotEqualTo(String value) {
+            addCriterion("to_user <>", value, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userGreaterThan(String value) {
+            addCriterion("to_user >", value, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userGreaterThanOrEqualTo(String value) {
+            addCriterion("to_user >=", value, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userLessThan(String value) {
+            addCriterion("to_user <", value, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userLessThanOrEqualTo(String value) {
+            addCriterion("to_user <=", value, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userLike(String value) {
+            addCriterion("to_user like", value, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userNotLike(String value) {
+            addCriterion("to_user not like", value, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userIn(List<String> values) {
+            addCriterion("to_user in", values, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userNotIn(List<String> values) {
+            addCriterion("to_user not in", values, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userBetween(String value1, String value2) {
+            addCriterion("to_user between", value1, value2, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTo_userNotBetween(String value1, String value2) {
+            addCriterion("to_user not between", value1, value2, "to_user");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(Byte value) {
+            addCriterion("type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(Byte value) {
+            addCriterion("type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(Byte value) {
+            addCriterion("type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(Byte value) {
+            addCriterion("type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(Byte value) {
+            addCriterion("type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<Byte> values) {
+            addCriterion("type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<Byte> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(Byte value1, Byte value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(Byte value1, Byte value2) {
+            addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
         public Criteria andCreate_timeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -591,28 +714,10 @@ public class CommentExample {
             addCriterion("update_time not between", value1, value2, "update_time");
             return (Criteria) this;
         }
-
-        public Criteria andComment_idLikeInsensitive(String value) {
-            addCriterion("upper(comment_id) like", value.toUpperCase(), "comment_id");
-            return (Criteria) this;
-        }
-
-        public Criteria andUser_idLikeInsensitive(String value) {
-            addCriterion("upper(user_id) like", value.toUpperCase(), "user_id");
-            return (Criteria) this;
-        }
-
-        public Criteria andComment_contentLikeInsensitive(String value) {
-            addCriterion("upper(comment_content) like", value.toUpperCase(), "comment_content");
-            return (Criteria) this;
-        }
-
-        public Criteria andObject_idLikeInsensitive(String value) {
-            addCriterion("upper(object_id) like", value.toUpperCase(), "object_id");
-            return (Criteria) this;
-        }
     }
 
+    /**
+     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {

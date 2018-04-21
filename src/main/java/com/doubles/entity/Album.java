@@ -4,36 +4,35 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * album
+ * @author 
  */
 public class Album implements Serializable {
     private String album_id;
 
     /**
-    * 所属用户id
-    **/
+     * 所属用户id
+     */
     private String user_id;
 
     /**
-    * 相册名称
-    **/
+     * 相册名称
+     */
     private String album_name;
 
     /**
-    * 相册描述
-    **/
+     * 相册描述
+     */
     private String album_describe;
 
     /**
-    * 相册创建时间
-    **/
+     * 相册创建时间
+     */
     private Date create_time;
 
     /**
-    * 该条记录的更新时间
-    **/
+     * 该条记录的更新时间
+     */
     private Date update_time;
 
     private static final long serialVersionUID = 1L;
@@ -42,61 +41,36 @@ public class Album implements Serializable {
         return album_id;
     }
 
-    public Album withAlbum_id(String album_id) {
-        this.setAlbum_id(album_id);
-        return this;
-    }
-
     public void setAlbum_id(String album_id) {
-        this.album_id = album_id == null ? null : album_id.trim();
+        this.album_id = album_id;
     }
 
     public String getUser_id() {
         return user_id;
     }
 
-    public Album withUser_id(String user_id) {
-        this.setUser_id(user_id);
-        return this;
-    }
-
     public void setUser_id(String user_id) {
-        this.user_id = user_id == null ? null : user_id.trim();
+        this.user_id = user_id;
     }
 
     public String getAlbum_name() {
         return album_name;
     }
 
-    public Album withAlbum_name(String album_name) {
-        this.setAlbum_name(album_name);
-        return this;
-    }
-
     public void setAlbum_name(String album_name) {
-        this.album_name = album_name == null ? null : album_name.trim();
+        this.album_name = album_name;
     }
 
     public String getAlbum_describe() {
         return album_describe;
     }
 
-    public Album withAlbum_describe(String album_describe) {
-        this.setAlbum_describe(album_describe);
-        return this;
-    }
-
     public void setAlbum_describe(String album_describe) {
-        this.album_describe = album_describe == null ? null : album_describe.trim();
+        this.album_describe = album_describe;
     }
 
     public Date getCreate_time() {
         return create_time;
-    }
-
-    public Album withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
     }
 
     public void setCreate_time(Date create_time) {
@@ -107,29 +81,8 @@ public class Album implements Serializable {
         return update_time;
     }
 
-    public Album withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", album_id=").append(album_id);
-        sb.append(", user_id=").append(user_id);
-        sb.append(", album_name=").append(album_name);
-        sb.append(", album_describe=").append(album_describe);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override
@@ -163,5 +116,22 @@ public class Album implements Serializable {
         result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", album_id=").append(album_id);
+        sb.append(", user_id=").append(user_id);
+        sb.append(", album_name=").append(album_name);
+        sb.append(", album_describe=").append(album_describe);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

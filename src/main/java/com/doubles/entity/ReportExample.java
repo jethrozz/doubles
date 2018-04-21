@@ -84,13 +84,6 @@ public class ReportExample {
         return offset;
     }
 
-    public void setPageInfo(Integer currentPage, Integer pageSize) {
-        if(pageSize<1) throw new IllegalArgumentException("页大小不能小于1！");
-        this.limit=pageSize;
-        if(currentPage<1) throw new IllegalArgumentException("页数不能小于1！");
-        this.offset=(currentPage-1)*pageSize;
-    }
-
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -591,28 +584,10 @@ public class ReportExample {
             addCriterion("update_time not between", value1, value2, "update_time");
             return (Criteria) this;
         }
-
-        public Criteria andReport_idLikeInsensitive(String value) {
-            addCriterion("upper(report_id) like", value.toUpperCase(), "report_id");
-            return (Criteria) this;
-        }
-
-        public Criteria andUser_idLikeInsensitive(String value) {
-            addCriterion("upper(user_id) like", value.toUpperCase(), "user_id");
-            return (Criteria) this;
-        }
-
-        public Criteria andContent_idLikeInsensitive(String value) {
-            addCriterion("upper(content_id) like", value.toUpperCase(), "content_id");
-            return (Criteria) this;
-        }
-
-        public Criteria andReport_describeLikeInsensitive(String value) {
-            addCriterion("upper(report_describe) like", value.toUpperCase(), "report_describe");
-            return (Criteria) this;
-        }
     }
 
+    /**
+     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {

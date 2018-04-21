@@ -83,13 +83,6 @@ public class ArtilceTopicExample {
         return offset;
     }
 
-    public void setPageInfo(Integer currentPage, Integer pageSize) {
-        if(pageSize<1) throw new IllegalArgumentException("页大小不能小于1！");
-        this.limit=pageSize;
-        if(currentPage<1) throw new IllegalArgumentException("页数不能小于1！");
-        this.offset=(currentPage-1)*pageSize;
-    }
-
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -340,23 +333,10 @@ public class ArtilceTopicExample {
             addCriterion("topic_id not between", value1, value2, "topic_id");
             return (Criteria) this;
         }
-
-        public Criteria andAt_idLikeInsensitive(String value) {
-            addCriterion("upper(at_id) like", value.toUpperCase(), "at_id");
-            return (Criteria) this;
-        }
-
-        public Criteria andArticle_idLikeInsensitive(String value) {
-            addCriterion("upper(article_id) like", value.toUpperCase(), "article_id");
-            return (Criteria) this;
-        }
-
-        public Criteria andTopic_idLikeInsensitive(String value) {
-            addCriterion("upper(topic_id) like", value.toUpperCase(), "topic_id");
-            return (Criteria) this;
-        }
     }
 
+    /**
+     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {

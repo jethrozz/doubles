@@ -3,10 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.Relationship;
 import com.doubles.entity.RelationshipExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface RelationshipMapper {
     long countByExample(RelationshipExample example);
 

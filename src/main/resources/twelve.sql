@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/4/20 15:32:07                           */
+/* Created on:     2018/4/20 23:39:53                           */
 /*==============================================================*/
 
 
@@ -23,6 +23,8 @@ drop table if exists comment;
 drop table if exists image;
 
 drop table if exists relationship;
+
+drop index Relationship_14_FK on reply;
 
 drop table if exists reply;
 
@@ -227,8 +229,7 @@ create table reply
 (
    reply_id             varchar(32) not null,
    user_id              varchar(32) comment '发出这条回复的用户id',
-   comment_id           varchar(32) comment '对应的评论id
-            表明这条回复是哪个评论下的',
+   object_id            varchar(32),
    reply_content        varchar(1024) not null comment '回复内容',
    to_user              varchar(32) not null comment '接收这条回复的用户id',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建这条记录的时间',
@@ -237,6 +238,14 @@ create table reply
 );
 
 alter table reply comment '回复表';
+
+/*==============================================================*/
+/* Index: Relationship_14_FK                                    */
+/*==============================================================*/
+create index Relationship_14_FK on reply
+(
+   
+);
 
 /*==============================================================*/
 /* Table: report                                                */
@@ -321,6 +330,7 @@ create table users
    user_id              varchar(32) not null,
    username             varchar(32) not null comment '用户名',
    password             varchar(32) not null comment '密码',
+   userImg              varchar(256) not null comment '用户头像。存放路径或者七牛地址',
    nickname             varchar(32) not null comment '用户昵称',
    userSex              varchar(2) default '0' comment '用户性别
             0-女
@@ -378,9 +388,6 @@ alter table image add constraint FK_Relationship_12 foreign key (album_id)
 
 alter table relationship add constraint FK_Relationship_8 foreign key (user_id)
       references users (user_id) on delete restrict on update restrict;
-
-alter table reply add constraint FK_Relationship_14 foreign key (comment_id)
-      references comment (comment_id) on delete restrict on update restrict;
 
 alter table reply add constraint FK_Relationship_5 foreign key (user_id)
       references users (user_id) on delete restrict on update restrict;

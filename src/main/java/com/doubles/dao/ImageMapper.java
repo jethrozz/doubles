@@ -3,10 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.Image;
 import com.doubles.entity.ImageExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface ImageMapper {
     long countByExample(ImageExample example);
 

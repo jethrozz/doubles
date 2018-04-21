@@ -4,38 +4,37 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * admin
+ * @author 
  */
 public class Admin implements Serializable {
     private String admin_id;
 
     /**
-    * 用户名
-    **/
+     * 用户名
+     */
     private String username;
 
     /**
-    * 密码
-    **/
+     * 密码
+     */
     private String password;
 
     /**
-    * 用数字表示权限
-*             0-普通
-*             1-高级
-    **/
+     * 用数字表示权限
+            0-普通
+            1-高级
+     */
     private Integer power;
 
     /**
-    * 这条记录的创建时间
-    **/
+     * 这条记录的创建时间
+     */
     private Date create_time;
 
     /**
-    * 这条记录的更新时间
-    **/
+     * 这条记录的更新时间
+     */
     private Date update_time;
 
     private static final long serialVersionUID = 1L;
@@ -44,48 +43,28 @@ public class Admin implements Serializable {
         return admin_id;
     }
 
-    public Admin withAdmin_id(String admin_id) {
-        this.setAdmin_id(admin_id);
-        return this;
-    }
-
     public void setAdmin_id(String admin_id) {
-        this.admin_id = admin_id == null ? null : admin_id.trim();
+        this.admin_id = admin_id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public Admin withUsername(String username) {
-        this.setUsername(username);
-        return this;
-    }
-
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public Admin withPassword(String password) {
-        this.setPassword(password);
-        return this;
-    }
-
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public Integer getPower() {
         return power;
-    }
-
-    public Admin withPower(Integer power) {
-        this.setPower(power);
-        return this;
     }
 
     public void setPower(Integer power) {
@@ -96,11 +75,6 @@ public class Admin implements Serializable {
         return create_time;
     }
 
-    public Admin withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
-    }
-
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
@@ -109,29 +83,8 @@ public class Admin implements Serializable {
         return update_time;
     }
 
-    public Admin withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", admin_id=").append(admin_id);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", power=").append(power);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override
@@ -165,5 +118,22 @@ public class Admin implements Serializable {
         result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", admin_id=").append(admin_id);
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
+        sb.append(", power=").append(power);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

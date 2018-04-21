@@ -4,37 +4,36 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * relationship
+ * @author 
  */
 public class Relationship implements Serializable {
     private String relationship_id;
 
     /**
-    * 外键，表示所属用户id
-    **/
+     * 外键，表示所属用户id
+     */
     private String user_id;
 
     /**
-    * 外键，好友或者被拉黑的人的id
-    **/
+     * 外键，好友或者被拉黑的人的id
+     */
     private String friend_id;
 
     /**
-    * 是否是好友，用数字表示 0-好友，1-拉黑
-*             默认为0
-    **/
+     * 是否是好友，用数字表示 0-好友，1-拉黑
+            默认为0
+     */
     private Byte is_friend;
 
     /**
-    * 这条记录的创建时间
-    **/
+     * 这条记录的创建时间
+     */
     private Date create_time;
 
     /**
-    * 这条记录的更新时间
-    **/
+     * 这条记录的更新时间
+     */
     private Date update_time;
 
     private static final long serialVersionUID = 1L;
@@ -43,48 +42,28 @@ public class Relationship implements Serializable {
         return relationship_id;
     }
 
-    public Relationship withRelationship_id(String relationship_id) {
-        this.setRelationship_id(relationship_id);
-        return this;
-    }
-
     public void setRelationship_id(String relationship_id) {
-        this.relationship_id = relationship_id == null ? null : relationship_id.trim();
+        this.relationship_id = relationship_id;
     }
 
     public String getUser_id() {
         return user_id;
     }
 
-    public Relationship withUser_id(String user_id) {
-        this.setUser_id(user_id);
-        return this;
-    }
-
     public void setUser_id(String user_id) {
-        this.user_id = user_id == null ? null : user_id.trim();
+        this.user_id = user_id;
     }
 
     public String getFriend_id() {
         return friend_id;
     }
 
-    public Relationship withFriend_id(String friend_id) {
-        this.setFriend_id(friend_id);
-        return this;
-    }
-
     public void setFriend_id(String friend_id) {
-        this.friend_id = friend_id == null ? null : friend_id.trim();
+        this.friend_id = friend_id;
     }
 
     public Byte getIs_friend() {
         return is_friend;
-    }
-
-    public Relationship withIs_friend(Byte is_friend) {
-        this.setIs_friend(is_friend);
-        return this;
     }
 
     public void setIs_friend(Byte is_friend) {
@@ -95,11 +74,6 @@ public class Relationship implements Serializable {
         return create_time;
     }
 
-    public Relationship withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
-    }
-
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
@@ -108,29 +82,8 @@ public class Relationship implements Serializable {
         return update_time;
     }
 
-    public Relationship withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", relationship_id=").append(relationship_id);
-        sb.append(", user_id=").append(user_id);
-        sb.append(", friend_id=").append(friend_id);
-        sb.append(", is_friend=").append(is_friend);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override
@@ -164,5 +117,22 @@ public class Relationship implements Serializable {
         result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", relationship_id=").append(relationship_id);
+        sb.append(", user_id=").append(user_id);
+        sb.append(", friend_id=").append(friend_id);
+        sb.append(", is_friend=").append(is_friend);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

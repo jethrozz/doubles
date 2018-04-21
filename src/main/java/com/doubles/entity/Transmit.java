@@ -4,48 +4,47 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * transmit
+ * @author 
  */
 public class Transmit implements Serializable {
     private String transmit_id;
 
     /**
-    * 转发这条动态的用户id
-    **/
+     * 转发这条动态的用户id
+     */
     private String user_id;
 
     /**
-    * 0-动态
-*             1-图片
-    **/
+     * 0-动态
+            1-图片
+     */
     private Integer type;
 
     /**
-    * type为0时表示动态id
-*             type为1时表示图片id
-    **/
+     * type为0时表示动态id
+            type为1时表示图片id
+     */
     private String content_id;
 
     /**
-    * 转发时发表的评论，可以为空
-    **/
+     * 转发时发表的评论，可以为空
+     */
     private String comment;
 
     /**
-    * 这条转发的点赞数，初始值默认为0
-    **/
+     * 这条转发的点赞数，初始值默认为0
+     */
     private Integer like_number;
 
     /**
-    * 这条记录的创建时间
-    **/
+     * 这条记录的创建时间
+     */
     private Date create_time;
 
     /**
-    * 这条记录的更新时间
-    **/
+     * 这条记录的更新时间
+     */
     private Date update_time;
 
     private static final long serialVersionUID = 1L;
@@ -54,35 +53,20 @@ public class Transmit implements Serializable {
         return transmit_id;
     }
 
-    public Transmit withTransmit_id(String transmit_id) {
-        this.setTransmit_id(transmit_id);
-        return this;
-    }
-
     public void setTransmit_id(String transmit_id) {
-        this.transmit_id = transmit_id == null ? null : transmit_id.trim();
+        this.transmit_id = transmit_id;
     }
 
     public String getUser_id() {
         return user_id;
     }
 
-    public Transmit withUser_id(String user_id) {
-        this.setUser_id(user_id);
-        return this;
-    }
-
     public void setUser_id(String user_id) {
-        this.user_id = user_id == null ? null : user_id.trim();
+        this.user_id = user_id;
     }
 
     public Integer getType() {
         return type;
-    }
-
-    public Transmit withType(Integer type) {
-        this.setType(type);
-        return this;
     }
 
     public void setType(Integer type) {
@@ -93,35 +77,20 @@ public class Transmit implements Serializable {
         return content_id;
     }
 
-    public Transmit withContent_id(String content_id) {
-        this.setContent_id(content_id);
-        return this;
-    }
-
     public void setContent_id(String content_id) {
-        this.content_id = content_id == null ? null : content_id.trim();
+        this.content_id = content_id;
     }
 
     public String getComment() {
         return comment;
     }
 
-    public Transmit withComment(String comment) {
-        this.setComment(comment);
-        return this;
-    }
-
     public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+        this.comment = comment;
     }
 
     public Integer getLike_number() {
         return like_number;
-    }
-
-    public Transmit withLike_number(Integer like_number) {
-        this.setLike_number(like_number);
-        return this;
     }
 
     public void setLike_number(Integer like_number) {
@@ -132,11 +101,6 @@ public class Transmit implements Serializable {
         return create_time;
     }
 
-    public Transmit withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
-    }
-
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
@@ -145,31 +109,8 @@ public class Transmit implements Serializable {
         return update_time;
     }
 
-    public Transmit withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", transmit_id=").append(transmit_id);
-        sb.append(", user_id=").append(user_id);
-        sb.append(", type=").append(type);
-        sb.append(", content_id=").append(content_id);
-        sb.append(", comment=").append(comment);
-        sb.append(", like_number=").append(like_number);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override
@@ -207,5 +148,24 @@ public class Transmit implements Serializable {
         result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", transmit_id=").append(transmit_id);
+        sb.append(", user_id=").append(user_id);
+        sb.append(", type=").append(type);
+        sb.append(", content_id=").append(content_id);
+        sb.append(", comment=").append(comment);
+        sb.append(", like_number=").append(like_number);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

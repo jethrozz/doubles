@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.doubles.dao.CommentMapper">
-  <resultMap id="BaseResultMap" type="com.doubles.entity.Comment">
-    <id column="comment_id" jdbcType="VARCHAR" property="comment_id" />
-    <result column="user_id" jdbcType="VARCHAR" property="user_id" />
-    <result column="comment_content" jdbcType="VARCHAR" property="comment_content" />
-    <result column="object_type" jdbcType="INTEGER" property="object_type" />
-    <result column="object_id" jdbcType="VARCHAR" property="object_id" />
+<mapper namespace="com.doubles.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.doubles.entity.Admin">
+    <id column="admin_id" jdbcType="VARCHAR" property="admin_id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="power" jdbcType="INTEGER" property="power" />
     <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
     <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
   </resultMap>
@@ -69,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    comment_id, user_id, comment_content, object_type, object_id, create_time, update_time
+    admin_id, username, password, power, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.doubles.entity.CommentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.doubles.entity.AdminExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from comment
+    from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,44 +95,41 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from comment
-    where comment_id = #{comment_id,jdbcType=VARCHAR}
+    from admin
+    where admin_id = #{admin_id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from comment
-    where comment_id = #{comment_id,jdbcType=VARCHAR}
+    delete from admin
+    where admin_id = #{admin_id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.doubles.entity.CommentExample">
-    delete from comment
+  <delete id="deleteByExample" parameterType="com.doubles.entity.AdminExample">
+    delete from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.Comment">
-    insert into comment (comment_id, user_id, comment_content, 
-      object_type, object_id, create_time, 
-      update_time)
-    values (#{comment_id,jdbcType=VARCHAR}, #{user_id,jdbcType=VARCHAR}, #{comment_content,jdbcType=VARCHAR}, 
-      #{object_type,jdbcType=INTEGER}, #{object_id,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, 
-      #{update_time,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.doubles.entity.Admin">
+    insert into admin (admin_id, username, password, 
+      power, create_time, update_time
+      )
+    values (#{admin_id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{power,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.Comment">
-    insert into comment
+  <insert id="insertSelective" parameterType="com.doubles.entity.Admin">
+    insert into admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="comment_id != null">
-        comment_id,
+      <if test="admin_id != null">
+        admin_id,
       </if>
-      <if test="user_id != null">
-        user_id,
+      <if test="username != null">
+        username,
       </if>
-      <if test="comment_content != null">
-        comment_content,
+      <if test="password != null">
+        password,
       </if>
-      <if test="object_type != null">
-        object_type,
-      </if>
-      <if test="object_id != null">
-        object_id,
+      <if test="power != null">
+        power,
       </if>
       <if test="create_time != null">
         create_time,
@@ -143,20 +139,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="comment_id != null">
-        #{comment_id,jdbcType=VARCHAR},
+      <if test="admin_id != null">
+        #{admin_id,jdbcType=VARCHAR},
       </if>
-      <if test="user_id != null">
-        #{user_id,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="comment_content != null">
-        #{comment_content,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="object_type != null">
-        #{object_type,jdbcType=INTEGER},
-      </if>
-      <if test="object_id != null">
-        #{object_id,jdbcType=VARCHAR},
+      <if test="power != null">
+        #{power,jdbcType=INTEGER},
       </if>
       <if test="create_time != null">
         #{create_time,jdbcType=TIMESTAMP},
@@ -166,29 +159,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.doubles.entity.CommentExample" resultType="java.lang.Long">
-    select count(*) from comment
+  <select id="countByExample" parameterType="com.doubles.entity.AdminExample" resultType="java.lang.Long">
+    select count(*) from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update comment
+    update admin
     <set>
-      <if test="record.comment_id != null">
-        comment_id = #{record.comment_id,jdbcType=VARCHAR},
+      <if test="record.admin_id != null">
+        admin_id = #{record.admin_id,jdbcType=VARCHAR},
       </if>
-      <if test="record.user_id != null">
-        user_id = #{record.user_id,jdbcType=VARCHAR},
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.comment_content != null">
-        comment_content = #{record.comment_content,jdbcType=VARCHAR},
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.object_type != null">
-        object_type = #{record.object_type,jdbcType=INTEGER},
-      </if>
-      <if test="record.object_id != null">
-        object_id = #{record.object_id,jdbcType=VARCHAR},
+      <if test="record.power != null">
+        power = #{record.power,jdbcType=INTEGER},
       </if>
       <if test="record.create_time != null">
         create_time = #{record.create_time,jdbcType=TIMESTAMP},
@@ -202,32 +192,28 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update comment
-    set comment_id = #{record.comment_id,jdbcType=VARCHAR},
-      user_id = #{record.user_id,jdbcType=VARCHAR},
-      comment_content = #{record.comment_content,jdbcType=VARCHAR},
-      object_type = #{record.object_type,jdbcType=INTEGER},
-      object_id = #{record.object_id,jdbcType=VARCHAR},
+    update admin
+    set admin_id = #{record.admin_id,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      power = #{record.power,jdbcType=INTEGER},
       create_time = #{record.create_time,jdbcType=TIMESTAMP},
       update_time = #{record.update_time,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Comment">
-    update comment
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Admin">
+    update admin
     <set>
-      <if test="user_id != null">
-        user_id = #{user_id,jdbcType=VARCHAR},
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="comment_content != null">
-        comment_content = #{comment_content,jdbcType=VARCHAR},
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="object_type != null">
-        object_type = #{object_type,jdbcType=INTEGER},
-      </if>
-      <if test="object_id != null">
-        object_id = #{object_id,jdbcType=VARCHAR},
+      <if test="power != null">
+        power = #{power,jdbcType=INTEGER},
       </if>
       <if test="create_time != null">
         create_time = #{create_time,jdbcType=TIMESTAMP},
@@ -236,16 +222,15 @@
         update_time = #{update_time,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where comment_id = #{comment_id,jdbcType=VARCHAR}
+    where admin_id = #{admin_id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Comment">
-    update comment
-    set user_id = #{user_id,jdbcType=VARCHAR},
-      comment_content = #{comment_content,jdbcType=VARCHAR},
-      object_type = #{object_type,jdbcType=INTEGER},
-      object_id = #{object_id,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Admin">
+    update admin
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      power = #{power,jdbcType=INTEGER},
       create_time = #{create_time,jdbcType=TIMESTAMP},
       update_time = #{update_time,jdbcType=TIMESTAMP}
-    where comment_id = #{comment_id,jdbcType=VARCHAR}
+    where admin_id = #{admin_id,jdbcType=VARCHAR}
   </update>
 </mapper>

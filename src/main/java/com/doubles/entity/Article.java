@@ -4,71 +4,70 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * article
+ * @author 
  */
 public class Article implements Serializable {
     private String article_id;
 
     /**
-    * 表示这条动态所属用户的id
-    **/
+     * 表示这条动态所属用户的id
+     */
     private String user_id;
 
     /**
-    * 是否带图，0-带图，1-不带
-*             默认为0
-    **/
+     * 是否带图，0-带图，1-不带
+            默认为0
+     */
     private Byte is_haveImg;
 
     /**
-    * 点赞数量，初始值为0
-    **/
+     * 点赞数量，初始值为0
+     */
     private Integer like_number;
 
     /**
-    * 收藏数量，初始值为0，
-    **/
+     * 收藏数量，初始值为0，
+     */
     private Integer collect_number;
 
     /**
-    * 转发数量，初始值 默认为0
-    **/
+     * 转发数量，初始值 默认为0
+     */
     private Integer transmit_number;
 
     /**
-    * 是否被举报
-*             0-被举报
-*             1-没有被举报
-*             默认为1
-    **/
+     * 是否被举报
+            0-被举报
+            1-没有被举报
+            默认为1
+     */
     private Byte is_report;
 
     /**
-    * 被举报的数量，初始值默认为0
-    **/
+     * 被举报的数量，初始值默认为0
+     */
     private Integer report_number;
 
     /**
-    * 动态话题分类，表示该条动态参与的话题标签，以字符串形式保存在数据库中，中间以  _  做分隔符
-*             如：人像_黑白_摄影
-    **/
+     * 动态话题分类，表示该条动态参与的话题标签，以字符串形式保存在数据库中，中间以  _  做分隔符
+            如：人像_黑白_摄影
+     */
     private String type;
 
     /**
-    * 这条动态的创建时间
-    **/
+     * 这条动态的创建时间
+     */
     private Date create_time;
 
     /**
-    * 这条记录的修改时间
-    **/
+     * 这条记录的修改时间
+     */
     private Date update_time;
 
     /**
-    * 动态内容的文字部分
-    **/
+     * 动态内容的文字部分
+     */
     private String content;
 
     private static final long serialVersionUID = 1L;
@@ -77,35 +76,20 @@ public class Article implements Serializable {
         return article_id;
     }
 
-    public Article withArticle_id(String article_id) {
-        this.setArticle_id(article_id);
-        return this;
-    }
-
     public void setArticle_id(String article_id) {
-        this.article_id = article_id == null ? null : article_id.trim();
+        this.article_id = article_id;
     }
 
     public String getUser_id() {
         return user_id;
     }
 
-    public Article withUser_id(String user_id) {
-        this.setUser_id(user_id);
-        return this;
-    }
-
     public void setUser_id(String user_id) {
-        this.user_id = user_id == null ? null : user_id.trim();
+        this.user_id = user_id;
     }
 
     public Byte getIs_haveImg() {
         return is_haveImg;
-    }
-
-    public Article withIs_haveImg(Byte is_haveImg) {
-        this.setIs_haveImg(is_haveImg);
-        return this;
     }
 
     public void setIs_haveImg(Byte is_haveImg) {
@@ -116,22 +100,12 @@ public class Article implements Serializable {
         return like_number;
     }
 
-    public Article withLike_number(Integer like_number) {
-        this.setLike_number(like_number);
-        return this;
-    }
-
     public void setLike_number(Integer like_number) {
         this.like_number = like_number;
     }
 
     public Integer getCollect_number() {
         return collect_number;
-    }
-
-    public Article withCollect_number(Integer collect_number) {
-        this.setCollect_number(collect_number);
-        return this;
     }
 
     public void setCollect_number(Integer collect_number) {
@@ -142,22 +116,12 @@ public class Article implements Serializable {
         return transmit_number;
     }
 
-    public Article withTransmit_number(Integer transmit_number) {
-        this.setTransmit_number(transmit_number);
-        return this;
-    }
-
     public void setTransmit_number(Integer transmit_number) {
         this.transmit_number = transmit_number;
     }
 
     public Byte getIs_report() {
         return is_report;
-    }
-
-    public Article withIs_report(Byte is_report) {
-        this.setIs_report(is_report);
-        return this;
     }
 
     public void setIs_report(Byte is_report) {
@@ -168,11 +132,6 @@ public class Article implements Serializable {
         return report_number;
     }
 
-    public Article withReport_number(Integer report_number) {
-        this.setReport_number(report_number);
-        return this;
-    }
-
     public void setReport_number(Integer report_number) {
         this.report_number = report_number;
     }
@@ -181,22 +140,12 @@ public class Article implements Serializable {
         return type;
     }
 
-    public Article withType(String type) {
-        this.setType(type);
-        return this;
-    }
-
     public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+        this.type = type;
     }
 
     public Date getCreate_time() {
         return create_time;
-    }
-
-    public Article withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
     }
 
     public void setCreate_time(Date create_time) {
@@ -207,11 +156,6 @@ public class Article implements Serializable {
         return update_time;
     }
 
-    public Article withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
     }
@@ -220,35 +164,8 @@ public class Article implements Serializable {
         return content;
     }
 
-    public Article withContent(String content) {
-        this.setContent(content);
-        return this;
-    }
-
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", article_id=").append(article_id);
-        sb.append(", user_id=").append(user_id);
-        sb.append(", is_haveImg=").append(is_haveImg);
-        sb.append(", like_number=").append(like_number);
-        sb.append(", collect_number=").append(collect_number);
-        sb.append(", transmit_number=").append(transmit_number);
-        sb.append(", is_report=").append(is_report);
-        sb.append(", report_number=").append(report_number);
-        sb.append(", type=").append(type);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append(", content=").append(content);
-        sb.append("]");
-        return sb.toString();
+        this.content = content;
     }
 
     @Override
@@ -294,5 +211,28 @@ public class Article implements Serializable {
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", article_id=").append(article_id);
+        sb.append(", user_id=").append(user_id);
+        sb.append(", is_haveImg=").append(is_haveImg);
+        sb.append(", like_number=").append(like_number);
+        sb.append(", collect_number=").append(collect_number);
+        sb.append(", transmit_number=").append(transmit_number);
+        sb.append(", is_report=").append(is_report);
+        sb.append(", report_number=").append(report_number);
+        sb.append(", type=").append(type);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", content=").append(content);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

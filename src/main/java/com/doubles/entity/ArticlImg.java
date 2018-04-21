@@ -3,21 +3,20 @@ package com.doubles.entity;
 import java.io.Serializable;
 
 /**
- * Description:
- * 
- * 
+ * articl_img
+ * @author 
  */
 public class ArticlImg implements Serializable {
     private String ai_id;
 
     /**
-    * 动态的id
-    **/
+     * 动态的id
+     */
     private String article_id;
 
     /**
-    * 该动态下的图片id
-    **/
+     * 该动态下的图片id
+     */
     private String img_id;
 
     private static final long serialVersionUID = 1L;
@@ -26,52 +25,24 @@ public class ArticlImg implements Serializable {
         return ai_id;
     }
 
-    public ArticlImg withAi_id(String ai_id) {
-        this.setAi_id(ai_id);
-        return this;
-    }
-
     public void setAi_id(String ai_id) {
-        this.ai_id = ai_id == null ? null : ai_id.trim();
+        this.ai_id = ai_id;
     }
 
     public String getArticle_id() {
         return article_id;
     }
 
-    public ArticlImg withArticle_id(String article_id) {
-        this.setArticle_id(article_id);
-        return this;
-    }
-
     public void setArticle_id(String article_id) {
-        this.article_id = article_id == null ? null : article_id.trim();
+        this.article_id = article_id;
     }
 
     public String getImg_id() {
         return img_id;
     }
 
-    public ArticlImg withImg_id(String img_id) {
-        this.setImg_id(img_id);
-        return this;
-    }
-
     public void setImg_id(String img_id) {
-        this.img_id = img_id == null ? null : img_id.trim();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", ai_id=").append(ai_id);
-        sb.append(", article_id=").append(article_id);
-        sb.append(", img_id=").append(img_id);
-        sb.append("]");
-        return sb.toString();
+        this.img_id = img_id;
     }
 
     @Override
@@ -99,5 +70,19 @@ public class ArticlImg implements Serializable {
         result = prime * result + ((getArticle_id() == null) ? 0 : getArticle_id().hashCode());
         result = prime * result + ((getImg_id() == null) ? 0 : getImg_id().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", ai_id=").append(ai_id);
+        sb.append(", article_id=").append(article_id);
+        sb.append(", img_id=").append(img_id);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

@@ -3,10 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.Topic;
 import com.doubles.entity.TopicExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface TopicMapper {
     long countByExample(TopicExample example);
 

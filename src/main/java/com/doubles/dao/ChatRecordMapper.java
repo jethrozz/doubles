@@ -3,10 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.ChatRecord;
 import com.doubles.entity.ChatRecordExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface ChatRecordMapper {
     long countByExample(ChatRecordExample example);
 

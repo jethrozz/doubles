@@ -5,6 +5,7 @@
     <id column="user_id" jdbcType="VARCHAR" property="user_id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="userImg" jdbcType="VARCHAR" property="userImg" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="userSex" jdbcType="VARCHAR" property="userSex" />
     <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
@@ -74,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, username, password, nickname, userSex, birthday, userinfo, phonenumber, 
+    user_id, username, password, userImg, nickname, userSex, birthday, userinfo, phonenumber, 
     usermail, userlike, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.doubles.entity.UsersExample" resultMap="BaseResultMap">
@@ -117,15 +118,15 @@
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.Users">
     insert into users (user_id, username, password, 
-      nickname, userSex, birthday, 
-      userinfo, phonenumber, usermail, 
-      userlike, create_time, update_time
-      )
+      userImg, nickname, userSex, 
+      birthday, userinfo, phonenumber, 
+      usermail, userlike, create_time, 
+      update_time)
     values (#{user_id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{userinfo,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, #{usermail,jdbcType=VARCHAR}, 
-      #{userlike,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}
-      )
+      #{userImg,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{userinfo,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, 
+      #{usermail,jdbcType=VARCHAR}, #{userlike,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, 
+      #{update_time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.Users">
     insert into users
@@ -138,6 +139,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="userImg != null">
+        userImg,
       </if>
       <if test="nickname != null">
         nickname,
@@ -176,6 +180,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        #{userImg,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
@@ -224,6 +231,9 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.userImg != null">
+        userImg = #{record.userImg,jdbcType=VARCHAR},
+      </if>
       <if test="record.nickname != null">
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
@@ -261,6 +271,7 @@
     set user_id = #{record.user_id,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      userImg = #{record.userImg,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       userSex = #{record.userSex,jdbcType=VARCHAR},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
@@ -282,6 +293,9 @@
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        userImg = #{userImg,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
@@ -317,6 +331,7 @@
     update users
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      userImg = #{userImg,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
       userSex = #{userSex,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=TIMESTAMP},

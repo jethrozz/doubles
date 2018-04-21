@@ -3,10 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.Admin;
 import com.doubles.entity.AdminExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface AdminMapper {
     long countByExample(AdminExample example);
 

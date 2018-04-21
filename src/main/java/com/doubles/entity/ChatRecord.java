@@ -4,36 +4,35 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * chat_record
+ * @author 
  */
 public class ChatRecord implements Serializable {
     private String cr_id;
 
     /**
-    * 这条消息 的发送者id
-    **/
+     * 这条消息 的发送者id
+     */
     private String user_id;
 
     /**
-    * 这条消息的接收者id
-    **/
+     * 这条消息的接收者id
+     */
     private String to_user;
 
     /**
-    * 这条消息的消息内容
-    **/
+     * 这条消息的消息内容
+     */
     private String content;
 
     /**
-    * 这条记录的创建时间
-    **/
+     * 这条记录的创建时间
+     */
     private Date create_time;
 
     /**
-    * 这条消息的更新时间
-    **/
+     * 这条消息的更新时间
+     */
     private Date update_time;
 
     private static final long serialVersionUID = 1L;
@@ -42,61 +41,36 @@ public class ChatRecord implements Serializable {
         return cr_id;
     }
 
-    public ChatRecord withCr_id(String cr_id) {
-        this.setCr_id(cr_id);
-        return this;
-    }
-
     public void setCr_id(String cr_id) {
-        this.cr_id = cr_id == null ? null : cr_id.trim();
+        this.cr_id = cr_id;
     }
 
     public String getUser_id() {
         return user_id;
     }
 
-    public ChatRecord withUser_id(String user_id) {
-        this.setUser_id(user_id);
-        return this;
-    }
-
     public void setUser_id(String user_id) {
-        this.user_id = user_id == null ? null : user_id.trim();
+        this.user_id = user_id;
     }
 
     public String getTo_user() {
         return to_user;
     }
 
-    public ChatRecord withTo_user(String to_user) {
-        this.setTo_user(to_user);
-        return this;
-    }
-
     public void setTo_user(String to_user) {
-        this.to_user = to_user == null ? null : to_user.trim();
+        this.to_user = to_user;
     }
 
     public String getContent() {
         return content;
     }
 
-    public ChatRecord withContent(String content) {
-        this.setContent(content);
-        return this;
-    }
-
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content;
     }
 
     public Date getCreate_time() {
         return create_time;
-    }
-
-    public ChatRecord withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
     }
 
     public void setCreate_time(Date create_time) {
@@ -107,29 +81,8 @@ public class ChatRecord implements Serializable {
         return update_time;
     }
 
-    public ChatRecord withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", cr_id=").append(cr_id);
-        sb.append(", user_id=").append(user_id);
-        sb.append(", to_user=").append(to_user);
-        sb.append(", content=").append(content);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override
@@ -163,5 +116,22 @@ public class ChatRecord implements Serializable {
         result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", cr_id=").append(cr_id);
+        sb.append(", user_id=").append(user_id);
+        sb.append(", to_user=").append(to_user);
+        sb.append(", content=").append(content);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

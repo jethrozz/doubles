@@ -4,47 +4,46 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * report
+ * @author 
  */
 public class Report implements Serializable {
     private String report_id;
 
     /**
-    * 举报用户的id
-    **/
+     * 举报用户的id
+     */
     private String user_id;
 
     /**
-    * 举报内容的类型，表示图片还是动态
-*             0-动态
-*             1-图片
-*             默认为0
-*             具体数据由前端判断之后发送到后台
-    **/
+     * 举报内容的类型，表示图片还是动态
+            0-动态
+            1-图片
+            默认为0
+            具体数据由前端判断之后发送到后台
+     */
     private Integer type;
 
     /**
-    * 被举报内容的id
-*             type为0，表示为动态id
-*             type为1，表示为图片id
-    **/
+     * 被举报内容的id
+            type为0，表示为动态id
+            type为1，表示为图片id
+     */
     private String content_id;
 
     /**
-    * 举报内容
-    **/
+     * 举报内容
+     */
     private String report_describe;
 
     /**
-    * 该条记录的创建时间
-    **/
+     * 该条记录的创建时间
+     */
     private Date create_time;
 
     /**
-    * 该条记录的更新时间
-    **/
+     * 该条记录的更新时间
+     */
     private Date update_time;
 
     private static final long serialVersionUID = 1L;
@@ -53,35 +52,20 @@ public class Report implements Serializable {
         return report_id;
     }
 
-    public Report withReport_id(String report_id) {
-        this.setReport_id(report_id);
-        return this;
-    }
-
     public void setReport_id(String report_id) {
-        this.report_id = report_id == null ? null : report_id.trim();
+        this.report_id = report_id;
     }
 
     public String getUser_id() {
         return user_id;
     }
 
-    public Report withUser_id(String user_id) {
-        this.setUser_id(user_id);
-        return this;
-    }
-
     public void setUser_id(String user_id) {
-        this.user_id = user_id == null ? null : user_id.trim();
+        this.user_id = user_id;
     }
 
     public Integer getType() {
         return type;
-    }
-
-    public Report withType(Integer type) {
-        this.setType(type);
-        return this;
     }
 
     public void setType(Integer type) {
@@ -92,35 +76,20 @@ public class Report implements Serializable {
         return content_id;
     }
 
-    public Report withContent_id(String content_id) {
-        this.setContent_id(content_id);
-        return this;
-    }
-
     public void setContent_id(String content_id) {
-        this.content_id = content_id == null ? null : content_id.trim();
+        this.content_id = content_id;
     }
 
     public String getReport_describe() {
         return report_describe;
     }
 
-    public Report withReport_describe(String report_describe) {
-        this.setReport_describe(report_describe);
-        return this;
-    }
-
     public void setReport_describe(String report_describe) {
-        this.report_describe = report_describe == null ? null : report_describe.trim();
+        this.report_describe = report_describe;
     }
 
     public Date getCreate_time() {
         return create_time;
-    }
-
-    public Report withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
     }
 
     public void setCreate_time(Date create_time) {
@@ -131,30 +100,8 @@ public class Report implements Serializable {
         return update_time;
     }
 
-    public Report withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", report_id=").append(report_id);
-        sb.append(", user_id=").append(user_id);
-        sb.append(", type=").append(type);
-        sb.append(", content_id=").append(content_id);
-        sb.append(", report_describe=").append(report_describe);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override
@@ -190,5 +137,23 @@ public class Report implements Serializable {
         result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", report_id=").append(report_id);
+        sb.append(", user_id=").append(user_id);
+        sb.append(", type=").append(type);
+        sb.append(", content_id=").append(content_id);
+        sb.append(", report_describe=").append(report_describe);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

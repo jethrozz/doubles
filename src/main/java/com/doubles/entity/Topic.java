@@ -4,41 +4,40 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Description:
- * 
- * 
+ * topic
+ * @author 
  */
 public class Topic implements Serializable {
     private String topic_id;
 
     /**
-    * 话题标题
-    **/
+     * 话题标题
+     */
     private String title;
 
     /**
-    * 话题的相关描述，数据库中可以为空
-    **/
+     * 话题的相关描述，数据库中可以为空
+     */
     private String descirbe;
 
     /**
-    * 该话题的被关注数量，初始值为0
-    **/
+     * 该话题的被关注数量，初始值为0
+     */
     private Integer fan_number;
 
     /**
-    * 该话题下的动态数量，初始值为0
-    **/
+     * 该话题下的动态数量，初始值为0
+     */
     private Integer discussion_number;
 
     /**
-    * 该条记录的创建时间
-    **/
+     * 该条记录的创建时间
+     */
     private Date create_time;
 
     /**
-    * 该条记录的更新时间
-    **/
+     * 该条记录的更新时间
+     */
     private Date update_time;
 
     private static final long serialVersionUID = 1L;
@@ -47,48 +46,28 @@ public class Topic implements Serializable {
         return topic_id;
     }
 
-    public Topic withTopic_id(String topic_id) {
-        this.setTopic_id(topic_id);
-        return this;
-    }
-
     public void setTopic_id(String topic_id) {
-        this.topic_id = topic_id == null ? null : topic_id.trim();
+        this.topic_id = topic_id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public Topic withTitle(String title) {
-        this.setTitle(title);
-        return this;
-    }
-
     public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+        this.title = title;
     }
 
     public String getDescirbe() {
         return descirbe;
     }
 
-    public Topic withDescirbe(String descirbe) {
-        this.setDescirbe(descirbe);
-        return this;
-    }
-
     public void setDescirbe(String descirbe) {
-        this.descirbe = descirbe == null ? null : descirbe.trim();
+        this.descirbe = descirbe;
     }
 
     public Integer getFan_number() {
         return fan_number;
-    }
-
-    public Topic withFan_number(Integer fan_number) {
-        this.setFan_number(fan_number);
-        return this;
     }
 
     public void setFan_number(Integer fan_number) {
@@ -99,22 +78,12 @@ public class Topic implements Serializable {
         return discussion_number;
     }
 
-    public Topic withDiscussion_number(Integer discussion_number) {
-        this.setDiscussion_number(discussion_number);
-        return this;
-    }
-
     public void setDiscussion_number(Integer discussion_number) {
         this.discussion_number = discussion_number;
     }
 
     public Date getCreate_time() {
         return create_time;
-    }
-
-    public Topic withCreate_time(Date create_time) {
-        this.setCreate_time(create_time);
-        return this;
     }
 
     public void setCreate_time(Date create_time) {
@@ -125,30 +94,8 @@ public class Topic implements Serializable {
         return update_time;
     }
 
-    public Topic withUpdate_time(Date update_time) {
-        this.setUpdate_time(update_time);
-        return this;
-    }
-
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", topic_id=").append(topic_id);
-        sb.append(", title=").append(title);
-        sb.append(", descirbe=").append(descirbe);
-        sb.append(", fan_number=").append(fan_number);
-        sb.append(", discussion_number=").append(discussion_number);
-        sb.append(", create_time=").append(create_time);
-        sb.append(", update_time=").append(update_time);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override
@@ -184,5 +131,23 @@ public class Topic implements Serializable {
         result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
         result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", topic_id=").append(topic_id);
+        sb.append(", title=").append(title);
+        sb.append(", descirbe=").append(descirbe);
+        sb.append(", fan_number=").append(fan_number);
+        sb.append(", discussion_number=").append(discussion_number);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

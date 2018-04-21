@@ -84,13 +84,6 @@ public class UsersExample {
         return offset;
     }
 
-    public void setPageInfo(Integer currentPage, Integer pageSize) {
-        if(pageSize<1) throw new IllegalArgumentException("页大小不能小于1！");
-        this.limit=pageSize;
-        if(currentPage<1) throw new IllegalArgumentException("页数不能小于1！");
-        this.offset=(currentPage-1)*pageSize;
-    }
-
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -339,6 +332,76 @@ public class UsersExample {
 
         public Criteria andPasswordNotBetween(String value1, String value2) {
             addCriterion("password not between", value1, value2, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgIsNull() {
+            addCriterion("userImg is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgIsNotNull() {
+            addCriterion("userImg is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgEqualTo(String value) {
+            addCriterion("userImg =", value, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgNotEqualTo(String value) {
+            addCriterion("userImg <>", value, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgGreaterThan(String value) {
+            addCriterion("userImg >", value, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgGreaterThanOrEqualTo(String value) {
+            addCriterion("userImg >=", value, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgLessThan(String value) {
+            addCriterion("userImg <", value, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgLessThanOrEqualTo(String value) {
+            addCriterion("userImg <=", value, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgLike(String value) {
+            addCriterion("userImg like", value, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgNotLike(String value) {
+            addCriterion("userImg not like", value, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgIn(List<String> values) {
+            addCriterion("userImg in", values, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgNotIn(List<String> values) {
+            addCriterion("userImg not in", values, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgBetween(String value1, String value2) {
+            addCriterion("userImg between", value1, value2, "userImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserImgNotBetween(String value1, String value2) {
+            addCriterion("userImg not between", value1, value2, "userImg");
             return (Criteria) this;
         }
 
@@ -941,53 +1004,10 @@ public class UsersExample {
             addCriterion("update_time not between", value1, value2, "update_time");
             return (Criteria) this;
         }
-
-        public Criteria andUser_idLikeInsensitive(String value) {
-            addCriterion("upper(user_id) like", value.toUpperCase(), "user_id");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsernameLikeInsensitive(String value) {
-            addCriterion("upper(username) like", value.toUpperCase(), "username");
-            return (Criteria) this;
-        }
-
-        public Criteria andPasswordLikeInsensitive(String value) {
-            addCriterion("upper(password) like", value.toUpperCase(), "password");
-            return (Criteria) this;
-        }
-
-        public Criteria andNicknameLikeInsensitive(String value) {
-            addCriterion("upper(nickname) like", value.toUpperCase(), "nickname");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSexLikeInsensitive(String value) {
-            addCriterion("upper(userSex) like", value.toUpperCase(), "userSex");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserinfoLikeInsensitive(String value) {
-            addCriterion("upper(userinfo) like", value.toUpperCase(), "userinfo");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhonenumberLikeInsensitive(String value) {
-            addCriterion("upper(phonenumber) like", value.toUpperCase(), "phonenumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsermailLikeInsensitive(String value) {
-            addCriterion("upper(usermail) like", value.toUpperCase(), "usermail");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserlikeLikeInsensitive(String value) {
-            addCriterion("upper(userlike) like", value.toUpperCase(), "userlike");
-            return (Criteria) this;
-        }
     }
 
+    /**
+     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {

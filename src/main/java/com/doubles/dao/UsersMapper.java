@@ -3,10 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.Users;
 import com.doubles.entity.UsersExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface UsersMapper {
     long countByExample(UsersExample example);
 
