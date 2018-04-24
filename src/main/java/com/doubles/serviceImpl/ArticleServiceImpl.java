@@ -1,114 +1,63 @@
 package com.doubles.serviceImpl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.doubles.dao.ArticleDao;
+import com.doubles.entity.Article;
 import com.doubles.service.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-
 /**
- * @时间: 2018/4/23
- * @描述：
+ * <p>
+ * 用户动态表 服务实现类
+ * </p>
+ *
+ * @author shuang
+ * @since 2018-04-24
  */
-@Service("article")
-public class ArticleServiceImpl implements ArticleService {
-
-    @Autowired
-    ArticleMapper articleDao;
-    @Autowired
-    CommentMapper commentDao;
-    @Autowired
-    CollectionMapper collectionDao;
-    @Autowired
-    ImageMapper imageDao;
+@Service
+public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> implements ArticleService {
 
     @Override
     public Article addArticleNoImg(Article article) {
-        articleDao.insertSelective(article);
+        insert(article);
         return article;
     }
 
     @Override
     public boolean deleteArticle(Article article) {
-        if(articleDao.deleteByPrimaryKey(article.getArticle_id()) == 1){
-            return true;
-        }
-        return false;
+        return deleteById(article.getArticleId());
     }
 
     @Override
     public boolean updateArticle(Article article) {
-        if(articleDao.updateByPrimaryKeySelective(article) == 1){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Comment addComment(Comment comment) {
-        commentDao.insertSelective(comment);
-        return comment;
-    }
-
-    @Override
-    public boolean deleteComment(String commentId) {
-        if(commentDao.deleteByPrimaryKey(commentId) == 1){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean updateComment(Comment comment) {
-        if(commentDao.updateByPrimaryKeySelective(comment) == 1){
-            return true;
-        }
-        return false;
+        return updateById(article);
     }
 
     @Override
     public boolean updateArticleLikeNumber(Article article) {
-        return false;
+        return updateById(article);
     }
-
-    @Override
-    public Collection addCollection(Collection collection) {
-        collectionDao.insertSelective(collection);
-        if(collection.getType() == 0){
-            //如果是动态，则动态的收藏数+1
-            Article article = articleDao.selectByPrimaryKey(collection.getContent_id());
-            article.setCollect_number(article.getCollect_number()+1);
-            articleDao.updateByPrimaryKeySelective(article);
-        }else if(collection.getType() == 1){
-            //则图片的收藏数加1
-            Image image = imageDao.selectByPrimaryKey(collection.getContent_id());
-            image.setCollect_number(image.getCollect_number()+1);
-            imageDao.updateByPrimaryKeySelective(image);
-        }
-        return collection ;
-    }
-
-    @Override
-    public boolean deleteCollection(String collectionId) {
-        if(collectionDao.deleteByPrimaryKey(collectionId) == 1){
-            return true;
-        }
-        return false;
-    }
-
 
     @Override
     public Page<Article> selectArticleListByUid(Page<Article> page, String user_id) {
-        return page.setRecords(articleDao.selectArticleListByUid(page,user_id));
+        EntityWrapper<Article> ew = new EntityWrapper<>();
+        ew.where("user_id = {0}",user_id);
+        ew.orderBy("create_time",false);
+        return selectPage(page,ew);
     }
 
     @Override
     public Page<Article> selectArticleListByContent(Page<Article> page, String content) {
-        return page.setRecords(articleDao.selectArticleListByContent(page,content));
+        EntityWrapper<Article> ew = new EntityWrapper<>();
+        ew.like("content",content);
+        ew.orderBy("create_time",true);
+        return selectPage(page,ew);
     }
 
     @Override
     public Article getOneArticle(String artilce_id) {
-        return articleDao.selectByPrimaryKey(artilce_id);
+        return selectById(artilce_id);
     }
 }

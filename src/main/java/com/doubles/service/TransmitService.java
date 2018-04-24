@@ -1,17 +1,16 @@
 package com.doubles.service;
 
-import java.util.List;
+import com.doubles.entity.Transmit;
+import com.baomidou.mybatisplus.service.IService;
 
 /**
- * @时间: 2018/4/23
- * @描述：
+ * <p>
+ * 转发表 服务类
+ * </p>
+ *
+ * @author shuang
+ * @since 2018-04-24
  */
-public interface TransmitService {
-    //转发
-    Transmit addTransmit(Transmit transmit);
-    //删除转发记录
-    boolean deleteTransmit(String transmitId);
-    //获取所有转发记录
-    List<Transmit> findAll();
-    
+public interface TransmitService extends IService<Transmit> {
+
 }
