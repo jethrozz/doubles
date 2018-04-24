@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/4/20 23:39:53                           */
+/* Created on:     2018/4/24 9:17:07                            */
 /*==============================================================*/
 
 
@@ -16,17 +16,13 @@ drop table if exists artilce_topic;
 
 drop table if exists chat_record;
 
-drop table if exists collection;
+drop table if exists collections;
 
-drop table if exists comment;
+drop table if exists comments;
 
 drop table if exists image;
 
 drop table if exists relationship;
-
-drop index Relationship_14_FK on reply;
-
-drop table if exists reply;
 
 drop table if exists report;
 
@@ -145,9 +141,9 @@ create table chat_record
 alter table chat_record comment '聊天记录表';
 
 /*==============================================================*/
-/* Table: collection                                            */
+/* Table: collections                                           */
 /*==============================================================*/
-create table collection
+create table collections
 (
    collection_id        varchar(32) not null,
    user_id              varchar(32) comment '收藏者id',
@@ -163,12 +159,12 @@ create table collection
    primary key (collection_id)
 );
 
-alter table collection comment '收藏表';
+alter table collections comment '收藏表';
 
 /*==============================================================*/
-/* Table: comment                                               */
+/* Table: comments                                              */
 /*==============================================================*/
-create table comment
+create table comments
 (
    comment_id           varchar(32) not null,
    user_id              varchar(32) comment '发出这条评论的用户id',
@@ -180,12 +176,17 @@ create table comment
             具体数据由前端判断之后发送给后台',
    object_id            varchar(32) not null comment 'type为0时，表示为动态id
             type为1时，表示为图片id',
+   to_user              varchar(32) not null comment '这条评论的发送对象',
+   type                 tinyint not null default 0 comment '标识回复类型，方便查询操作
+            评论则为0
+            回复为1
+            默认为0',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建这条记录时的id',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新这条记录时的id',
    primary key (comment_id)
 );
 
-alter table comment comment '评论表';
+alter table comments comment '评论表';
 
 /*==============================================================*/
 /* Table: image                                                 */
@@ -221,31 +222,6 @@ create table relationship
 );
 
 alter table relationship comment '好友关系表';
-
-/*==============================================================*/
-/* Table: reply                                                 */
-/*==============================================================*/
-create table reply
-(
-   reply_id             varchar(32) not null,
-   user_id              varchar(32) comment '发出这条回复的用户id',
-   object_id            varchar(32),
-   reply_content        varchar(1024) not null comment '回复内容',
-   to_user              varchar(32) not null comment '接收这条回复的用户id',
-   create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建这条记录的时间',
-   update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新这条记录的时间',
-   primary key (reply_id)
-);
-
-alter table reply comment '回复表';
-
-/*==============================================================*/
-/* Index: Relationship_14_FK                                    */
-/*==============================================================*/
-create index Relationship_14_FK on reply
-(
-   
-);
 
 /*==============================================================*/
 /* Table: report                                                */
@@ -330,7 +306,7 @@ create table users
    user_id              varchar(32) not null,
    username             varchar(32) not null comment '用户名',
    password             varchar(32) not null comment '密码',
-   userImg              varchar(256) not null comment '用户头像。存放路径或者七牛地址',
+   userImg              varchar(32) not null,
    nickname             varchar(32) not null comment '用户昵称',
    userSex              varchar(2) default '0' comment '用户性别
             0-女
@@ -377,19 +353,16 @@ alter table artilce_topic add constraint FK_artilce_topic2 foreign key (topic_id
 alter table chat_record add constraint FK_Relationship_7 foreign key (user_id)
       references users (user_id) on delete restrict on update restrict;
 
-alter table collection add constraint FK_Relationship_3 foreign key (user_id)
+alter table collections add constraint FK_Relationship_3 foreign key (user_id)
       references users (user_id) on delete restrict on update restrict;
 
-alter table comment add constraint FK_Relationship_4 foreign key (user_id)
+alter table comments add constraint FK_Relationship_4 foreign key (user_id)
       references users (user_id) on delete restrict on update restrict;
 
 alter table image add constraint FK_Relationship_12 foreign key (album_id)
       references album (album_id) on delete restrict on update restrict;
 
 alter table relationship add constraint FK_Relationship_8 foreign key (user_id)
-      references users (user_id) on delete restrict on update restrict;
-
-alter table reply add constraint FK_Relationship_5 foreign key (user_id)
       references users (user_id) on delete restrict on update restrict;
 
 alter table report add constraint FK_Relationship_10 foreign key (user_id)
