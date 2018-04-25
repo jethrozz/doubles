@@ -1,9 +1,19 @@
 package com.doubles.controller;
 
 
+import com.doubles.entity.Users;
+import com.doubles.model.SingletonList;
+import com.doubles.service.UsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
 
 /**
  * <p>
@@ -17,5 +27,25 @@ import org.springframework.stereotype.Controller;
 @RequestMapping("/users")
 public class UsersController {
 
+    @Autowired
+    private UsersService usersService;
+
+    @RequestMapping("/login")
+    public void userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String username, String password){
+        try{  //把sessionId记录在浏览器
+            Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(request.getSession().getId(), "utf-8"));
+            c.setPath("/");
+            //先设置cookie有效期为2天，不用担心，session不会保存2天
+            c.setMaxAge( 48*60 * 60);
+            response.addCookie(c);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Users user = usersService.userLogin(new Users(username,password));
+        if(user != null){
+            session.setAttribute("user",user);
+            //
+        }
+    }
 }
 

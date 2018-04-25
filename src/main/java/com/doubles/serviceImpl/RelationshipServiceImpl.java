@@ -10,6 +10,8 @@ import com.doubles.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * <p>
@@ -26,11 +28,16 @@ public class RelationshipServiceImpl extends ServiceImpl<RelationshipDao, Relati
     RelationshipDao relationshipDao;
     @Override
     public Page<Relationship> findFriends(Page<Relationship> page, String user_id, Integer is_friend) {
-        // RelationshipExample example = new RelationshipExample();
-        // example.or().andUser_idEqualTo(user_id).andIs_friendEqualTo(is_friend.byteValue());
         EntityWrapper<Relationship> ew = new EntityWrapper<>();
-        ew.where("user_id = {0}",user_id).and("is_friend = {0}",is_friend);
+        ew.where("friend_id = {0}",user_id).and("is_friend = {0}",is_friend);
         return page.setRecords(relationshipDao.selectPage(page,ew));
+    }
+
+    @Override
+    public List<Relationship> findFriends(String user_id,Integer is_friend) {
+        EntityWrapper<Relationship> ew = new EntityWrapper<>();
+        ew.where("friend_id = {0}",user_id).and("is_friend = {0}",is_friend);
+        return selectList(ew);
     }
 
     @Override

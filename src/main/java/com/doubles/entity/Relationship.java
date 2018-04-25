@@ -25,7 +25,7 @@ public class Relationship implements Serializable {
      */
     private String friendId;
     /**
-     * 是否是好友，用数字表示 0-好友，1-拉黑，2-相互关注
+     * 是否是好友，用数字表示 0-好友(我的关注)，1-拉黑，2-相互关注
             默认为0
      */
     private Integer isFriend;

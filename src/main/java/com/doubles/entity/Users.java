@@ -184,6 +184,11 @@ public class Users implements Serializable {
         this.updateTime = updateTime;
     }
 
+
+    public Users(String username,String password){
+        this.username = username;
+        this.password = password;
+    }
     @Override
     public String toString() {
         return "Users{" +

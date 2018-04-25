@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.doubles.entity.Relationship;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 好友关系表 服务类
@@ -13,6 +15,8 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-04-24
  */
 public interface RelationshipService extends IService<Relationship> {
-    public Page<Relationship> findFriends(Page<Relationship> page, String user_id, Integer is_friend);
-    public boolean followOrUnfollow(Relationship relationship);
+    Page<Relationship> findFriends(Page<Relationship> page, String user_id, Integer is_friend);
+    List<Relationship> findFriends(String user_id, Integer is_friend);
+
+    boolean followOrUnfollow(Relationship relationship);
 }
