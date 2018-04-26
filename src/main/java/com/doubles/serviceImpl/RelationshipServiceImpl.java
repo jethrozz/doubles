@@ -27,16 +27,24 @@ public class RelationshipServiceImpl extends ServiceImpl<RelationshipDao, Relati
     @Autowired
     RelationshipDao relationshipDao;
     @Override
-    public Page<Relationship> findFriends(Page<Relationship> page, String user_id, Integer is_friend) {
+    public Page<Relationship> findFriends(Page<Relationship> page, String user_id, Integer is_friend, int isFollowMe) {
         EntityWrapper<Relationship> ew = new EntityWrapper<>();
-        ew.where("friend_id = {0}",user_id).and("is_friend = {0}",is_friend);
+        if(isFollowMe == 0){
+            ew.where("user_id = {0}",user_id).and("is_friend = {0}",is_friend);
+        }else{
+            ew.where("friend_id = {0}",user_id).and("is_friend = {0}",is_friend);
+         }
         return page.setRecords(relationshipDao.selectPage(page,ew));
     }
 
     @Override
-    public List<Relationship> findFriends(String user_id,Integer is_friend) {
+    public List<Relationship> findFriends(String user_id,Integer is_friend, int isFollowMe) {
         EntityWrapper<Relationship> ew = new EntityWrapper<>();
-        ew.where("friend_id = {0}",user_id).and("is_friend = {0}",is_friend);
+        if(isFollowMe == 0){
+            ew.where("user_id = {0}",user_id).and("is_friend = {0}",is_friend);
+        }else{
+            ew.where("friend_id = {0}",user_id).and("is_friend = {0}",is_friend);
+        }
         return selectList(ew);
     }
 

@@ -15,8 +15,9 @@ import java.util.List;
  * @since 2018-04-24
  */
 public interface RelationshipService extends IService<Relationship> {
-    Page<Relationship> findFriends(Page<Relationship> page, String user_id, Integer is_friend);
-    List<Relationship> findFriends(String user_id, Integer is_friend);
+    //isFollowMe 为0 表示我关注的用户，或者拉黑的，或者相互关注的。为1时，表示关注了这个用户的，或者拉黑了和这个用户的所有人的集合
+    Page<Relationship> findFriends(Page<Relationship> page, String user_id, Integer is_friend, int isFollowMe);
+    List<Relationship> findFriends(String user_id, Integer is_friend, int isFollowMe);
 
     boolean followOrUnfollow(Relationship relationship);
 }

@@ -1,21 +1,18 @@
 package com.doubles.model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @时间: 2018/4/25
- * @描述：
+ * @描述：用set集合存放在线用户，因为set集合不允许重复，且会自动排序
  */
 public class SingletonList {
-    private List<String> onlineUser;
+    private Set<String> onlineUser;
     private static SingletonList instance = null;
 
     private SingletonList(){
-        onlineUser = new ArrayList<>();
+        onlineUser = new TreeSet<>();
     }
     public static synchronized SingletonList getInstance(){
         if(instance == null){
@@ -24,7 +21,7 @@ public class SingletonList {
         return instance;
     }
 
-    public List<String> getUserList() {
+    public Set<String> getUserList() {
         return onlineUser;
     }
 
@@ -32,12 +29,8 @@ public class SingletonList {
         onlineUser.add(userId);
     }
     public void removedUser(String userId){
-        Iterator<String> it = onlineUser.iterator();
-        while (it.hasNext()){
-            String id = it.next();
-            if(id.compareTo(userId) == 0){
-                it.remove();
-            }
+        if(onlineUser.contains(userId)) {
+            onlineUser.remove(userId);
         }
     }
 }
