@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -34,8 +35,17 @@ public class ArticleController {
         String userId = article.getUserId();
         //将当前发表动态的用户放入阻塞队列中，在另一个线程中进行推送操作
         SingletonArticleQueue.getInstance().addUserIntoPushQueue(userId);
-
-
     }
+
+    @RequestMapping("/addArtLike")
+    public void addLike(HttpServletRequest request,String articleId){
+        Article article = articleService.getOneArticle(articleId);
+        if(article !=  null){
+            article.setLikeNumber(article.getLikeNumber()+1);
+            articleService.updateArticleLikeNumber(article);
+        }
+    }
+
+
 }
 
