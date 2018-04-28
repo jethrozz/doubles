@@ -1,0 +1,66 @@
+PID{12368}-11:39:08.369 logback [main] WARN  o.m.s.mapper.ClassPathMapperScanner [ClassPathMapperScanner.java : 166] -No MyBatis mapper was found in '[com.baomidou.cloud.service.*.mapper*]' package. Please check your configuration.
+PID{12368}-11:39:08.594 logback [main] WARN  c.i.s.BeetlSqlStarterClassPathScanner [BeetlSqlClassPathScanner.java : 60] -BeetlSql没有在 '[com.]' 包中找到任何Mapper，请检查配置
+PID{12368}-11:39:12.067 logback [main] WARN  n.s.e.config.ConfigurationFactory [ConfigurationFactory.java : 136] -No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/C:/Users/jethro/.m2/repository/net/sf/ehcache/ehcache-core/2.6.11/ehcache-core-2.6.11.jar!/ehcache-failsafe.xml
+PID{12368}-11:39:12.220 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Admin.
+PID{12368}-11:39:12.221 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Admin ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.256 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Album.
+PID{12368}-11:39:12.257 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Album ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.282 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Article.
+PID{12368}-11:39:12.283 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Article ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.309 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.ArticlImg.
+PID{12368}-11:39:12.309 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.ArticlImg ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.333 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.ArtilceTopic.
+PID{12368}-11:39:12.333 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.ArtilceTopic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.356 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.ChatRecord.
+PID{12368}-11:39:12.357 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.ChatRecord ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.376 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Collections.
+PID{12368}-11:39:12.376 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Collections ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.397 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Comments.
+PID{12368}-11:39:12.398 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Comments ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.414 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Image.
+PID{12368}-11:39:12.415 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Image ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.430 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Relationship.
+PID{12368}-11:39:12.430 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Relationship ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.444 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Report.
+PID{12368}-11:39:12.445 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Report ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.458 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Topic.
+PID{12368}-11:39:12.458 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Topic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.473 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Transmit.
+PID{12368}-11:39:12.473 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Transmit ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.497 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Users.
+PID{12368}-11:39:12.498 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Users ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{12368}-11:39:12.521 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.UserTopic.
+PID{12368}-11:39:12.522 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.UserTopic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:04.821 logback [main] WARN  o.m.s.mapper.ClassPathMapperScanner [ClassPathMapperScanner.java : 166] -No MyBatis mapper was found in '[com.baomidou.cloud.service.*.mapper*]' package. Please check your configuration.
+PID{10980}-11:40:04.917 logback [main] WARN  c.i.s.BeetlSqlStarterClassPathScanner [BeetlSqlClassPathScanner.java : 60] -BeetlSql没有在 '[com.]' 包中找到任何Mapper，请检查配置
+PID{10980}-11:40:06.676 logback [main] WARN  n.s.e.config.ConfigurationFactory [ConfigurationFactory.java : 136] -No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/C:/Users/jethro/.m2/repository/net/sf/ehcache/ehcache-core/2.6.11/ehcache-core-2.6.11.jar!/ehcache-failsafe.xml
+PID{10980}-11:40:06.758 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Admin.
+PID{10980}-11:40:06.758 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Admin ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.794 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Album.
+PID{10980}-11:40:06.794 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Album ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.820 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Article.
+PID{10980}-11:40:06.821 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Article ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.845 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.ArticlImg.
+PID{10980}-11:40:06.845 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.ArticlImg ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.866 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.ArtilceTopic.
+PID{10980}-11:40:06.866 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.ArtilceTopic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.887 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.ChatRecord.
+PID{10980}-11:40:06.888 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.ChatRecord ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.907 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Collections.
+PID{10980}-11:40:06.908 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Collections ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.926 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Comments.
+PID{10980}-11:40:06.927 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Comments ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.944 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Image.
+PID{10980}-11:40:06.945 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Image ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.961 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Relationship.
+PID{10980}-11:40:06.961 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Relationship ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.977 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Report.
+PID{10980}-11:40:06.977 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Report ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:06.992 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Topic.
+PID{10980}-11:40:06.993 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Topic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:07.009 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Transmit.
+PID{10980}-11:40:07.009 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Transmit ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:07.029 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.Users.
+PID{10980}-11:40:07.029 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.Users ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+PID{10980}-11:40:07.050 logback [main] WARN  c.b.m.toolkit.TableInfoHelper [TableInfoHelper.java : 188] -Warn: Could not find @TableId in Class: com.doubles.entity.UserTopic.
+PID{10980}-11:40:07.051 logback [main] WARN  c.b.m.mapper.AutoSqlInjector [AutoSqlInjector.java : 147] -class com.doubles.entity.UserTopic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.

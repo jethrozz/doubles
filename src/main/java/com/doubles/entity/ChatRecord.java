@@ -1,5 +1,7 @@
 package com.doubles.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -14,27 +16,32 @@ import java.io.Serializable;
 public class ChatRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    @JsonProperty("id")
     private String crId;
     /**
      * 这条消息 的发送者id
      */
+    @JsonProperty("fromUser")
     private String userId;
     /**
      * 这条消息的接收者id
      */
+    @JsonProperty("toUser")
     private String toUser;
     /**
      * 这条消息的消息内容
      */
+    @JsonProperty("content")
     private String content;
     /**
      * 这条记录的创建时间
      */
+    @JsonProperty("createTime")
     private Date createTime;
     /**
      * 这条消息的更新时间
      */
+
     private Date updateTime;
 
 

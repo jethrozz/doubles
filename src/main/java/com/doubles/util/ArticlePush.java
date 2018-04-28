@@ -1,7 +1,7 @@
 package com.doubles.util;
 
 import com.doubles.entity.Relationship;
-import com.doubles.model.SingletonBlockQueue;
+import com.doubles.model.SingletonArticleQueue;
 import com.doubles.model.SingletonList;
 import com.doubles.service.RelationshipService;
 import io.goeasy.GoEasy;
@@ -37,7 +37,7 @@ public class ArticlePush implements Runnable{
                     break;
                 }
                 //获取到一个当前发表了动态的用户
-                String userId = SingletonBlockQueue.getInstance().getUserFromPushQueue().take();
+                String userId = SingletonArticleQueue.getInstance().getUserFromPushQueue().take();
 
                 //将所有关注了我的用户以及相互关注了的用户放入一个list中
                 List<Relationship> relationship1 = relationshipService.findFriends(userId,0,1); //单方面关注了我的用户

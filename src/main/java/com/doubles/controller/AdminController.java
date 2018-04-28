@@ -1,9 +1,14 @@
 package com.doubles.controller;
 
 
+import com.doubles.entity.Admin;
+import com.doubles.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -16,6 +21,12 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    @Autowired
+    private AdminService adminService;
 
+    @RequestMapping("/addAdmin")
+    public void addAdmin(HttpServletRequest request, Admin admin){
+        adminService.insert(admin);
+    }
 }
 

@@ -62,8 +62,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
 
     @Override
     public Page<Users> findAll(Page<Users> page) {
-        EntityWrapper ew = new EntityWrapper();
-        ew.setEntity(new Users());
+        EntityWrapper<Users> ew = new EntityWrapper();
         return page.setRecords(userDao.selectPage(page,ew));
     }
 

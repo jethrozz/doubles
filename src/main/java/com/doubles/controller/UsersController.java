@@ -47,5 +47,13 @@ public class UsersController {
             //
         }
     }
+    @RequestMapping("/regist")
+    public void userRegist(HttpServletRequest request,Users user){
+        usersService.registUser(user);
+    }
+    @RequestMapping("/updateInfo")
+    public void  userUpdate(HttpServletRequest request,Users user){
+        usersService.updateUserInfo(user);
+    }
 }
 
