@@ -3,6 +3,8 @@ package com.doubles.util;
 
 import com.doubles.entity.ChatRecord;
 import com.doubles.model.SingletonMsgQueue;
+import com.doubles.model.SingletonOnlineUserList;
+import com.doubles.model.SingletonReadySendMsgUserList;
 import com.doubles.service.RelationshipService;
 import io.goeasy.GoEasy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +35,14 @@ public class MessagePush implements Runnable {
                     break;
                 }
                 ChatRecord chatRecord = SingletonMsgQueue.getInstance().getMsgFromPushQueue().take();
-                //这里需要把这个chatRecord对象转成json发送过去
-                goEasy.publish(msgChannel,Utils.toJson(chatRecord));
+                //检查这条消息的接收方是否在线，在线就直接推送
+                if(SingletonOnlineUserList.getInstance().getUserList().contains(chatRecord.getToUser())){
+                    //这里需要把这个chatRecord对象转成json发送过去
+                    goEasy.publish(msgChannel,Utils.toJson(chatRecord));
+                }else{
+                    //不在线就放入离线列表中
+                    SingletonReadySendMsgUserList.getInstance().addChatRecord(chatRecord.getToUser(),chatRecord);
+                }
                 Thread.currentThread().yield();
             }
         }catch (Exception e){

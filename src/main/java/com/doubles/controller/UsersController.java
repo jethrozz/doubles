@@ -2,7 +2,6 @@ package com.doubles.controller;
 
 
 import com.doubles.entity.Users;
-import com.doubles.model.SingletonList;
 import com.doubles.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +29,7 @@ public class UsersController {
     @Autowired
     private UsersService usersService;
 
+    //返回数据待商议
     @RequestMapping("/login")
     public void userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String username, String password){
         try{  //把sessionId记录在浏览器
@@ -47,10 +47,12 @@ public class UsersController {
             //
         }
     }
+    //返回数据待商议
     @RequestMapping("/regist")
     public void userRegist(HttpServletRequest request,Users user){
         usersService.registUser(user);
     }
+    //返回数据待商议
     @RequestMapping("/updateInfo")
     public void  userUpdate(HttpServletRequest request,Users user){
         usersService.updateUserInfo(user);

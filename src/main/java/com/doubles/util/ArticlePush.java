@@ -2,7 +2,7 @@ package com.doubles.util;
 
 import com.doubles.entity.Relationship;
 import com.doubles.model.SingletonArticleQueue;
-import com.doubles.model.SingletonList;
+import com.doubles.model.SingletonOnlineUserList;
 import com.doubles.service.RelationshipService;
 import io.goeasy.GoEasy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,13 +45,13 @@ public class ArticlePush implements Runnable{
 
                 //当前所有在线的用户
                 for(Relationship relationship : relationship1){
-                    if(SingletonList.getInstance().getUserList().contains(relationship.getUserId())){
+                    if(SingletonOnlineUserList.getInstance().getUserList().contains(relationship.getUserId())){
                         // 只是一个推送的例子，传过去的数据格式有待商议
                         // goEasy.publish(articleChannel, "Hello world!");
                     }
                 }
                 for(Relationship relationship : relationship2){
-                    if(SingletonList.getInstance().getUserList().contains(relationship.getUserId())){
+                    if(SingletonOnlineUserList.getInstance().getUserList().contains(relationship.getUserId())){
                         // 只是一个推送的例子，传过去的数据格式有待商议
                         // goEasy.publish(articleChannel, "Hello world!");
                     }

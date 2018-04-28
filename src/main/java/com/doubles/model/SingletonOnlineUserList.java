@@ -7,16 +7,16 @@ import java.util.TreeSet;
  * @时间: 2018/4/25
  * @描述：用set集合存放在线用户，因为set集合不允许重复，且会自动排序
  */
-public class SingletonList {
+public class SingletonOnlineUserList {
     private Set<String> onlineUser;
-    private static SingletonList instance = null;
+    private static SingletonOnlineUserList instance = null;
 
-    private SingletonList(){
+    private SingletonOnlineUserList(){
         onlineUser = new TreeSet<>();
     }
-    public static synchronized SingletonList getInstance(){
+    public static synchronized SingletonOnlineUserList getInstance(){
         if(instance == null){
-            instance = new SingletonList();
+            instance = new SingletonOnlineUserList();
         }
         return instance;
     }
