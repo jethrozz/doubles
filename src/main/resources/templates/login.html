@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户登录</title>
+		<link rel="stylesheet" href="${basePath}/static/css/bootstrap.css"/>
+		<link rel="stylesheet" href="${basePath}/static/css/register.css" />
+	</head>
+	<body>
+		<div class="container-fluid" id="regMain" >	
+			<div class="container" >
+				<div id="mainContent"style="margin-top: 10%; margin-bottom: 10%;">
+					<h2><b>用户注册</b></h2>
+					<hr />
+					<p style="color:red;text-align: right;font-size: 8px;">----<a href="#" >忘记密码？</a></p>
+					<div class="form-group row">
+					    <label for="userName"  class="col-sm-3 col-form-label">用户名：</label>
+					    <div class="col-sm-9">
+						<input type="text" class="form-control" id="userName" name="username" placeholder="用户名或邮箱地址" style="width: 80%;"/>
+					    </div>
+				    </div>
+				    
+				<div class="form-group row">
+					<label for="userPW" class="col-sm-3 col-form-label">密码：</label>
+					<div class="col-sm-9">
+						<input type="password" class="form-control" id="userPW" name="password" placeholder="请您的输入密码"style="width: 80%;"/>
+					</div>					
+				</div>
+				
+				
+				<button type="button"  id="btn-lg"  class="btn btn-primary btn-lg btn-block">立即登录</button>
+				
+			    <hr />
+				<p id="pig">没有账号，<a href="register.html">立即注册</a></p>
+				<hr />
+				</div>	
+				
+
+			</div>	
+		</div>
+		<div class="panel-footer">
+				版权归个人所有----------Chongqin Scien and technology Univer<br />
+				2018-04-27
+			</div>
+	</body>
+	<script src="${basePath}/static/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="${basePath}/static/js/login.js" ></script>
+</html>

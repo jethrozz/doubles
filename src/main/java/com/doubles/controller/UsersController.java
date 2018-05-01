@@ -2,11 +2,14 @@ package com.doubles.controller;
 
 
 import com.doubles.entity.Users;
+import com.doubles.model.ResLogin;
 import com.doubles.service.UsersService;
+import com.doubles.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +32,15 @@ public class UsersController {
     @Autowired
     private UsersService usersService;
 
-    //返回数据待商议
     @RequestMapping("/login")
-    public void userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String username, String password){
+    public String login(){
+        return "login";
+    }
+    //返回数据待商议
+    @RequestMapping("/userlogin")
+    @ResponseBody
+    public String userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String username, String password){
+        ResLogin resLogin = new ResLogin(1,"failed");
         try{  //把sessionId记录在浏览器
             Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(request.getSession().getId(), "utf-8"));
             c.setPath("/");
@@ -44,8 +53,11 @@ public class UsersController {
         Users user = usersService.userLogin(new Users(username,password));
         if(user != null){
             session.setAttribute("user",user);
-            //
+            resLogin.setStauts(0);
+            resLogin.setMsg("登录成功");
+            return Utils.toJson(resLogin);
         }
+        return Utils.toJson(resLogin);
     }
     //返回数据待商议
     @RequestMapping("/regist")

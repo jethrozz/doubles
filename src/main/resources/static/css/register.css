@@ -1,0 +1,68 @@
+#regMain{
+	color: dodgerblue;
+	font-size: 16px;
+	background-image: url(../img/57cfde37e5304.jpg);
+	background-repeat: no-repeat;
+}
+#mainContent{
+	background-color: whitesmoke;
+	margin-top: 50px;
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	border-radius: 10px;
+	opacity: 0.8;
+}
+#mainContent form{
+	padding-top:30px;
+	margin-bottom: 30px;
+	
+}
+.top1{
+	height: ;
+}
+#regMain h2{
+	text-align: center;
+	opacity: 0.8;
+	
+}
+#regMain label{
+	text-align: right;
+}
+#userSex1{
+	width: 20%;
+}
+
+
+#regMain textarea{
+	width: 80%;
+}
+
+.panel-footer{
+	text-align: center;
+	background-color: wheat;
+	opacity: 0.5;	
+}
+#pig{
+	text-align: center;
+	margin-top: 20px;
+}
+#regMain a{
+	color: red;
+}
+
+#interestPage{
+	background-color: wheat;
+}
+#main{
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+#main h2{
+	padding-top: 30px;
+	padding-bottom: 20px;
+}
+#btnGroup label{
+	margin: 5px 5px 5px 5px;
+}

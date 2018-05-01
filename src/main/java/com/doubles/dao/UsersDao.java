@@ -2,6 +2,7 @@ package com.doubles.dao;
 
 import com.doubles.entity.Users;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +13,4 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2018-04-24
  */
 public interface UsersDao extends BaseMapper<Users> {
-
 }

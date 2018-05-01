@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>用户注册</title>
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" href="css/register.css" />
+		
+	</head>
+	<body>
+		<div class="container-fluid" id="regMain">	
+			<div class="container" >
+				<div id="mainContent">
+					<form>
+					<h2><b>用户注册</b></h2><hr />
+					<div class="form-group row">
+					    <label for="userName"  class="col-sm-3 col-form-label">用户名：</label>
+					    <div class="col-sm-9">
+						<input type="text" class="form-control" id="userName" placeholder="请输入您的用户名（不可更改）" style="width: 80%;"/>
+					    </div>
+				    </div>
+				    <div class="form-group row">
+					    <label for="userNC" class="col-sm-3 col-form-label">昵称：</label>
+					    <div class="col-sm-9">
+						<input type="text" class="form-control" id="nickName" placeholder="请输入您的昵称"style="width: 80%;"/>
+					    </div>	
+				    </div>
+				<div class="form-group row">
+					<label for="userPW" class="col-sm-3 col-form-label">密码：</label>
+					<div class="col-sm-9">
+						<input type="password" class="form-control" id="userPW"  placeholder="请您的输入密码（密码输入不得少于6位）"style="width: 80%;"/>
+					</div>					
+				</div>
+				<div class="form-check row">
+					<label for="userSex" class="col-sm-3 col-form-label" >性别：</label>
+					<div class="col-sm-9">
+						<input class="form-check-input" type="radio" name="sexRadios" id="userSex1" value="男" checked/>
+                        <label class="form-check-label" for="userSex1">男 </label>
+				        <input class="form-check-input" type="radio" name="sexRadios" id="userSex2" value="女"/>
+                        <label class="form-check-label" for="userSex2">女 </label>
+					</div> 
+				</div>
+				<div class="form-group row">
+					<label for="userBirthday" class="col-sm-3 col-form-label">出生日期：</label>
+					<div class="col-sm-9">
+						<input type="date" class="form-control" id="userBirthday"  style="width: 80%;"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="userEmail" class="col-sm-3 col-form-label">邮箱：</label>
+					<div class="col-sm-9">
+						<input type="email" class="form-control" id="userEmail"  placeholder="XXXX@XX.com"style="width: 80%;"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="userNumber" class="col-sm-3 col-form-label">电话：</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="userNumber"  placeholder="请输入你的电话号码"style="width: 80%;"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="userInfo" class="col-sm-3 col-form-label">个人简介：</label>
+					<div class="col-sm-9">
+						<textarea class="form-control" id="userInfo" rows="3" placeholder="请输入……"style="width: 80%;"></textarea>
+					</div>
+				</div>
+				
+				<button type="button" id="myBtn" class="btn btn-primary btn-lg btn-block" id="regBtn">立即注册</button>
+				
+			    <hr />
+				<p id="pig">已有账号，<a href="login.html" style="color: red;">直接登录</a></p>
+				<hr />
+				
+				</div>	
+				
+			</form>
+			</div>	
+		</div>
+		<div class="panel-footer">
+				版权归个人所有----------Chongqin Scien and technology Univer<br />
+				2018-04-27
+			</div>
+			<div class="modal" id="mymodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">模态弹出窗标题</h4>
+			</div>
+			<div class="modal-body">
+				<p>模态弹出窗主体内容</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary">保存</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->	
+	</body>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+	<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="js/register.js" ></script>
+</html>
