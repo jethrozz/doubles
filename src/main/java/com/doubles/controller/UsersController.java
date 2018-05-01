@@ -4,6 +4,7 @@ package com.doubles.controller;
 import com.doubles.entity.Users;
 import com.doubles.model.ResLogin;
 import com.doubles.service.UsersService;
+import com.doubles.util.SecretUtils;
 import com.doubles.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,7 @@ public class UsersController {
     public String login(){
         return "login";
     }
-    //返回数据待商议
+
     @RequestMapping("/userlogin")
     @ResponseBody
     public String userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String username, String password){
@@ -59,27 +60,32 @@ public class UsersController {
         }
         return Utils.toJson(resLogin);
     }
-    //返回数据待商议
+
     @RequestMapping("/regist")
     public String regist(HttpServletRequest request,Users user){
         return "register";
     }
 
     @RequestMapping("/userregist")
+    @ResponseBody
     public String userRegist(HttpServletRequest request,Users user){
         ResLogin res = new ResLogin(1,"default failed");
+        user.setUserId(SecretUtils.uuid32());
+        System.out.print(user.getNickname());
         if(usersService.registUser(user)){
             res.setStauts(0);
-            res.setMsg("success");
+            res.setMsg(user.getUserId());
         }
         return Utils.toJson(res);
     }
 
     @RequestMapping("/addLike")
-    public String userLike(HttpSession session,String like){
+    public String userLike(HttpSession session,String like,String userId){
         //String likes[] = like.split("-");
-       Users user =  (Users)session.getAttribute("user");
-       user.setUserlike(like);
+       //Users user =  (Users)session.getAttribute("user");
+        Users user = new Users();
+        user.setUserId(userId);
+        user.setUserlike(like);
        usersService.updateUserInfo(user);
        return "index";
     }
@@ -89,8 +95,6 @@ public class UsersController {
           return "interestLabel";
     }
 
-
-    //返回数据待商议
     @RequestMapping("/updateInfo")
     public void  userUpdate(HttpServletRequest request,Users user){
         usersService.updateUserInfo(user);
