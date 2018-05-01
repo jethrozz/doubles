@@ -184,8 +184,24 @@ public class Users implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public Users(){}
+    public Users(String userId, String username, String password, String userImg, String nickname, String userSex, Date birthday, String userinfo, String phonenumber, String usermail, String userlike, Date createTime, Date updateTime) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.userImg = userImg;
+        this.nickname = nickname;
+        this.userSex = userSex;
+        this.birthday = birthday;
+        this.userinfo = userinfo;
+        this.phonenumber = phonenumber;
+        this.usermail = usermail;
+        this.userlike = userlike;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 
-    public Users(String username,String password){
+    public Users(String username, String password){
         this.username = username;
         this.password = password;
     }

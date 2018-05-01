@@ -19,7 +19,7 @@
 	
 }
 .top1{
-	height: ;
+	height:;
 }
 #regMain h2{
 	text-align: center;
@@ -65,4 +65,7 @@
 }
 #btnGroup label{
 	margin: 5px 5px 5px 5px;
+}
+#btnGroup{
+	display: inline-block;
 }

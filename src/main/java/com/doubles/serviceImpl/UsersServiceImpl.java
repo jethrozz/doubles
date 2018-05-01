@@ -26,11 +26,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
     @Autowired
     UsersDao userDao;
 
-
     @Override
     public Users userLogin(Users user) {
-
-        Users u = selectById("test0001");
+        Users u = userDao.selectOne(user);
         if(u != null){
             return u;
         }else {

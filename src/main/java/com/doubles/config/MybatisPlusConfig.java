@@ -35,7 +35,7 @@ public class MybatisPlusConfig {
         /*<!-- SQL 执行性能分析，开发环境使用，线上不推荐。 maxTime 指的是 sql 最大执行时长 -->*/
         performanceInterceptor.setMaxTime(1000);
         /*<!--SQL是否格式化 默认false-->*/
-        performanceInterceptor.setFormat(true);
+        performanceInterceptor.setFormat(false);
         return performanceInterceptor;
     }
 
@@ -44,36 +44,10 @@ public class MybatisPlusConfig {
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
         paginationInterceptor.setLocalPage(true);// 开启 PageHelper 的支持
-        /*
-         * 【测试多租户】 SQL 解析处理拦截器<br>
-         * 这里固定写成住户 1 实际情况你可以从cookie读取，因此数据看不到 【 麻花藤 】 这条记录（ 注意观察 SQL ）<br>
-         */
-        List<ISqlParser> sqlParserList = new ArrayList<>();
-        TenantSqlParser tenantSqlParser = new TenantSqlParser();
-        tenantSqlParser.setTenantHandler(new TenantHandler() {
-            @Override
-            public Expression getTenantId() {
-                return new LongValue(1L);
-            }
 
-            @Override
-            public String getTenantIdColumn() {
-                return "tenant_id";
-            }
 
-            @Override
-            public boolean doTableFilter(String tableName) {
-                // 这里可以判断是否过滤表
-                /*
-                if ("user".equals(tableName)) {
-                    return true;
-                }*/
-                return false;
-            }
-        });
-
-        sqlParserList.add(tenantSqlParser);
-        paginationInterceptor.setSqlParserList(sqlParserList);
+        //sqlParserList.add(tenantSqlParser);
+        //paginationInterceptor.setSqlParserList(sqlParserList);
         return paginationInterceptor;
     }
     /**

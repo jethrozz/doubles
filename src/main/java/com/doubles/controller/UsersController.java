@@ -61,9 +61,35 @@ public class UsersController {
     }
     //返回数据待商议
     @RequestMapping("/regist")
-    public void userRegist(HttpServletRequest request,Users user){
-        usersService.registUser(user);
+    public String regist(HttpServletRequest request,Users user){
+        return "register";
     }
+
+    @RequestMapping("/userregist")
+    public String userRegist(HttpServletRequest request,Users user){
+        ResLogin res = new ResLogin(1,"default failed");
+        if(usersService.registUser(user)){
+            res.setStauts(0);
+            res.setMsg("success");
+        }
+        return Utils.toJson(res);
+    }
+
+    @RequestMapping("/addLike")
+    public String userLike(HttpSession session,String like){
+        //String likes[] = like.split("-");
+       Users user =  (Users)session.getAttribute("user");
+       user.setUserlike(like);
+       usersService.updateUserInfo(user);
+       return "index";
+    }
+
+    @RequestMapping("/inter")
+    public String inter(){
+          return "interestLabel";
+    }
+
+
     //返回数据待商议
     @RequestMapping("/updateInfo")
     public void  userUpdate(HttpServletRequest request,Users user){

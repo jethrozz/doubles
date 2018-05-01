@@ -26,6 +26,9 @@ function login(user,pwd){
 		success:function(data,stauts,result){
 			var res = JSON.parse(data);
 			console.log(res)
+			if(res.stauts == 0){
+				window.location.href = "../index"
+			}
 		}
 	});
 }
