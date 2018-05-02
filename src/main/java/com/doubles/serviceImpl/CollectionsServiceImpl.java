@@ -1,9 +1,9 @@
 package com.doubles.serviceImpl;
 
-import com.doubles.dao.CollectionsDao;
+import com.doubles.dao.CollectionsMapper;
 import com.doubles.entity.Collections;
 import com.doubles.service.CollectionsService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,16 +15,22 @@ import org.springframework.stereotype.Service;
  * @since 2018-04-24
  */
 @Service
-public class CollectionsServiceImpl extends ServiceImpl<CollectionsDao, Collections> implements CollectionsService {
+public class CollectionsServiceImpl implements CollectionsService {
+
+    @Autowired
+    CollectionsMapper collectionsDao;
 
     @Override
     public Collections addCollection(Collections collection) {
-        insert(collection);
+        collectionsDao.insertSelective(collection);
         return collection;
     }
 
     @Override
     public boolean deleteCollection(String collectionId) {
-        return deleteById(collectionId);
+        if(collectionsDao.deleteByPrimaryKey(collectionId) >= 1){
+            return true;
+        }
+        return false;
     }
 }

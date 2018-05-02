@@ -1,9 +1,6 @@
 package com.doubles.serviceImpl;
 
-import com.doubles.dao.ArtilceTopicDao;
-import com.doubles.entity.ArtilceTopic;
 import com.doubles.service.ArtilceTopicService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +13,6 @@ import org.springframework.stereotype.Service;
  * @since 2018-04-24
  */
 @Service
-public class ArtilceTopicServiceImpl extends ServiceImpl<ArtilceTopicDao, ArtilceTopic> implements ArtilceTopicService {
+public class ArtilceTopicServiceImpl implements ArtilceTopicService {
 
 }

@@ -1,69 +1,32 @@
 package com.doubles.entity;
 
 import java.util.Date;
-import java.io.Serializable;
 
-/**
- * <p>
- * 评论表
- * </p>
- *
- * @author shuang
- * @since 2018-04-24
- */
-public class Comments implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Comments {
     private String commentId;
-    /**
-     * 发出这条评论的用户id
-     */
-    private String userId;
-    /**
-     * 评论内容
-     */
-    private String commentContent;
-    /**
-     * 被评论的类型
-            0-动态
-            1-图片
-            默认为0
-            具体数据由前端判断之后发送给后台
-     */
-    private Integer objectType;
-    /**
-     * type为0时，表示为动态id
-            type为1时，表示为图片id
-     */
-    private String objectId;
-    /**
-     * 这条评论的发送对象
-     */
-    private String toUser;
-    /**
-     * 标识回复类型，方便查询操作
-            评论则为0
-            回复为1
-            默认为0
-     */
-    private Integer type;
-    /**
-     * 创建这条记录时的id
-     */
-    private Date createTime;
-    /**
-     * 更新这条记录时的id
-     */
-    private Date updateTime;
 
+    private String userId;
+
+    private String commentContent;
+
+    private Integer objectType;
+
+    private String objectId;
+
+    private String toUser;
+
+    private Byte type;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getCommentId() {
         return commentId;
     }
 
     public void setCommentId(String commentId) {
-        this.commentId = commentId;
+        this.commentId = commentId == null ? null : commentId.trim();
     }
 
     public String getUserId() {
@@ -71,7 +34,7 @@ public class Comments implements Serializable {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getCommentContent() {
@@ -79,7 +42,7 @@ public class Comments implements Serializable {
     }
 
     public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
+        this.commentContent = commentContent == null ? null : commentContent.trim();
     }
 
     public Integer getObjectType() {
@@ -95,7 +58,7 @@ public class Comments implements Serializable {
     }
 
     public void setObjectId(String objectId) {
-        this.objectId = objectId;
+        this.objectId = objectId == null ? null : objectId.trim();
     }
 
     public String getToUser() {
@@ -103,14 +66,14 @@ public class Comments implements Serializable {
     }
 
     public void setToUser(String toUser) {
-        this.toUser = toUser;
+        this.toUser = toUser == null ? null : toUser.trim();
     }
 
-    public Integer getType() {
+    public Byte getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(Byte type) {
         this.type = type;
     }
 
@@ -128,20 +91,5 @@ public class Comments implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Comments{" +
-        "commentId=" + commentId +
-        ", userId=" + userId +
-        ", commentContent=" + commentContent +
-        ", objectType=" + objectType +
-        ", objectId=" + objectId +
-        ", toUser=" + toUser +
-        ", type=" + type +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

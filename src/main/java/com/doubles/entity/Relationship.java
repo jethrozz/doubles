@@ -1,50 +1,26 @@
 package com.doubles.entity;
 
 import java.util.Date;
-import java.io.Serializable;
 
-/**
- * <p>
- * 好友关系表
- * </p>
- *
- * @author shuang
- * @since 2018-04-24
- */
-public class Relationship implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Relationship {
     private String relationshipId;
-    /**
-     * 外键，表示所属用户id
-     */
-    private String userId;
-    /**
-     * 外键，好友或者被拉黑的人的id
-     */
-    private String friendId;
-    /**
-     * 是否是好友，用数字表示 0-好友(我的关注)，1-拉黑，2-相互关注
-            默认为0
-     */
-    private Integer isFriend;
-    /**
-     * 这条记录的创建时间
-     */
-    private Date createTime;
-    /**
-     * 这条记录的更新时间
-     */
-    private Date updateTime;
 
+    private String userId;
+
+    private String friendId;
+
+    private Byte isFriend;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getRelationshipId() {
         return relationshipId;
     }
 
     public void setRelationshipId(String relationshipId) {
-        this.relationshipId = relationshipId;
+        this.relationshipId = relationshipId == null ? null : relationshipId.trim();
     }
 
     public String getUserId() {
@@ -52,7 +28,7 @@ public class Relationship implements Serializable {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getFriendId() {
@@ -60,14 +36,14 @@ public class Relationship implements Serializable {
     }
 
     public void setFriendId(String friendId) {
-        this.friendId = friendId;
+        this.friendId = friendId == null ? null : friendId.trim();
     }
 
-    public Integer getIsFriend() {
+    public Byte getIsFriend() {
         return isFriend;
     }
 
-    public void setIsFriend(Integer isFriend) {
+    public void setIsFriend(Byte isFriend) {
         this.isFriend = isFriend;
     }
 
@@ -85,17 +61,5 @@ public class Relationship implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Relationship{" +
-        "relationshipId=" + relationshipId +
-        ", userId=" + userId +
-        ", friendId=" + friendId +
-        ", isFriend=" + isFriend +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

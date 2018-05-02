@@ -1,7 +1,6 @@
 package com.doubles.util;
 
 import com.doubles.entity.ChatRecord;
-import com.doubles.model.SingletonMsgQueue;
 import com.doubles.model.SingletonReadySendMsgUserList;
 import io.goeasy.GoEasy;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package com.doubles.service;
 
 import com.doubles.entity.Comments;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
@@ -11,7 +10,7 @@ import com.baomidou.mybatisplus.service.IService;
  * @author shuang
  * @since 2018-04-24
  */
-public interface CommentsService extends IService<Comments> {
+public interface CommentsService{
     //发表评论或者回复
     Comments addComment(Comments comment);
     //删除评论或者回复

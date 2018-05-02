@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * <p>
@@ -30,74 +32,110 @@ import java.net.URLEncoder;
 @RequestMapping("/users")
 public class UsersController {
 
-    @Autowired
-    private UsersService usersService;
+	@Autowired
+	private UsersService usersService;
 
-    @RequestMapping("/login")
-    public String login(){
-        return "login";
-    }
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
 
-    @RequestMapping("/userlogin")
-    @ResponseBody
-    public String userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String username, String password){
-        ResLogin resLogin = new ResLogin(1,"failed");
-        try{  //把sessionId记录在浏览器
-            Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(request.getSession().getId(), "utf-8"));
-            c.setPath("/");
-            //先设置cookie有效期为2天，不用担心，session不会保存2天
-            c.setMaxAge( 48*60 * 60);
-            response.addCookie(c);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        Users user = usersService.userLogin(new Users(username,password));
-        if(user != null){
-            session.setAttribute("user",user);
-            resLogin.setStauts(0);
-            resLogin.setMsg("登录成功");
-            return Utils.toJson(resLogin);
-        }
-        return Utils.toJson(resLogin);
-    }
+	@RequestMapping("/userlogin")
+	@ResponseBody
+	public String userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String username, String password) {
+		ResLogin resLogin = new ResLogin(1, "failed");
+		try {  //把sessionId记录在浏览器
+			Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(request.getSession().getId(), "utf-8"));
+			c.setPath("/");
+			//先设置cookie有效期为2天，不用担心，session不会保存2天
+			c.setMaxAge(48 * 60 * 60);
+			response.addCookie(c);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Users user = usersService.userLogin(new Users(username, password));
+		if (user != null) {
+			session.setAttribute("user", user);
+			resLogin.setStauts(0);
+			resLogin.setMsg("登录成功");
+			return Utils.toJson(resLogin);
+		}
+		return Utils.toJson(resLogin);
+	}
 
-    @RequestMapping("/regist")
-    public String regist(HttpServletRequest request,Users user){
-        return "register";
-    }
+	@RequestMapping("/regist")
+	public String regist(HttpServletRequest request, Users user) {
+		return "register";
+	}
 
-    @RequestMapping("/userregist")
-    @ResponseBody
-    public String userRegist(HttpServletRequest request,Users user){
-        ResLogin res = new ResLogin(1,"default failed");
-        user.setUserId(SecretUtils.uuid32());
-        System.out.print(user.getNickname());
-        if(usersService.registUser(user)){
-            res.setStauts(0);
-            res.setMsg(user.getUserId());
-        }
-        return Utils.toJson(res);
-    }
+	@RequestMapping("/userregist")
+	@ResponseBody
+	public String userRegist(HttpServletRequest request, String username, String nickname, String password, String userSex, String birthday) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		ResLogin res = new ResLogin(1, "default failed");
+		Users user = new Users();
+		user.setUserId(SecretUtils.uuid32());
+		user.setNickname(nickname);
+		user.setUsername(username);
+		user.setUsersex(userSex);
+		user.setUserimg("/static/img/default.jpg");
+		try {
+			user.setBirthday(sdf.parse(birthday));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		user.setPassword(password);
+		System.out.print(user.getNickname());
+		if (usersService.registUser(user)) {
+			res.setStauts(0);
+			res.setMsg(user.getUserId());
+		}
+		return Utils.toJson(res);
+	}
 
-    @RequestMapping("/addLike")
-    public String userLike(HttpSession session,String like,String userId){
-        //String likes[] = like.split("-");
-       //Users user =  (Users)session.getAttribute("user");
-        Users user = new Users();
-        user.setUserId(userId);
-        user.setUserlike(like);
-       usersService.updateUserInfo(user);
-       return "index";
-    }
+	@RequestMapping("/addLike")
+	@ResponseBody
+	public String userLike(HttpSession session,HttpServletResponse response, String like, String userId) {
+		//String likes[] = like.split("-");
+		Users user = new Users();
+		user.setUserId(userId);
+		user.setUserlike(like);
+		usersService.updateUserInfo(user);
+		try {  //把sessionId记录在浏览器
+			Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(session.getId(), "utf-8"));
+			c.setPath("/");
+			//先设置cookie有效期为2天，不用担心，session不会保存2天
+			c.setMaxAge(48 * 60 * 60);
+			response.addCookie(c);
+		} catch (Exception e) {
 
-    @RequestMapping("/inter")
-    public String inter(){
-          return "interestLabel";
-    }
+			e.printStackTrace();
+		}
+		user = usersService.getOne(userId);
+		session.setAttribute("user", user);
 
-    @RequestMapping("/updateInfo")
-    public void  userUpdate(HttpServletRequest request,Users user){
-        usersService.updateUserInfo(user);
-    }
+		return Utils.toJson(new ResLogin(0, "success"));
+	}
+
+	@RequestMapping("/inter")
+	public String inter() {
+		return "interestLabel";
+	}
+
+	@RequestMapping("/checkName")
+	@ResponseBody
+	public String checkName(String username) {
+		ResLogin res = new ResLogin(1, "default failed");
+		if (usersService.checkUserName(username)) {
+			res.setMsg("success");
+			res.setStauts(0);
+		}
+		return Utils.toJson(res);
+	}
+
+	@RequestMapping("/updateInfo")
+	public void userUpdate(HttpServletRequest request, Users user) {
+		usersService.updateUserInfo(user);
+	}
 }
 

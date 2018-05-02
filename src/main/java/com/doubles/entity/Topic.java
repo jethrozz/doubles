@@ -1,53 +1,28 @@
 package com.doubles.entity;
 
 import java.util.Date;
-import java.io.Serializable;
 
-/**
- * <p>
- * 话题表
- * </p>
- *
- * @author shuang
- * @since 2018-04-24
- */
-public class Topic implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Topic {
     private String topicId;
-    /**
-     * 话题标题
-     */
-    private String title;
-    /**
-     * 话题的相关描述，数据库中可以为空
-     */
-    private String descirbe;
-    /**
-     * 该话题的被关注数量，初始值为0
-     */
-    private Integer fanNumber;
-    /**
-     * 该话题下的动态数量，初始值为0
-     */
-    private Integer discussionNumber;
-    /**
-     * 该条记录的创建时间
-     */
-    private Date createTime;
-    /**
-     * 该条记录的更新时间
-     */
-    private Date updateTime;
 
+    private String title;
+
+    private String descirbe;
+
+    private Integer fanNumber;
+
+    private Integer discussionNumber;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getTopicId() {
         return topicId;
     }
 
     public void setTopicId(String topicId) {
-        this.topicId = topicId;
+        this.topicId = topicId == null ? null : topicId.trim();
     }
 
     public String getTitle() {
@@ -55,7 +30,7 @@ public class Topic implements Serializable {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
     public String getDescirbe() {
@@ -63,7 +38,7 @@ public class Topic implements Serializable {
     }
 
     public void setDescirbe(String descirbe) {
-        this.descirbe = descirbe;
+        this.descirbe = descirbe == null ? null : descirbe.trim();
     }
 
     public Integer getFanNumber() {
@@ -96,18 +71,5 @@ public class Topic implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Topic{" +
-        "topicId=" + topicId +
-        ", title=" + title +
-        ", descirbe=" + descirbe +
-        ", fanNumber=" + fanNumber +
-        ", discussionNumber=" + discussionNumber +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

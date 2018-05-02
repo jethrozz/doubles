@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doubles.dao.UsersMapper" >
+    <resultMap id="BaseResultMap" type="com.doubles.entity.Users" >
+        <id column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="userImg" property="userimg" jdbcType="VARCHAR" />
+        <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+        <result column="userSex" property="usersex" jdbcType="VARCHAR" />
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+        <result column="userinfo" property="userinfo" jdbcType="VARCHAR" />
+        <result column="phonenumber" property="phonenumber" jdbcType="VARCHAR" />
+        <result column="usermail" property="usermail" jdbcType="VARCHAR" />
+        <result column="userlike" property="userlike" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        user_id, username, password, userImg, nickname, userSex, birthday, userinfo, phonenumber,
+        usermail, userlike, create_time, update_time
+    </sql>
+    <select id="isUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from users
+        where username = #{0} AND password = #{1}
+    </select>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.UsersExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from users
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from users
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from users
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.doubles.entity.UsersExample" >
+        delete from users
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.doubles.entity.Users" >
+        insert into users (user_id, username, password,
+        userImg, nickname, userSex,
+        birthday, userinfo, phonenumber,
+        usermail, userlike, create_time,
+        update_time)
+        values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{userimg,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{usersex,jdbcType=VARCHAR},
+        #{birthday,jdbcType=TIMESTAMP}, #{userinfo,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR},
+        #{usermail,jdbcType=VARCHAR}, #{userlike,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.doubles.entity.Users" >
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="username != null" >
+                username,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="userimg != null" >
+                userImg,
+            </if>
+            <if test="nickname != null" >
+                nickname,
+            </if>
+            <if test="usersex != null" >
+                userSex,
+            </if>
+            <if test="birthday != null" >
+                birthday,
+            </if>
+            <if test="userinfo != null" >
+                userinfo,
+            </if>
+            <if test="phonenumber != null" >
+                phonenumber,
+            </if>
+            <if test="usermail != null" >
+                usermail,
+            </if>
+            <if test="userlike != null" >
+                userlike,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userimg != null" >
+                #{userimg,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null" >
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="usersex != null" >
+                #{usersex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userinfo != null" >
+                #{userinfo,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenumber != null" >
+                #{phonenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="usermail != null" >
+                #{usermail,jdbcType=VARCHAR},
+            </if>
+            <if test="userlike != null" >
+                #{userlike,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.doubles.entity.UsersExample" resultType="java.lang.Integer" >
+        select count(*) from users
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update users
+        <set >
+            <if test="record.userId != null" >
+                user_id = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.username != null" >
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null" >
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userimg != null" >
+                userImg = #{record.userimg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nickname != null" >
+                nickname = #{record.nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.usersex != null" >
+                userSex = #{record.usersex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.birthday != null" >
+                birthday = #{record.birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.userinfo != null" >
+                userinfo = #{record.userinfo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phonenumber != null" >
+                phonenumber = #{record.phonenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.usermail != null" >
+                usermail = #{record.usermail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userlike != null" >
+                userlike = #{record.userlike,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update users
+        set user_id = #{record.userId,jdbcType=VARCHAR},
+        username = #{record.username,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
+        userImg = #{record.userimg,jdbcType=VARCHAR},
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+        userSex = #{record.usersex,jdbcType=VARCHAR},
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+        userinfo = #{record.userinfo,jdbcType=VARCHAR},
+        phonenumber = #{record.phonenumber,jdbcType=VARCHAR},
+        usermail = #{record.usermail,jdbcType=VARCHAR},
+        userlike = #{record.userlike,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Users" >
+        update users
+        <set >
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userimg != null" >
+                userImg = #{userimg,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null" >
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="usersex != null" >
+                userSex = #{usersex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userinfo != null" >
+                userinfo = #{userinfo,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenumber != null" >
+                phonenumber = #{phonenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="usermail != null" >
+                usermail = #{usermail,jdbcType=VARCHAR},
+            </if>
+            <if test="userlike != null" >
+                userlike = #{userlike,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Users" >
+    update users
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      userImg = #{userimg,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      userSex = #{usersex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      userinfo = #{userinfo,jdbcType=VARCHAR},
+      phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      usermail = #{usermail,jdbcType=VARCHAR},
+      userlike = #{userlike,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.doubles.dao.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.doubles.entity.Article" >
+    <id column="article_id" property="articleId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="is_haveImg" property="isHaveimg" jdbcType="TINYINT" />
+    <result column="like_number" property="likeNumber" jdbcType="INTEGER" />
+    <result column="collect_number" property="collectNumber" jdbcType="INTEGER" />
+    <result column="transmit_number" property="transmitNumber" jdbcType="INTEGER" />
+    <result column="is_report" property="isReport" jdbcType="TINYINT" />
+    <result column="report_number" property="reportNumber" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.doubles.entity.Article" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    article_id, user_id, is_haveImg, like_number, collect_number, transmit_number, is_report, 
+    report_number, type, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.doubles.entity.ArticleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.ArticleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where article_id = #{articleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from article
+    where article_id = #{articleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.doubles.entity.ArticleExample" >
+    delete from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.doubles.entity.Article" >
+    insert into article (article_id, user_id, is_haveImg, 
+      like_number, collect_number, transmit_number, 
+      is_report, report_number, type, 
+      create_time, update_time, content
+      )
+    values (#{articleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{isHaveimg,jdbcType=TINYINT}, 
+      #{likeNumber,jdbcType=INTEGER}, #{collectNumber,jdbcType=INTEGER}, #{transmitNumber,jdbcType=INTEGER}, 
+      #{isReport,jdbcType=TINYINT}, #{reportNumber,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.doubles.entity.Article" >
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="isHaveimg != null" >
+        is_haveImg,
+      </if>
+      <if test="likeNumber != null" >
+        like_number,
+      </if>
+      <if test="collectNumber != null" >
+        collect_number,
+      </if>
+      <if test="transmitNumber != null" >
+        transmit_number,
+      </if>
+      <if test="isReport != null" >
+        is_report,
+      </if>
+      <if test="reportNumber != null" >
+        report_number,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="isHaveimg != null" >
+        #{isHaveimg,jdbcType=TINYINT},
+      </if>
+      <if test="likeNumber != null" >
+        #{likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="collectNumber != null" >
+        #{collectNumber,jdbcType=INTEGER},
+      </if>
+      <if test="transmitNumber != null" >
+        #{transmitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isReport != null" >
+        #{isReport,jdbcType=TINYINT},
+      </if>
+      <if test="reportNumber != null" >
+        #{reportNumber,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.doubles.entity.ArticleExample" resultType="java.lang.Integer" >
+    select count(*) from article
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update article
+    <set >
+      <if test="record.articleId != null" >
+        article_id = #{record.articleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isHaveimg != null" >
+        is_haveImg = #{record.isHaveimg,jdbcType=TINYINT},
+      </if>
+      <if test="record.likeNumber != null" >
+        like_number = #{record.likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectNumber != null" >
+        collect_number = #{record.collectNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.transmitNumber != null" >
+        transmit_number = #{record.transmitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.isReport != null" >
+        is_report = #{record.isReport,jdbcType=TINYINT},
+      </if>
+      <if test="record.reportNumber != null" >
+        report_number = #{record.reportNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update article
+    set article_id = #{record.articleId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      is_haveImg = #{record.isHaveimg,jdbcType=TINYINT},
+      like_number = #{record.likeNumber,jdbcType=INTEGER},
+      collect_number = #{record.collectNumber,jdbcType=INTEGER},
+      transmit_number = #{record.transmitNumber,jdbcType=INTEGER},
+      is_report = #{record.isReport,jdbcType=TINYINT},
+      report_number = #{record.reportNumber,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update article
+    set article_id = #{record.articleId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      is_haveImg = #{record.isHaveimg,jdbcType=TINYINT},
+      like_number = #{record.likeNumber,jdbcType=INTEGER},
+      collect_number = #{record.collectNumber,jdbcType=INTEGER},
+      transmit_number = #{record.transmitNumber,jdbcType=INTEGER},
+      is_report = #{record.isReport,jdbcType=TINYINT},
+      report_number = #{record.reportNumber,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Article" >
+    update article
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="isHaveimg != null" >
+        is_haveImg = #{isHaveimg,jdbcType=TINYINT},
+      </if>
+      <if test="likeNumber != null" >
+        like_number = #{likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="collectNumber != null" >
+        collect_number = #{collectNumber,jdbcType=INTEGER},
+      </if>
+      <if test="transmitNumber != null" >
+        transmit_number = #{transmitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isReport != null" >
+        is_report = #{isReport,jdbcType=TINYINT},
+      </if>
+      <if test="reportNumber != null" >
+        report_number = #{reportNumber,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.doubles.entity.Article" >
+    update article
+    set user_id = #{userId,jdbcType=VARCHAR},
+      is_haveImg = #{isHaveimg,jdbcType=TINYINT},
+      like_number = #{likeNumber,jdbcType=INTEGER},
+      collect_number = #{collectNumber,jdbcType=INTEGER},
+      transmit_number = #{transmitNumber,jdbcType=INTEGER},
+      is_report = #{isReport,jdbcType=TINYINT},
+      report_number = #{reportNumber,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Article" >
+    update article
+    set user_id = #{userId,jdbcType=VARCHAR},
+      is_haveImg = #{isHaveimg,jdbcType=TINYINT},
+      like_number = #{likeNumber,jdbcType=INTEGER},
+      collect_number = #{collectNumber,jdbcType=INTEGER},
+      transmit_number = #{transmitNumber,jdbcType=INTEGER},
+      is_report = #{isReport,jdbcType=TINYINT},
+      report_number = #{reportNumber,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where article_id = #{articleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,91 +1,66 @@
 package com.doubles.entity;
 
+import com.doubles.util.SecretUtils;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
 
-import java.io.Serializable;
+public class Users {
 
-/**
- * <p>
- * 用户信息表
- * </p>
- *
- * @author shuang
- * @since 2018-04-24
- */
-@TableName("users")
-public class Users implements Serializable {
+    public  Users(){
+    }
+    public Users(String username,String password){
+        this.username = username;
+        this.password = password;
+    }
 
-    private static final long serialVersionUID = 1L;
+    public Users(String userId, String username, String password, String userimg, String nickname, String usersex, Date birthday, String userinfo, String phonenumber, String usermail, String userlike, Date createTime, Date updateTime) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.userimg = userimg;
+        this.nickname = nickname;
+        this.usersex = usersex;
+        this.birthday = birthday;
+        this.userinfo = userinfo;
+        this.phonenumber = phonenumber;
+        this.usermail = usermail;
+        this.userlike = userlike;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 
     private String userId;
-    /**
-     * 用户名
-     */
-    private String username;
-    /**
-     * 密码
-     */
-    private String password;
-    @TableField("userImg")
-    private String userImg;
-    /**
-     * 用户昵称
-     */
-    private String nickname;
-    /**
-     * 用户性别
-            0-女
-            1-男
-            默认值为0
-            字段可以为空
-     */
-    @TableField("userSex")
-    private String userSex;
-    /**
-     * 用户生日
-            yyyy-MM-dd
-            
-            可以为空
-     */
-    private Date birthday;
-    /**
-     * 这个字段可以用做个性签名或者个人简介
-            
-            可以为空
-     */
-    private String userinfo;
-    /**
-     * 用户手机号码
-     */
-    private String phonenumber;
-    /**
-     * 用户邮箱
-     */
-    private String usermail;
-    /**
-     * 用户喜好，就是用户注册之后会选择的感兴趣的那几个东西
-            数据库中以字符串形式保存，以 _  做分隔符
-            如用户选择了运动，摄影，男神，女神这几个类别，则传过来的数据应是：运动_摄影_男神_女神    
-     */
-    private String userlike;
-    /**
-     * 该用户的注册时间
-     */
-    private Date createTime;
-    /**
-     * 该用户上一次更新个人信息的时间
-     */
-    private Date updateTime;
 
+    private String username;
+
+    private String password;
+
+    private String userimg;
+
+    private String nickname;
+
+    private String usersex;
+
+    private Date birthday;
+
+    private String userinfo;
+
+    private String phonenumber;
+
+    private String usermail;
+
+    private String userlike;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getUserId() {
         return userId;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getUsername() {
@@ -93,7 +68,7 @@ public class Users implements Serializable {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -101,15 +76,15 @@ public class Users implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
-    public String getUserImg() {
-        return userImg;
+    public String getUserimg() {
+        return userimg;
     }
 
-    public void setUserImg(String userImg) {
-        this.userImg = userImg;
+    public void setUserimg(String userimg) {
+        this.userimg = userimg == null ? null : userimg.trim();
     }
 
     public String getNickname() {
@@ -117,15 +92,15 @@ public class Users implements Serializable {
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public String getUserSex() {
-        return userSex;
+    public String getUsersex() {
+        return usersex;
     }
 
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
+    public void setUsersex(String usersex) {
+        this.usersex = usersex == null ? null : usersex.trim();
     }
 
     public Date getBirthday() {
@@ -141,7 +116,7 @@ public class Users implements Serializable {
     }
 
     public void setUserinfo(String userinfo) {
-        this.userinfo = userinfo;
+        this.userinfo = userinfo == null ? null : userinfo.trim();
     }
 
     public String getPhonenumber() {
@@ -149,7 +124,7 @@ public class Users implements Serializable {
     }
 
     public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+        this.phonenumber = phonenumber == null ? null : phonenumber.trim();
     }
 
     public String getUsermail() {
@@ -157,7 +132,7 @@ public class Users implements Serializable {
     }
 
     public void setUsermail(String usermail) {
-        this.usermail = usermail;
+        this.usermail = usermail == null ? null : usermail.trim();
     }
 
     public String getUserlike() {
@@ -165,7 +140,7 @@ public class Users implements Serializable {
     }
 
     public void setUserlike(String userlike) {
-        this.userlike = userlike;
+        this.userlike = userlike == null ? null : userlike.trim();
     }
 
     public Date getCreateTime() {
@@ -182,45 +157,5 @@ public class Users implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Users(){}
-    public Users(String userId, String username, String password, String userImg, String nickname, String userSex, Date birthday, String userinfo, String phonenumber, String usermail, String userlike, Date createTime, Date updateTime) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.userImg = userImg;
-        this.nickname = nickname;
-        this.userSex = userSex;
-        this.birthday = birthday;
-        this.userinfo = userinfo;
-        this.phonenumber = phonenumber;
-        this.usermail = usermail;
-        this.userlike = userlike;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
-
-    public Users(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-    @Override
-    public String toString() {
-        return "Users{" +
-        "userId=" + userId +
-        ", username=" + username +
-        ", password=" + password +
-        ", userImg=" + userImg +
-        ", nickname=" + nickname +
-        ", userSex=" + userSex +
-        ", birthday=" + birthday +
-        ", userinfo=" + userinfo +
-        ", phonenumber=" + phonenumber +
-        ", usermail=" + usermail +
-        ", userlike=" + userlike +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

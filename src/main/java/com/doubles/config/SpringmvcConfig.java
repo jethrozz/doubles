@@ -5,12 +5,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.servlet.Filter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +30,13 @@ public class SpringmvcConfig implements WebMvcConfigurer {
 		multipartResolver.setMaxUploadSize(1000000);
 		return multipartResolver;
 	}
-
+//	@Bean
+//	public Filter characterEncodingFilter() {
+//		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+//		characterEncodingFilter.setEncoding("UTF-8");
+//		characterEncodingFilter.setForceEncoding(true);
+//		return characterEncodingFilter;
+//	}
 	@Bean
 	public ConversionServiceFactoryBean conversionServiceFactoryBean(){
 		ConversionServiceFactoryBean conversionServiceFactoryBean=new ConversionServiceFactoryBean();

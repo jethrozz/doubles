@@ -1,9 +1,9 @@
 package com.doubles.serviceImpl;
 
-import com.doubles.dao.CommentsDao;
+import com.doubles.dao.CommentsMapper;
 import com.doubles.entity.Comments;
 import com.doubles.service.CommentsService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,21 +15,30 @@ import org.springframework.stereotype.Service;
  * @since 2018-04-24
  */
 @Service
-public class CommentsServiceImpl extends ServiceImpl<CommentsDao, Comments> implements CommentsService {
+public class CommentsServiceImpl implements CommentsService {
+
+    @Autowired
+    CommentsMapper commentsDao;
 
     @Override
     public Comments addComment(Comments comment) {
-        insert(comment);
+        commentsDao.insertSelective(comment);
         return comment;
     }
 
     @Override
     public boolean deleteComment(String commentId) {
-        return deleteById(commentId);
+        if(commentsDao.deleteByPrimaryKey(commentId) >= 1){
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean updateComment(Comments comment) {
-        return updateById(comment);
+        if(commentsDao.updateByPrimaryKeySelective(comment) >= 1){
+            return true;
+        }
+        return false;
     }
 }

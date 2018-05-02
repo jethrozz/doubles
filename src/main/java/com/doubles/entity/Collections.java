@@ -1,54 +1,26 @@
 package com.doubles.entity;
 
 import java.util.Date;
-import java.io.Serializable;
 
-/**
- * <p>
- * 收藏表
- * </p>
- *
- * @author shuang
- * @since 2018-04-24
- */
-public class Collections implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Collections {
     private String collectionId;
-    /**
-     * 收藏者id
-     */
-    private String userId;
-    /**
-     * 收藏内容的类型
-            0-动态
-            1-图片
-            默认值为 0
-            具体数据由前端判断之后发送到后台
-     */
-    private Integer type;
-    /**
-     * type为0时，表示动态id
-            type为1时，表示图片id
-     */
-    private String contentId;
-    /**
-     * 该条记录的创建时间
-     */
-    private Date createTime;
-    /**
-     * 该条记录的更新时间
-     */
-    private Date updateTime;
 
+    private String userId;
+
+    private Integer type;
+
+    private String contentId;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getCollectionId() {
         return collectionId;
     }
 
     public void setCollectionId(String collectionId) {
-        this.collectionId = collectionId;
+        this.collectionId = collectionId == null ? null : collectionId.trim();
     }
 
     public String getUserId() {
@@ -56,7 +28,7 @@ public class Collections implements Serializable {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public Integer getType() {
@@ -72,7 +44,7 @@ public class Collections implements Serializable {
     }
 
     public void setContentId(String contentId) {
-        this.contentId = contentId;
+        this.contentId = contentId == null ? null : contentId.trim();
     }
 
     public Date getCreateTime() {
@@ -89,17 +61,5 @@ public class Collections implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Collections{" +
-        "collectionId=" + collectionId +
-        ", userId=" + userId +
-        ", type=" + type +
-        ", contentId=" + contentId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

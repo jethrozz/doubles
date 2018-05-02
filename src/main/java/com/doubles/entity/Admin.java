@@ -1,51 +1,26 @@
 package com.doubles.entity;
 
 import java.util.Date;
-import java.io.Serializable;
 
-/**
- * <p>
- * 管理员表
- * </p>
- *
- * @author shuang
- * @since 2018-04-24
- */
-public class Admin implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Admin {
     private String adminId;
-    /**
-     * 用户名
-     */
-    private String username;
-    /**
-     * 密码
-     */
-    private String password;
-    /**
-     * 用数字表示权限
-            0-普通
-            1-高级
-     */
-    private Integer power;
-    /**
-     * 这条记录的创建时间
-     */
-    private Date createTime;
-    /**
-     * 这条记录的更新时间
-     */
-    private Date updateTime;
 
+    private String username;
+
+    private String password;
+
+    private Integer power;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getAdminId() {
         return adminId;
     }
 
     public void setAdminId(String adminId) {
-        this.adminId = adminId;
+        this.adminId = adminId == null ? null : adminId.trim();
     }
 
     public String getUsername() {
@@ -53,7 +28,7 @@ public class Admin implements Serializable {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -61,7 +36,7 @@ public class Admin implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public Integer getPower() {
@@ -86,17 +61,5 @@ public class Admin implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Admin{" +
-        "adminId=" + adminId +
-        ", username=" + username +
-        ", password=" + password +
-        ", power=" + power +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

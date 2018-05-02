@@ -1,7 +1,6 @@
 package com.doubles.controller;
 
 
-import com.doubles.entity.Article;
 import com.doubles.entity.Image;
 import com.doubles.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +25,11 @@ public class ImageController {
     @Autowired
     ImageService imageService;
     @RequestMapping("/addImgLike")
-    public void addLike(HttpServletRequest request, String articleId){
-        Image image = imageService.selectById(articleId);
+    public void addLike(HttpServletRequest request, String imgId){
+        Image image = imageService.getOneImg(imgId);
         if(image !=  null){
             image.setLikeNumber(image.getLikeNumber()+1);
-            imageService.updateById(image);
+            imageService.updateImg(image);
         }
     }
 }

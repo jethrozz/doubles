@@ -1,7 +1,6 @@
 package com.doubles.service;
 
 import com.doubles.entity.ChatRecord;
-import com.baomidou.mybatisplus.service.IService;
 
 import java.util.List;
 
@@ -13,8 +12,8 @@ import java.util.List;
  * @author shuang
  * @since 2018-04-24
  */
-public interface ChatRecordService extends IService<ChatRecord> {
+public interface ChatRecordService{
     //查询聊天记录
-    List<ChatRecord> findChatRecordList(String fromUser,String toUser);
-
+    List<ChatRecord> findChatRecordList(String fromUser, String toUser);
+    boolean insert(ChatRecord chatRecord);
 }

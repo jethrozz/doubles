@@ -28,7 +28,10 @@ function login(user,pwd){
 			console.log(res)
 			if(res.stauts == 0){
 				window.location.href = "../index"
+			}else{
+				alert("用户名或密码错误")
 			}
 		}
 	});
 }
+

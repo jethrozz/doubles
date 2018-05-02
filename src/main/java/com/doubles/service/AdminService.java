@@ -1,7 +1,7 @@
 package com.doubles.service;
 
+
 import com.doubles.entity.Admin;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @author shuang
  * @since 2018-04-24
  */
-public interface AdminService extends IService<Admin> {
-
+public interface AdminService {
+	boolean insert(Admin admin);
 }

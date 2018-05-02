@@ -1,49 +1,26 @@
 package com.doubles.entity;
 
 import java.util.Date;
-import java.io.Serializable;
 
-/**
- * <p>
- * 相册
- * </p>
- *
- * @author shuang
- * @since 2018-04-24
- */
-public class Album implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Album {
     private String albumId;
-    /**
-     * 所属用户id
-     */
-    private String userId;
-    /**
-     * 相册名称
-     */
-    private String albumName;
-    /**
-     * 相册描述
-     */
-    private String albumDescribe;
-    /**
-     * 相册创建时间
-     */
-    private Date createTime;
-    /**
-     * 该条记录的更新时间
-     */
-    private Date updateTime;
 
+    private String userId;
+
+    private String albumName;
+
+    private String albumDescribe;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getAlbumId() {
         return albumId;
     }
 
     public void setAlbumId(String albumId) {
-        this.albumId = albumId;
+        this.albumId = albumId == null ? null : albumId.trim();
     }
 
     public String getUserId() {
@@ -51,7 +28,7 @@ public class Album implements Serializable {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getAlbumName() {
@@ -59,7 +36,7 @@ public class Album implements Serializable {
     }
 
     public void setAlbumName(String albumName) {
-        this.albumName = albumName;
+        this.albumName = albumName == null ? null : albumName.trim();
     }
 
     public String getAlbumDescribe() {
@@ -67,7 +44,7 @@ public class Album implements Serializable {
     }
 
     public void setAlbumDescribe(String albumDescribe) {
-        this.albumDescribe = albumDescribe;
+        this.albumDescribe = albumDescribe == null ? null : albumDescribe.trim();
     }
 
     public Date getCreateTime() {
@@ -84,17 +61,5 @@ public class Album implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Album{" +
-        "albumId=" + albumId +
-        ", userId=" + userId +
-        ", albumName=" + albumName +
-        ", albumDescribe=" + albumDescribe +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

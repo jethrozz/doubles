@@ -1,17 +1,11 @@
 package com.doubles.serviceImpl;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.doubles.dao.RelationshipDao;
-import com.doubles.dao.UsersDao;
-import com.doubles.entity.Relationship;
+import com.doubles.dao.UsersMapper;
 import com.doubles.entity.Users;
+import com.doubles.entity.UsersExample;
 import com.doubles.service.UsersService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * <p>
@@ -22,13 +16,24 @@ import java.util.List;
  * @since 2018-04-24
  */
 @Service
-public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements UsersService {
+public class UsersServiceImpl implements UsersService {
     @Autowired
-    UsersDao userDao;
+    UsersMapper userDao;
+
+    @Override
+    public boolean checkUserName(String username) {
+        UsersExample example = new UsersExample();
+        example.or().andUsernameEqualTo(username);
+        if(userDao.countByExample(example) == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     @Override
     public Users userLogin(Users user) {
-        Users u = userDao.selectOne(user);
+        Users u = userDao.isUser(user.getUsername(),user.getPassword());
         if(u != null){
             return u;
         }else {
@@ -38,31 +43,24 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
 
     @Override
     public boolean registUser(Users user) {
-        return insert(user);
+        if(userDao.insertSelective(user) >= 1){
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean updateUserInfo(Users user) {
-        return updateById(user);
+        if(userDao.updateByPrimaryKeySelective(user) >= 1){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean updateUserPassword(Users user) {
-        return updateById(user);
+    public Users getOne(String userId) {
+        return userDao.selectByPrimaryKey(userId);
     }
-
-    @Override
-    public boolean updateUserImg(Users user) {
-        return updateById(user);
-    }
-
-    @Override
-    public Page<Users> findAll(Page<Users> page) {
-        EntityWrapper<Users> ew = new EntityWrapper();
-        return page.setRecords(userDao.selectPage(page,ew));
-    }
-
-
 
 
 }

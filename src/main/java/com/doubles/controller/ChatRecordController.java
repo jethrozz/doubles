@@ -4,9 +4,7 @@ package com.doubles.controller;
 import com.doubles.entity.ChatRecord;
 import com.doubles.model.SingletonMsgQueue;
 import com.doubles.service.ChatRecordService;
-import io.goeasy.GoEasy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;

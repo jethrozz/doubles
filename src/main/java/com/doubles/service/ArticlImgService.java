@@ -1,8 +1,5 @@
 package com.doubles.service;
 
-import com.doubles.entity.ArticlImg;
-import com.baomidou.mybatisplus.service.IService;
-
 /**
  * <p>
  * 动态图片表
@@ -13,6 +10,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @author shuang
  * @since 2018-04-24
  */
-public interface ArticlImgService extends IService<ArticlImg> {
+public interface ArticlImgService{
 
 }

@@ -1,59 +1,30 @@
 package com.doubles.entity;
 
 import java.util.Date;
-import java.io.Serializable;
 
-/**
- * <p>
- * 转发表
- * </p>
- *
- * @author shuang
- * @since 2018-04-24
- */
-public class Transmit implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Transmit {
     private String transmitId;
-    /**
-     * 转发这条动态的用户id
-     */
-    private String userId;
-    /**
-     * 0-动态
-            1-图片
-     */
-    private Integer type;
-    /**
-     * type为0时表示动态id
-            type为1时表示图片id
-     */
-    private String contentId;
-    /**
-     * 转发时发表的评论，可以为空
-     */
-    private String comment;
-    /**
-     * 这条转发的点赞数，初始值默认为0
-     */
-    private Integer likeNumber;
-    /**
-     * 这条记录的创建时间
-     */
-    private Date createTime;
-    /**
-     * 这条记录的更新时间
-     */
-    private Date updateTime;
 
+    private String userId;
+
+    private Integer type;
+
+    private String contentId;
+
+    private String comment;
+
+    private Integer likeNumber;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public String getTransmitId() {
         return transmitId;
     }
 
     public void setTransmitId(String transmitId) {
-        this.transmitId = transmitId;
+        this.transmitId = transmitId == null ? null : transmitId.trim();
     }
 
     public String getUserId() {
@@ -61,7 +32,7 @@ public class Transmit implements Serializable {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public Integer getType() {
@@ -77,7 +48,7 @@ public class Transmit implements Serializable {
     }
 
     public void setContentId(String contentId) {
-        this.contentId = contentId;
+        this.contentId = contentId == null ? null : contentId.trim();
     }
 
     public String getComment() {
@@ -85,7 +56,7 @@ public class Transmit implements Serializable {
     }
 
     public void setComment(String comment) {
-        this.comment = comment;
+        this.comment = comment == null ? null : comment.trim();
     }
 
     public Integer getLikeNumber() {
@@ -110,19 +81,5 @@ public class Transmit implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Transmit{" +
-        "transmitId=" + transmitId +
-        ", userId=" + userId +
-        ", type=" + type +
-        ", contentId=" + contentId +
-        ", comment=" + comment +
-        ", likeNumber=" + likeNumber +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

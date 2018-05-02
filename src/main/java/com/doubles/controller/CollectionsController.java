@@ -32,7 +32,7 @@ public class CollectionsController {
         collection.setContentId(contentId);
         collection.setUserId(user.getUserId());
         collection.setType(1);
-        collectionService.insert(collection);
+        collectionService.addCollection(collection);
     }
 
     @RequestMapping("/addCollectionArticle")
@@ -42,7 +42,7 @@ public class CollectionsController {
         collection.setContentId(contentId);
         collection.setUserId(user.getUserId());
         collection.setType(0);
-        collectionService.insert(collection);
+        collectionService.addCollection(collection);
     }
 
 

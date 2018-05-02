@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -42,7 +41,7 @@ public class ArticleController {
         Article article = articleService.getOneArticle(articleId);
         if(article !=  null){
             article.setLikeNumber(article.getLikeNumber()+1);
-            articleService.updateArticleLikeNumber(article);
+            articleService.updateArticle(article);
         }
     }
 

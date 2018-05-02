@@ -1,9 +1,9 @@
 package com.doubles.serviceImpl;
 
-import com.doubles.dao.AdminDao;
+import com.doubles.dao.AdminMapper;
 import com.doubles.entity.Admin;
 import com.doubles.service.AdminService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +15,15 @@ import org.springframework.stereotype.Service;
  * @since 2018-04-24
  */
 @Service
-public class AdminServiceImpl extends ServiceImpl<AdminDao, Admin> implements AdminService {
+public class AdminServiceImpl implements AdminService {
 
+	@Autowired
+	AdminMapper adminDao;
+	@Override
+	public boolean insert(Admin admin) {
+		if(adminDao.insertSelective(admin) >= 1){
+			return  true;
+		}
+		return false;
+	}
 }

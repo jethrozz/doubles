@@ -1,7 +1,5 @@
 package com.doubles.service;
 
-import com.doubles.entity.ArtilceTopic;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
@@ -12,6 +10,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @author shuang
  * @since 2018-04-24
  */
-public interface ArtilceTopicService extends IService<ArtilceTopic> {
+public interface ArtilceTopicService {
 
 }

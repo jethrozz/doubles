@@ -1,10 +1,9 @@
 package com.doubles.serviceImpl;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.doubles.dao.ChatRecordDao;
+import com.doubles.dao.ChatRecordMapper;
 import com.doubles.entity.ChatRecord;
+import com.doubles.entity.ChatRecordExample;
 import com.doubles.service.ChatRecordService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,19 +19,26 @@ import java.util.List;
  * @since 2018-04-24
  */
 @Service
-public class ChatRecordServiceImpl extends ServiceImpl<ChatRecordDao, ChatRecord> implements ChatRecordService {
+public class ChatRecordServiceImpl  implements ChatRecordService {
 
     @Autowired
-    private ChatRecordDao chatRecordDao;
+    private ChatRecordMapper chatRecordDao;
 
     @Override
     public List<ChatRecord> findChatRecordList(String fromUser, String toUser) {
         List<ChatRecord> chatRecordList = new ArrayList<>();
-        EntityWrapper<ChatRecord> ew = new EntityWrapper<>();
-        ew.where("user_id = {0}",fromUser).and("to_user = {0}",toUser);
-        ew.orderBy("create_time",false);
-        chatRecordList = selectList(ew);
+        ChatRecordExample example = new ChatRecordExample();
+        example.or().andUserIdEqualTo(fromUser).andToUserEqualTo(toUser);
+        chatRecordList = chatRecordDao.selectByExample(example);
         return chatRecordList;
+    }
+
+    @Override
+    public boolean insert(ChatRecord chatRecord) {
+        if(chatRecordDao.insertSelective(chatRecord) >= 1){
+            return true;
+        }
+        return false;
     }
 
 }

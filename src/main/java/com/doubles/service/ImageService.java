@@ -1,7 +1,7 @@
 package com.doubles.service;
 
+
 import com.doubles.entity.Image;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.service.IService;
  * @author shuang
  * @since 2018-04-24
  */
-public interface ImageService extends IService<Image> {
-
+public interface ImageService{
+	Image getOneImg(String imgId);
+	boolean updateImg(Image image);
 }

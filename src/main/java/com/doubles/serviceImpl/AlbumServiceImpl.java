@@ -1,9 +1,6 @@
 package com.doubles.serviceImpl;
 
-import com.doubles.dao.AlbumDao;
-import com.doubles.entity.Album;
 import com.doubles.service.AlbumService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +12,6 @@ import org.springframework.stereotype.Service;
  * @since 2018-04-24
  */
 @Service
-public class AlbumServiceImpl extends ServiceImpl<AlbumDao, Album> implements AlbumService {
+public class AlbumServiceImpl implements AlbumService {
 
 }
