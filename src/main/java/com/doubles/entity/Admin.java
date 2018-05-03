@@ -11,6 +11,18 @@ public class Admin {
 
     private Integer power;
 
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "adminId='" + adminId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", power=" + power +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
     private Date createTime;
 
     private Date updateTime;

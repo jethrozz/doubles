@@ -5,6 +5,24 @@ import com.doubles.util.SecretUtils;
 import java.util.Date;
 
 public class Users {
+    @Override
+    public String toString() {
+        return "Users{" +
+                "userId='" + userId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userimg='" + userimg + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", usersex='" + usersex + '\'' +
+                ", birthday=" + birthday +
+                ", userinfo='" + userinfo + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", usermail='" + usermail + '\'' +
+                ", userlike='" + userlike + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 
     public  Users(){
     }

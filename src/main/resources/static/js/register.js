@@ -35,11 +35,12 @@ $("#myBtn").click(function (e) {
                         url: "./userregist",
                         type: "post",
                         async:true,
+                        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
                         data: {
                             username:$("#userName").val(),
                             nickname:$("#nickName").val(),
                             password:$("#userPW").val(),
-                            userSex: $("input[name='userSex']:checked").val(),
+                            usersex: $("input[name='userSex']:checked").val(),
                             birthday:$("#userBirthday").val()
                         },
                         success: function (data,stauts,result) {
@@ -91,7 +92,7 @@ function sublike() {
         async:true,
         data: {
             userId:uid,
-            like:like,
+            userlike:like,
         },
         success: function (data,stauts,result) {
             var res = JSON.parse(data);

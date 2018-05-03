@@ -3,6 +3,8 @@ package com.doubles.serviceImpl;
 import com.doubles.dao.ArticleMapper;
 import com.doubles.entity.Article;
 import com.doubles.service.ArticleService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,23 +44,17 @@ public class ArticleServiceImpl implements ArticleService {
         return false;
     }
 
+    @Override
+    public Page<Article> selectArticlePageByUid(int pageNo, int pageSize, String user_id) {
+        PageHelper.startPage(pageNo,pageSize);
+        return articleDao.findPageByUid(user_id);
+    }
 
-//    @Override
-//    public Page<Article> selectArticleListByUid(Page<Article> page, String user_id) {
-//        page.
-//        EntityWrapper<Article> ew = new EntityWrapper<>();
-//        ew.where("user_id = {0}",user_id);
-//        ew.orderBy("create_time",false);
-//        return selectPage(page,ew);
-//    }
-//
-//    @Override
-//    public Page<Article> selectArticleListByContent(Page<Article> page, String content) {
-//        EntityWrapper<Article> ew = new EntityWrapper<>();
-//        ew.like("content",content);
-//        ew.orderBy("create_time",true);
-//        return selectPage(page,ew);
-//    }
+    @Override
+    public Page<Article> selectArticlePageByContent(int pageNo, int pageSize, String content) {
+        PageHelper.startPage(pageNo,pageSize);
+        return articleDao.findPageByContent(content);
+    }
 
     @Override
     public Article getOneArticle(String artilce_id) {

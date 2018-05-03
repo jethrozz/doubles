@@ -1,5 +1,9 @@
 package com.doubles.service;
 
+import com.doubles.entity.Image;
+
+import java.util.List;
+
 /**
  * <p>
  * 动态图片表
@@ -11,5 +15,5 @@ package com.doubles.service;
  * @since 2018-04-24
  */
 public interface ArticlImgService{
-
+	List<Image> findImgByArticleId(String article_id);
 }

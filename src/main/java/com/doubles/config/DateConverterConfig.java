@@ -3,6 +3,7 @@ package com.doubles.config;
 import com.doubles.util.Logger;
 import com.doubles.util.SecretUtils;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,6 +16,7 @@ import java.util.List;
  * @时间: 2018/4/25
  * @描述：网上复制的日期格式转换器，主要用于转换将前端传过来的字符串形式的日期转换成java.util.date
  */
+@Component
 public class DateConverterConfig  implements Converter<String, Date> {
     private final Logger LOGGER = Logger.getLogger(DateConverterConfig.class);
     /**

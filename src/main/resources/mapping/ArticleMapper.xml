@@ -82,6 +82,20 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
+
+  <select id="findPageByUid" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from article WHERE user_id = #{userId} ORDER BY create_time DESC
+  </select>
+
+  <select id="findPageByContent" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    from article WHERE content LIKE  CONCAT('%',#{content},'%' ) ORDER BY create_time DESC
+  </select>
+
+
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.doubles.entity.ArticleExample" >
     select
     <if test="distinct" >

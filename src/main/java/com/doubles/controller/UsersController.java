@@ -64,28 +64,17 @@ public class UsersController {
 	}
 
 	@RequestMapping("/regist")
-	public String regist(HttpServletRequest request, Users user) {
+	public String regist(HttpServletRequest request) {
 		return "register";
 	}
 
 	@RequestMapping("/userregist")
 	@ResponseBody
-	public String userRegist(HttpServletRequest request, String username, String nickname, String password, String userSex, String birthday) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	public String userRegist(HttpServletRequest request,Users users) {
 		ResLogin res = new ResLogin(1, "default failed");
 		Users user = new Users();
 		user.setUserId(SecretUtils.uuid32());
-		user.setNickname(nickname);
-		user.setUsername(username);
-		user.setUsersex(userSex);
 		user.setUserimg("/static/img/default.jpg");
-		try {
-			user.setBirthday(sdf.parse(birthday));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		user.setPassword(password);
-		System.out.print(user.getNickname());
 		if (usersService.registUser(user)) {
 			res.setStauts(0);
 			res.setMsg(user.getUserId());
@@ -95,11 +84,7 @@ public class UsersController {
 
 	@RequestMapping("/addLike")
 	@ResponseBody
-	public String userLike(HttpSession session,HttpServletResponse response, String like, String userId) {
-		//String likes[] = like.split("-");
-		Users user = new Users();
-		user.setUserId(userId);
-		user.setUserlike(like);
+	public String userLike(HttpSession session,HttpServletResponse response, Users user) {
 		usersService.updateUserInfo(user);
 		try {  //把sessionId记录在浏览器
 			Cookie c = new Cookie("JSESSIONID", URLEncoder.encode(session.getId(), "utf-8"));
@@ -111,16 +96,12 @@ public class UsersController {
 
 			e.printStackTrace();
 		}
-		user = usersService.getOne(userId);
+		user = usersService.getOne(user.getUserId());
 		session.setAttribute("user", user);
 
 		return Utils.toJson(new ResLogin(0, "success"));
 	}
 
-	@RequestMapping("/inter")
-	public String inter() {
-		return "interestLabel";
-	}
 
 	@RequestMapping("/checkName")
 	@ResponseBody
