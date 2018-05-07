@@ -1,6 +1,7 @@
 package com.doubles.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Article {
     private String articleId;
@@ -26,6 +27,17 @@ public class Article {
     private Date updateTime;
 
     private String content;
+
+
+    List<Image> imgList;
+
+    public List<Image> getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(List<Image> imgList) {
+        this.imgList = imgList;
+    }
 
     public String getArticleId() {
         return articleId;

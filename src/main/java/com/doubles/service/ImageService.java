@@ -14,4 +14,5 @@ import com.doubles.entity.Image;
 public interface ImageService{
 	Image getOneImg(String imgId);
 	boolean updateImg(Image image);
+
 }

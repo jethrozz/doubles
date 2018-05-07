@@ -3,6 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.Article;
 import com.doubles.entity.ArticleExample;
 import java.util.List;
+
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface ArticleMapper {
@@ -33,4 +35,6 @@ public interface ArticleMapper {
     int updateByPrimaryKeyWithBLOBs(Article record);
 
     int updateByPrimaryKey(Article record);
+    Page<Article> findPageByUid(@Param("userId")String userId);
+    Page<Article> findPageByContent(@Param("content")String content);
 }

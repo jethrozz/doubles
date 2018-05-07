@@ -1,7 +1,16 @@
 package com.doubles.serviceImpl;
 
+import com.doubles.dao.ArticlImgMapper;
+import com.doubles.dao.ImageMapper;
+import com.doubles.entity.ArticlImg;
+import com.doubles.entity.ArticlImgExample;
+import com.doubles.entity.Image;
 import com.doubles.service.ArticlImgService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -16,4 +25,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticlImgServiceImpl implements ArticlImgService {
 
+	@Autowired
+	private ArticlImgMapper articlImgDao;
+	@Autowired
+	private ImageMapper imgDao;
+	@Override
+	public List<Image> findImgByArticleId(String article_id) {
+		ArticlImgExample example = new ArticlImgExample();
+		example.or().andArticleIdEqualTo(article_id);
+		List<ArticlImg> articlImgList = articlImgDao.selectByExample(example);
+		List<Image> imageList = new ArrayList<>();
+		for (ArticlImg articlImg : articlImgList){
+			imageList.add(imgDao.selectByPrimaryKey(articlImg.getImgId()));
+		}
+		return imageList;
+	}
 }
