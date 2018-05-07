@@ -18,9 +18,7 @@
 	margin-bottom: 30px;
 	
 }
-.top1{
-	height:;
-}
+
 #regMain h2{
 	text-align: center;
 	opacity: 0.8;
@@ -30,7 +28,12 @@
 	text-align: right;
 }
 #userSex1{
-	width: 20%;
+	position: absolute;
+	width: 30px;
+}
+#userSex2{
+	position: absolute;
+	width: 30px;
 }
 
 
@@ -68,4 +71,14 @@
 }
 #btnGroup{
 	display: inline-block;
+}
+.form-check-input{
+	width: 50px;
+	padding-left: 10px;
+
+}
+.form-check-label{
+	padding-left: 5px;
+	padding-right: 30px;
+	width: 40px;
 }

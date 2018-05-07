@@ -1,30 +1,46 @@
 .my-underline{
-	border-bottom: 1px solid #333;
+	border-bottom: 1px solid #FF5DC3;
 	margin: 2px;
 }
 #user_img{
 	width: 100px;
 	height: 100px;
-	margin: 10px auto 0px auto;
+	margin: 20px auto 0px auto;
+}
+#user_img1{
+	width: 50px;
+	height: 50px;
+
 }
 .user_list{
-	border-bottom:1px solid #333;
+	border-bottom:1px solid #FF5DC3;
 }
 .panel-footer {
 	text-align: center;
+	font-size: 0.8rem;
+	color: white;
+	height: 60px;
+	padding-top: 10px;
+	background-color: #FF5DC3;
+
 }
 #fllow-tab,#article-tab,#fans-tab,#like-tab{
-	border: none;
+	border:none;
+	color: #F04BB3;
 }
 #fllow-tab.active,#article-tab.active,#fans-tab.active,#like-tab.active{
-	background-color: transparent;	
+	background-color: transparent;
+	color: gray;
+}
+.badge-primary{
+	background-color: #FF5DC3;
 }
 .my-number{
 	position: absolute;
 	right:2rem;
 }
 .article-time{
-		position: absolute;
+	position: absolute;
 	right:2rem;
 	font-size: 0.7rem;
 }
@@ -37,6 +53,16 @@
 .fllow-user-even{
 	padding-left: 0;
 }
+.left_top{
+	text-align: center;
+	background-color: #FFF3F8;
+	height: 150px;
+	padding-bottom: 15px;
+}
+/*.card-title{
+	background-color: #FFF3F8;
+	margin-top: -5px;
+}*/
 .fllow-user-img{
 	/*position: absolute;*/
 	position: relative;
@@ -83,15 +109,42 @@
 	position: absolute;
 	text-align: center;
 	font-size: 10px;
-	width: 50px;
+	background-color: #FF5DC3;
+	border: 0px;
 	height: 30px;
 	right:1rem;
-	
 }
 .fllow_btn:hover{
-	background-color: lawngreen;
-	text-indent: fsj;
-	
+	background-color: white;
+	color: #FF5DC3;
+	border: 1px solid #FF5DC3;
+}
+.fllow_btn1{
+	position: absolute;
+	text-align: center;
+	font-size: 10px;
+	background-color: #FF5DC3;
+	border: 0px;
+	height: 30px;
+	right:1rem;
+}
+.fllow_btn1:hover{
+	background-color: white;
+	color: #FF5DC3;
+	border: 1px solid #FF5DC3;
+}
+.btn-secondary.focus, .btn-secondary:focus{
+	box-shadow: none;
+}
+.btn.focus, .btn:focus{
+	box-shadow: none;
+}
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+	background-color: #FF5DC3;
+	border-color: #FF5DC3;
+}
+.card-deck .card{
+	margin-bottom: 20px;
 }
 .nav-tabs{
 	margin: 20px auto 10px auto;
@@ -103,29 +156,160 @@
 	font-size: 10px;
 	width: 40px;
 	height: 25px;
-	}
-.search_text{
+}
+.search_text {
 	position: absolute;
 	border-radius: 1rem;
 	right: 4rem;
 	height: 20px;
-	
+	border: 1px solid darkgrey;
+	margin: 20px 10px;
+
 }
-#myTop {
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus{
+	box-shadow: 0 0 0 0.2rem #FF5DC3;
+	background-color: #F04BB3;
+}
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+	background-color: #F04BB3;
+	border-color: #F04BB3;
+}
+/*#myTop {
 	height: 80px;
-	background-color: black;
+	background-image: url(../img/chuangyi_meiyuan_yusan-003.jpg);
+}*/
+.row{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+#myLeft ,#myRight{
+	background-color: white;
+}
+#mytabl .btn-primary:hover{
+	color: coral;
+	background-color: white;
+	border:1px solid coral;
 }
 
-#myLeft {
-	background-color: antiquewhite;
+.card-footer{
+	background-color:white;
+
+}
+.text-muted{
+	color: #FF5DC3!important;
+}
+#myTabR ,#myTabL{
+	background-color: #FF5DC3;
+	margin-top: 0px;
+
+	padding-top: 20px;
+
+
+}
+.nav-tabs .btn-primary {
+	color: white;
+	background-color: #FF5DC3;
+	border:0px;
+	margin: 12px 0px;
+}
+.card-title{
+	font-family: inherit;
+	font-size: 20px;
+}
+p{
+	font-family: inherit;
+	color: #16181B;
+	font-size: 14px;
+}
+.card-text{
+	overflow: hidden;
+}
+#user_content_img{
+	width: 300px;
+	height: 310px;
+	float: left;
+	margin-right: 10px;
+}
+#user_content_img span{
+	float: right;
+	position: absolute;
+	top: 24px;
+	margin-left: 4px;
+	z-index: 100;
+}
+#user_content_img img{
+	width: 100%;
+	height: 100%;
 }
 
-#myRight {
-	background-color: antiquewhite;
+#user_context{
+	line-height: 1.6;
+	word-wrap: break-word;
 }
 
 #mainContent {
 	width: 100%;
 }
-
+#myTab li{
+	text-align: left;
+}
 #onePage {}
+
+#topicTab{
+	height: 60px;
+}
+.push_topic{
+	position: absolute;
+	right: 1.5rem;
+	margin-top: 30px;
+	color: #FF5DC3;
+}
+.topic_img img{
+	width: 100px;
+	height: 100px;
+}
+.list-group-item.active{
+	background-color: #FF5DC3;
+	border: 0px;
+	color: white;
+}
+.list-group{
+	width: 200px;
+	float: right;
+
+}
+.hot_person_img{
+	margin-top: 10px;
+}
+.hot_person_img img{
+	width: 130px;
+	height: 120px;
+	margin-right: 5px;
+}
+.hot_person_header{
+	background-color: #f9b9b975;
+	padding-left: 0px;
+	margin-top: 0px;
+}
+.hot_person_header img{
+	width: 60px;
+	height: 60px;
+	margin-left: 0px;
+
+}
+.hot_nickname{
+	padding-left: 5px;
+
+}
+a{
+	color: gray;
+	text-decoration: none;
+}
+a :hover{
+	color: #FF5DC3;
+
+}
+.hot_person_header .fllow_btn1{
+	margin-top: 20px;
+	margin-right: 20px;
+}

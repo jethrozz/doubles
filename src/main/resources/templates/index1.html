@@ -1,362 +1,558 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>Bootstrap</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/index.css" />
-		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
-		<script>
-		</script>
-	</head>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Bootstrap</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/iconfont1.css">
+	<script>
+	</script>
+</head>
 
-	<body>
-		<div class="container-fluid" id="main">
-			<div class="row">
-				<div class="col-lg-12" id="myTop"></div>
-			</div>
-			<div class="container" id="myCon">
-				<div class="row">
-					<div class="col-lg-4" id="myLeft">
-						<ul class="nav nav-tabs" id="myTabL">
-							<li class="active">
-								<a data-toggle="tab" class="btn btn-primary" href="#myPage">信息</a>
-							</li>
-							<li>
-								<a data-toggle="tab" class="btn btn-primary" href="#others">其它</a>
-							</li>
-						</ul>
+<body>
+<div class="container-fluid" id="main">
+	<div class="row">
+		<div class="col-lg-12" id="myTop"></div>
+	</div>
+	<div class="container-fluid" id="myCon">
+		<div class="row">
+			<div class="col-lg-4" id="myLeft">
+				<ul class="nav nav-tabs" id="myTabL">
+					<li class="active">
+						<a data-toggle="tab" class="btn btn-primary" href="#myPage">信息</a>
+					</li>
+					<li>
+						<a data-toggle="tab" class="btn btn-primary" href="#others">其它</a>
+					</li>
+				</ul>
 
-						<div class="tab-content" id="mainContent1">
+				<div class="tab-content" id="mainContent1">
 
-							<div class="tab-pane active" id="myPage">
-								<div class="card">
-									<img class="card-img-top rounded-circle " id="user_img" width="100px" height="100px" src="img/chuangyi_meiyuan_yusan-003.jpg" alt="Card image cap">
-									<div class="card-body">
-										<h5 class="card-title text-center">JacksonWZ</h5>
-										
-										<ul class="nav  nav-tabs flex-column" id="myTab" role="tablist">
-											<li class="nav-item user_list">
-												<a class="nav-link active " id="fllow-tab" data-toggle="tab" href="#fllow" role="tab" aria-controls="fllow" aria-selected="false">我的关注 <span class="badge badge-primary badge-pill my-number">100</span></a>
-											</li>
-											<li class="nav-item user_list">
-												<a class="nav-link" id="fans-tab" data-toggle="tab" href="#fans" role="tab" aria-controls="fans" aria-selected="false">我的粉丝 <span class="badge badge-primary badge-pill my-number">25</span></a>
-											</li>
-											<li class="nav-item user_list">
-												<a class="nav-link" id="article-tab" data-toggle="tab" href="#article" role="tab" aria-controls="article" aria-selected="false">我的文章 <span class="badge badge-primary badge-pill my-number">73</span></a>
-											</li>
-											<li class="nav-item user_list">
-												<a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false">我的喜欢  <span class="badge badge-primary badge-pill my-number">222</span></a>
-												
-											</li>
-										</ul>
-									</div>
-								</div>
+					<div class="tab-pane active" id="myPage">
+						<div class="card">
+							<div class="left_top">
+								<img class="card-img-top rounded-circle " id="user_img" src="img/chuangyi_meiyuan_yusan-003.jpg" alt="Card image cap">
+								<h5 class="nicname_title text-center">JacksonWZ</h5>
 							</div>
-							<div class="tab-pane" id="others">其它相关信息</div>
-						</div>
-					</div>
+							<div class="card-body">
+								<!--<h5 class="card-title text-center">JacksonWZ</h5>-->
 
-					<div class="col-lg-8 col-md-8" id="myRight">
-						<ul class="nav nav-tabs" id="myTabR">
-							<li class="active">
-								<a data-toggle="tab" class="btn btn-primary" href="#home"><i class="iconfont icon-shouye"></i>首页</a>
-							</li>
-
-							<li>
-								<a data-toggle="tab" class="btn btn-primary" href="#messages">话题</a>
-							</li>
-							<li>
-								<a data-toggle="tab" class="btn btn-primary" href="#settings">达人</a>
-							</li>
-							<li><input type="search" class="search_text"/></li>
-							<li><button type="button" class="btn btn-primary btn-sm search_btn">搜索</button></li>
-						</ul>
-
-						<div class="tab-content my-content" id="mainContent">
-							<div class="tab-pane " id="home">
-								<div class="card text-center">
-									<div class="card-header">
-										Featured
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">Special title treatment</h5>
-										<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-										<a href="#" class="btn btn-primary">Go somewhere</a>
-									</div>
-									<div class="card-footer text-muted">
-										2 days ago
-									</div>
-								</div>
-							</div>
-							<div class="tab-pane" id="profile">profile</div>
-							<div class="tab-pane" id="messages">messages</div>
-							<div class="tab-pane" id="settings">settings</div>
-							<div class="tab-pane" id="fans">fans</div>
-							<div class="tab-pane active" id="article">
-								<div class="card article-card">
-									<a href="#" class="article-link">
-									<div class="card-body">
-										<h5 class="card-title">Card title </h5>
-										<p class="card-text">the card's content.</p>
-										<div class="my-underline"></div>
-										<div class="little-tag">
-											<a href="#">#hhh</a>,
-											<a href="#">#bbb</a>,
-											<a href="#">#ccc</a>
-										</div>
-										<div class="little-tip">
-											<ul>
-												<li>
-													<a href="#">删除</a>
-												</li>
-												<li>
-													<a href="#">评论</a>
-												</li>
-												<li><span><i class="iconfont icon-icons- my-icon-size"></i> 10</span></li>
-												<li><span class="article-time">2018-4-30 12:34:22</span></li>
-											</ul>
-											
-										</div>
-									</div>
-									</a>
-								</div>
-								<div class="card article-card">
-									<div class="card-body">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									</div>
-								</div>
-								<div class="card article-card">
-									<div class="card-body">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									</div>
-								</div>
-								<div class="card article-card">
-									<div class="card-body">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									</div>
-								</div>
-							</div>
-							<div class="tab-pane" id="like">profile</div>
-							<div class="tab-pane " id="fllow">
-								<!--我关注的人-->
-								<div class="row">
-									<div class="card-deck" id="fllow_u">
-										<div class="card">
-											<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
-											<div class="card-body">
-												<p class="card-title nickname" >精致的猪猪女孩
-													<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button>
-												</p><hr />
-												<p class="card-text">
-													这个人很懒，什么都没有留下。
-												</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
-											<div class="card-body">
-												<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p><hr />
-												<p class="card-text">
-													This card has supporting text below as a natural lead-in to additional content.
-													
-												</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
-											<div class="card-body">
-												<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p><hr />
-												<p class="card-text">
-													This card has supporting text below as a natural lead-in to additional content.
-													
-												</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-										
-									</div>
-										<div class="card-deck">
-										<div class="card">
-											<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
-											<div class="card-body">
-												<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p><hr />
-												<p class="card-text">
-													This card has supporting text below as a natural lead-in to additional content.
-													
-												</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
-											<div class="card-body">
-												<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p><hr />
-												<p class="card-text">
-													This card has supporting text below as a natural lead-in to additional content.
-													
-												</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
-											<div class="card-body">
-												<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p><hr />
-												<p class="card-text">
-													This card has supporting text below as a natural lead-in to additional content.
-													
-												</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-										
-									</div>
-									<!--<div class="col-sm-6 fllow-user-list">
-										<div class="card">
-											<div class="card-body">	
-												<h6 class="card-title "><img src="img/img-got702.jpg" class="rounded-circle fllow-user-img" />精致的猪猪女孩<span class=""><div></div></span></h6>
-												<p class="card-text">
-													<ul class="nav  nav-tabs flex-column" id="myTab" role="tablist">
-														<li class="nav-item ">
-															<a class="nav-link active " id="fllow-tab" data-toggle="tab" href="#fllow" role="tab" aria-controls="fllow" aria-selected="false">我的关注 <span class="my-number">100</span></a>
-														</li>
-														<li class="nav-item user_list">
-															<a class="nav-link" id="fans-tab" data-toggle="tab" href="#fans" role="tab" aria-controls="fans" aria-selected="false">我的粉丝 <span class="my-number">25</span></a>
-														</li>
-														<li class="nav-item user_list">
-															<a class="nav-link" id="article-tab" data-toggle="tab" href="#article" role="tab" aria-controls="article" aria-selected="false">我的文章 <span class="my-number">73</span></a>
-														</li>
-														<li class="nav-item user_list">
-															<a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false">我的喜欢 <span class="my-number">222</span></a>
-													
-														</li>
-													</ul>
-												</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6 fllow-user-even fllow-user-list">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Special title treatment</h5>
-												<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更近在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6 fllow-user-list">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Special title treatment</h5>
-												<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更近在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6 fllow-user-even fllow-user-list">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Special title treatment</h5>
-												<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更近在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6 fllow-user-list">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Special title treatment</h5>
-												<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更近在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6 fllow-user-even fllow-user-list">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Special title treatment</h5>
-												<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">最近更近在<span class="updateTime">3小时</span>前</small>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6 fllow-user-list">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Special title treatment</h5>
-												<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">Last updated 3 mins ago</small>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6 fllow-user-even fllow-user-list">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Special title treatment</h5>
-												<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-											</div>
-											<div class="card-footer">
-												<small class="text-muted">Last updated 3 mins ago</small>
-											</div>
-										</div>
-									</div>-->
-								</div>
+								<ul class="nav  nav-tabs flex-column" id="myTab" role="tablist">
+									<li class="nav-item user_list">
+										<a class="nav-link active " id="fllow-tab" data-toggle="tab" href="#fllow" role="tab" aria-controls="fllow" aria-selected="false"><i class="iconfont icon-gongsisvgtubiaozongji20"></i> 我的关注 <span class="badge badge-primary badge-pill my-number">100</span></a>
+									</li>
+									<li class="nav-item user_list">
+										<a class="nav-link" id="fans-tab" data-toggle="tab" href="#fans" role="tab" aria-controls="fans" aria-selected="false"><i class="iconfont icon-fensi1"></i> 我的粉丝 <span class="badge badge-primary badge-pill my-number">25</span></a>
+									</li>
+									<li class="nav-item user_list">
+										<a class="nav-link" id="article-tab" data-toggle="tab" href="#article" role="tab" aria-controls="article" aria-selected="false"><i class="iconfont icon-wenzhang"></i> 我的动态<span class="badge badge-primary badge-pill my-number">73</span></a>
+									</li>
+									<li class="nav-item user_list">
+										<a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false"><i class="iconfont icon-icons-"></i> 我的喜欢  <span class="badge badge-primary badge-pill my-number">222</span></a>
+									</li>
+									<li class="nav-item user_list">
+										<a class="nav-link" id="like-tab" data-toggle="tab" href="#like" role="tab" aria-controls="like" aria-selected="false"><i class="iconfont icon-xiaoxi1"></i> 我的消息  <span class="badge badge-primary badge-pill my-number">222</span></a>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
+					<div class="tab-pane" id="others">其它相关信息</div>
 				</div>
 			</div>
-<div class="tab-content" id="leftContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="panel-footer">
-						版权归个人所有----------Chongqin Scien and technology Univer<br /> 2018-04-27
+
+			<div class="col-lg-8 col-md-8" id="myRight">
+				<ul class="nav nav-tabs" id="myTabR">
+					<li class="active">
+						<a data-toggle="tab" class="btn btn-primary" href="#home"><i class="iconfont icon-shouye"></i> 首页</a>
+					</li>
+
+					<li>
+						<a data-toggle="tab" class="btn btn-primary" href="#messages"><i class="iconfont icon-huati"></i> 话题</a>
+					</li>
+					<li>
+						<a data-toggle="tab" class="btn btn-primary" href="#settings"><i class="iconfont icon-daren1"></i> 达人</a>
+					</li>
+					<li><input type="search" class="search_text"/></li>
+					<li><button type="button" class="btn btn-primary btn-sm search_btn">搜索</button></li>
+				</ul>
+
+				<div class="tab-content my-content" id="mainContent">
+					<div class="tab-pane " id="home">
+						<!--<div class="card text-center">
+                            <div class="card-header">
+                                Featured
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                2 days ago
+                            </div>
+                        </div>-->
+					</div>
+					<div class="tab-pane" id="profile">profile</div>
+					<div class="tab-pane" id="messages">
+						<div class="" id="topicPage">
+							<ul class="nav nav-tabs" id="topicTab">
+								<li class="active">
+									<a data-toggle="tab" class="btn btn-primary" href="#hotTopic">最热</a>
+								</li>
+								<li>
+									<a data-toggle="tab" class="btn btn-primary" href="#newTopic">最新</a>
+								</li>
+								<li>
+									<a href="#" class="push_topic">发起话题</a>
+								</li>
+							</ul>
+
+							<div class="tab-content" id="topicContent">
+
+								<div class="tab-pane active" id="hotTopic">
+									<div class="card-deck">
+										<div class="card">
+											<div class="card">
+												<div class="card-body">
+													<h4 class="card-title"><a href="#">百图斩</a></h4>
+													<small class="joinPers">1234人参加</small>
+													<div class="card-text">
+														<div class="topic_img">
+															<div class="row">
+																<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+																<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+																<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+															</div>
+															<div class="row">
+																<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+																<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+																<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title"><a href="#">百图斩</a></h4>
+												<small class="joinPers">1234人参加</small>
+												<div class="card-text">
+													<div class="topic_img">
+														<div class="row">
+															<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+															<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+															<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+														</div>
+														<div class="row">
+															<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+															<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+															<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+									<div class="card-deck">
+										<div class="card">
+											<div class="card">
+												<div class="card-body">
+													<h4 class="card-title"><a href="#">百图斩</a></h4>
+													<small class="joinPers">1234人参加</small>
+													<div class="card-text">
+														<div class="topic_img">
+															<div class="row">
+																<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+																<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+																<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+															</div>
+															<div class="row">
+																<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+																<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+																<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title"><a href="#">百图斩</a></h4>
+												<small class="joinPers">1234人参加</small>
+												<div class="card-text">
+													<div class="topic_img">
+														<div class="row">
+															<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+															<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+															<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+														</div>
+														<div class="row">
+															<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+															<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+															<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="tab-pane" id="newTopic">
+									<div class="card-deck">
+										<div class="card">
+											<div class="card">
+												<div class="card-body">
+													<h4 class="card-title"><a href="#">百图斩</a></h4>
+													<small class="joinPers">1234人参加</small>
+													<div class="card-text">
+														<div class="topic_img">
+															<div class="row">
+																<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+																<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+																<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+															</div>
+															<div class="row">
+																<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+																<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+																<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title"><a href="#">国家地理摄影</a></h4>
+												<small class="joinPers">34人参加</small>
+												<div class="card-text">
+													<div class="topic_img">
+														<div class="row">
+															<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+															<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+															<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+														</div>
+														<div class="row">
+															<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+															<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+															<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="settings">
+						<div class="row hot_person">
+							<div class="col-lg-9">
+								<div class="card">
+									<div class="card-body">
+										<div class="card-header hot_person_header">
+											<a href="#"><img src="img/img-got701.jpg" alt="..." class="rounded-circle"><span class="hot_nickname">果酱红</span></a>
+											<button type="button" class="btn btn-secondary btn-sm fllow_btn1" >关注</button>
+
+										</div>
+
+										<div class="card-text">
+											<div class="hot_person_img">
+												<div class="row">
+													<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+													<img src="img/57cfde37e5304.jpg" alt="..." class="rounded-0">
+													<img src="img/img-got702.jpg" alt="..." class="rounded-0">
+													<img src="img/chuangyi_meiyuan_yusan-003.jpg" alt="..." class="rounded-0">
+
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="list-group">
+									<a href="#" class="list-group-item list-group-item-action active">
+										标签达人
+									</a>
+									<a href="#" class="list-group-item list-group-item-action">运动</a>
+									<a href="#" class="list-group-item list-group-item-action">男神</a>
+									<a href="#" class="list-group-item list-group-item-action disabled">女神</a>
+									<a href="#" class="list-group-item list-group-item-action">美食</a>
+									<a href="#" class="list-group-item list-group-item-action">萌宠</a>
+									<a href="#" class="list-group-item list-group-item-action disabled">摄影</a>
+									<a href="#" class="list-group-item list-group-item-action">绘画</a>
+									<a href="#" class="list-group-item list-group-item-action">电影</a>
+									<a href="#" class="list-group-item list-group-item-action disabled">音乐</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--我的粉丝-->
+					<div class="tab-pane" id="fans">
+						<div class="card-deck">
+							<div class="card">
+								<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
+								<div class="card-body">
+									<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn1">关注</button></p><hr />
+									<p class="card-text">
+										This card has supporting text below as a natural lead-in to additional content.
+
+									</p>
+								</div>
+								<div class="card-footer">
+									<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+								</div>
+							</div>
+							<div class="card">
+								<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
+								<div class="card-body">
+									<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn1">已关注</button></p><hr />
+									<p class="card-text">
+										This card has supporting text below as a natural lead-in to additional content.
+
+									</p>
+								</div>
+								<div class="card-footer">
+									<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+								</div>
+							</div>
+							<div class="card">
+								<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
+								<div class="card-body">
+									<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn1">已关注</button></p><hr />
+									<p class="card-text">
+										This card has supporting text below as a natural lead-in to additional content.
+
+									</p>
+								</div>
+								<div class="card-footer">
+									<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="tab-pane active" id="article">
+						<div class="card article-card">
+							<a href="#" class="article-link">
+								<div class="card-body">
+									<div class="card-title">
+										这里是标题
+									</div>
+									<p class="card-text">这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容</p>
+									<div class="my-underline"></div>
+									<div class="little-tag">
+										<a href="#">#hhh</a>,
+										<a href="#">#bbb</a>,
+										<a href="#">#ccc</a>
+									</div>
+									<div class="little-tip">
+										<ul>
+											<li>
+												<a href="#">删除</a>
+											</li>
+											<li>
+												<a href="#">评论</a>
+											</li>
+											<li><span><i class="iconfont icon-icons- my-icon-size"></i> 10</span></li>
+											<li><span class="article-time">2018-4-30 12:34:22</span></li>
+										</ul>
+
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="card article-card">
+							<a href="#" class="article-link">
+								<div class="card-body">
+
+									<div class="card-text">
+										<div id="user_content_img">
+											<img src="img/img-got701.jpg" alt="" class="rounded-0">
+											<span class="badge badge-secondary">2</span>
+										</div>
+										<div id="user_context">
+
+											<p>这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内<br />容这里是内容
+												这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内<br />容这里是内容这里是内容这里是内容这里是内容这里是内容
+												这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里<br />是内容这里是内容这里是内容这里是内容这里是内容这里是内容
+												这里是内容这里是内<br />容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内<br />容这里是内容这里是内容这里是
+												内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里<br />是内容这里是内容这里是内容这里是内容这里是内
+												容这里是内容这里是内容这里是内<br />容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内<br />容这里是内容这里是内
+												容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里<br />是内容这里是内
+												容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容</p>
+										</div>
+									</div>
+									<div class="my-underline"></div>
+									<div class="little-tag">
+										<a href="#">#hhh</a>,
+										<a href="#">#bbb</a>,
+										<a href="#">#ccc</a>
+									</div>
+									<div class="little-tip">
+										<ul>
+											<li>
+												<a href="#">删除</a>
+											</li>
+											<li>
+												<a href="#">评论</a>
+											</li>
+											<li><span><i class="iconfont icon-icons- my-icon-size"></i> 10</span></li>
+											<li><span class="article-time">2018-4-30 12:34:22</span></li>
+										</ul>
+
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="card article-card">
+							<div class="card-body">
+								<h5 class="card-title">Card title</h5>
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							</div>
+						</div>
+						<div class="card article-card">
+							<div class="card-body">
+								<h5 class="card-title">Card title</h5>
+								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="like">profile</div>
+					<div class="tab-pane " id="fllow">
+						<!--我关注的人-->
+						<div class="row">
+							<div class="card-deck" id="fllow_u">
+								<div class="card">
+									<img class="card-img-top"  src="img/img-got701.jpg" alt="Card image cap">
+									<div class="card-body">
+										<p class="card-title nickname" >精致的猪猪女孩
+											<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button>
+										</p><hr />
+										<p class="card-text">
+											这个人很懒，什么都没有留下。
+										</p>
+									</div>
+									<div class="card-footer">
+										<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+									</div>
+								</div>
+								<div class="card">
+									<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
+									<div class="card-body">
+										<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p><hr />
+										<p class="card-text">
+											This card has supporting text below as a natural lead-in to additional content.
+
+										</p>
+									</div>
+									<div class="card-footer">
+										<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+									</div>
+								</div>
+								<div class="card">
+									<img class="card-img-top"  src="img/img-got702.jpg" alt="Card image cap">
+									<div class="card-body">
+										<p class="card-title nickname" >精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p><hr />
+										<p class="card-text">
+											This card has supporting text below as a natural lead-in to additional content.
+
+										</p>
+									</div>
+									<div class="card-footer">
+										<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+									</div>
+								</div>
+
+							</div>
+							<div class="card-deck">
+								<div class="card">
+									<img class="card-img-top" src="img/img-got702.jpg" alt="Card image cap">
+									<div class="card-body">
+										<p class="card-title nickname">精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p>
+										<hr />
+										<p class="card-text">
+											This card has supporting text below as a natural lead-in to additional content.
+
+										</p>
+									</div>
+									<div class="card-footer">
+										<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+									</div>
+								</div>
+								<div class="card">
+									<img class="card-img-top" src="img/img-got702.jpg" alt="Card image cap">
+									<div class="card-body">
+										<p class="card-title nickname">精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p>
+										<hr />
+										<p class="card-text">
+											This card has supporting text below as a natural lead-in to additional content.
+
+										</p>
+									</div>
+									<div class="card-footer">
+										<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+									</div>
+								</div>
+								<div class="card">
+									<img class="card-img-top" src="img/img-got702.jpg" alt="Card image cap">
+									<div class="card-body">
+										<p class="card-title nickname">精致的猪猪女孩<button type="button" class="btn btn-secondary btn-sm fllow_btn">已关注</button></p>
+										<hr />
+										<p class="card-text">
+											This card has supporting text below as a natural lead-in to additional content.
+
+										</p>
+									</div>
+									<div class="card-footer">
+										<small class="text-muted">最近更新在<span class="updateTime">3小时</span>前</small>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</body>
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/index.js" ></script>
+	</div>
+	<div class="tab-content" id="leftContent">
+		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"></div>
+		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"></div>
+		<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel-footer">
+				版权归个人所有----------Chongqin Science and technology Univer<br /> 2018-04-27
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/index.js" ></script>
 
 </html>
