@@ -48,6 +48,19 @@ $(".fllow_btn").bind("mouseenter",function(){
 	}
 })
 
+//评论部分的js
+function subComment(e) {
+	console.log(e)
+	var commentBox = $(e).parent().parent().parent().parent().next();
+    if(commentBox.is(':hidden')){
+        commentBox.show(300);
+        commentBox.next().show(300);
+    }else{
+        commentBox.hide(300);
+        commentBox.next().hide(300);
+
+    }
+}
 /*鼠标移入检查
 	关注显示:取消关注
 	没有关注:显示关注
@@ -56,3 +69,6 @@ $(".fllow_btn").bind("mouseenter",function(){
 	是:移出的时候不变
 	否:移出的时候变
 */
+/*
+* 评论点击事件
+* */

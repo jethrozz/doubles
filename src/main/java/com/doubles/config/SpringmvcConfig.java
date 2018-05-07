@@ -1,5 +1,6 @@
 package com.doubles.config;
 
+import com.doubles.util.UserInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,13 +13,16 @@ import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.Filter;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Configuration
@@ -48,6 +52,16 @@ public class SpringmvcConfig implements WebMvcConfigurer {
 		conversionServiceFactoryBean.setConverters(converters);
 		return conversionServiceFactoryBean;
 	}
+
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		List<String> excludeList = new ArrayList<>();
+//		excludeList.add("/users/login");
+//		excludeList.add("/users/regist");
+//		List<String> pathList = new ArrayList<>();
+//		pathList.add("/article");
+//		registry.addInterceptor(new UserInterceptor()).addPathPatterns("/users/**").excludePathPatterns(excludeList);
+//	}
 
 	@PostConstruct
 	public void initEditableValidation(){

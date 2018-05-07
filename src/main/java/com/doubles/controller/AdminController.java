@@ -4,6 +4,7 @@ package com.doubles.controller;
 import com.doubles.entity.Admin;
 import com.doubles.entity.Users;
 import com.doubles.service.AdminService;
+import io.goeasy.GoEasy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 

@@ -313,3 +313,82 @@ a :hover{
 	margin-top: 20px;
 	margin-right: 20px;
 }
+
+/*评论部分css*/
+.my-opticrt{
+	position: absolute;
+	top: 38px;
+	left: 50%;
+	width: 19px;
+	height: 12px;
+	margin-left: -9px;
+	overflow: hidden;
+	opacity: 0;
+	display: none\9;
+	background-position: 0 -1222px;
+}
+.my-shadow{
+	height: 1px;
+	overflow: hidden;
+	border-top: 1px solid #c8c8c8;
+	border-bottom: 1px solid #f1f1f1;
+	background: #e1e1e1;
+	display: none;
+}
+.my-comment-ul{
+	float: none;
+	width: 100%;
+}
+#article-comment{
+	display: none;
+	background-color: #fafafa;
+}
+#comment-list ul li{
+	background-color: #fafafa;
+	padding: 0.5rem 1rem;
+	font-size: 12px;
+	color: #444;
+
+}
+#comment-list ul li a{
+	color: #7594b3;
+}
+.comment-content {
+	position: absolute;
+	top: 13px;
+	left: 45px;
+}
+.btn-reply{
+	 position: absolute;
+	 top: 13px;
+	 right: 0;
+ }
+
+.comment-img{
+	float: left;
+}
+
+/*以下是首页部分css*/
+.toolbar,#div2{
+	color: #444;
+	border: 1px solid #fafafa;
+}
+#div2{
+	height: 150px;
+}
+#user-article-container{
+	background-color: #fafafa;
+}
+#triangle-topright{
+	width: 0;
+	height: 0;
+	border-top: 20px solid #ff5dc3;
+	border-left: 30px solid transparent;
+}
+#sub-article{
+	float: right;
+}
+.myCard{
+	margin-top: 0px;
+	background-color: #fafafa;
+}

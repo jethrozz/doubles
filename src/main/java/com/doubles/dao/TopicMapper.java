@@ -1,8 +1,11 @@
 package com.doubles.dao;
 
+import com.doubles.entity.Article;
 import com.doubles.entity.Topic;
 import com.doubles.entity.TopicExample;
 import java.util.List;
+
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface TopicMapper {
@@ -27,4 +30,6 @@ public interface TopicMapper {
     int updateByPrimaryKeySelective(Topic record);
 
     int updateByPrimaryKey(Topic record);
+    Page<Topic> findPageByfansNum();
+    Page<Topic> findPageByDisNum();
 }

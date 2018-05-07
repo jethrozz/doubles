@@ -21,9 +21,12 @@ public class CommentsServiceImpl implements CommentsService {
     CommentsMapper commentsDao;
 
     @Override
-    public Comments addComment(Comments comment) {
-        commentsDao.insertSelective(comment);
-        return comment;
+    public boolean addComment(Comments comment) {
+
+        if( commentsDao.insertSelective(comment) >= 1){
+            return true;
+        }
+        return false;
     }
 
     @Override

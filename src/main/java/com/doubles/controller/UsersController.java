@@ -40,6 +40,11 @@ public class UsersController {
 		return "login";
 	}
 
+	@RequestMapping("/regist")
+	public String regist(HttpServletRequest request) {
+		return "register";
+	}
+
 	@RequestMapping("/userlogin")
 	@ResponseBody
 	public String userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String username, String password) {
@@ -63,10 +68,6 @@ public class UsersController {
 		return Utils.toJson(resLogin);
 	}
 
-	@RequestMapping("/regist")
-	public String regist(HttpServletRequest request) {
-		return "register";
-	}
 
 	@RequestMapping("/userregist")
 	@ResponseBody

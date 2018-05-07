@@ -83,19 +83,86 @@
 
 				<div class="tab-content my-content" id="mainContent">
 					<div class="tab-pane " id="home">
-						<!--<div class="card text-center">
-                            <div class="card-header">
-                                Featured
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                            <div class="card-footer text-muted">
-                                2 days ago
-                            </div>
-                        </div>-->
+						<div id="my-editor">
+							<div id="div1" class="toolbar" >
+							</div>
+							<div id="div2" class="text" > <!--可使用 min-height 实现编辑区域自动增加高度-->
+
+							</div>
+							<div class="row mt-2">
+								<div class="col">
+									<button type="button" id="sub-article" class="btn btn-primary btn-sm ">发布</button>
+								</div>
+							</div>
+
+						</div>
+						<div id="tip">
+
+						</div>
+						<div id="user-article-container" class="container mt-3">
+							<div id="user-article-content" class="row">
+								<div id="user-article-content-img" class="col-sm-2">
+									<img src="img/chuangyi_meiyuan_yusan-003.jpg" width="50px" height="50px">
+								</div>
+								<!--<div class="col-sm-1">-->
+
+								<!--</div>-->
+								<div id="user-article-content-text" class="col-sm-10">
+									<div class="card article-card myCard">
+										<a href="#" class="article-link">
+											<div class="card-body">
+												<div class="card-title">
+													这里是标题
+												</div>
+												<p class="card-text">这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容</p>
+												<div class="my-underline"></div>
+												<div class="little-tag">
+													<a href="#">#hhh</a>,
+													<a href="#">#bbb</a>,
+													<a href="#">#ccc</a>
+												</div>
+												<div class="little-tip">
+													<ul>
+														<li>
+															<a href="#">删除</a>
+														</li>
+														<li>
+															<a href="javascript:void(0);" onclick="subComment(this)">评论</a>
+														</li>
+														<li><span><i class="iconfont icon-icons- my-icon-size"></i> 10</span></li>
+														<li><span class="article-time">2018-4-30 12:34:22</span></li>
+													</ul>
+												</div>
+											</div>
+										</a>
+										<div class="my-shadow"></div>
+										<div id="article-comment">
+											<form class="mt-3 ">
+												<div class="row">
+													<div class="col-7 col-lg-9 col-sm-7">
+														<input type="text" class="form-control" placeholder="First name">
+													</div>
+													<div class="col col-lg col-sm">
+														<button type="button" class="btn btn-primary ">Submit</button>
+													</div>
+												</div>
+											</form>
+											<div id="comment-list">
+												<ul class="list-group my-comment-ul list-group-flush">
+													<li class="list-group-item">
+
+													</li>
+													<li class="list-group-item">Dapibus ac facilisis in</li>
+													<li class="list-group-item">Morbi leo risus</li>
+													<li class="list-group-item">Porta ac consectetur ac</li>
+													<li class="list-group-item">Vestibulum at eros</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="tab-pane" id="profile">profile</div>
 					<div class="tab-pane" id="messages">
@@ -372,15 +439,38 @@
 												<a href="#">删除</a>
 											</li>
 											<li>
-												<a href="#">评论</a>
+												<a href="javascript:void(0);" onclick="subComment(this)">评论</a>
 											</li>
 											<li><span><i class="iconfont icon-icons- my-icon-size"></i> 10</span></li>
 											<li><span class="article-time">2018-4-30 12:34:22</span></li>
 										</ul>
-
 									</div>
 								</div>
 							</a>
+							<div class="my-shadow"></div>
+							<div id="article-comment">
+								<form class="mt-3 ">
+									<div class="row">
+										<div class="col-9 col-lg-10 col-sm-9">
+											<input type="text" class="form-control" placeholder="First name">
+										</div>
+										<div class="col col-lg col-sm">
+											<button type="button" class="btn btn-primary ">Submit</button>
+										</div>
+									</div>
+								</form>
+								<div id="comment-list">
+									<ul class="list-group my-comment-ul list-group-flush">
+										<li class="list-group-item">
+
+										</li>
+										<li class="list-group-item">Dapibus ac facilisis in</li>
+										<li class="list-group-item">Morbi leo risus</li>
+										<li class="list-group-item">Porta ac consectetur ac</li>
+										<li class="list-group-item">Vestibulum at eros</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 						<div class="card article-card">
 							<a href="#" class="article-link">
@@ -553,6 +643,8 @@
 </body>
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/wangEditor.min.css">
+<script src="js/wangEditor.min.js"></script>
 <script type="text/javascript" src="js/index.js" ></script>
-
+<script type="text/javascript" src="js/myEditor.js"></script>
 </html>

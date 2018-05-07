@@ -71,6 +71,19 @@
   <sql id="Base_Column_List" >
     topic_id, title, descirbe, fan_number, discussion_number, create_time, update_time
   </sql>
+
+  <select id="findPageByfansNum" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from topic ORDER BY fan_number DESC
+  </select>
+
+  <select id="findPageByDisNum" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from topic ORDER BY discussion_number DESC
+  </select>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.TopicExample" >
     select
     <if test="distinct" >

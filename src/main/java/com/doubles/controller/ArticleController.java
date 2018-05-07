@@ -1,19 +1,19 @@
 package com.doubles.controller;
 
 
-import com.doubles.entity.Article;
-import com.doubles.entity.Relationship;
-import com.doubles.entity.Users;
+import com.doubles.entity.*;
 import com.doubles.model.CommonResult;
 import com.doubles.model.SingletonArticleQueue;
-import com.doubles.service.ArticlImgService;
-import com.doubles.service.ArticleService;
-import com.doubles.service.RelationshipService;
+import com.doubles.service.*;
+import com.doubles.util.SecretUtils;
 import com.doubles.util.Utils;
+import net.sf.jsqlparser.statement.select.Top;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,11 +39,15 @@ public class ArticleController {
     @Autowired
     private RelationshipService relationshipService;
     @Autowired
-    private ArticlImgService articlImgDao;
+    private ArticlImgService articlImgService;
+    @Autowired
+    private TopicService topicService;
+    @Autowired
+    private ArtilceTopicService artilceTopicService;
     @RequestMapping("/indexArticle")
-
+    @ResponseBody
     public String indexArticle(HttpSession session){
-        CommonResult<List<Article>> cr = new CommonResult<List<Article>>();
+        CommonResult<List<Article>> cr = new CommonResult<List<Article>>(0,"success");
         //用户首页动态显示
         //先获取该用户，查找其关注的用户的动态
         Users user = (Users)session.getAttribute("user");
@@ -71,14 +75,31 @@ public class ArticleController {
         isHaveImg(articleList);
 
         cr.setData(articleList);
-        cr.setSuccess(true);
+
         return Utils.toJson(cr);
     }
 
     @RequestMapping("/submitArticle")
     public void submitArticle(HttpServletRequest request, Article article){
+        //发表动态时要先去遍历该动态的type
+        article.setArticleId(SecretUtils.uuid32());
         articleService.addArticleNoImg(article);
         String userId = article.getUserId();
+
+        if(!StringUtils.isEmpty(article.getType())){
+            String tag[] = article.getType().split("_");
+            for (String t:tag) {
+                Topic topic = topicService.getOneByTitle(t);
+                if(topic != null){
+                    ArtilceTopic artilceTopic = new ArtilceTopic();
+                    artilceTopic.setAtId(SecretUtils.uuid32());
+                    artilceTopic.setArticleId(article.getArticleId());
+                    artilceTopic.setTopicId(topic.getTopicId());
+                    artilceTopicService.insertOne(artilceTopic);
+                }
+            }
+        }
+
         //将当前发表动态的用户放入阻塞队列中，在另一个线程中进行推送操作
         SingletonArticleQueue.getInstance().addUserIntoPushQueue(userId);
     }
@@ -96,7 +117,7 @@ public class ArticleController {
     private void isHaveImg(List<Article> list){
         for (Article article : list) {
             if (article.getIsHaveimg() == 0){
-                article.setImgList(articlImgDao.findImgByArticleId(article.getArticleId()));
+                article.setImgList(articlImgService.findImgByArticleId(article.getArticleId()));
             }
         }
     }

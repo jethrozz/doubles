@@ -12,7 +12,7 @@ import com.doubles.entity.Comments;
  */
 public interface CommentsService{
     //发表评论或者回复
-    Comments addComment(Comments comment);
+    boolean addComment(Comments comment);
     //删除评论或者回复
     boolean deleteComment(String commentId);
     //修改评论或者回复

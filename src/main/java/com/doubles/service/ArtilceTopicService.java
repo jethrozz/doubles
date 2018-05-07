@@ -1,6 +1,8 @@
 package com.doubles.service;
 
 
+import com.doubles.entity.ArtilceTopic;
+
 /**
  * <p>
  * 动态话题表,表示参与了该话题的动态
@@ -11,5 +13,5 @@ package com.doubles.service;
  * @since 2018-04-24
  */
 public interface ArtilceTopicService {
-
+	boolean insertOne(ArtilceTopic articleTopic);
 }
