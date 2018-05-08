@@ -353,17 +353,29 @@ a :hover{
 #comment-list ul li a{
 	color: #7594b3;
 }
+.user-comment:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
 .comment-content {
-	position: absolute;
-	top: 13px;
-	left: 45px;
+	/*position: absolute;*/
+	/*top: 13px;*/
+	/*left: 45px;*/
+	float: left;
+	width: 85%;
+	margin-left: 1rem;
 }
 .btn-reply{
 	 position: absolute;
 	 top: 13px;
-	 right: 0;
+	 right: 3rem;
  }
-
+.user-comment-text{
+	width: 80%;
+}
 .comment-img{
 	float: left;
 }

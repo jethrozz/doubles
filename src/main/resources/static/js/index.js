@@ -61,6 +61,39 @@ function subComment(e) {
 
     }
 }
+//回复相关js
+var reply_to_id = "";//被回复者id
+
+function reply(e) {
+    reply_to_id = $(e).parent().prev().children("input").val();
+	var text = $(e).parent().prev().children("div").children("a");
+    console.log(text.text());
+	console.log(reply_to_id);
+	var str = "回复 " +text.text()+"：";
+	$("#reply-input").val(str);
+    $("#reply-input").focus();
+}
+
+$("#btn-reply-input").bind("click",function () {
+	var reply = $("#reply-input").val();
+	var i = reply.indexOf("：")
+	reply = reply.substring(i+1,reply.length);
+	console.log(reply);
+	console.log(reply_to_id);
+	if(reply != ""){
+		//发出ajax请求
+	}
+});
+
+function addComment(id,username,type,content,imgsrc) {
+	//拼接html语句做渲染
+	var str = "<li class='list-group-item'><div class='user-comment'><div class='user-comment-img comment-img'> <img src='"+
+		imgsrc+
+		"'width=\"20px\" height=\"20px\" /></div><div class=\"comment-content\"><input name='user_id' value='"+id+"' type=\"hidden\">"+
+        "<div ><a href='#'>"+username我有一头没毛驴+"</a>&nbsp"+ content +"</div></div><div class='btn-reply'>"+
+		"<a href=\"javascript:void(0);\" onclick=\"reply(this)\">回复</a></div></div></li>"
+	return str;
+}
 /*鼠标移入检查
 	关注显示:取消关注
 	没有关注:显示关注

@@ -53,6 +53,7 @@ public class SpringmvcConfig implements WebMvcConfigurer {
 		return conversionServiceFactoryBean;
 	}
 
+
 //	@Override
 //	public void addInterceptors(InterceptorRegistry registry) {
 //		List<String> excludeList = new ArrayList<>();
