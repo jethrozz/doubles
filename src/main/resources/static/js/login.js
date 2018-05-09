@@ -13,7 +13,6 @@ $("#btn-lg").click(function(){
 	}
 })
 
-
 function login(user,pwd){
 	$.ajax({
 		type:"post",
@@ -26,6 +25,7 @@ function login(user,pwd){
 		success:function(data,stauts,result){
 			var res = JSON.parse(data);
 			console.log(res)
+			var user = res.data;
 			if(res.stauts == 0){
 				window.location.href = "../index"
 			}else{

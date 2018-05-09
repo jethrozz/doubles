@@ -82,7 +82,7 @@
         select
         <include refid="Base_Column_List"/>
         from users
-        where username = #{0} AND password = #{1}
+        where username = #{username} AND password = #{password}
     </select>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.UsersExample" >

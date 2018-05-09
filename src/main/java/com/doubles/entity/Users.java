@@ -1,6 +1,7 @@
 package com.doubles.entity;
 
 import com.doubles.util.SecretUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -58,7 +59,7 @@ public class Users {
     private String nickname;
 
     private String usersex;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private String userinfo;
@@ -68,9 +69,9 @@ public class Users {
     private String usermail;
 
     private String userlike;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public String getUserId() {

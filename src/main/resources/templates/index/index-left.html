@@ -13,8 +13,9 @@
         <div class="tab-pane active" id="myPage">
             <div class="card">
                 <div class="left_top">
-                    <img class="card-img-top rounded-circle " id="user_img" src="img/chuangyi_meiyuan_yusan-003.jpg" alt="Card image cap">
-                    <h5 class="nicname_title text-center">JacksonWZ</h5>
+                    <img class="card-img-top rounded-circle " id="user_img" src="${session.user.userimg}" alt="${session.user.username}">
+                    <h5 class="nicname_title text-center">${session.user.username}</h5>
+                    <input id="index-user-id" name="index-user-id" type="hidden" value="${session.user.userId}">
                 </div>
                 <div class="card-body">
                     <!--<h5 class="card-title text-center">JacksonWZ</h5>-->

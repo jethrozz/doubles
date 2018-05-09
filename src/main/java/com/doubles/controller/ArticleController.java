@@ -44,6 +44,7 @@ public class ArticleController {
     private TopicService topicService;
     @Autowired
     private ArtilceTopicService artilceTopicService;
+
     @RequestMapping("/indexArticle")
     @ResponseBody
     public String indexArticle(HttpSession session){
