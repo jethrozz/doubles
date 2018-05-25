@@ -1,6 +1,10 @@
 package com.doubles.service;
 
 import com.doubles.entity.Collections;
+import com.doubles.entity.Users;
+import com.github.pagehelper.Page;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,7 +16,12 @@ import com.doubles.entity.Collections;
  */
 public interface CollectionsService {
     //添加收藏
-    Collections addCollection(Collections collection);
+    boolean addCollection(Collections collection);
     //删除收藏记录
     boolean deleteCollection(String collectionId);
+
+    Collections getOneCollection(String collectionId);
+    List<Collections> getListCollection(String userId);
+    List<Collections> getListCollectionByArtcile(String articleId);
+    Page<Collections> getPageCollection(String userId,int pageNo,int pageSize);
 }

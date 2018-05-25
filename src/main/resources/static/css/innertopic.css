@@ -1,0 +1,161 @@
+*{
+	margin:0;
+	padding:0;
+}
+img{
+	display: block;
+	border: 0;
+}
+#innertopic{
+	overflow: hidden;
+	_zoom:1;
+	width:80%;
+	margin: 0 auto;
+	margin-top: 2rem;
+}
+.contentleft{
+	float:left;
+	width:70%;
+}
+.contentleft .w{
+	width:90%;
+	margin: 0 auto;;
+}
+.contentleft .topic{
+	margin-bottom: 1.5rem;
+	border: 1px solid #ccc;
+}
+.contentleft .topic .top{
+	border-bottom: 1px solid #ccc;
+}
+.contentleft .topic .top .w div{
+	overflow: hidden;
+	_zoom:1;
+}
+.contentleft .topic .top .w div h4{
+	float: left;
+	width:6.5rem;
+	text-overflow: ellipsis;
+	white-space: pre;
+	overflow: hidden;
+}
+.contentleft .topic .top .w div p{
+	margin-bottom: 0;
+	line-height: 1rem;
+	background: #bbb;
+	float: left;
+	margin-left: 1rem;
+	padding: 0.5rem;
+	cursor: pointer;
+}
+.contentleft .topic .middle{
+	border-bottom: 1px solid #ccc;
+}
+.contentleft .topic .middle .w div{
+	padding:1rem 0;
+}
+.contentleft .topic .middle .w div p{
+	margin-bottom: 0;
+	font-size: 0.8rem;
+}
+.contentleft .topic .middle .w div button{
+	cursor: pointer;
+}
+.contentleft .topic .bottom .w div{
+	padding:1rem 0;
+}
+.contentleft .topic .bottom .w div strong{
+	padding:0 1rem;
+	cursor: pointer;
+}
+.contentleft .others{
+	margin-bottom: 1.5rem;
+	border: 1px solid #ccc;
+}
+.contentleft .others .w .top{
+	padding:1rem 0;
+	overflow: hidden;
+	_zoom:1;
+}
+.contentleft .others .w .top img{
+	float:left;
+	width:4rem;
+	height: 4rem;
+	border: 1px solid #ccc;
+	margin-right: 1rem;
+}
+.contentleft .others .w .top p{
+	float: left;
+	color: #ccc;
+	margin-right: 1rem;
+}
+.contentleft .others .w .top span{
+	float: left;
+	display: block;
+	width:20px;
+	height:20px;
+	color:#fff;
+	background: gray;
+	cursor:pointer;
+}
+.contentleft .others .w .bottom{
+	overflow: hidden;
+	_zoom:1;
+	margin-bottom: 1rem;
+}
+.contentleft .others .w .bottom div:first-of-type{
+	float: left;
+}
+.contentleft .others .w .bottom div:last-of-type{
+	float: right;
+}
+.contentleft .others .w .bottom div span{
+	margin-right: 1rem;
+	color:#ccc;
+	cursor: pointer;
+}
+.contentright{
+	float:right;
+	width:25%;
+	border:1px solid red;
+}
+.contentright ul{
+	list-style: none;
+	border:1px solid #ccc;
+	margin-bottom: 0;
+}
+.contentright ul li{
+	overflow: hidden;
+	_zoom:1;
+	padding:10px;
+	border-bottom: 1px solid #eee;
+	
+}
+.contentright ul li .peopleleft{
+	float: left;
+}
+.contentright ul li .peopleleft div{
+	float: left;
+	margin-right:15px;
+	border: 1px solid #ccc;
+}
+.contentright ul li .peopleleft div img{
+	width:42px;
+	height:42px;
+}
+.contentright ul li .peopleleft div p{
+	margin-bottom: 0;
+	line-height: 1rem;
+}
+.contentright ul li .peopleleft div span{
+	color:#eee;
+}
+.contentright ul li .guanzhu{
+	color:#fff;
+	font-weight: 800;
+	width:20px;
+	height:20px;
+	background: #ccc;
+	float: right;
+	margin-top: 14px;
+}

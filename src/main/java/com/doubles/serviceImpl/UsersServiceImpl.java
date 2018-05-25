@@ -7,6 +7,8 @@ import com.doubles.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户信息表 服务实现类
@@ -58,8 +60,28 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public List<Users> getHotPerson() {
+        return userDao.getHotPerson();
+    }
+
+    @Override
     public Users getOne(String userId) {
         return userDao.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public Users getAdmin() {
+        UsersExample example = new UsersExample();
+        example.or().andUsernameEqualTo("admin").andPasswordEqualTo("admin").andNicknameEqualTo("admin");
+        List<Users> list = userDao.selectByExample(example);
+        if(null == list || list.size() == 0)
+            return null;
+        return list.get(0);
+    }
+
+    @Override
+    public List<Users> getHotPersonByTopic(String topicId) {
+        return userDao.getHotPersonByTopic(topicId);
     }
 
 

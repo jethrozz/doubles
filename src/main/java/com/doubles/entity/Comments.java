@@ -1,5 +1,8 @@
 package com.doubles.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Comments {
@@ -16,10 +19,31 @@ public class Comments {
     private String toUser;
 
     private Byte type;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
+
+    private Users user;
+    private Users to;
+
+    public Users getTo() {
+        return to;
+    }
+
+    public void setTo(Users to) {
+        this.to = to;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
     public String getCommentId() {
         return commentId;

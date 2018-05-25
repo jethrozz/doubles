@@ -1,16 +1,23 @@
 package com.doubles.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by shuang on 2018/5/3.
  */
 public class CommonResult<T> {
-	@JsonProperty("stauts")
+	@JsonProperty("status")
+	@JSONField(name = "status")
 	private int stauts;
 	@JsonProperty("data")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JSONField(name = "data",serialzeFeatures = {SerializerFeature.WriteMapNullValue})
 	private T data;
 	@JsonProperty("msg")
+	@JSONField(name = "msg")
 	private String msg;
 
 	public CommonResult() {

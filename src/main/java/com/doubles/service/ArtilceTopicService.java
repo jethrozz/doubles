@@ -1,7 +1,13 @@
 package com.doubles.service;
 
 
+import com.doubles.entity.Article;
 import com.doubles.entity.ArtilceTopic;
+import com.doubles.entity.Topic;
+import com.github.pagehelper.Page;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -14,4 +20,8 @@ import com.doubles.entity.ArtilceTopic;
  */
 public interface ArtilceTopicService {
 	boolean insertOne(ArtilceTopic articleTopic);
+	List<Article> getArticleByTopic(String topicId);
+	Page<ArtilceTopic> getArticlePageByTopicId(String topicId,int pageNo,int pageSize);
+	Map<Topic,List<Article>> getListByArticleNumber();
+	Map<Topic,List<Article>> getListByCreateTime();
 }

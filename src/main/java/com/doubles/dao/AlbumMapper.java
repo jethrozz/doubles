@@ -3,6 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.Album;
 import com.doubles.entity.AlbumExample;
 import java.util.List;
+
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface AlbumMapper {
@@ -27,4 +29,6 @@ public interface AlbumMapper {
     int updateByPrimaryKeySelective(Album record);
 
     int updateByPrimaryKey(Album record);
+
+    Page<Album> getAlbumPageByUser(@Param("userId") String userId);
 }

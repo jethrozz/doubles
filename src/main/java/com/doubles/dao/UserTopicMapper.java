@@ -3,6 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.UserTopic;
 import com.doubles.entity.UserTopicExample;
 import java.util.List;
+
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserTopicMapper {
@@ -27,4 +29,7 @@ public interface UserTopicMapper {
     int updateByPrimaryKeySelective(UserTopic record);
 
     int updateByPrimaryKey(UserTopic record);
+
+    Page<UserTopic> getTopicPageByUserId(@Param("userId")String userId);
+    Page<UserTopic> getUserPageByTopicId(@Param("topicId")String topicId);
 }

@@ -3,6 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.ChatRecord;
 import com.doubles.entity.ChatRecordExample;
 import java.util.List;
+
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface ChatRecordMapper {
@@ -27,4 +29,7 @@ public interface ChatRecordMapper {
     int updateByPrimaryKeySelective(ChatRecord record);
 
     int updateByPrimaryKey(ChatRecord record);
+
+    //聊天记录分页
+    Page<ChatRecord> getNoticePage(@Param("toUser") String toUser,@Param("userId")String userId);
 }

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.UserTopicMapper" >
+  <cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.UserTopic" >
     <id column="up_id" property="upId" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="topic_id" property="topicId" jdbcType="VARCHAR" />
+    <association property="user" column="user_id" select="com.doubles.dao.UsersMapper.selectByPrimaryKey"></association>
+    <association property="topic" column="topic_id" select="com.doubles.dao.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,6 +70,20 @@
   <sql id="Base_Column_List" >
     up_id, user_id, topic_id
   </sql>
+  <select id="getTopicPageByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select
+  <include refid="Base_Column_List" />
+  from user_topic
+  WHERE
+  user_id = #{userId} ORDER BY create_time DESC
+</select>
+  <select id="getUserPageByTopicId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from user_topic
+    WHERE
+    topic_id = #{topicId} ORDER BY create_time DESC
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.UserTopicExample" >
     select
     <if test="distinct" >
@@ -98,12 +115,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.UserTopic" >
+    <selectKey keyProperty="upId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into user_topic (up_id, user_id, topic_id
       )
     values (#{upId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.UserTopic" >
+    <selectKey keyProperty="upId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into user_topic
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="upId != null" >

@@ -19,7 +19,7 @@ public interface CommentsMapper {
     List<Comments> selectByExample(CommentsExample example);
 
     Comments selectByPrimaryKey(String commentId);
-
+    List<Comments> selectByArticleId(@Param("articleId")String aid);
     int updateByExampleSelective(@Param("record") Comments record, @Param("example") CommentsExample example);
 
     int updateByExample(@Param("record") Comments record, @Param("example") CommentsExample example);

@@ -1,5 +1,9 @@
 package com.doubles.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,21 +25,50 @@ public class Article {
     private Integer reportNumber;
 
     private String type;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
 
     private String content;
 
+    private Users user;
+    private List<ArticlImg> imgList;
+    private List<Comments> commentsList;
+    private List<ArtilceTopic> artilceTopics;
 
-    List<Image> imgList;
+    public List<ArtilceTopic> getArtilceTopics() {
+        return artilceTopics;
+    }
 
-    public List<Image> getImgList() {
+    public void setArtilceTopics(List<ArtilceTopic> artilceTopics) {
+        this.artilceTopics = artilceTopics;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public List<Comments> getCommentsList() {
+        return commentsList;
+    }
+
+    public void setCommentsList(List<Comments> commentsList) {
+        this.commentsList = commentsList;
+    }
+
+
+    public List<ArticlImg> getImgList() {
         return imgList;
     }
 
-    public void setImgList(List<Image> imgList) {
+    public void setImgList(List<ArticlImg> imgList) {
         this.imgList = imgList;
     }
 
@@ -133,5 +166,10 @@ public class Article {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+       return this.getArticleId().equals(((Article)obj).getArticleId());
     }
 }

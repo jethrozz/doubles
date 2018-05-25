@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.ReportMapper" >
+  <cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.Report" >
     <id column="report_id" property="reportId" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
@@ -102,6 +103,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.Report" >
+    <selectKey keyProperty="reportId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into report (report_id, user_id, type, 
       content_id, report_describe, create_time, 
       update_time)
@@ -110,6 +114,9 @@
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.Report" >
+    <selectKey keyProperty="reportId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into report
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="reportId != null" >

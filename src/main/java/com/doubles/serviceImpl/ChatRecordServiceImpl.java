@@ -4,6 +4,8 @@ import com.doubles.dao.ChatRecordMapper;
 import com.doubles.entity.ChatRecord;
 import com.doubles.entity.ChatRecordExample;
 import com.doubles.service.ChatRecordService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,12 @@ public class ChatRecordServiceImpl  implements ChatRecordService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Page<ChatRecord> getPageChatRecord(String fromUser, String toUser, int pageNo, int pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+        return chatRecordDao.getNoticePage(toUser,fromUser);
     }
 
 }

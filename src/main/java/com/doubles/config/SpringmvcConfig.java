@@ -40,7 +40,7 @@ public class SpringmvcConfig implements WebMvcConfigurer {
 	@Bean
 	public MultipartResolver multipartResolver(){
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		multipartResolver.setMaxUploadSize(1000000);
+		multipartResolver.setMaxUploadSize(104857600);
 		return multipartResolver;
 	}
 
@@ -59,9 +59,12 @@ public class SpringmvcConfig implements WebMvcConfigurer {
 //		List<String> excludeList = new ArrayList<>();
 //		excludeList.add("/users/login");
 //		excludeList.add("/users/regist");
+//		excludeList.add("/users/checkName");
 //		List<String> pathList = new ArrayList<>();
-//		pathList.add("/article");
-//		registry.addInterceptor(new UserInterceptor()).addPathPatterns("/users/**").excludePathPatterns(excludeList);
+//		//pathList.add("/article/**");
+//		pathList.add("/users/**");
+//		pathList.add("/index");
+//		registry.addInterceptor(new UserInterceptor()).addPathPatterns(pathList).excludePathPatterns(excludeList);
 //	}
 
 	@PostConstruct

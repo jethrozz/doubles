@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.AlbumMapper" >
+  <cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.Album" >
     <id column="album_id" property="albumId" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
@@ -8,6 +9,8 @@
     <result column="album_describe" property="albumDescribe" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <association property="user" column="user_id" select="com.doubles.dao.UsersMapper.selectByPrimaryKey"></association>
+    <collection property="imageList" column="album_id" select="com.doubles.dao.ImageMapper.selectByAlbum"></collection>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,6 +73,12 @@
   <sql id="Base_Column_List" >
     album_id, user_id, album_name, album_describe, create_time, update_time
   </sql>
+  <select id="getAlbumPageByUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from album
+    WHERE user_id = #{userId} ORDER BY create_time DESC
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.AlbumExample" >
     select
     <if test="distinct" >
@@ -101,6 +110,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.Album" >
+    <selectKey keyProperty="albumId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into album (album_id, user_id, album_name, 
       album_describe, create_time, update_time
       )
@@ -109,6 +121,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.Album" >
+    <selectKey keyProperty="albumId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into album
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="albumId != null" >

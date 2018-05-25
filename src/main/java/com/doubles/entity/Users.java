@@ -1,5 +1,6 @@
 package com.doubles.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.doubles.util.SecretUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -60,6 +61,7 @@ public class Users {
 
     private String usersex;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @JSONField(format="yyyy-MM-dd")
     private Date birthday;
 
     private String userinfo;
@@ -70,8 +72,10 @@ public class Users {
 
     private String userlike;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
 
     public String getUserId() {

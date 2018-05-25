@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人主页</title>
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/homepage.css" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="pmark">
+				@ if(session.user.userId != object.userId){@}
+					@ if(relationship == 1){ @}
+						<button type="button" class="btn btn-secondary fllow_btn">添加关注</button>
+						<input name="friendId" type="hidden" value="${object.userId}" />
+					@ }else if(relationship == 2){ @}
+						<button type="button" class="btn btn-secondary fllow_btn">相互关注</button>
+						<input name="friendId" type="hidden" value="${object.userId}" />
+					@ }else if(relationship == 0){ @}
+						<button type="button" class="btn btn-secondary fllow_btn">已关注</button>
+						<input name="friendId" type="hidden" value="${object.userId}" />
+					@ } @}
+				@ } @}
+				<button type="button" onclick="backIndex();" class="btn btn-secondary back_btn">返回首页</button>
+			</div>
+			<div class="home_header">
+				<div class="selfinfo">
+					<div class="logo">
+						<a href="#">
+							<img class="rounded-circle" src="${object.userimg}" />
+						</a>
+						<h1 class="nickname">
+							${object.nickname}
+						</h1>
+						<small class="sele_introduce">
+							@ if(isEmpty(object.userinfo)){ @}
+								这个人很懒，什么都没有留下。。。
+							@ }else{ @}
+							${object.userinfo}
+							@} @}
+						</small>
+					</div>	
+				</div>
+				<div class="sch">
+					<input type="search" placeholder="  搜索"/>
+				</div>
+				<div class="btncl">
+					@if(session.user.userId != object.userId){@}
+					<a href="../users/getAlbumImgList?userId=${object.userId}" class="btn btn-secondary letters">私信</a>
+					@}@}
+					<a href="../users/getAlbumImgList?userId=${object.userId}" class="btn btn-secondary img_file">图集</a>
+				</div>
+				
+			</div>
+			@
+				var regex = "<img[^<>]*?\\ssrc=['\"]?(.*?)['\"].*?>";
+			@}
+			@ for(article in articleList){
+				var length = 0;
+				for(c in article.commentsList){
+					length = cLP.size;
+					break;
+				}
+				var text = article.content;
+
+				var src = reg.find(text,regex);
+
+				text = reg.replace(text,regex,"");
+			@}
+			<div class="content">
+				<div class="left">
+					<div class="days">
+						10
+					</div>
+					<div class="moths">
+						03
+					</div>
+				</div>
+				<div class="right">
+					<div class="card article-card">
+						<div class="article-link">
+							<div class="card-body">
+								<div class="card-img">
+									<!--<img src="" />-->
+									${src}
+								</div>
+								<div class="card-text">${text}</div>
+								<hr />
+								<div class="little-tag">
+									@for(tag in article.artilceTopics){ @}
+										@if(!tagLP.last){ @}
+										<a href="../${tag.topicId}">#${tag.topic.title}</a>,
+										@}else{ @}
+										<a href="../${tag.topicId}">#${tag.topic.title}</a>
+										@ }@}
+									@  }@}
+								</div>
+								<div class="little-tip">
+									<ul>
+										<li>
+											<a href="../article/getArticle?articleId=${article.articleId}">评论(<small>${length}</small>)</a>
+										</li>
+										<li>
+											<a href="../article/getArticle?articleId=${article.articleId}">热度(<small>${article.collectNumber}</small>)</a>
+										</li>
+										<li>
+											<a href="../article/getArticle?articleId=${article.articleId}">全文链接</a>
+										</li>
+										<li><span class="article-time">${article.createTime,dateFormat="yyyy-MM-dd hh:mm:ss"}</span></li>
+									</ul>
+					
+								</div>
+								<div class="cut"></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			@}@}
+		</div>
+	</body>
+	<script src="/js/jquery-3.1.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/homepage.js"></script>
+</html>

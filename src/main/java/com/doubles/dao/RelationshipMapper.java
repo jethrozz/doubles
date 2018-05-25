@@ -3,6 +3,9 @@ package com.doubles.dao;
 import com.doubles.entity.Relationship;
 import com.doubles.entity.RelationshipExample;
 import java.util.List;
+
+import com.doubles.model.PageInfo;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface RelationshipMapper {
@@ -27,4 +30,6 @@ public interface RelationshipMapper {
     int updateByPrimaryKeySelective(Relationship record);
 
     int updateByPrimaryKey(Relationship record);
+
+    Page<Relationship> getPageFriend(@Param("userId") String userId,@Param("isFriend") int is_friend,@Param("isFollowMe") int isFollowMe);
 }

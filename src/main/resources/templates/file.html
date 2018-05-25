@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的图集-${session.user.nickname}</title>
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/file.css" />
+	</head>
+	<body>
+		<div class="container-fluid bg-dark" >
+			<div class="row">
+				<div class="col col-lg-1 info">
+					<img class="header_img" src="${session.user.userimg}">
+				</div>
+				<div class="col col-lg-6 info">
+					<h5 class="nickname">${session.user.nickname}</h5>
+				</div>
+
+				<div class=" col col-lg-4 pmark">
+					@ if(session.user.userId != objectId){ @}
+						<button type="button" class="btn btn-secondary fllow_btn">添加关注</button>
+					@ } @}
+						<button type="button" onclick="backIndex()" class="btn btn-secondary back_btn">返回首页</button>
+
+				</div>
+			</div>
+			<div class="">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									日期
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+									<form>
+										<input type="date"  id="getDate"/>
+										<input type="hidden" value="${objectId}" name="objectId">
+									</form>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									标签
+								</a>
+								<div class="dropdown-menu" aria-labelledby="">
+									<a class="dropdown-item" href="#">运动</a>
+									<a class="dropdown-item" href="#">男神</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#">萌宠</a>
+								</div>
+							</li>
+
+						</ul>
+						<form class="form-inline my-2 my-lg-0">
+							<div class="input-group">
+
+								<input class="form-control " id="search_btn" type="search" placeholder="Search" aria-label="Search">
+								<div class="input-group-prepend">
+									<span class="input-group-text "  id="serch_img">\@</span>
+								</div>
+							</div>
+						</form>
+					</div>
+				</nav>
+			</div>
+			<div id="album">
+				@ for(album in albumList){ @}
+				<div class="card bg-light" >
+					<div class="card-header">${album.albumTime} 图集</div>
+					<div class="card-body">
+						<div class="card-text">
+							@ for(img in album.albumList){ @}
+							<a href="../article/getArticle?articleId=${img.articleId}" > ${img.imgSrc} </a>
+							@ } @}
+						</div>
+					</div>
+				</div>
+				@ } @}
+			</div>
+		</div>
+	</body>
+	<script src="/js/jquery-3.1.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/file.js" ></script>
+</html>

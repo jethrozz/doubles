@@ -1,14 +1,20 @@
 package com.doubles.util;
 
+import com.doubles.entity.Article;
+import com.doubles.entity.PushData;
 import com.doubles.entity.Relationship;
+import com.doubles.model.CommonResult;
 import com.doubles.model.SingletonArticleQueue;
 import com.doubles.model.SingletonOnlineUserList;
+import com.doubles.service.PushService;
 import com.doubles.service.RelationshipService;
 import io.goeasy.GoEasy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,35 +32,44 @@ public class ArticlePush implements Runnable{
     private RelationshipService relationshipService;
     @Autowired
     private GoEasy goEasy;
+    @Autowired
+    private PushService pushService;
     @Value("${goEasy.articlePush}")
     private String articleChannel;
     @Override
     public void run() {
         try {
             while (true){
+                LOGGER.info("推送线程");
                 if(stopme || Thread.currentThread().isInterrupted()){
                     LOGGER.trace("CurrentThread IS STOP");
                     break;
                 }
                 //获取到一个当前发表了动态的用户
-                String userId = SingletonArticleQueue.getInstance().getUserFromPushQueue().take();
-
+                CommonResult<PushData> result = new CommonResult<>(0,"success");
+                Article article = SingletonArticleQueue.getInstance().getUserFromPushQueue().take();
+                addToMyPush(article);
+                String userId = article.getUserId();
                 //将所有关注了我的用户以及相互关注了的用户放入一个list中
                 List<Relationship> relationship1 = relationshipService.findFriends(userId,0,1); //单方面关注了我的用户
                 List<Relationship> relationship2 = relationshipService.findFriends(userId,2,1); //相互关注用户
+                List<String> followUser = new ArrayList<>();
 
-                //当前所有在线的用户
-                for(Relationship relationship : relationship1){
-                    if(SingletonOnlineUserList.getInstance().getUserList().contains(relationship.getUserId())){
-                        // 只是一个推送的例子，传过去的数据格式有待商议
-                        // goEasy.publish(articleChannel, "Hello world!");
+                addtoList(relationship1,followUser);
+                addtoList(relationship2,followUser);
+
+                for(String userid : followUser){
+                    PushData pushData = new PushData();
+                    pushData.setBelongUser(userId);
+                    pushData.setContentId(article.getArticleId());
+                    pushData.setPushUser(userid);
+                    pushData.setType(3);
+                    if(SingletonOnlineUserList.getInstance().getUserList().contains(userid)){
+                        pushData.setIsPush(0);
+                        result.setData(pushData);
+                        goEasy.publish(articleChannel, Utils.toJson(result));
                     }
-                }
-                for(Relationship relationship : relationship2){
-                    if(SingletonOnlineUserList.getInstance().getUserList().contains(relationship.getUserId())){
-                        // 只是一个推送的例子，传过去的数据格式有待商议
-                        // goEasy.publish(articleChannel, "Hello world!");
-                    }
+                    pushService.addData(pushData);
                 }
             }
         }catch (InterruptedException e) {
@@ -66,5 +81,21 @@ public class ArticlePush implements Runnable{
 
     private void stopThread(){
         stopme = true;
+    }
+
+    private void addtoList(List<Relationship> list1,List<String> list2){
+        for (Relationship r:list1 ) {
+            list2.add(r.getUserId());
+        }
+    }
+
+    private void addToMyPush(Article article){
+        PushData pushData = new PushData();
+        pushData.setBelongUser(article.getUserId());
+        pushData.setPushUser(article.getUserId());
+        pushData.setType(0);
+        pushData.setContentId(article.getArticleId());
+        pushData.setIsPush(0);
+        pushService.addData(pushData);
     }
 }

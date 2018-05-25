@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.ImageMapper" >
+  <cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.Image" >
     <id column="img_id" property="imgId" jdbcType="VARCHAR" />
     <result column="album_id" property="albumId" jdbcType="VARCHAR" />
@@ -73,6 +74,19 @@
     img_id, album_id, img_path, img_describe, like_number, collect_number, create_time, 
     update_time
   </sql>
+  <select id="selectByAlbum" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from image
+    WHERE album_id = #{albumId} ORDER BY create_time DESC
+  </select>
+
+  <select id="getImagePageByAlbum" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from image
+    WHERE album_id = #{albumId} ORDER BY create_time DESC
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.ImageExample" >
     select
     <if test="distinct" >
@@ -104,6 +118,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.Image" >
+    <selectKey keyProperty="imgId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into image (img_id, album_id, img_path, 
       img_describe, like_number, collect_number, 
       create_time, update_time)
@@ -112,6 +129,9 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.Image" >
+    <selectKey keyProperty="imgId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into image
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="imgId != null" >

@@ -1,0 +1,30 @@
+.container-fluid{
+	background-color: darkgrey;
+	overflow: hidden;
+}
+.container{
+	width: 60%;
+	background-color: white;
+	border: 1px solid gainsboro;
+	margin-top: 8%;
+	margin-bottom: 10%;
+	padding: 20px 20px;
+}
+.row{
+	margin: 20px 20px;
+}
+small{
+	margin-top: -20px;
+	margin-left: 74%;
+}
+#letter-input{
+	height: 200px;
+}
+.btns{
+	margin-left: 80%;
+	
+}
+.sent{
+	margin-right: 10px;
+}
+

@@ -29,4 +29,7 @@ public interface UsersMapper {
     int updateByPrimaryKeySelective(Users record);
 
     int updateByPrimaryKey(Users record);
+
+    List<Users> getHotPerson();
+    List<Users> getHotPersonByTopic(@Param("topicId") String topicId);
 }

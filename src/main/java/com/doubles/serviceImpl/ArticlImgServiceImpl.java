@@ -40,4 +40,13 @@ public class ArticlImgServiceImpl implements ArticlImgService {
 		}
 		return imageList;
 	}
+
+	@Override
+	public boolean addImage(ArticlImg articlImg) {
+		if(articlImgDao.insertSelective(articlImg) >= 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

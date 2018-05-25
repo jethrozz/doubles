@@ -7,6 +7,25 @@ public class ArtilceTopic {
 
     private String topicId;
 
+    private Topic topic;
+    private Article article;
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
     public String getAtId() {
         return atId;
     }

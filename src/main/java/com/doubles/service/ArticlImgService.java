@@ -1,5 +1,6 @@
 package com.doubles.service;
 
+import com.doubles.entity.ArticlImg;
 import com.doubles.entity.Image;
 
 import java.util.List;
@@ -16,4 +17,5 @@ import java.util.List;
  */
 public interface ArticlImgService{
 	List<Image> findImgByArticleId(String article_id);
+	boolean addImage(ArticlImg articlImg);
 }

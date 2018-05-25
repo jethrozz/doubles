@@ -1,9 +1,27 @@
 package com.doubles.controller;
 
 
+import com.doubles.entity.*;
+import com.doubles.model.CommonResult;
+import com.doubles.model.PageInfo;
+import com.doubles.model.ResultTopic;
+import com.doubles.service.ArtilceTopicService;
+import com.doubles.service.TopicService;
+import com.doubles.service.UserTopicService;
+import com.doubles.service.UsersService;
+import com.doubles.util.SecretUtils;
+import com.doubles.util.Utils;
+import com.github.pagehelper.Page;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * <p>
@@ -16,6 +34,180 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequestMapping("/topic")
 public class TopicController {
+
+	@Autowired
+	private TopicService topicService;
+	@Autowired
+	private UserTopicService userTopicService;
+	@Autowired
+	private UsersService userService;
+	@Autowired
+	private ArtilceTopicService artilceTopicService;
+
+	@RequestMapping("/addTopic")
+	@ResponseBody
+	public String addTopic(Topic topic){
+		CommonResult<String> result = new CommonResult<>(0,"add topic success");
+		if(null == topic){
+			result.setStauts(1);
+			result.setMsg("the request is empty");
+			return Utils.toJson(result);
+		}else{
+			//topic.setTopicId(SecretUtils.uuid32());
+			if (!topicService.addTopic(topic)){
+				result.setStauts(1);
+				result.setMsg("add topic failed");
+			}
+			return Utils.toJson(result);
+		}
+	}
+
+	@RequestMapping("/followOrUnfollowTopic")
+	@ResponseBody
+	public String followTopic(HttpServletRequest request,UserTopic userTopic,String opt){
+		CommonResult<String> result = new CommonResult<>(0,"follow success");
+		Users user = (Users) request.getSession().getAttribute("user");
+		//Users user = userService.getOne(userTopic.getUserId());
+		Topic topic = topicService.getOneById(userTopic.getTopicId());
+		userTopic.setUserId(user.getUserId());
+/*		if(user == null){
+			result.setStauts(1);
+			result.setMsg("user is not exist");
+			return Utils.toJson(result);
+		}*/
+		if (topic == null ){
+			result.setStauts(1);
+			result.setMsg("topic is not exist");
+			return Utils.toJson(result);
+		}
+		if("follow".equals(opt)){
+			if(!userTopicService.followTopic(userTopic)){
+				result.setStauts(1);
+				result.setMsg("follow failed");
+				return Utils.toJson(result);
+			}
+			topic.setFanNumber(topic.getFanNumber()+1);
+			topicService.updateTopic(topic);
+			return Utils.toJson(result);
+		}else{
+			if(!userTopicService.unFollowTopic(userTopic)){
+				result.setStauts(1);
+				result.setMsg("unFollow failed");
+				return Utils.toJson(result);
+			}
+			topic.setFanNumber(topic.getFanNumber()-1);
+			topicService.updateTopic(topic);
+			result.setMsg("unFollow success");
+			return Utils.toJson(result);
+		}
+
+	}
+
+	@RequestMapping("/getUserList")
+	@ResponseBody
+	public String getUserList(String topicId, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+		CommonResult<PageInfo<UserTopic>> result = new CommonResult<>(0,"success");
+		if(StringUtils.isEmpty(topicId)){
+			result.setStauts(1);
+			result.setMsg("topicId is empty");
+			return Utils.toJson(result);
+		}
+
+		Page<UserTopic> userTopicPage = userTopicService.getUserPageByTopicId(topicId,pageNo,pageSize);
+		PageInfo<UserTopic> userTopicPageInfo = new PageInfo<>(userTopicPage);
+
+		result.setData(userTopicPageInfo);
+		return Utils.toJson(result);
+	}
+
+	@RequestMapping("/getTopicList")
+	@ResponseBody
+	public String getTopicList(String userId, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+		CommonResult<PageInfo<UserTopic>> result = new CommonResult<>(0,"success");
+		if(StringUtils.isEmpty(userId)){
+			result.setStauts(1);
+			result.setMsg("userId is empty");
+			return Utils.toJson(result);
+		}
+
+		Page<UserTopic> userTopicPage = userTopicService.getTopicPageByUserId(userId,pageNo,pageSize);
+		PageInfo<UserTopic> userTopicPageInfo = new PageInfo<>(userTopicPage);
+
+		result.setData(userTopicPageInfo);
+		return Utils.toJson(result);
+	}
+
+	@RequestMapping("/getArticleList")
+	@ResponseBody
+	public String getArticleList(String topicId, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+		CommonResult<PageInfo<ArtilceTopic>> result = new CommonResult<>(0,"success");
+		if(StringUtils.isEmpty(topicId)){
+			result.setStauts(1);
+			result.setMsg("topicId is empty");
+			return Utils.toJson(result);
+		}
+		Page<ArtilceTopic> artilceTopicPage = artilceTopicService.getArticlePageByTopicId(topicId,pageNo,pageSize);
+		PageInfo<ArtilceTopic> artilceTopicPageInfo = new PageInfo<>(artilceTopicPage);
+		result.setData(artilceTopicPageInfo);
+		return Utils.toJson(result);
+	}
+
+	@RequestMapping("/getHotTopic")
+	@ResponseBody
+	public String getHotTopic(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+		CommonResult<PageInfo<ResultTopic>> result = new CommonResult<>(0,"success");
+		Map<Topic,List<Article>> artilceTopicList = artilceTopicService.getListByArticleNumber();
+
+		List<ResultTopic> resultTopicList = new ArrayList<>();
+		getTopic(artilceTopicList,resultTopicList);
+		PageInfo<ResultTopic> topicPageInfo = new PageInfo<>(resultTopicList);
+		result.setData(topicPageInfo);
+		return Utils.toJson(result);
+	}
+
+	@RequestMapping("/getNewTopic")
+	@ResponseBody
+	public String getNewTopic(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+		CommonResult<PageInfo<ResultTopic>> result = new CommonResult<>(0,"success");
+		Map<Topic,List<Article>> artilceTopicList = artilceTopicService.getListByCreateTime();
+
+		List<ResultTopic> resultTopicList = new ArrayList<>();
+		getTopic(artilceTopicList,resultTopicList);
+
+		PageInfo<ResultTopic> topicPageInfo = new PageInfo<>(resultTopicList);
+		result.setData(topicPageInfo);
+		return Utils.toJson(result);
+	}
+
+
+	private void getTopic(Map<Topic,List<Article>> artilceTopicList,List<ResultTopic> resultTopicList){
+		Iterator iterator = artilceTopicList.entrySet().iterator();
+
+		while (iterator.hasNext()){
+			Map.Entry<Topic, List<Article>> entry = (Map.Entry<Topic, List<Article>>) iterator.next();
+			ResultTopic resultTopic = new ResultTopic();
+			resultTopic.setTopic(entry.getKey());
+			//获取到该动态的第一张图片
+			Map<String,String> imgList = new LinkedHashMap<>();
+			for (Article article :entry.getValue()){
+				String img = Utils.getOneImgTag(article.getContent());
+				//判断是否有图
+				if(img == null){
+					continue;
+				}else{
+					//有图
+					String src = Utils.getOneImgSrc(img);
+					//将该动态与图片关联起来
+					imgList.put(article.getArticleId(),src);
+					resultTopic.setImgList(imgList);
+				}
+				if(imgList.size() >= 6){
+					break;
+				}
+			}
+			resultTopicList.add(resultTopic);
+		}
+	}
 
 }
 

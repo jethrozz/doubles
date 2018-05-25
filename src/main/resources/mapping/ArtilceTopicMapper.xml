@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.ArtilceTopicMapper" >
+  <cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.ArtilceTopic" >
     <id column="at_id" property="atId" jdbcType="VARCHAR" />
     <result column="article_id" property="articleId" jdbcType="VARCHAR" />
     <result column="topic_id" property="topicId" jdbcType="VARCHAR" />
+    <association property="topic" column="topic_id" select="com.doubles.dao.TopicMapper.selectByPrimaryKey"></association>
+    <association property="article" column="article_id" select="com.doubles.dao.ArticleMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,6 +70,26 @@
   <sql id="Base_Column_List" >
     at_id, article_id, topic_id
   </sql>
+
+  <select id="getTopicListByArticleNumber" resultType="java.lang.String">
+    select
+    topic_id
+    FROM artilce_topic
+    group by topic_id order by count(*) desc
+  </select>
+  
+  <select id="getArticleListByArticleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from artilce_topic
+    WHERE article_id = #{articleId}
+  </select>
+  <select id="getArticlePageByTopicId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from artilce_topic
+    WHERE topic_id = #{topicId}
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.ArtilceTopicExample" >
     select
     <if test="distinct" >
@@ -98,12 +121,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.ArtilceTopic" >
+    <selectKey keyProperty="atId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into artilce_topic (at_id, article_id, topic_id
       )
     values (#{atId,jdbcType=VARCHAR}, #{articleId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.ArtilceTopic" >
+    <selectKey keyProperty="atId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into artilce_topic
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="atId != null" >

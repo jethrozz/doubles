@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+@
+layout("/common/index-header.html",{title:'首页'}){}
+@}
+
+	<body >
+		<div class="container-fluid" id="main">
+			<div class="row">
+				<div class="col-lg-12" id="myTop"></div>
+			</div>
+			<!--<div class="container-fluid" id="myCon">-->
+			@include("/index/index-myTabR.html"){}@}
+				<div class="row">
+					
+			@include("/index/index-myLeft.html"){}
+					@}
+
+					<div class="col-lg-9 col-md-9" id="myRight" style="background-color: #F2F2F2;">
+						
+						<!--首页-->
+						<div class="tab-content my-content" id="mainContent">
+							@
+								include("/index/mainContent-home.html"){}
+								include("/index/mainContent-hotPerson.html"){}
+								include("/index/mainContent-fans.html"){}
+								include("/index/mainContent-myArticle.html"){}
+								include("/index/mainContent-myFollow.html"){}
+								include("/index/mainContent-myLike.html"){}
+								include("/index/mainContent-myMsg.html"){}
+								include("/index/mainContent-topic.html"){}
+							@}
+
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+		@layout("/common/index-footer.html"){}
+		@}
+	</body>
+
+
+</html>

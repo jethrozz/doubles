@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.ArticlImgMapper" >
+  <cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.ArticlImg" >
     <id column="ai_id" property="aiId" jdbcType="VARCHAR" />
     <result column="article_id" property="articleId" jdbcType="VARCHAR" />
     <result column="img_id" property="imgId" jdbcType="VARCHAR" />
+    <association property="image" column="img_id" select="com.doubles.dao.ImageMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,6 +69,12 @@
   <sql id="Base_Column_List" >
     ai_id, article_id, img_id
   </sql>
+  <select id="selectByArticle" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM articl_img
+    WHERE article_id = #{articleId}
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.ArticlImgExample" >
     select
     <if test="distinct" >
@@ -98,12 +106,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.ArticlImg" >
+    <selectKey keyProperty="aiId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into articl_img (ai_id, article_id, img_id
       )
     values (#{aiId,jdbcType=VARCHAR}, #{articleId,jdbcType=VARCHAR}, #{imgId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.ArticlImg" >
+    <selectKey keyProperty="aiId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into articl_img
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="aiId != null" >

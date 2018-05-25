@@ -1,0 +1,261 @@
+.container-fluid{
+	background-color:darkgrey;
+	overflow: hidden;
+}
+/*关注 返回*/
+.pmark{
+	background-color: darkgrey;
+    text-align: right;
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+}
+.pmark button{
+	background-color: #606060;
+	font-size: 8px;
+	border-radius: 0px;
+	line-height: 8px;
+}
+/*头*/
+.home_header{
+	margin-top: 40px;
+	width: 700px;
+	background-color: white;
+    margin-left: 25%;
+    margin-bottom: 20px;
+}
+.selfinfo{
+	width: 68%;
+	float: left;
+}
+.logo img{
+	margin: 20px 10px auto 10px;
+	width: 80px;
+	height: 80px;
+}
+.nickname{
+	font-size: 1.5rem;
+	color: black;
+	margin-left: 110px;
+	position: absolute;
+	top: 60px;
+	font-family: arial;
+}
+.sele_introduce{
+	color: gray;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	position: absolute;
+	top: 90px;
+	margin-left: 10px;
+}
+.sch{
+	float: right;
+	margin-right: 20px;
+}
+.sch input{
+	margin-top: 20px;
+	border-radius: 1rem;
+    border: 1px solid #CBCBCB;
+    background-position: 10px 6px;
+    background-color: #f7f7f7;
+    line-height: 16px;
+    color: #fbfbfb;
+    font-size: 12px;
+}
+.btncl{
+	padding-left: 110px;
+	clear: both;
+	padding-bottom: 20px;
+}
+.btncl button{
+	font-size: 8px;
+	
+}
+
+
+/*内容*/
+.content{
+	overflow: hidden;
+	width: 700px;
+	background-color: white;
+    margin-left: 25%;
+}
+.left{
+	float: left;
+}
+.days{
+	text-align: center;
+	width: 80px;
+	height: 80px;
+	border: 2px solid slategray;
+	border-radius: 50px;
+	font-size: 30px;
+	padding-top: 12px;
+	margin: 40px auto auto 40px;
+	
+}
+.moths{
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 40px;
+	font-size: 30px;
+	margin-left: 55px;
+	color: gray;
+}
+.right{
+	overflow: hidden;
+	width: 80%;
+/*	float: right;*/
+}
+.article-card{
+	margin-bottom: 20px;
+	border: 0px;
+	width: 100%;
+}
+.card-body{
+	padding: 3.25rem;
+}
+.card-img img{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.article-link{
+	color: #333;
+}
+.article-link:hover{
+	text-decoration: none;
+	color: #333333;
+}
+.little-tag{
+	color: #adadad;
+	font-size: 0.8rem;
+}
+.little-tip{
+	font-size: 0.8rem;
+}
+.little-tag a,.little-tip a{
+	color: #adadad;
+	/*margin: 1px 0 1px 0;*/
+}
+.little-tip ul{
+	margin-bottom:0 ;
+	padding: 0;
+}
+.little-tip ul li{
+	margin-right: 1rem;
+	display: block;
+	float: left;
+}
+.article-time{
+	position: absolute;
+	right:3rem;
+	font-size: 0.7rem;
+}
+.cut{
+	border-bottom: 1px solid gainsboro;
+	margin-top: 40px ;
+}
+
+
+/*评论部分css*/
+.my-opticrt{
+	position: absolute;
+	top: 38px;
+	left: 50%;
+	width: 19px;
+	height: 12px;
+	margin-left: -9px;
+	overflow: hidden;
+	opacity: 0;
+	display: none\9;
+	background-position: 0 -1222px;
+}
+#a{
+	margin-bottom: 20px;
+	margin-left: 1rem;
+	font-weight: 1000;
+	margin-top: 20px;
+}
+#reply-input{
+	border-radius: 0px;
+	height: 30px;
+	width: 98%;
+	font-size: 12px;
+	margin-left: 1rem;
+	
+}
+#btn-reply-input{
+	font-size: 8px;
+	line-height: 8px;
+	float:right;
+	margin-top: 10px;
+	border-radius: 0px;
+}
+.my-shadow{
+	height: 1px;
+	overflow: hidden;
+	border-top: 1px solid #c8c8c8;
+	border-bottom: 1px solid #f1f1f1;
+	background: #e1e1e1;
+	display: none;
+}
+.my-comment-ul{
+	float: none;
+	width: 100%;
+}
+#article-comment{
+	/*display: none;*/
+	/*background-color: #fafafa;*/
+}
+#comment-list ul li{
+	background-color: #fafafa;
+	padding: 0.5rem 1rem;
+	font-size: 12px;
+	color: #444;
+	line-height: 20px;
+	margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+#comment-list ul li a{
+	color: #7594b3;
+}
+.user-comment:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.comment-content {
+	/*position: absolute;*/
+	/*top: 13px;*/
+	/*left: 45px;*/
+	float: left;
+	width: 85%;
+	margin-left: 1rem;
+}
+.btn-reply{
+	 position: absolute;
+	 top: 13px;
+	 right: 1rem;
+ }
+.user-comment-text{
+	width: 80%;
+}
+.comment-img{
+	float: left;
+}
+.list-group-flush:last-child .list-group-item:last-child{
+	border-top: 0;
+	border-bottom: 1px solid #DBDBDB;
+}
+
+/*//分页*/
+#ud{
+	
+	position: absolute;
+	left: 11rem;
+}

@@ -7,6 +7,16 @@ public class ArticlImg {
 
     private String imgId;
 
+    private Image image;
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
     public String getAiId() {
         return aiId;
     }

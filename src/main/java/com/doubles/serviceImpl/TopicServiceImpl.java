@@ -43,6 +43,24 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
+	public boolean addTopic(Topic topic) {
+		if(topicMapper.insertSelective(topic) >= 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateTopic(Topic topic) {
+		if(topicMapper.updateByPrimaryKeySelective(topic) >= 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
 	public List<Topic> findTopicOrderByfansNum() {
 		TopicExample example = new TopicExample();
 		example.setOrderByClause("fan_number desc");
@@ -69,5 +87,11 @@ public class TopicServiceImpl implements TopicService {
 	public Page<Topic> findPageOrderByDisNum(int pageNo, int pageSize) {
 		PageHelper.startPage(pageNo,pageSize);
 		return topicMapper.findPageByDisNum();
+	}
+
+	@Override
+	public Page<Topic> findTopicOrderByTime(int pageNo, int pageSize) {
+		PageHelper.startPage(pageNo,pageSize);
+		return topicMapper.findPageOrderByTime();
 	}
 }

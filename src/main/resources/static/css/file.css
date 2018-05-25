@@ -1,0 +1,59 @@
+.container-fluid{
+	
+}
+.info img{
+	width: 30px;
+	height: 30px;
+	margin: 10px 10px 10px 70px;
+}
+h5{
+	margin: 10px 10px 10px auto;
+	color: white;
+}
+.pmark{
+	background-color: dark;
+    text-align: right;
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+}
+.pmark button{
+	border: 0px;
+	background-color: #222324;
+	font-size: 8px;
+	border-radius: 0px;
+	line-height: 8px;
+}
+#search_btn{
+	font-size: 12px;
+	line-height: 12px;
+	width: 200px;
+}
+#serch_img{
+	background-color: white;
+}
+.navbar{
+	margin: auto 0px auto 0px;
+}
+
+.card-header{
+	background-color: white;
+	
+}
+.card{
+	margin: 0px 0px;
+}
+.card-header{
+	padding-top: 40px;
+}
+.card-body{
+	background-color: white;
+}
+.card-text{
+	margin-bottom: 20px;
+}
+.card-text img{
+	width: 130px;
+	height: 140px;
+	margin-right: 5px;
+}

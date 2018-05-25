@@ -1,3 +1,4 @@
+
 //$("form").submit(function(e){
 //	
 //$("#mymodal").modal("toggle");
@@ -13,7 +14,8 @@ $("#userName").blur(function (e) {
             data: {
                 username:$("#userName").val()
             },
-            success: function (data,stauts,result) {
+            success: function (data,status,result) {
+                console.log(result);
                 var res = JSON.parse(data);
                 console.log(res);
                 if(res.stauts != 0){
@@ -22,11 +24,8 @@ $("#userName").blur(function (e) {
             }
         })
     }
-})
-
-
+});
 $("#myBtn").click(function (e) {
-    console.log(1)
     if($("#userName").val() != ""){
         if($("#nickName").val() != ""){
             if($("#userPW").val() != ""){
@@ -41,13 +40,14 @@ $("#myBtn").click(function (e) {
                             nickname:$("#nickName").val(),
                             password:$("#userPW").val(),
                             usersex: $("input[name='userSex']:checked").val(),
-                            birthday:$("#userBirthday").val()
+                            birthday:$("#userBirthday").val(),
+                            usermail:$("#userEmail").val()
                         },
                         success: function (data,stauts,result) {
                             var res = JSON.parse(data);
                             console.log(res);
-                            if(res.stauts == 0){
-                                uid = res.msg;
+                            if(res.status == 0){
+                                //uid = res.msg;
                                 $("#mymodal").modal("toggle");
                             }else{
                                 alert("注册失败，请重试");
@@ -70,15 +70,13 @@ $("#myBtn").click(function (e) {
         $("#userName").focus();
         alert("用户名不能为空");
     }
-
 })
-
 function getTheCheckBoxValue() {
     var test = $("input[name='userlike']:checked");
     console.log(test);
     var checkBoxValue = "";
     test.each(function () {
-        checkBoxValue += $(this).val() + "_";
+        checkBoxValue += $(this).val() + "||";
     })
     checkBoxValue = checkBoxValue.substring(0, checkBoxValue.length - 1);
 
@@ -104,6 +102,5 @@ function sublike() {
             }
         }
     });
-    
-}
 
+}

@@ -13,25 +13,27 @@ $("#btn-lg").click(function(){
 	}
 })
 
-function login(user,pwd){
-	$.ajax({
-		type:"post",
-		url:"./userlogin",
-		async:true,
-		data:{
-			username:user,
-			password:pwd
-		},
-		success:function(data,stauts,result){
-			var res = JSON.parse(data);
-			console.log(res)
-			var user = res.data;
-			if(res.stauts == 0){
-				window.location.href = "../index"
-			}else{
-				alert("用户名或密码错误")
-			}
-		}
-	});
-}
 
+function login(user,pwd){
+    $.ajax({
+        type:"post",
+        url:"./userlogin",
+        async:true,
+        data:{
+            username:user,
+            password:pwd
+        },
+        success:function(data,stauts,result){
+            var res = JSON.parse(data);
+            var user = res.data;
+            console.log(res);
+            var id =user.userId;
+            sessionStorage.setItem("userId", id);
+            if(res.status == 0){
+               window.location.href = "../index"
+            }else{
+                //alert("用户名或密码错误")
+            }
+        }
+    });
+}

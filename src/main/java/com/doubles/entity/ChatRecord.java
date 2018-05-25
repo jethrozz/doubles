@@ -1,5 +1,8 @@
 package com.doubles.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class ChatRecord {
@@ -10,10 +13,31 @@ public class ChatRecord {
     private String toUser;
 
     private String content;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
+
+    private Users to;
+    private Users from;
+
+    public Users getTo() {
+        return to;
+    }
+
+    public void setTo(Users to) {
+        this.to = to;
+    }
+
+    public Users getFrom() {
+        return from;
+    }
+
+    public void setFrom(Users from) {
+        this.from = from;
+    }
 
     public String getCrId() {
         return crId;

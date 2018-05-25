@@ -2,6 +2,8 @@ package com.doubles.dao;
 
 import com.doubles.entity.Article;
 import com.doubles.entity.ArticleExample;
+
+import java.util.Date;
 import java.util.List;
 
 import com.github.pagehelper.Page;
@@ -37,4 +39,7 @@ public interface ArticleMapper {
     int updateByPrimaryKey(Article record);
     Page<Article> findPageByUid(@Param("userId")String userId);
     Page<Article> findPageByContent(@Param("content")String content);
+
+    List<Date> getTimeGroup(@Param("userId")String userId);
+    List<Article> getArticleByTime(@Param("date")String date,@Param("userId") String userId);
 }

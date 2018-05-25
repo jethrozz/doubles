@@ -1,12 +1,13 @@
 #regMain{
 	color: dodgerblue;
 	font-size: 16px;
-	background-image: url(../img/57cfde37e5304.jpg);
+	/*background-image: url(../img/wy2.jpg);*/
+	background-color: darkgrey;
 	background-repeat: no-repeat;
 }
 #mainContent{
 	background-color: whitesmoke;
-	margin-top: 50px;
+
 	margin-left: 25%;
 	margin-right: 25%;
 	width: 50%;
@@ -15,7 +16,6 @@
 }
 #mainContent form{
 	padding-top:30px;
-	margin-bottom: 30px;
 	
 }
 
@@ -27,14 +27,7 @@
 #regMain label{
 	text-align: right;
 }
-#userSex1{
-	position: absolute;
-	width: 30px;
-}
-#userSex2{
-	position: absolute;
-	width: 30px;
-}
+
 
 
 #regMain textarea{
@@ -42,6 +35,7 @@
 }
 
 .panel-footer{
+	font-size: 12px;
 	text-align: center;
 	background-color: wheat;
 	opacity: 0.5;	
@@ -69,16 +63,12 @@
 #btnGroup label{
 	margin: 5px 5px 5px 5px;
 }
-#btnGroup{
-	display: inline-block;
-}
 .form-check-input{
-	width: 50px;
-	padding-left: 10px;
-
+	width: 100px;
+	
 }
 .form-check-label{
-	padding-left: 5px;
-	padding-right: 30px;
+	padding-left: 50px;
 	width: 40px;
 }
+

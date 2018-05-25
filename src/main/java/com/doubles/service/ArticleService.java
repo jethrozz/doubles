@@ -3,6 +3,9 @@ package com.doubles.service;
 import com.doubles.entity.Article;
 import com.github.pagehelper.Page;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * <p>
  * 用户动态表 服务类
@@ -18,6 +21,7 @@ public interface ArticleService{
     boolean deleteArticle(Article article);
     //更新动态
     boolean updateArticle(Article article);
+    List<Article> selectArticleListByUid(String user_id);
     //分页查询，该用户的所有动态
     Page<Article> selectArticlePageByUid(int pageNo, int pageSize, String user_id);
 
@@ -26,4 +30,6 @@ public interface ArticleService{
     Page<Article> selectArticlePageByContent(int pageNo, int pageSize, String content);
     //获取单个动态
     Article getOneArticle(String artilce_id);
+    List<Date> getTimeGroup(String date);
+    List<Article> getArticleByTime(String date,String userId);
 }

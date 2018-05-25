@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.ArticleMapper" >
+<cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.Article" >
+  <id column="article_id" property="articleId" jdbcType="VARCHAR" />
+  <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  <result column="is_haveImg" property="isHaveimg" jdbcType="TINYINT" />
+  <result column="like_number" property="likeNumber" jdbcType="INTEGER" />
+  <result column="collect_number" property="collectNumber" jdbcType="INTEGER" />
+  <result column="transmit_number" property="transmitNumber" jdbcType="INTEGER" />
+  <result column="is_report" property="isReport" jdbcType="TINYINT" />
+  <result column="report_number" property="reportNumber" jdbcType="INTEGER" />
+  <result column="type" property="type" jdbcType="VARCHAR" />
+  <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+</resultMap>
+  <resultMap id="BaseResultMap1" type="com.doubles.entity.Article" >
     <id column="article_id" property="articleId" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="is_haveImg" property="isHaveimg" jdbcType="TINYINT" />
@@ -13,8 +27,12 @@
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <association property="user" column="user_id" select="com.doubles.dao.UsersMapper.selectByPrimaryKey"></association>
+    <collection property="commentsList" column="article_id" select="com.doubles.dao.CommentsMapper.selectByArticleId"></collection>
+    <collection property="imgList" column="article_id" select="com.doubles.dao.ArticlImgMapper.selectByArticle"></collection>
+    <collection property="artilceTopics" column="article_id" select="com.doubles.dao.ArtilceTopicMapper.getArticleListByArticleId"></collection>
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.doubles.entity.Article" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.doubles.entity.Article" extends="BaseResultMap1" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -82,16 +100,33 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
-
+  <select id="getArticleByTime" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM article
+    where date_format(create_time,'%Y-%m-%d')= #{date} AND user_id = #{userId};
+  </select>
+  <select id="getTimeGroup" parameterType="java.lang.String" resultType="java.util.Date">
+    SELECT DATE_FORMAT(create_time, "%Y-%m-%d")
+    FROM article
+    WHERE user_id = #{userId}
+    GROUP BY DATE_FORMAT(create_time, "%Y-%m-%d")
+  </select>
   <select id="findPageByUid" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from article WHERE user_id = #{userId} ORDER BY create_time DESC
   </select>
 
   <select id="findPageByContent" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from article WHERE content LIKE  CONCAT('%',#{content},'%' ) ORDER BY create_time DESC
   </select>
 
@@ -112,7 +147,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.ArticleExample" >
+  <select id="selectByExample" resultMap="ResultMapWithBLOBs" parameterType="com.doubles.entity.ArticleExample" >
     select
     <if test="distinct" >
       distinct
@@ -145,6 +180,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.Article" >
+    <selectKey keyProperty="articleId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into article (article_id, user_id, is_haveImg, 
       like_number, collect_number, transmit_number, 
       is_report, report_number, type, 
@@ -157,6 +195,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.Article" >
+    <selectKey keyProperty="articleId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="articleId != null" >

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.AdminMapper" >
+  <cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.Admin" >
     <id column="admin_id" property="adminId" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
@@ -101,6 +102,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.Admin" >
+    <selectKey keyProperty="adminId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into admin (admin_id, username, password, 
       power, create_time, update_time
       )
@@ -109,6 +113,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.Admin" >
+    <selectKey keyProperty="adminId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into admin
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="adminId != null" >

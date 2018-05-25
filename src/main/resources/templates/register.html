@@ -1,135 +1,152 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>用户注册</title>
-    <link rel="stylesheet" href="${basePath}/static/css/bootstrap.css"/>
-    <link rel="stylesheet" href="${basePath}/static/css/register.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
-</head>
-<body>
-<div class="container-fluid" id="regMain">
-    <div class="container">
-        <div id="mainContent">
-            <form>
-                <h2><b>用户注册</b></h2>
-                <hr/>
-                <div class="form-group row">
-                    <label for="userName" class="col-sm-3 col-form-label">用户名：</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="userName" id="userName" placeholder="请输入您的用户名（不可更改）"
-                               style="width: 80%;"/>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="nickName" class="col-sm-3 col-form-label">昵称：</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="nickName" id="nickName" placeholder="请输入您的昵称"
-                               style="width: 80%;"/>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="userPW" class="col-sm-3 col-form-label">密码：</label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" name="userPW" id="userPW" placeholder="请您的输入密码（密码输入不得少于6位）"
-                               style="width: 80%;"/>
-                    </div>
-                </div>
-                <div class="form-check row">
-                    <label for="userSex1" class="col-sm-3 col-form-label">性别：</label>
-                    <div class="col-sm-9">
-                        <input class="form-check-input" type="radio" name="userSex" id="userSex1" value="男" checked/>
-                        <label class="form-check-label" for="userSex1">男 </label>
-                        <input class="form-check-input" type="radio" name="userSex" id="userSex2" value="女"/>
-                        <label class="form-check-label" for="userSex2">女 </label>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="userBirthday" class="col-sm-3 col-form-label">出生日期：</label>
-                    <div class="col-sm-9">
-                        <input type="date" class="form-control" name="userBirthday" id="userBirthday" style="width: 80%;"/>
-                    </div>
-                </div>
-                <button type="button" id="myBtn" class="btn btn-primary btn-lg btn-block" id="regBtn">立即注册</button>
 
-                <hr/>
-                <p id="pig">已有账号，<a href="login.html" style="color: red;">直接登录</a></p>
-                <hr/>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="panel-footer">
-    版权归个人所有----------Chongqin Scien and technology Univer<br/>
-    2018-04-27
-</div>
-<div class="modal" id="mymodal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="container-fluid" id="interestPage">
-                    <div class="container" id="main">
-                        <div id="like">
-                            <h2>选择一些你喜欢的兴趣 <br/>
-                                <small>我们将努力推荐你可能更感兴趣的内容</small>
-                            </h2>
-                            <div class="btn-group btn-group-lg" data-toggle="buttons" id="btnGroup">
-                                <label class="btn btn-primary">
-                                    <input type="checkbox" name="userlike" value="摄影" autocomplete="off"> 摄影
-                                </label>
-                                <label class="btn btn-warning">
-                                    <input type="checkbox" name="userlike" value="运动" autocomplete="off"> 运动
-                                </label>
-                                <label class="btn btn-danger">
-                                    <input type="checkbox" name="userlike" value="萌宠" autocomplete="off"> 萌宠
-                                </label>
-                                <br />
-                                <label class="btn btn-info ">
-                                    <input type="checkbox" name="userlike" value="男神" autocomplete="off"> 男神
-                                </label>
-                                <label class="btn btn-danger">
-                                    <input type="checkbox" name="userlike" value="女神" autocomplete="off"> 女神
-                                </label>
-                                <label class="btn btn-primary">
-                                    <input type="checkbox" name="userlike" value="绘画" autocomplete="off"> 绘画
-                                </label>
-                                <br />
-                                <label class="btn btn-info">
-                                    <input type="checkbox" name="userlike" value="电影" autocomplete="off"> 电影
-                                </label>
-                                <label class="btn btn-warning">
-                                    <input type="checkbox" name="userlike" value="音乐" autocomplete="off"> 音乐
-                                </label>
-                                <label class="btn btn-success ">
-                                    <input type="checkbox" name="userlike" value="美食" autocomplete="off"> 美食
-                                </label>
-                                <br />
-                                <label class="btn btn-success">
-                                    <input type="checkbox" name="userlike" value="美妆" autocomplete="off"> 美妆
-                                </label>
-                                <label class="btn btn-danger">
-                                    <input type="checkbox" name="userlike" value="穿搭" autocomplete="off"> 穿搭
-                                </label>
-                                <label class="btn btn-info ">
-                                    <input type="checkbox" name="userlike" value="旅行" autocomplete="off"> 旅行
-                                </label>
-                            </div>
-                            <h4 style="padding-top: 20px;">-------即刻开启你的<a href="javascript:void(0);" onclick="sublike()" ><strong>doubleS</strong></a>之旅</h4>
-                            <div class="panel-footer" style="background-color: white;margin-top: 30px;">
-                                版权归个人所有----------Chongqin Scien and technology Univer<br/>
-                                2018-04-27
-                            </div>
-                        </div>
-                    </div>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>用户注册</title>
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<link rel="stylesheet" href="/css/register.css" />
 
-                </div>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-</body>
-<script type="text/javascript" src="${basePath}/static/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="${basePath}/static/js/bootstrap.min.js"></script>
-<script type="text/javascript" src=""></script>
-<script type="text/javascript" src="${basePath}/static/js/register.js"></script>
+	</head>
+
+	<body>
+		<div class="container-fluid" id="regMain">
+			<div class="container">
+				<div id="mainContent">
+					<form>
+						<h2><b>用户注册</b></h2>
+						<hr />
+						<div class="form-group row">
+							<label for="userName" class="col-sm-3 col-form-label">用户名：</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="userName" placeholder="请输入您的用户名（不可更改）" style="width: 80%;" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="nickName" class="col-sm-3 col-form-label">昵称：</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="nickName" placeholder="请输入您的昵称" style="width: 80%;" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="userPW" class="col-sm-3 col-form-label">密码：</label>
+							<div class="col-sm-9">
+								<input type="password" class="form-control" id="userPW" placeholder="请您的输入密码（密码输入不得少于6位）" style="width: 80%;" />
+							</div>
+						</div>
+						<div class="form-check row">
+						
+							<div class="col-sm-9">
+								<label for="userSex1" class="col-sm-3 col-form-label">性别：</label>
+								<input class="form-check-input" type="radio" name="sexRadios" id="userSex1" value="男" checked/>
+								<label class="form-check-label" for="userSex1">男 </label>
+								<input class="form-check-input" type="radio" name="sexRadios" id="userSex2" value="女" />
+								<label class="form-check-label" for="userSex2">女 </label>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="userBirthday" class="col-sm-3 col-form-label">出生日期：</label>
+							<div class="col-sm-9">
+								<input type="date" class="form-control" id="userBirthday" style="width: 80%;" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="userEmail" class="col-sm-3 col-form-label">邮箱：</label>
+							<div class="col-sm-9">
+								<input type="email" class="form-control" id="userEmail" style="width: 80%;"  />
+							</div>
+						</div>
+
+						<button type="button" id="myBtn" class="btn btn-primary btn-lg btn-block">立即注册</button>
+						<hr />
+						<p id="pig">已有账号，
+							<a href="login.html" style="color: red;">直接登录</a>
+						</p>
+						<hr />
+					</form>
+				</div>
+
+
+			</div>
+		</div>
+		<div class="panel-footer">
+			版权归个人所有----------Chongqin Scien and technology Univer<br /> 2018-04-27
+		</div>
+		<div class="modal" id="mymodal" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="container-fluid" id="interestPage">
+							<div class="container" id="main">
+								<div id="like">
+									<h2>选择一些你喜欢的兴趣 <br/>
+										<small>我们将努力推荐你可能更感兴趣的内容</small>
+									</h2>
+									<div class="btn-group btn-group-lg" data-toggle="buttons" id="btnGroup">
+										<div class="row">
+
+											<label class="btn btn-primary">
+												<input type="checkbox" name="userlike" value="test_00001" autocomplete="off"> 摄影
+											</label>
+											<label class="btn btn-warning">
+												<input type="checkbox" name="userlike" value="test_00002" autocomplete="off"> 运动
+											</label>
+											<label class="btn btn-danger">
+												<input type="checkbox" name="userlike" value="test_00003" autocomplete="off"> 萌宠
+											</label>
+										</div>
+
+										<div class="row">
+										<label class="btn btn-info ">
+											<input type="checkbox" name="userlike" value="test_00004" autocomplete="off"> 男神
+										</label>
+										<label class="btn btn-danger">
+											<input type="checkbox" name="userlike" value="test_00005" autocomplete="off"> 女神
+										</label>
+										<label class="btn btn-primary">
+											<input type="checkbox" name="userlike" value="test_00006" autocomplete="off"> 绘画
+										</label>
+										</div>
+										<div class="row">
+										<label class="btn btn-info">
+											<input type="checkbox" name="userlike" value="test_00007" autocomplete="off"> 电影
+										</label>
+										<label class="btn btn-warning">
+											<input type="checkbox" name="userlike" value="test_00008" autocomplete="off"> 音乐
+										</label>
+										<label class="btn btn-success ">
+											<input type="checkbox" name="userlike" value="test_00009" autocomplete="off"> 美食
+										</label>
+										</div>
+										<div class="row">
+										<label class="btn btn-success">
+											<input type="checkbox" name="userlike" value="test_00010" autocomplete="off"> 美妆
+										</label>
+										<label class="btn btn-danger">
+											<input type="checkbox" name="userlike" value="test_00011" autocomplete="off"> 穿搭
+										</label>
+										<label class="btn btn-info ">
+											<input type="checkbox" name="userlike" value="test_00012" autocomplete="off"> 旅行
+										</label>
+										</div>
+									</div>
+									<h4 style="padding-top: 20px;">-------即刻开启你的<a href="javascript:void(0);" onclick="sublike()" ><strong>doubleS</strong></a>之旅</h4>
+									<div class="panel-footer" style="background-color: white;margin-top: 30px;">
+										版权归个人所有----------Chongqin Scien and technology Univer<br/>
+										2018-04-27
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	</body>
+
+	<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/register.js"></script>
+
 </html>

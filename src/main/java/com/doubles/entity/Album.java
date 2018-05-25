@@ -1,6 +1,10 @@
 package com.doubles.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
+import java.util.List;
 
 public class Album {
     private String albumId;
@@ -11,9 +15,22 @@ public class Album {
 
     private String albumDescribe;
 
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
+
+    private Users user;
+    private List<Image> imageList;
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
     public String getAlbumId() {
         return albumId;

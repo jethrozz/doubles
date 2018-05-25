@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.doubles.dao.TransmitMapper" >
+  <cache eviction="LRU" flushInterval="10800000"  size="512" readOnly="true" />
   <resultMap id="BaseResultMap" type="com.doubles.entity.Transmit" >
     <id column="transmit_id" property="transmitId" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
@@ -103,6 +104,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.doubles.entity.Transmit" >
+    <selectKey keyProperty="transmitId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into transmit (transmit_id, user_id, type, 
       content_id, comment, like_number, 
       create_time, update_time)
@@ -111,6 +115,9 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.doubles.entity.Transmit" >
+    <selectKey keyProperty="transmitId" resultType="String" order="BEFORE">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
     insert into transmit
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="transmitId != null" >

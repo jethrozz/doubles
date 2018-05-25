@@ -7,6 +7,25 @@ public class UserTopic {
 
     private String topicId;
 
+    private Users user;
+    private Topic topic;
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
     public String getUpId() {
         return upId;
     }

@@ -20,6 +20,8 @@ public interface ArticlImgMapper {
 
     ArticlImg selectByPrimaryKey(String aiId);
 
+    List<ArticlImg> selectByArticle(@Param("articleId") String aId);
+
     int updateByExampleSelective(@Param("record") ArticlImg record, @Param("example") ArticlImgExample example);
 
     int updateByExample(@Param("record") ArticlImg record, @Param("example") ArticlImgExample example);

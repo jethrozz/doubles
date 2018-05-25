@@ -5,6 +5,8 @@ import com.doubles.entity.Relationship;
 import com.doubles.entity.RelationshipExample;
 import com.doubles.service.RelationshipService;
 import com.doubles.util.Logger;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +26,13 @@ public class RelationshipServiceImpl implements RelationshipService {
     private static final Logger LOGGER = Logger.getLogger(RelationshipServiceImpl.class);
     @Autowired
     RelationshipMapper relationshipDao;
-/*    @Override
-    public Page<Relationship> findFriends(Page<Relationship> page, String user_id, Integer is_friend, int isFollowMe) {
-        RelationshipExample example = new RelationshipExample();
-        if(isFollowMe == 0){
-            example.or().andUserIdEqualTo(user_id).andIsFriendEqualTo(is_friend.byteValue());
-        }else{
-            example.or().andFriendIdEqualTo(user_id).andIsFriendEqualTo(is_friend.byteValue());
-         }
-        return page.setRecords(relationshipDao.selectByExample(example));
-    }*/
+
+
+    @Override
+    public Page<Relationship> findPageFriends(int pageNo, int pageSize, String user_id, int is_friend, int isFollowMe) {
+        PageHelper.startPage(pageNo,pageSize);
+        return relationshipDao.getPageFriend(user_id,is_friend,isFollowMe);
+    }
 
     @Override
     public List<Relationship> findFriends(String user_id,Integer is_friend, int isFollowMe) {
@@ -48,11 +47,17 @@ public class RelationshipServiceImpl implements RelationshipService {
 
     @Override
     public boolean followOrUnfollow(Relationship relationship) {
+        //业务逻辑
+        //关注之后去查看对方对我的状态，如果也是关注，则变为相互关注
+        //否则只是单方面关注
+        //如果是取消关注，那么检查对方状态，如果是相互关注，则变为单方面关注
+
         RelationshipExample example = new RelationshipExample();
 
         example.or().andUserIdEqualTo(relationship.getUserId()).andFriendIdEqualTo(relationship.getFriendId());
-        //先查询这两人之前是否在表中有过关注或者拉黑记录，如果有则改变好友状态即可，如没有，则插入一条记录
+        //先查询这两人之前是否在表中有过关注或者拉黑记录，如果有记录，则改变这条记录的好友状态即可。如没有，则插入一条记录
         List<Relationship> rslist = relationshipDao.selectByExample(example);
+
         if(rslist.size() != 0 || null != rslist){
             Relationship rs = rslist.get(0);
             //将这条记录的状态变成新的
@@ -83,12 +88,25 @@ public class RelationshipServiceImpl implements RelationshipService {
         }
     }
 
+    @Override
+    public Relationship isFriend(String userId, String friend) {
+        RelationshipExample example = new RelationshipExample();
+        example.or().andUserIdEqualTo(userId).andFriendIdEqualTo(friend);
+        List<Relationship> list = relationshipDao.selectByExample(example);
+
+        if(list != null && list.size() != 0){
+            return list.get(0);
+        }
+        return null;
+    }
+
     private boolean cheeckFriendStauts(Relationship oldStauts,Relationship newStauts){
         if(oldStauts == null){
             //打印日志方便调试
             LOGGER.info("oldrs is empty");
             return false;
         }else{
+
             if (newStauts.getIsFriend() == 1 && oldStauts.getIsFriend() == 2){
                 oldStauts.setIsFriend((byte)0);
                 relationshipDao.updateByPrimaryKeySelective(oldStauts);

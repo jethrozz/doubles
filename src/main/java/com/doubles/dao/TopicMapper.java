@@ -32,4 +32,6 @@ public interface TopicMapper {
     int updateByPrimaryKey(Topic record);
     Page<Topic> findPageByfansNum();
     Page<Topic> findPageByDisNum();
+    Page<Topic> findPageOrderByTime();
+
 }

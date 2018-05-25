@@ -3,6 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.Collections;
 import com.doubles.entity.CollectionsExample;
 import java.util.List;
+
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface CollectionsMapper {
@@ -27,4 +29,5 @@ public interface CollectionsMapper {
     int updateByPrimaryKeySelective(Collections record);
 
     int updateByPrimaryKey(Collections record);
+    Page<Collections> getCollectionPage(@Param("userId")String userId);
 }

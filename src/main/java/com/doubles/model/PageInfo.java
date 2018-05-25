@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by zxc on 2018/5/3.
+ * Created by shuang on 2018/5/3.
  */
 public class PageInfo<T> implements Serializable {
 	private static final long serialVersionUID = 1L;

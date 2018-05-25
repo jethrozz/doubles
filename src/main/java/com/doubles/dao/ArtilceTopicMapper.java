@@ -3,6 +3,8 @@ package com.doubles.dao;
 import com.doubles.entity.ArtilceTopic;
 import com.doubles.entity.ArtilceTopicExample;
 import java.util.List;
+
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface ArtilceTopicMapper {
@@ -27,4 +29,8 @@ public interface ArtilceTopicMapper {
     int updateByPrimaryKeySelective(ArtilceTopic record);
 
     int updateByPrimaryKey(ArtilceTopic record);
+    List<ArtilceTopic> getArticleListByArticleId(@Param("articleId") String articleId);
+    Page<ArtilceTopic> getArticlePageByTopicId(@Param("topicId") String topicId);
+
+    List<String> getTopicListByArticleNumber();
 }

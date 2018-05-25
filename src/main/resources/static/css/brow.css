@@ -1,0 +1,64 @@
+body {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+#index {
+	height: 50px;
+	padding: 0px;
+	margin: 0px;
+}
+.logo{
+	font-size: 40px;
+	color: white;
+	font-family:impact;
+	margin-left: 1rem;
+}
+#index ul ,#slider ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: grey;
+}
+
+#index li {
+	float: left;
+}
+
+#index li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 20px;
+	text-decoration: none;
+}
+
+#index li a:hover:not(.active) {
+	background-color: #111;
+}
+
+.active {
+	background-color: chocolate;
+}
+
+
+#buttom {
+	margin: 0;
+	padding-top: 10px;
+	overflow: hidden;
+	background-color: #333;
+	color: white;
+	text-align: center;
+	height: 60px;
+}
+
+#myCarousel{
+	width: 1380px;
+	height: 594px;
+}
+.carousel-item img{
+	width: 980px;
+	height: 540px;
+}

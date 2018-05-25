@@ -1,5 +1,8 @@
 package com.doubles.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Relationship {
@@ -10,10 +13,31 @@ public class Relationship {
     private String friendId;
 
     private Byte isFriend;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
+
+    private Users me;
+    private Users friend;
+
+    public Users getMe() {
+        return me;
+    }
+
+    public void setMe(Users me) {
+        this.me = me;
+    }
+
+    public Users getFriend() {
+        return friend;
+    }
+
+    public void setFriend(Users friend) {
+        this.friend = friend;
+    }
 
     public String getRelationshipId() {
         return relationshipId;
