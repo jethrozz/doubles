@@ -1,6 +1,7 @@
 package com.doubles.controller;
 
 import com.doubles.entity.*;
+import com.doubles.model.CommonResult;
 import com.doubles.model.IndexResult;
 import com.doubles.model.PageInfo;
 import com.doubles.model.ResultArticle;
@@ -56,10 +57,11 @@ public class MainController {
 	@RequestMapping("/getIndex")
 	@ResponseBody
 	public String getIndex(HttpServletRequest request, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+		CommonResult<IndexResult> result = new CommonResult<IndexResult>(0,"success");
 		IndexResult indexResult = new IndexResult();
 		indexResult.setList(getIndexData(request,pageNo,pageSize));
-
-		return Utils.toJson(indexResult);
+		result.setData(indexResult);
+		return Utils.toJson(result);
 	}
 
 	//为带图的动态加上图片

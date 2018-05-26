@@ -121,13 +121,8 @@ public class ArticleController {
             result.setStauts(1);
             result.setMsg("the articleId is empty");
             return Utils.toJson(result);
-        }/*else if (StringUtils.isEmpty(userId)){
-            result.setStauts(1);
-            result.setMsg("the userId is empty");
-            return Utils.toJson(result);
-        }*/else{
+        }else{
             Article article = articleService.getOneArticle(articleId);
-            //Users user = userService.getOne(userId);
             if(article ==  null){
                 result.setStauts(1);
                 result.setMsg("not found the article by articleId");
@@ -152,23 +147,7 @@ public class ArticleController {
         }
 
     }
-    //获取用户id该用户的所有动态
-    @RequestMapping("/getArticleList")
-    @ResponseBody
-    public String getArticleList(HttpServletRequest request,String userId,@RequestParam(defaultValue = "1") int pageNo,@RequestParam(defaultValue = "20") int pageSize){
-        CommonResult<PageInfo<Article>> result = new CommonResult<>(0,"success");
-        //Users user = (Users)request.getSession().getAttribute("user");
-        if(StringUtils.isEmpty(userId)){
-            result.setStauts(1);
-            result.setMsg("userId is empty");
-            return Utils.toJson(result);
-        }
-        Page<Article> articlePage = articleService.selectArticlePageByUid(pageNo,pageSize,userId);
-        PageInfo<Article> articlePageInfo = new PageInfo<>(articlePage);
-        result.setData(articlePageInfo);
 
-        return Utils.toJson(result);
-    }
 
     //获取用户id该用户的所有动态，并跳转到用户个人主页
     @RequestMapping("/getMyArticle")
@@ -180,26 +159,21 @@ public class ArticleController {
         //PageInfo<Article> articlePageInfo = new PageInfo<>(articlePage);
         Users u = (Users)request.getSession().getAttribute("user");
         Users user = userService.getOne(userId);
+
+
         Relationship relationship = relationshipService.isFriend(u.getUserId(),userId);
+
         modelAndView.addObject("articleList",articleList);
         modelAndView.addObject("object",user);
-        modelAndView.addObject("relationship",(int)relationship.getIsFriend());
-        return modelAndView;
-    }
-
-    //获取单个动态
-    @RequestMapping("/getOneArticle")
-    @ResponseBody
-    public String getOneArticle(HttpServletRequest request,String articleId){
-        CommonResult<Article> result = new CommonResult<>(0,"success");
-        if(StringUtils.isEmpty(articleId)){
-            result.setStauts(1);
-            result.setMsg("articleId is empty");
-            return Utils.toJson(result);
+        if(u.getUserId().equals(userId) && relationship == null){
+            modelAndView.addObject("relationship",3);
+        }else if(relationship == null){
+            modelAndView.addObject("relationship",1);
+        }else{
+            modelAndView.addObject("relationship",(int)relationship.getIsFriend());
         }
-        Article article = articleService.getOneArticle(articleId);
-        result.setData(article);
-        return Utils.toJson(result);
+
+        return modelAndView;
     }
 
     //获取单个动态详情
@@ -271,6 +245,37 @@ public class ArticleController {
         articleService.deleteArticle(article);
         return Utils.toJson(result);
     }
+    //获取用户id该用户的所有动态
+    @RequestMapping("/getArticleList")
+    @ResponseBody
+    public String getArticleList(HttpServletRequest request,String userId,@RequestParam(defaultValue = "1") int pageNo,@RequestParam(defaultValue = "20") int pageSize){
+        CommonResult<PageInfo<Article>> result = new CommonResult<>(0,"success");
+        //Users user = (Users)request.getSession().getAttribute("user");
+        if(StringUtils.isEmpty(userId)){
+            result.setStauts(1);
+            result.setMsg("userId is empty");
+            return Utils.toJson(result);
+        }
+        Page<Article> articlePage = articleService.selectArticlePageByUid(pageNo,pageSize,userId);
+        PageInfo<Article> articlePageInfo = new PageInfo<>(articlePage);
+        result.setData(articlePageInfo);
 
+        return Utils.toJson(result);
+    }
+
+    //    //获取单个动态
+//    @RequestMapping("/getOneArticle")
+//    @ResponseBody
+//    public String getOneArticle(HttpServletRequest request,String articleId){
+//        CommonResult<Article> result = new CommonResult<>(0,"success");
+//        if(StringUtils.isEmpty(articleId)){
+//            result.setStauts(1);
+//            result.setMsg("articleId is empty");
+//            return Utils.toJson(result);
+//        }
+//        Article article = articleService.getOneArticle(articleId);
+//        result.setData(article);
+//        return Utils.toJson(result);
+//    }
 }
 

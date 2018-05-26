@@ -4,9 +4,6 @@
         发表动态
     </button>
 
-    <div id="tip">
-
-    </div>
     <div id="user-article-container" class="container mt-3">
         <div id="user-article-content" class="row">
 
@@ -19,13 +16,26 @@
                 <div class="card article-card myCard mt-3">
                     <div id="user-article-content-img" class="mt-3 ml-3">
                         @if(article.isTransmit != 2){ @}
-                        <img src="${article.oldUser.userimg}" class="float-left " width="50px" height="50px">
-                        <a href="../article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
+                            @if(session.user.userId == article.oldUser.userId){ @}
+                                <img src="${article.oldUser.userimg}" class="float-left " width="50px" height="50px">
+                                <strong class="float-left mt-3 ml-3"> 我</strong>
+                            @ }else{ @}
+                                <img src="${article.oldUser.userimg}" class="float-left " width="50px" height="50px">
+                                <a href="../article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
+                            @} @}
                         @}else{ @}
-                            <img src="${article.oldUser.userimg}" class="float-left " width="50px" height="50px">
-                        <a href="../article/getMyArticle?userId=${article.nowUser.userId}"><strong class="float-left mt-3 ml-3">${article.nowUser.nickname}</strong></a>
-                            <small class="float-left mt-3 ml-3">转发</small>
-                        <a href="../article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
+                            @if(session.user.userId == article.nowUser.userId){ @}
+                                <img src="${article.nowUser.userimg}" class="float-left " width="50px" height="50px">
+                                <strong class="float-left mt-3 ml-3">我</strong>
+                                <small class="float-left mt-3 ml-3">转发</small>
+                                <a href="../article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
+                            @ }else{ @}
+                                <img src="${article.nowUser.userimg}" class="float-left " width="50px" height="50px">
+                                <a href="../article/getMyArticle?userId=${article.nowUser.userId}"><strong class="float-left mt-3 ml-3">${article.nowUser.nickname}</strong></a>
+                                <small class="float-left mt-3 ml-3">转发</small>
+                                <a href="../article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
+                            @} @}
+
                         @ }@}
                     </div>
 
@@ -53,7 +63,17 @@
                                     <li>
                                         <a href="javascript:void(0);" onclick="subComment(this)">评论</a>
                                     </li>
-                                    <li><span><i class="iconfont icon-icons- my-icon-size"></i> ${article.article.collectNumber}</span></li>
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:void(0);"><div  class="fave">
+                                                </div></a>
+                                            </li>
+                                            <li>
+                                                <div class="like-number">${article.article.collectNumber}</div>
+                                            </li>
+                                        </ul>
+                                        </li>
                                     <li><span class="article-time"> ${article.article.createTime,dateFormat="yyyy-MM-dd hh:mm:ss"}</span></li>
                                 </ul>
                             </div>

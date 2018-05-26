@@ -20,13 +20,14 @@ public class Comments {
 
     private Byte type;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format="yyyy-MM-dd hh:mm:ss")
+    @JSONField(format="yyyy-MM-dd")
     private Date createTime;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format="yyyy-MM-dd hh:mm:ss")
+    @JSONField(format="yyyy-MM-dd")
     private Date updateTime;
 
     private Users user;
+
     private Users to;
 
     public Users getTo() {

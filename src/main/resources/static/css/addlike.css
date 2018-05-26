@@ -1,0 +1,13 @@
+.fave {
+  width: 18px;
+  height: 20px;
+  background: url(../img/like.png) no-repeat;
+  background-position: right;
+  background-size: auto 100%;
+}
+
+.fave.active {
+  background-position: left;
+  /* 主要在这一步 */
+  transition: background .3s steps(10);
+}

@@ -6,23 +6,27 @@ import com.doubles.entity.Comments;
 import com.doubles.entity.Users;
 import com.doubles.model.CommonResult;
 import com.doubles.model.NoticeResult;
+import com.doubles.model.PageInfo;
 import com.doubles.service.ArticleService;
 import com.doubles.service.ChatRecordService;
 import com.doubles.service.CommentsService;
 import com.doubles.service.UsersService;
-import com.doubles.util.SecretUtils;
 import com.doubles.util.Utils;
+import com.github.pagehelper.Page;
 import io.goeasy.GoEasy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * <p>
@@ -47,7 +51,7 @@ public class CommentsController {
 	@Autowired
 	private GoEasy goEasy;
 
-	@Value("${goEasy.articlePush}")
+	@Value("${goEasy.noticePush}")
 	private String noticePush;
 
 	@RequestMapping("/addComment")
@@ -63,14 +67,20 @@ public class CommentsController {
 			commonResult.setStauts(1);
 		}
 		Users admin = usersService.getAdmin();
+		if(!StringUtils.isEmpty(comment.getToUser())){
 
+		}
 		if(admin != null){
 			ChatRecord chatRecord = new ChatRecord();
 			chatRecord.setUserId(admin.getUserId());
 			chatRecord.setToUser(comment.getToUser());
 			chatRecord.setContent(comment.getCommentContent()+"||"+comment.getObjectId());
 			chatRecordService.insert(chatRecord);
+			//封装即将推送出去的数据
 			NoticeResult noticeResult = new NoticeResult(0,"you have a new notice");
+			noticeResult.setFromUser(user.getUserId());
+			noticeResult.setToUser(comment.getToUser());
+			noticeResult.setMsg(comment.getCommentContent());
 			//goEasy推送评论通知
 			goEasy.publish(noticePush,Utils.toJson(noticeResult));
 		}
@@ -87,6 +97,22 @@ public class CommentsController {
 		}
 
 		return Utils.toJson(commonResult);
+	}
+
+
+
+	@RequestMapping("getCommentList")
+	@ResponseBody
+	public String getCommentList(HttpServletRequest request, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+		CommonResult<PageInfo<Comments>> result = new CommonResult<>(0,"success");
+		Users user = (Users)request.getSession().getAttribute("user");
+
+		Page<Comments> list = commentsService.getCommentsPage(user.getUserId(),pageNo,pageSize);
+		PageInfo<Comments> pageInfo = new PageInfo<>(list);
+
+		result.setData(pageInfo);
+		//封装返回
+		return Utils.toJson(result);
 	}
 }
 

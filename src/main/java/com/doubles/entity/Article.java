@@ -35,8 +35,11 @@ public class Article {
     private String content;
 
     private Users user;
+
     private List<ArticlImg> imgList;
+
     private List<Comments> commentsList;
+
     private List<ArtilceTopic> artilceTopics;
 
     public List<ArtilceTopic> getArtilceTopics() {

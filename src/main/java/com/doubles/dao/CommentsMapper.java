@@ -2,7 +2,11 @@ package com.doubles.dao;
 
 import com.doubles.entity.Comments;
 import com.doubles.entity.CommentsExample;
+
+import java.util.Date;
 import java.util.List;
+
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface CommentsMapper {
@@ -27,4 +31,7 @@ public interface CommentsMapper {
     int updateByPrimaryKeySelective(Comments record);
 
     int updateByPrimaryKey(Comments record);
+
+    Page<Comments> getCommentPage(@Param("toUser") String toUser);
+
 }

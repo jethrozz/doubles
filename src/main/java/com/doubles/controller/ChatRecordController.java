@@ -2,7 +2,6 @@ package com.doubles.controller;
 
 
 import com.doubles.entity.ChatRecord;
-import com.doubles.entity.Image;
 import com.doubles.entity.Users;
 import com.doubles.model.CommonResult;
 import com.doubles.model.PageInfo;
@@ -61,6 +60,7 @@ public class ChatRecordController {
         result.setData(chatRecordPageInfo);
         return Utils.toJson(result);
     }
+
     @RequestMapping("/getMsgRecord")
     @ResponseBody
     public String getMsgRecord(String toUser,HttpServletRequest request, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
@@ -76,5 +76,17 @@ public class ChatRecordController {
         result.setData(chatRecordPageInfo);
         return Utils.toJson(result);
     }
+
+//    @RequestMapping("getCommentNotice")
+//    @ResponseBody
+//    public String getCommentNotice(HttpServletRequest request, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+//
+//        Users admin = usersService.getAdmin();
+//        Users user = (Users)request.getSession().getAttribute("user");
+//
+//        Page<ChatRecord> chatRecordPage = chatRecordService.getPageChatRecord(admin.getUserId(),user.getUserId(),pageNo,pageSize);
+//
+//    }
+
 }
 

@@ -46,7 +46,7 @@ public class ChatRecordServiceImpl  implements ChatRecordService {
     @Override
     public Page<ChatRecord> getPageChatRecord(String fromUser, String toUser, int pageNo, int pageSize) {
         PageHelper.startPage(pageNo,pageSize);
-        return chatRecordDao.getNoticePage(toUser,fromUser);
+        return chatRecordDao.getChatRecordPage(toUser,fromUser);
     }
 
 }

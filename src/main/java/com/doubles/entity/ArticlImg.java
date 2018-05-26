@@ -1,5 +1,7 @@
 package com.doubles.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class ArticlImg {
     private String aiId;
 
@@ -7,6 +9,7 @@ public class ArticlImg {
 
     private String imgId;
 
+    @JSONField(serialize=false)
     private Image image;
 
     public Image getImage() {

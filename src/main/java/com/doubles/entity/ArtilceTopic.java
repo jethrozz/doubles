@@ -1,5 +1,7 @@
 package com.doubles.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class ArtilceTopic {
     private String atId;
 
@@ -8,6 +10,7 @@ public class ArtilceTopic {
     private String topicId;
 
     private Topic topic;
+    @JSONField(serialize=false)
     private Article article;
 
     public Topic getTopic() {

@@ -35,9 +35,11 @@ public class Collections {
     public void setImage(Image image) {
         this.image = image;
     }
-
+    @JSONField(serialize=false)
     private Users user;
+    @JSONField(serialize=false)
     private Article article;
+    @JSONField(serialize=false)
     private Image image;
     public Users getUser() {
         return user;

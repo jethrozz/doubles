@@ -88,6 +88,21 @@
     comment_id, user_id, comment_content, object_type, object_id, to_user, type, create_time, 
     update_time
   </sql>
+  
+  <select id="getCommentPage" resultMap="BaseResultMap1">
+    SELECT
+    <include refid="Base_Column_List" />
+    from comments
+    where to_user = #{toUser} ORDER BY create_time DESC
+  </select>
+
+  <select id="getTimeGroup" resultType="java.util.Date">
+    SELECT DATE_FORMAT(create_time, "%Y-%m-%d")
+    FROM comments
+    WHERE to_user = #{toUser}
+    GROUP BY DATE_FORMAT(create_time, "%Y-%m-%d")
+  </select>
+  
   <select id="selectByArticleId" resultMap="BaseResultMap1" parameterType="java.lang.String" >
     SELECT
     <include refid="Base_Column_List" />

@@ -1,5 +1,6 @@
 
 function showFollow() {
+    $('#loading').modal('show');
     var userId = sessionStorage.getItem("userId");
 
     $.ajax({
@@ -15,13 +16,14 @@ function showFollow() {
             console.log(res);
             if(res.status == 0){
                 followUserText($("#fllow"),res.data);
-                //$("#mymodal").modal("toggle");
+                $('#loading').modal('hide');
             }
         }
     });
 }
 
 function showFans() {
+    $('#loading').modal('show');
     var userId = sessionStorage.getItem("userId");
 
     $.ajax({
@@ -37,7 +39,7 @@ function showFans() {
             console.log(res);
             if(res.status == 0){
                 followUserText($("#fans"),res.data);
-                //$("#mymodal").modal("toggle");
+                $('#loading').modal('hide');
             }
         }
     });

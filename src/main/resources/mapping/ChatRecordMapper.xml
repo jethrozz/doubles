@@ -73,7 +73,7 @@
   <sql id="Base_Column_List" >
     cr_id, user_id, to_user, content, create_time, update_time
   </sql>
-  <select id="getNoticePage" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="getChatRecordPage" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />
     from chat_record

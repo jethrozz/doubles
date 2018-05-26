@@ -2,6 +2,8 @@ package com.doubles.dao;
 
 import com.doubles.entity.ChatRecord;
 import com.doubles.entity.ChatRecordExample;
+
+import java.util.Date;
 import java.util.List;
 
 import com.github.pagehelper.Page;
@@ -31,5 +33,7 @@ public interface ChatRecordMapper {
     int updateByPrimaryKey(ChatRecord record);
 
     //聊天记录分页
-    Page<ChatRecord> getNoticePage(@Param("toUser") String toUser,@Param("userId")String userId);
+    Page<ChatRecord> getChatRecordPage(@Param("toUser") String toUser,@Param("userId")String userId);
+
+
 }

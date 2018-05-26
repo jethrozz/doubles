@@ -3,6 +3,8 @@ package com.doubles.serviceImpl;
 import com.doubles.dao.CommentsMapper;
 import com.doubles.entity.Comments;
 import com.doubles.service.CommentsService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,12 @@ public class CommentsServiceImpl implements CommentsService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Page<Comments> getCommentsPage(String userId, int pageNo, int pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+
+        return commentsDao.getCommentPage(userId);
     }
 }

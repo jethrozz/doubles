@@ -30,6 +30,6 @@ public interface ArticleService{
     Page<Article> selectArticlePageByContent(int pageNo, int pageSize, String content);
     //获取单个动态
     Article getOneArticle(String artilce_id);
-    List<Date> getTimeGroup(String date);
+    List<Date> getTimeGroup(String userId);
     List<Article> getArticleByTime(String date,String userId);
 }

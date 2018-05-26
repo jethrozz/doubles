@@ -24,6 +24,7 @@ function login(user,pwd){
             password:pwd
         },
         success:function(data,stauts,result){
+            console.log(data);
             var res = JSON.parse(data);
             var user = res.data;
             console.log(res);

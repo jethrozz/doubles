@@ -3,6 +3,7 @@ package com.doubles.service;
 import com.doubles.entity.ChatRecord;
 import com.github.pagehelper.Page;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,4 +19,5 @@ public interface ChatRecordService{
     List<ChatRecord> findChatRecordList(String fromUser, String toUser);
     boolean insert(ChatRecord chatRecord);
     Page<ChatRecord> getPageChatRecord(String fromUser, String toUser,int pageNo,int pageSize);
+
 }

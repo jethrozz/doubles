@@ -21,9 +21,12 @@ public class Album {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
-
+    @JSONField(serialize=false)
     private Users user;
+    @JSONField(serialize=false)
     private List<Image> imageList;
+
+
     public Users getUser() {
         return user;
     }

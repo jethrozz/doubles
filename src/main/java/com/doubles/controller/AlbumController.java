@@ -130,7 +130,13 @@ public class AlbumController {
 
 		modelAndView.addObject("albumList",resultAlbumList);
 		modelAndView.addObject("objectId",userId);
-		modelAndView.addObject("relationship",(int)relationship.getIsFriend());
+		if(user.getUserId().equals(userId) && relationship == null){
+			modelAndView.addObject("relationship",3);
+		}else if(relationship == null){
+			modelAndView.addObject("relationship",1);
+		}else{
+			modelAndView.addObject("relationship",(int)relationship.getIsFriend());
+		}
 		return modelAndView;
 	}
 
