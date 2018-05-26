@@ -49,4 +49,16 @@ public class ChatRecordServiceImpl  implements ChatRecordService {
         return chatRecordDao.getChatRecordPage(toUser,fromUser);
     }
 
+    @Override
+    public Page<ChatRecord> getChatRecordList(String toUser, int pageNo, int pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+
+        return chatRecordDao.getChatRecordList(toUser);
+    }
+
+    @Override
+    public Integer getNumberOfMeAndFriend(String fromUser, String toUser) {
+        return chatRecordDao.getNumberOfMeAndFriend(fromUser,toUser);
+    }
+
 }

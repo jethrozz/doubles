@@ -3,6 +3,7 @@ package com.doubles.controller;
 
 import com.doubles.entity.ChatRecord;
 import com.doubles.entity.Users;
+import com.doubles.model.ChatResult;
 import com.doubles.model.CommonResult;
 import com.doubles.model.PageInfo;
 import com.doubles.model.SingletonMsgQueue;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -77,16 +80,49 @@ public class ChatRecordController {
         return Utils.toJson(result);
     }
 
-//    @RequestMapping("getCommentNotice")
-//    @ResponseBody
-//    public String getCommentNotice(HttpServletRequest request, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
-//
-//        Users admin = usersService.getAdmin();
-//        Users user = (Users)request.getSession().getAttribute("user");
-//
-//        Page<ChatRecord> chatRecordPage = chatRecordService.getPageChatRecord(admin.getUserId(),user.getUserId(),pageNo,pageSize);
-//
-//    }
+
+    @RequestMapping("getChatRecordList")
+    @ResponseBody
+    public String getChatRecordList(HttpServletRequest request, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+        CommonResult<PageInfo<ChatResult>> result = new CommonResult<>(0,"success");
+        Users user = (Users)request.getSession().getAttribute("user");
+
+        Page<ChatRecord> chatRecordPage = chatRecordService.getChatRecordList(user.getUserId(),pageNo,pageSize);
+        List<ChatResult> list = new ArrayList<>();
+        for (ChatRecord chat:chatRecordPage) {
+            ChatResult chatResult = new ChatResult();
+            chatResult.setFromUser(chat.getFrom());
+            chatResult.setCreate_time(chat.getCreateTime());
+            chatResult.setToUser(chat.getTo());
+            chatResult.setContent(chat.getContent());
+            int number = chatRecordService.getNumberOfMeAndFriend(chat.getUserId(),chat.getToUser());
+            chatResult.setCount(number);
+            list.add(chatResult);
+        }
+
+        PageInfo<ChatResult> chatResultPageInfo = new PageInfo<>(list);
+        result.setData(chatResultPageInfo);
+        return Utils.toJson(result);
+    }
+
+    @RequestMapping("getChatDetail")
+    @ResponseBody
+    public String getChatDetail(HttpServletRequest request,String toUserId, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+        CommonResult<PageInfo<ChatRecord>> result = new CommonResult<>(0,"success");
+        Users user = (Users)request.getSession().getAttribute("user");
+        if(StringUtils.isEmpty(toUserId)){
+            result.setMsg("toUserId is null");
+            result.setStauts(1);
+            return Utils.toJson(result);
+        }
+
+        Page<ChatRecord> chatRecordPage = chatRecordService.getPageChatRecord(user.getUserId(),toUserId,pageNo,pageSize);
+        PageInfo<ChatRecord> chatRecordPageInfo = new PageInfo<>(chatRecordPage);
+
+        result.setData(chatRecordPageInfo);
+
+        return Utils.toJson(result);
+    }
 
 }
 

@@ -35,5 +35,7 @@ public interface ChatRecordMapper {
     //聊天记录分页
     Page<ChatRecord> getChatRecordPage(@Param("toUser") String toUser,@Param("userId")String userId);
 
+    Page<ChatRecord> getChatRecordList(@Param("toUser")String userId);
+    Integer getNumberOfMeAndFriend(@Param("userId")String fromUser, @Param("toUser")String toUser);
 
 }

@@ -1,8 +1,5 @@
-*{
-	margin: 0;
-	padding: 0;
-}
-img{
+
+#tongzhi img{
 	display: block;
 	border: 0;
 	cursor: pointer;
@@ -242,7 +239,6 @@ img{
 	height: 30px;
 }
 #repeat_btn{
-	
 	font-size: 12px;
 	margin-left: 12px;
 }

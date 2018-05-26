@@ -73,12 +73,28 @@
   <sql id="Base_Column_List" >
     cr_id, user_id, to_user, content, create_time, update_time
   </sql>
-  <select id="getChatRecordPage" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select
-    <include refid="Base_Column_List" />
-    from chat_record
-    WHERE to_user = #{toUser} AND user_id = #{userId} ORDER BY create_time DESC
+
+  <select id="getChatRecordPage" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" />
+    FROM doubles.chat_record
+     WHERE  (to_user = #{toUser} AND user_id = #{userId}) OR (to_user = #{userId} AND user_id = #{toUser}) ORDER BY create_time desc
   </select>
+
+
+  <select id="getNumberOfMeAndFriend" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM doubles.chat_record
+     WHERE  (to_user = #{toUser} AND user_id = #{userId}) OR (to_user = #{userId} AND user_id = #{toUser})
+  </select>
+  
+  
+  <select id="getChatRecordList" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" />
+    FROM doubles.chat_record
+    WHERE  to_user = #{toUser} OR user_id = #{toUser}
+    group by user_id order by create_time desc
+  </select>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.doubles.entity.ChatRecordExample" >
     select
     <if test="distinct" >

@@ -19,5 +19,6 @@ public interface ChatRecordService{
     List<ChatRecord> findChatRecordList(String fromUser, String toUser);
     boolean insert(ChatRecord chatRecord);
     Page<ChatRecord> getPageChatRecord(String fromUser, String toUser,int pageNo,int pageSize);
-
+    Page<ChatRecord> getChatRecordList(String toUser,int pageNo,int pageSize);
+    Integer getNumberOfMeAndFriend(String fromUser, String toUser);
 }
