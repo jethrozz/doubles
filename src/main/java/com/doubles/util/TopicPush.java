@@ -35,7 +35,7 @@ public class TopicPush implements Runnable{
 	private ArticleService articleService;
 	@Autowired
 	private PushService pushService;
-	@Value("${goEasy.articlePush}")
+	@Value("${goEasy.topicPush}")
 	private String articleChannel;
 
 	private static final Logger LOGGER = Logger.getLogger(TopicPush.class);
@@ -49,6 +49,7 @@ public class TopicPush implements Runnable{
 					break;
 				}
 				CommonResult<PushData> result = new CommonResult<>(0,"success");
+
 				ArtilceTopic artilceTopic = SingletonTopicQueue.getInstance().getArtilceTopicPushQueue().take();
 				String topicId = artilceTopic.getTopicId();
 				String articleId = artilceTopic.getArticleId();

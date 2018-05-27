@@ -2,29 +2,36 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>发私信给</title>
-		<link rel="stylesheet" href="css/bootstrap.css" />
-		<link rel="stylesheet" href="css/privateletter.css" />
+		<title>发私信给${toUser.nickname}</title>
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<link rel="stylesheet" href="/css/privateletter.css" />
+		<link rel="stylesheet" type="text/css" href="css/tip.css" />
 	</head>
 	<body>
 		<div class="container-fluid">
 			<div class="container">
 			<div class="row">
-				<h2>发私信给雷锋经过</h2>
+				<h2>发私信给${toUser.nickname}</h2>
 			</div>
 			<div class="row">
-				<small><a href="#">查看历史对话</a>|共可输入500个字</small>
-				<input type="text" id="letter-input" class="form-control" placeholder="请输入">
+				<small><a href="../getprivateletter/${toUser.userId}">查看历史对话</a>|共可输入500个字</small>
+				<textarea id="letter-input" rows="7" cols="30"  name="letter-input"  class="form-control" placeholder="请输入"></textarea>
 			</div>
 			<div class="row btns">
-				<button type="button" class="btn btn-success sent">发送</button>
+				<button type="button" onclick="sendMsg('${toUser.userId}')" class="btn btn-success sent">发送</button>
 				<button type="button" class="btn btn-secondary call_off">取消</button>
 			</div>
 			</div>
 			
 		</div>
+		<div id="tip">
+
+		</div>
 	</body>
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/privletter.js"></script>
+
+	<script src="/js/jquery-3.1.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="https://cdn-hangzhou.goeasy.io/goeasy.js​"></script>
+	<script type="text/javascript" src="/js/privletter.js"></script>
+	<script type="text/javascript" src="/js/subscribe.js"></script>
 </html>

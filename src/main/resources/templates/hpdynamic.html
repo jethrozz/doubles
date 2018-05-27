@@ -14,7 +14,7 @@
 				@ if(session.user.userId != article.user.userId){ @}
 				<button type="button" class="btn btn-secondary reprinted " onclick="transmit('${article.articleId}')">转载</button>
 				@ } @}
-				<button type="button" class="btn btn-secondary tip_off" onclick="transmit('${article.articleId}')">举报</button>
+				<!--<button type="button" class="btn btn-secondary tip_off" onclick="transmit('${article.articleId}')">举报</button>-->
 				@ if(session.user.userId != article.user.userId){ @}
 				<button type="button" class="btn btn-secondary fllow_btn">添加关注</button>
 				@ } @}
@@ -79,7 +79,9 @@
 												<input type="text" id="reply-input" class="form-control" placeholder="评论">
 											</div>
 											<div class="col col-lg_12 ">
-												<button type="button" id="btn-reply-input" class="btn btn-secondary ">提交</button>
+												<button type="button" id="btn-reply-input" class="btn btn-secondary " onclick="addArticleComment(this)">提交</button>
+												<input value="${article.user.userId}" type="hidden" name="toUser" />
+												<input value="${article.articleId}" type="hidden" name="objectId" />
 											</div>
 										</div>
 									</form>
@@ -95,7 +97,7 @@
 			
 													</div>
 													<div class="comment-content">
-														<input name="${comment.user.userId}" value="id" type="hidden">
+														<input name="userid" value="${comment.user.userId}" type="hidden">
 														<div class="">
 															<a href="../user/${comment.user.userId}">${comment.user.nickname}</a>
 															${comment.commentContent}
@@ -104,6 +106,7 @@
 													</div>
 													<div class="btn-reply">
 														<a href="javascript:void(0);" onclick="reply(this)">回复</a>
+														<input type="hidden" value="${comment.user.userId}" name="replyTo"/>
 													</div>
 												</div>
 											</li>
@@ -114,7 +117,7 @@
 														<img src="img/img-got701.jpg" width="20px" height="20px" />
 													</div>
 													<div class="comment-content">
-														<input name="user_id" value="id" type="hidden">
+														<input name="userid" value="${comment.user.userId}" type="hidden">
 														<div>
 															<a href="../user/${comment.user.userId}">
 																${comment.user.nickname}</a>&nbsp回复&nbsp
@@ -123,7 +126,8 @@
 														</div>
 													</div>
 													<div class="btn-reply">
-														<a href="#">回复</a>
+														<a href="javascript:void(0);" onclick="reply(this)">回复</a>
+														<input type="hidden" value="${comment.user.userId}" name="replyTo"/>
 													</div>
 												</div>
 											</li>
@@ -136,7 +140,7 @@
 								@}@}
 								@ if(!isEmpty(collectionsList)){ @}
 								<div id="a">热度(<small>${article.collectNumber}</small>)</div>
-								<div id="comment-list">
+								<div id="comment-list-like">
 									<ul class="list-group my-comment-ul list-group-flush">
 										@for(collection in collectionsList) { @}
 										<li class="list-group-item">
@@ -173,7 +177,14 @@
 								上一篇
 							</a>
 						</li>
-						@ } @}
+						@ }else{ @}
+						<li class="page-item ">
+							<a class="page-link disabled" style="margin-left: 9rem;margin-right: 23rem;text-align: center;background-color: #DBDBDB;" href="javascript:void(0);" aria-label="Previous">
+								上一篇
+							</a>
+						</li>
+
+						@} @}
 						@ if(!isEmpty(next)){
 						@}
 						<li class="page-item " >
@@ -181,7 +192,13 @@
 								下一篇
 							</a>
 						</li>
-						@ } @}
+						@ }else{ @}
+						<li class="page-item " >
+							<a class="page-link" style="background-color: #DBDBDB;" href="javascript:void(0);" aria-label="Next">
+								下一篇
+							</a>
+						</li>
+						@} @}
 					</ul>
 				<!--</nav>-->
 			</div>

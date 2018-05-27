@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>私信</title>
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/tongzhi.css">
+		<link rel="stylesheet" type="text/css" href="/css/tip.css" />
+	</head>
+	<body>
+		<div class="container-fluid" style="background-color: gainsboro;">
+			<div id="talk" style="background-color: white;">
+				<div class="top">
+					<h3>与<span>${toUser.nickname}</span>的私信对话</h3>
+					<strong>返回私信列表</strong>
+				</div>
+				<div class="bottom">
+					<div class="chat">
+						<img src="${session.user.userimg}" alt="">
+						<div class="chatarea">
+							<span style="float:right;" id="charNum">你还可以输入500字</span>
+							<textarea name="letter-input" id="letter-input" cols="80" rows="3"></textarea>
+							<button onclick="sendMsg('${toUser.userId}')">发送</button>
+						</div>
+					</div>
+					<div class="community">
+						@for(chatRecord in pageinfo.list){ @}
+							@if(session.user.userId == chatRecord.userId){ @}
+								<div class="mine">
+									<img src="${chatRecord.from.userimg}" alt="">
+									<div class="frimess">
+										<p>${chatRecord.content}</p>
+										<span>${chatRecord.createTime,dateFormat="yyyy-MM-dd hh:mm:ss"}</span>
+									</div>
+								</div>
+							@}else{ @}
+								<div class="friend">
+									<img src="${chatRecord.to.userimg}" alt="">
+									<div class="frimess">
+										<p>${chatRecord.content}</p>
+										<span>${chatRecord.createTime,dateFormat="yyyy-MM-dd hh:mm:ss"}</span>
+									</div>
+								</div>
+							@} @}
+						@} @}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="tip">
+
+		</div>
+	</body>
+	<script src="/js/jquery-3.1.1.min.js"></script>
+	<script src="https://cdn-hangzhou.goeasy.io/goeasy.js​"></script>
+	<script src="/js/talk.js"></script>
+	<script type="text/javascript" src="/js/subscribe.js"></script>
+</html>

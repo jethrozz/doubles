@@ -63,21 +63,6 @@ function subContent(data) {
     return data;
 }
 
-goEasy.subscribe({
-    channel: "newNotice",
-    onMessage: function (message) {
-        console.log(message);
-        var data = message.content;
-        var content = JSON.parse(data);
-        var me = sessionStorage.getItem("userId");
-        console.log(content)
-        if(me != content.fromUser && me == content.toUser){
-            var str =  "有人评论了您：" + content.msg;
-            $("#tip").text(str);
-            $("#tip").fadeIn(1500).fadeOut(3000);
-        }
-    }
-});
 
 /*
 

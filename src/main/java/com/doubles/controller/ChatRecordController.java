@@ -13,11 +13,13 @@ import com.doubles.util.Utils;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -40,15 +42,50 @@ public class ChatRecordController {
     @Autowired
     private UsersService usersService;
 
+
+    @RequestMapping("/privateletter/{id}")
+    public ModelAndView privateletter(HttpServletRequest request,@PathVariable String id){
+        ModelAndView modelAndView = new ModelAndView("/privateletter");
+        Users toUser = usersService.getOne(id);
+        modelAndView.addObject("toUser",toUser);
+
+        return modelAndView;
+    }
+    @RequestMapping("/getprivateletter/{id}")
+    public ModelAndView getprivateletter(HttpServletRequest request,@PathVariable String id, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+        ModelAndView modelAndView = new ModelAndView("/talk");
+        Users toUser = usersService.getOne(id);
+        Users fromUser = (Users)request.getSession().getAttribute("user");
+
+        Page<ChatRecord> chatRecordPage = chatRecordService.getPageChatRecord(fromUser.getUserId(),toUser.getUserId(),pageNo,pageSize);
+        PageInfo<ChatRecord> chatRecordPageInfo = new PageInfo<>(chatRecordPage);
+        modelAndView.addObject("pageinfo",chatRecordPageInfo);
+        modelAndView.addObject("toUser",toUser);
+        return modelAndView;
+    }
     /**
      * 返回数据时记得把数据库写入结果返回了
      * @param chatRecord
      */
     @RequestMapping("/sendMsg")
-    public void sendMsg(ChatRecord chatRecord){
+    @ResponseBody
+    public String sendMsg(HttpServletRequest request,ChatRecord chatRecord){
+        CommonResult<ChatRecord> result = new CommonResult<>(0,"success");
+        Users user = (Users)request.getSession().getAttribute("user");
+        if(StringUtils.isEmpty(chatRecord.getToUser())){
+            result.setStauts(1);
+            result.setMsg("touser id is null");
+            return Utils.toJson(result);
+        }
+        chatRecord.setUserId(user.getUserId());
+        chatRecord.setFrom(user);
+        chatRecord.setTo(usersService.getOne(chatRecord.getToUser()));
+
         if(chatRecordService.insert(chatRecord)){
             SingletonMsgQueue.getInstance().addMsgPushQueue(chatRecord);
         }
+        result.setData(chatRecord);
+        return  Utils.toJson(result);
     }
 
     @RequestMapping("/getNotice")

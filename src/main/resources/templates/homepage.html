@@ -22,7 +22,7 @@
 						<input name="friendId" type="hidden" value="${object.userId}" />
 					@ } @}
 				@ } @}
-				<a href="../index" class="btn btn-secondary back_btn">返回首页</a>
+				<button type="button"  class="btn btn-secondary back_btn">返回首页</button>
 			</div>
 			<div class="home_header">
 				<div class="selfinfo">
@@ -47,7 +47,7 @@
 				</div>
 				<div class="btncl">
 					@if(session.user.userId != object.userId){@}
-					<a href="../users/getAlbumImgList?userId=${object.userId}" class="btn btn-secondary letters">私信</a>
+					<a href="../chatRecord/privateletter/${object.userId}" class="btn btn-secondary letters">私信</a>
 					@}@}
 					<a href="../users/getAlbumImgList?userId=${object.userId}" class="btn btn-secondary img_file">图集</a>
 				</div>

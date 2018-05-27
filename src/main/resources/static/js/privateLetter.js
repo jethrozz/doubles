@@ -86,9 +86,8 @@ function pinjieChatRecord(container,data) {
                 "            <img src=\""+data[i].from.userimg+"\" alt=\"\">\n" +
                 "            <div class=\"chatarea\">\n" +
                 "                <span style=\"float:right;\">你还可以输入500字</span>\n" +
-                "                <textarea name=\"\" id=\"\" cols=\"69\" rows=\"3\"></textarea>\n" +
-                "                <input type=\"hidden\" name=\"touserId\" value=\""+data[i].to.userId+"\">\n" +
-                "                <button>发送</button>\n" +
+                "                <textarea name=\"letter-input\" id=\"letter-input\" cols=\"69\" rows=\"3\"></textarea>\n" +
+                "                <button onclick=\"sendMsg('data[i].to.userId')\">发送</button>\n" +
                 "            </div>\n" +
                 "        </div>";
             $("#talkObject").text(data[i].to.nickname);
@@ -121,8 +120,48 @@ function pinjieChatRecord(container,data) {
     container.append(html);
 }
 
-/*
-
-<li><div class="left"><img src="http://p8jz8nm27.bkt.clouddn.com/kenan.png" alt=""><div><p>来自<a href="../article/getMyArticle?userId=50c6d15759cf11e8afae525400864554">我有一头没毛驴</a></p><p>不吃，我只喝水。</p><p>2018-05-26 09:20:35</p></div></div><span class="right" onclick="showChat(this,'50c6d15759cf11e8afae525400864554')">共<span>3</span>条对话</span></li>
-
- */
+function sendMsg(id) {
+    if($("#letter-input").val() != ""){
+        var text = $.trim($("#letter-input").val());
+        $.ajax({
+            url:"../sendMsg",
+            type:"post",
+            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            data:{
+                toUser:id,
+                content:text
+            },
+            success:function(data,result,stauts){
+                var res = JSON.parse(data);
+                if(res.status == 0){
+                    var html = "            <div class=\"mine\">\n" +
+                        "                <img src=\""+res.data.from.userimg+"\" alt=\"\">\n" +
+                        "                <div class=\"frimess\">\n" +
+                        "                    <p>"+res.data.content+"</p>\n" +
+                        "                    <span>"+getNowFormatDate()+"</span>\n" +
+                        "                </div>\n" +
+                        "            </div>";
+                    $("#talk .community").prepend(html);
+                    $("#letter-input").val("");
+                }
+            }
+        })
+    }
+}
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + " " + date.getHours() + seperator2 + date.getMinutes()
+        + seperator2 + date.getSeconds();
+    return currentdate;
+}

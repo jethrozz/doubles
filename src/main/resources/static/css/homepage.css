@@ -175,7 +175,7 @@
 #a{
 	margin-bottom: 20px;
 	margin-left: 1rem;
-	font-weight: 1000;
+	/*font-weight: 1000;*/
 	margin-top: 20px;
 }
 #reply-input{
@@ -209,7 +209,7 @@
 	/*display: none;*/
 	/*background-color: #fafafa;*/
 }
-#comment-list ul li{
+#comment-list ul li,#comment-list-like ul li{
 	background-color: #fafafa;
 	padding: 0.5rem 1rem;
 	font-size: 12px;
@@ -219,7 +219,7 @@
     margin-bottom: 10px;
 
 }
-#comment-list ul li a{
+#comment-list ul li a,#comment-list-like ul li a{
 	color: #7594b3;
 }
 .user-comment:after {

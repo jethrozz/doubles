@@ -67,8 +67,12 @@ public class CommentsController {
 			commonResult.setStauts(1);
 		}
 		Users admin = usersService.getAdmin();
-		if(!StringUtils.isEmpty(comment.getToUser())){
 
+//		if(!StringUtils.isEmpty(comment.getToUser())){
+//
+//		}
+		if(comment.getType() == 1){
+			comment.setTo(usersService.getOne(comment.getToUser()));
 		}
 		if(admin != null){
 			ChatRecord chatRecord = new ChatRecord();

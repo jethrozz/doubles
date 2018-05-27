@@ -104,7 +104,7 @@
                                                 <img src="${comment.user.userimg}" width="20px" height="20px" />
                                             </div>
                                             <div class="comment-content user-comment-text ">
-                                                <input name="${comment.user.userId}" value="id" type="hidden">
+                                                <input name="userid" value="${comment.user.userId}" type="hidden">
                                                 <div class=""><a href="../article/getMyArticle?userId=${comment.user.userId}">
                                                     ${comment.user.nickname}</a>
                                                     ${comment.commentContent}
@@ -112,7 +112,7 @@
                                             </div>
                                             <div class="btn-reply">
                                                 <a href="javascript:void(0);" onclick="reply(this)">回复</a>
-
+                                                <input type="hidden" value="${comment.user.userId}" name="replyTo"/>
                                             </div>
                                         </div>
                                     </li>
@@ -123,7 +123,7 @@
                                                 <img src="${comment.user.userimg}" width="20px" height="20px" />
                                             </div>
                                             <div class="comment-content  user-comment-text">
-                                                <input name="${comment.user.userId}" value="id" type="hidden">
+                                                <input name="userid" value="${comment.user.userId}" type="hidden">
                                                 <div >
                                                     <a href="../article/getMyArticle?userId=${comment.user.userId}">
                                                         ${comment.user.nickname}</a>

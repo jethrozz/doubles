@@ -350,8 +350,8 @@ a :hover{
 }
 .list-group{
 	
-	position:absolute;
-	right: 0rem;
+	/*!*position:absolute;*!*/
+	/*right: 0rem;*/
 }
 .list-group-item {
 	height: 40px;
@@ -400,7 +400,6 @@ a :hover{
 	padding: 0.5rem 1rem;
 	font-size: 12px;
 	color: #444;
-
 }
 #comment-list ul li a{
 	color: #7594b3;
