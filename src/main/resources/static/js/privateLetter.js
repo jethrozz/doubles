@@ -124,7 +124,7 @@ function sendMsg(id) {
     if($("#letter-input").val() != ""){
         var text = $.trim($("#letter-input").val());
         $.ajax({
-            url:"../sendMsg",
+            url:"../chatRecord/sendMsg",
             type:"post",
             contentType : "application/x-www-form-urlencoded; charset=UTF-8",
             data:{

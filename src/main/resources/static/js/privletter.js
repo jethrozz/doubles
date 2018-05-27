@@ -10,7 +10,7 @@ function sendMsg(id) {
     if($("#letter-input").val() != ""){
         var text = $.trim($("#letter-input").val());
     	$.ajax({
-            url:"../chatRecord/sendMsg",
+            url:"../sendMsg",
             type:POST,
             contentType : "application/x-www-form-urlencoded; charset=UTF-8",
             data:{
@@ -20,6 +20,10 @@ function sendMsg(id) {
             success:function(data,result,stauts){
                 var res = JSON.parse(data);
                 console.log(res);
+                if(res.status == 0){
+                    alert("发送成功");
+                    $("#letter-input").val("");
+                }
             }
         })
 	}
