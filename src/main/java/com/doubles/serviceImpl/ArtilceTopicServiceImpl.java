@@ -40,7 +40,6 @@ public class ArtilceTopicServiceImpl implements ArtilceTopicService {
 	public List<Article> getArticleByTopic(String topicId) {
 		ArtilceTopicExample example = new ArtilceTopicExample();
 		example.or().andTopicIdEqualTo(topicId);
-		example.setOrderByClause("create_time desc");
 		List<ArtilceTopic> artilceTopics = artilceTopicDao.selectByExample(example);
 		List<Article> articleList = new ArrayList<>();
 

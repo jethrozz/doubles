@@ -129,17 +129,17 @@
     from comments
     where comment_id = #{commentId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" flushCache="true">
     delete from comments
     where comment_id = #{commentId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.doubles.entity.CommentsExample" >
+  <delete id="deleteByExample" parameterType="com.doubles.entity.CommentsExample" flushCache="true">
     delete from comments
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.Comments" >
+  <insert id="insert" parameterType="com.doubles.entity.Comments" flushCache="true">
     <selectKey keyProperty="commentId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -152,7 +152,7 @@
       #{type,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.Comments" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.Comments" flushCache="true">
     <selectKey keyProperty="commentId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>

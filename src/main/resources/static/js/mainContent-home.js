@@ -19,7 +19,6 @@ function deletArtciel(articleId) {
     });
 }
 
-
 //回复相关js
 var reply_to_id = "";//被回复者id
 var str = "";

@@ -102,82 +102,7 @@ function subComment(e) {
     }
 }
 
-// //回复相关js
-// var reply_to_id = "";//被回复者id
-//
-// function reply(e) {
-//     reply_to_id = $(e).parent().prev().children("input").val();
-//     var text = $(e).parent().prev().children("div").children("a")[0];
-//     var reply_input = $(e).parent().parent().parent().parent().parent().prev().children().children().children("input");
-//     var str = "回复 " +text.innerText+"：";
-//
-//     reply_input.val("");
-//     reply_input.val(str);
-//     reply_input.focus();
-// }
-//
-//
-// $("#btn-reply-input").bind("click",function () {
-//     if($("#reply-input").val() !=  ""){
-//         var reply = $("#reply-input").val();
-//         var i = reply.indexOf("：")
-//         reply = reply.substring(i+1,reply.length);
-//         console.log(reply);
-//         console.log(reply_to_id);
-//         if(reply != ""){
-//             //发出ajax请求
-//         }
-// 	}else{
-//         var toUser = $(this).next().val();
-//         var text = $().val();
-//         var object = $(this).next().next().val();
-// 	}
-//
-//
-//
-//
-// });
-//
-// function addComment(id,username,type,content,imgsrc) {
-//     //拼接html语句做渲染
-//     var str = "<li class='list-group-item'><div class='user-comment'><div class='user-comment-img comment-img'> <img src='"+
-//         imgsrc+
-//         "'width=\"20px\" height=\"20px\" /></div><div class=\"comment-content\"><input name='user_id' value='"+id+"' type=\"hidden\">"+
-//         "<div ><a href='#'>"+username+"</a>&nbsp"+ content +"</div></div><div class='btn-reply'>"+
-//         "<a href=\"javascript:void(0);\" onclick=\"reply(this)\">回复</a></div></div></li>"
-//     return str;
-// }
-/*
 
-                        @if(article.isTransmit != 2){ @}
-
-                        @}else{ @}
-
-                        @ }@}
-                            @for(tag in article.article.artilceTopics){ @}
-                                  @if(!tagLP.last){ @}
-                                    @}else{ @}
-                                   @ }@}
-                              @  }@}
-
-                                    @if(article.oldUser.userId == session.user.userId){ @}
-
-                                    @}@}
-
-
-
-                            @for(comment in article.article.commentsList){ @}
-                                @if(comment.type == 0){ @}
-
-                                @}else{@}
-
-                                @}@}
-                                @}@}
-
-
-                        </div>
-                    </div>
-                </div>*/
 function getIndex() {
     $('#loading').modal('show');
 	$.ajax({
@@ -247,7 +172,15 @@ function indexText(container,data) {
                 html = html + "<li><a href=\"javascript:void(0);\" onclick=\"deletArtciel('"+data[i].article.articleId+"')\">删除</a></li>";
             }
 		}
-		html = html + "<li><a href=\"javascript:void(0);\" onclick=\"subComment(this)\">评论</a></li> <li> <ul><li><a href=\"javascript:void(0);\"><div  class=\"fave\"></div></a></li><li><div class=\"like-number\"> "+data[i].article.collectNumber+" </div></li></ul></li><li><span class=\"article-time\"> "+data[i].article.createTime+"</span></li></ul>"
+		html = html + "<li><a href=\"javascript:void(0);\" onclick=\"subComment(this)\">评论</a></li> <li> <ul>";
+		if(data[i].isLike){
+		  html = html + "<li><a href=\"javascript:void(0);\"><div  class=\"fave active\"></div></a></li>";
+		}else{
+          html = html + "<li><a href=\"javascript:void(0);\"><div  class=\"fave\"></div></a></li>";
+		}
+
+
+		html = html +"<li><div class=\"like-number\"> "+data[i].article.collectNumber+" </div></li></ul></li><li><span class=\"article-time\"> "+data[i].article.createTime+"</span></li></ul>"
 		html = html + end + end + "</a>";
 		//正文部分拼接结束
 		//拼接评论部分

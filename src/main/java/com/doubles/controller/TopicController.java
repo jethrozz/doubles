@@ -2,23 +2,19 @@ package com.doubles.controller;
 
 
 import com.doubles.entity.*;
-import com.doubles.model.CommonResult;
-import com.doubles.model.PageInfo;
-import com.doubles.model.ResultTopic;
-import com.doubles.service.ArtilceTopicService;
-import com.doubles.service.TopicService;
-import com.doubles.service.UserTopicService;
-import com.doubles.service.UsersService;
-import com.doubles.util.SecretUtils;
+import com.doubles.model.*;
+import com.doubles.service.*;
 import com.doubles.util.Utils;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -42,7 +38,11 @@ public class TopicController {
 	@Autowired
 	private UsersService userService;
 	@Autowired
+	private RelationshipService relationshipService;
+	@Autowired
 	private ArtilceTopicService artilceTopicService;
+	@Autowired
+	private CollectionsService collectionsService;
 
 	@RequestMapping("/addTopic")
 	@ResponseBody
@@ -86,6 +86,7 @@ public class TopicController {
 				result.setMsg("follow failed");
 				return Utils.toJson(result);
 			}
+
 			topic.setFanNumber(topic.getFanNumber()+1);
 			topicService.updateTopic(topic);
 			return Utils.toJson(result);
@@ -179,6 +180,65 @@ public class TopicController {
 		return Utils.toJson(result);
 	}
 
+	@RequestMapping("/gettopic/{topicId}")
+	public ModelAndView getTopic(HttpServletRequest request,@PathVariable String topicId){
+		ModelAndView modelAndView = new ModelAndView("/innertopic");
+		List<TopicArticleResult> articleResults = new ArrayList<>();
+		List<TopicUserResult> userResults = new ArrayList<>();
+		Topic topic = topicService.getOneById(topicId);
+
+		Users user = (Users)request.getSession().getAttribute("user");
+		boolean isFollow = userTopicService.isFollow(topicId,user.getUserId());
+
+		List<UserTopic> userTopicList = userTopicService.getLisyByTopicId(topicId);
+		List<Article> articleList = artilceTopicService.getArticleByTopic(topicId);
+		List<Users> usersList = new ArrayList<>();
+
+		for(UserTopic userTopic : userTopicList){
+			usersList.add(userTopic.getUser());
+		}
+
+
+		for(Article article : articleList){
+			TopicArticleResult topicArticleResult = new TopicArticleResult();
+			topicArticleResult.setArticle(article);
+			topicArticleResult.setLike(collectionsService.isCollection(user.getUserId(),article.getArticleId()));
+
+			if(article.getUserId().equals(user.getUserId())){
+				topicArticleResult.setIsFollow(3);
+			}else{
+				Relationship relationship = relationshipService.isFriend(user.getUserId(),article.getUserId());
+				if(relationship == null){
+					topicArticleResult.setIsFollow(3);
+				}else{
+					topicArticleResult.setIsFollow((int)relationship.getIsFriend());
+				}
+			}
+			articleResults.add(topicArticleResult);
+		}
+
+		for (Users u : usersList){
+			TopicUserResult topicUserResult = new TopicUserResult();
+			topicUserResult.setUser(u);
+			if(u.getUserId().equals(user.getUserId())){
+				topicUserResult.setIsFollow(3);
+			}else{
+				Relationship relationship = relationshipService.isFriend(user.getUserId(),u.getUserId());
+				if(relationship == null){
+					topicUserResult.setIsFollow(1);
+				}else{
+					topicUserResult.setIsFollow((int)relationship.getIsFriend());
+				}
+			}
+			userResults.add(topicUserResult);
+		}
+
+		modelAndView.addObject("articleList",articleResults);
+		modelAndView.addObject("topic",topic);
+		modelAndView.addObject("userList",userResults);
+		modelAndView.addObject("subscribe",isFollow);
+		return modelAndView;
+	}
 
 	private void getTopic(Map<Topic,List<Article>> artilceTopicList,List<ResultTopic> resultTopicList){
 		Iterator iterator = artilceTopicList.entrySet().iterator();

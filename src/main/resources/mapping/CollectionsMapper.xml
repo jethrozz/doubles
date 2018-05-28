@@ -98,17 +98,17 @@
     from collections
     where collection_id = #{collectionId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" flushCache="true">
     delete from collections
     where collection_id = #{collectionId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.doubles.entity.CollectionsExample" >
+  <delete id="deleteByExample" parameterType="com.doubles.entity.CollectionsExample" flushCache="true">
     delete from collections
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.Collections" >
+  <insert id="insert" parameterType="com.doubles.entity.Collections" flushCache="true">
     <selectKey keyProperty="collectionId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -119,7 +119,7 @@
       #{contentId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.Collections" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.Collections" flushCache="true">
     <selectKey keyProperty="collectionId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -171,7 +171,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map" flushCache="true">
     update collections
     <set >
       <if test="record.collectionId != null" >
@@ -197,7 +197,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map" flushCache="true">
     update collections
     set collection_id = #{record.collectionId,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
@@ -209,7 +209,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Collections" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Collections" flushCache="true">
     update collections
     <set >
       <if test="userId != null" >
@@ -230,7 +230,7 @@
     </set>
     where collection_id = #{collectionId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Collections" >
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Collections" flushCache="true">
     update collections
     set user_id = #{userId,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},

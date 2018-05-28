@@ -130,7 +130,7 @@
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
-    <insert id="insert" parameterType="com.doubles.entity.Users" >
+    <insert id="insert" parameterType="com.doubles.entity.Users" flushCache="true">
         <selectKey keyProperty="userId" resultType="String" order="BEFORE">
             select replace(uuid(),'-','') from dual
         </selectKey>
@@ -145,7 +145,7 @@
         #{usermail,jdbcType=VARCHAR}, #{userlike,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
         #{updateTime,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.doubles.entity.Users" >
+    <insert id="insertSelective" parameterType="com.doubles.entity.Users" flushCache="true">
         <selectKey keyProperty="userId" resultType="String" order="BEFORE">
             select replace(uuid(),'-','') from dual
         </selectKey>
@@ -239,7 +239,7 @@
             <include refid="Example_Where_Clause" />
         </if>
     </select>
-    <update id="updateByExampleSelective" parameterType="map" >
+    <update id="updateByExampleSelective" parameterType="map" flushCache="true">
         update users
         <set >
             <if test="record.userId != null" >
@@ -286,7 +286,7 @@
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
-    <update id="updateByExample" parameterType="map" >
+    <update id="updateByExample" parameterType="map" flushCache="true">
         update users
         set user_id = #{record.userId,jdbcType=VARCHAR},
         username = #{record.username,jdbcType=VARCHAR},
@@ -305,7 +305,7 @@
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Users" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Users" flushCache="true">
         update users
         <set >
             <if test="username != null" >
@@ -347,7 +347,7 @@
         </set>
         where user_id = #{userId,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Users" >
+    <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Users" flushCache="true">
     update users
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

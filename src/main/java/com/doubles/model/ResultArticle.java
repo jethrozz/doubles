@@ -27,6 +27,16 @@ public class ResultArticle {
 	@JsonProperty("article")
 	private Article article;
 
+	private boolean isLike;
+
+	public boolean isLike() {
+		return isLike;
+	}
+
+	public void setLike(boolean like) {
+		isLike = like;
+	}
+
 	public int getIsTransmit() {
 		return isTransmit;
 	}

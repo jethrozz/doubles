@@ -106,17 +106,17 @@
     from relationship
     where relationship_id = #{relationshipId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" flushCache="true">
     delete from relationship
     where relationship_id = #{relationshipId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.doubles.entity.RelationshipExample" >
+  <delete id="deleteByExample" parameterType="com.doubles.entity.RelationshipExample" flushCache="true">
     delete from relationship
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.Relationship" >
+  <insert id="insert" parameterType="com.doubles.entity.Relationship" flushCache="true">
     <selectKey keyProperty="relationshipId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -127,7 +127,7 @@
       #{isFriend,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.Relationship" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.Relationship" flushCache="true">
     <selectKey keyProperty="relationshipId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -179,7 +179,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map" flushCache="true">
     update relationship
     <set >
       <if test="record.relationshipId != null" >
@@ -205,7 +205,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map" flushCache="true">
     update relationship
     set relationship_id = #{record.relationshipId,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
@@ -217,7 +217,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Relationship" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Relationship" flushCache="true">
     update relationship
     <set >
       <if test="userId != null" >
@@ -238,7 +238,7 @@
     </set>
     where relationship_id = #{relationshipId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Relationship" >
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Relationship" flushCache="true">
     update relationship
     set user_id = #{userId,jdbcType=VARCHAR},
       friend_id = #{friendId,jdbcType=VARCHAR},

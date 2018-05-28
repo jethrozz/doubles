@@ -20,6 +20,7 @@ import java.util.List;
 public interface UserTopicService {
 	boolean followTopic(UserTopic userTopic);
 	boolean unFollowTopic(UserTopic userTopic);
+	boolean isFollow(String topicId,String userId);
 
 	List<UserTopic> getListByUserId(String userId);
 	List<UserTopic> getLisyByTopicId(String topicId);

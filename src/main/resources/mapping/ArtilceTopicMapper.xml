@@ -110,17 +110,17 @@
     from artilce_topic
     where at_id = #{atId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" flushCache="true">
     delete from artilce_topic
     where at_id = #{atId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.doubles.entity.ArtilceTopicExample" >
+  <delete id="deleteByExample" parameterType="com.doubles.entity.ArtilceTopicExample" flushCache="true">
     delete from artilce_topic
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.ArtilceTopic" >
+  <insert id="insert" parameterType="com.doubles.entity.ArtilceTopic" flushCache="true">
     <selectKey keyProperty="atId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -129,7 +129,7 @@
     values (#{atId,jdbcType=VARCHAR}, #{articleId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.ArtilceTopic" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.ArtilceTopic" flushCache="true">
     <selectKey keyProperty="atId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -163,7 +163,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map" flushCache="true">
     update artilce_topic
     <set >
       <if test="record.atId != null" >
@@ -180,7 +180,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map" flushCache="true">
     update artilce_topic
     set at_id = #{record.atId,jdbcType=VARCHAR},
       article_id = #{record.articleId,jdbcType=VARCHAR},
@@ -189,7 +189,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.ArtilceTopic" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.ArtilceTopic" flushCache="true">
     update artilce_topic
     <set >
       <if test="articleId != null" >
@@ -201,7 +201,7 @@
     </set>
     where at_id = #{atId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.ArtilceTopic" >
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.ArtilceTopic" flushCache="true">
     update artilce_topic
     set article_id = #{articleId,jdbcType=VARCHAR},
       topic_id = #{topicId,jdbcType=VARCHAR}

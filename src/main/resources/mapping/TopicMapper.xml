@@ -120,7 +120,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.Topic" >
+  <insert id="insert" parameterType="com.doubles.entity.Topic" flushCache="true">
     <selectKey keyProperty="topicId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -131,7 +131,7 @@
       #{fanNumber,jdbcType=INTEGER}, #{discussionNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.Topic" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.Topic" flushCache="true">
     <selectKey keyProperty="topicId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -189,7 +189,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map" flushCache="true">
     update topic
     <set >
       <if test="record.topicId != null" >
@@ -218,7 +218,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map" flushCache="true">
     update topic
     set topic_id = #{record.topicId,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
@@ -231,7 +231,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Topic" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Topic" flushCache="true">
     update topic
     <set >
       <if test="title != null" >
@@ -255,7 +255,7 @@
     </set>
     where topic_id = #{topicId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Topic" >
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Topic" flushCache="true">
     update topic
     set title = #{title,jdbcType=VARCHAR},
       descirbe = #{descirbe,jdbcType=VARCHAR},

@@ -99,17 +99,17 @@
     from album
     where album_id = #{albumId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" flushCache="true">
     delete from album
     where album_id = #{albumId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.doubles.entity.AlbumExample" >
+  <delete id="deleteByExample" parameterType="com.doubles.entity.AlbumExample" flushCache="true">
     delete from album
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.Album" >
+  <insert id="insert" parameterType="com.doubles.entity.Album" flushCache="true">
     <selectKey keyProperty="albumId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -120,7 +120,7 @@
       #{albumDescribe,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.Album" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.Album" flushCache="true">
     <selectKey keyProperty="albumId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -172,7 +172,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map" flushCache="true">
     update album
     <set >
       <if test="record.albumId != null" >
@@ -198,7 +198,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map" flushCache="true">
     update album
     set album_id = #{record.albumId,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
@@ -210,7 +210,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Album" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Album" flushCache="true">
     update album
     <set >
       <if test="userId != null" >
@@ -231,7 +231,7 @@
     </set>
     where album_id = #{albumId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Album" >
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Album" flushCache="true">
     update album
     set user_id = #{userId,jdbcType=VARCHAR},
       album_name = #{albumName,jdbcType=VARCHAR},

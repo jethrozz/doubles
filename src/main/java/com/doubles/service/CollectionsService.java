@@ -19,9 +19,10 @@ public interface CollectionsService {
     boolean addCollection(Collections collection);
     //删除收藏记录
     boolean deleteCollection(String collectionId);
-
+    boolean deleteCollection(String userId,String articleId);
     Collections getOneCollection(String collectionId);
     List<Collections> getListCollection(String userId);
     List<Collections> getListCollectionByArtcile(String articleId);
     Page<Collections> getPageCollection(String userId,int pageNo,int pageSize);
+    boolean isCollection(String userId,String articleId);
 }

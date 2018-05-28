@@ -169,17 +169,17 @@
     from article
     where article_id = #{articleId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" flushCache="true">
     delete from article
     where article_id = #{articleId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.doubles.entity.ArticleExample" >
+  <delete id="deleteByExample" parameterType="com.doubles.entity.ArticleExample" flushCache="true">
     delete from article
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.Article" >
+  <insert id="insert" parameterType="com.doubles.entity.Article" flushCache="true">
     <selectKey keyProperty="articleId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -194,7 +194,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.Article" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.Article" flushCache="true">
     <selectKey keyProperty="articleId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -282,7 +282,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map" flushCache="true">
     update article
     <set >
       <if test="record.articleId != null" >
@@ -326,7 +326,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
+  <update id="updateByExampleWithBLOBs" parameterType="map" flushCache="true">
     update article
     set article_id = #{record.articleId,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
@@ -344,7 +344,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map" flushCache="true">
     update article
     set article_id = #{record.articleId,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
@@ -361,7 +361,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Article" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.doubles.entity.Article" flushCache="true">
     update article
     <set >
       <if test="userId != null" >
@@ -400,7 +400,7 @@
     </set>
     where article_id = #{articleId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.doubles.entity.Article" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.doubles.entity.Article" flushCache="true">
     update article
     set user_id = #{userId,jdbcType=VARCHAR},
       is_haveImg = #{isHaveimg,jdbcType=TINYINT},
@@ -415,7 +415,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where article_id = #{articleId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Article" >
+  <update id="updateByPrimaryKey" parameterType="com.doubles.entity.Article" flushCache="true">
     update article
     set user_id = #{userId,jdbcType=VARCHAR},
       is_haveImg = #{isHaveimg,jdbcType=TINYINT},

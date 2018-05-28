@@ -6,6 +6,24 @@ img{
 	display: block;
 	border: 0;
 }
+.fave {
+  width: 18px;
+  height: 20px;
+  background: url(../img/like.png) no-repeat;
+  background-position: right;
+  background-size: auto 100%;
+}
+
+.fave.active {
+  background-position: left;
+  /* 主要在这一步 */
+  transition: background .3s steps(10);
+}
+
+.like-number{
+	float: left;
+}
+
 #innertopic{
 	overflow: hidden;
 	_zoom:1;
@@ -103,21 +121,27 @@ img{
 	_zoom:1;
 	margin-bottom: 1rem;
 }
+.contentleft .others .w a{
+	text-decoration: none;
+	font-size: 1rem;
+	color: #333;
+}
 .contentleft .others .w .bottom div:first-of-type{
 	float: left;
 }
-.contentleft .others .w .bottom div:last-of-type{
+.contentleft .others .w .bottom div:nth-of-type(2){
 	float: right;
 }
 .contentleft .others .w .bottom div span{
 	margin-right: 1rem;
 	color:#ccc;
 	cursor: pointer;
+	float: left;
 }
 .contentright{
 	float:right;
 	width:25%;
-	border:1px solid red;
+	border:1px solid #ccc;
 }
 .contentright ul{
 	list-style: none;
@@ -153,9 +177,74 @@ img{
 .contentright ul li .guanzhu{
 	color:#fff;
 	font-weight: 800;
-	width:20px;
-	height:20px;
-	background: #ccc;
+	/*width:20px;*/
+	/*height:20px;*/
+	/*background: #ccc;*/
 	float: right;
-	margin-top: 14px;
+	margin-top: 5px;
+}
+
+/*以下是评论部分css*/
+.my-opticrt{
+	position: absolute;
+	top: 38px;
+	left: 50%;
+	width: 19px;
+	height: 12px;
+	margin-left: -9px;
+	overflow: hidden;
+	opacity: 0;
+	display: none\9;
+	background-position: 0 -1222px;
+}
+.my-shadow{
+	height: 1px;
+	overflow: hidden;
+	border-top: 1px solid #c8c8c8;
+	border-bottom: 1px solid #f1f1f1;
+	background: #e1e1e1;
+	display: none;
+}
+.my-comment-ul{
+	float: none;
+	width: 100%;
+}
+#article-comment{
+	display: none;
+	background-color: #fafafa;
+}
+#comment-list ul li{
+	background-color: #fafafa;
+	padding: 0.5rem 1rem;
+	font-size: 12px;
+	color: #444;
+}
+#comment-list ul li a{
+	color: #7594b3;
+}
+.user-comment:after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.comment-content {
+	/*position: absolute;*/
+	/*top: 13px;*/
+	/*left: 45px;*/
+	float: left;
+	width: 85%;
+	margin-left: 1rem;
+}
+.btn-reply{
+	position: absolute;
+	top: 13px;
+	right: 3rem;
+}
+.user-comment-text{
+	width: 80%;
+}
+.comment-img{
+	float: left;
 }

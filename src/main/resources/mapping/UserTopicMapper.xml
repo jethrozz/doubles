@@ -7,7 +7,7 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="topic_id" property="topicId" jdbcType="VARCHAR" />
     <association property="user" column="user_id" select="com.doubles.dao.UsersMapper.selectByPrimaryKey"></association>
-    <association property="topic" column="topic_id" select="com.doubles.dao.selectByPrimaryKey"></association>
+    <association property="topic" column="topic_id" select="com.doubles.dao.TopicMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -114,7 +114,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.UserTopic" >
+  <insert id="insert" parameterType="com.doubles.entity.UserTopic" flushCache="true">
     <selectKey keyProperty="upId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -123,7 +123,7 @@
     values (#{upId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.UserTopic" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.UserTopic" flushCache="true">
     <selectKey keyProperty="upId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>

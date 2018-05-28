@@ -48,6 +48,17 @@ public class UserTopicServiceImpl implements UserTopicService {
 	}
 
 	@Override
+	public boolean isFollow(String topicId, String userId) {
+		UserTopicExample example = new UserTopicExample();
+		example.or().andUserIdEqualTo(userId).andTopicIdEqualTo(topicId);
+		List<UserTopic> list = userTopicMapper.selectByExample(example);
+		if(list != null && list.size() != 0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public List<UserTopic> getListByUserId(String userId) {
 		UserTopicExample example = new UserTopicExample();
 		example.or().andUserIdEqualTo(userId);

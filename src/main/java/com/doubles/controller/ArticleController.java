@@ -99,7 +99,7 @@ public class ArticleController {
                 artilceTopic.setTopicId(t);
                 artilceTopicService.insertOne(artilceTopic);
                 if(topic != null){
-                    topic.setDiscussionNumber(topic.getFanNumber()+1);
+                    topic.setDiscussionNumber(topic.getDiscussionNumber()+1);
                     topicService.updateTopic(topic);
                     SingletonTopicQueue.getInstance().addUserIntoPushQueue(artilceTopic);
                 }
@@ -114,7 +114,7 @@ public class ArticleController {
     //根据文章id，点赞
     @RequestMapping("/addArtLike")
     @ResponseBody
-    public String addLike(HttpServletRequest request,String articleId){
+    public String addLike(HttpServletRequest request,String articleId,Integer type){
         CommonResult<String> result = new CommonResult<>(0,"collect success");
         Users user = (Users)request.getSession().getAttribute("user");
         if(StringUtils.isEmpty(articleId)){
@@ -134,18 +134,28 @@ public class ArticleController {
                 return Utils.toJson(result);
             }
 
-            Collections collection = new Collections();
-            collection.setContentId(article.getArticleId());
-            collection.setUserId(user.getUserId());
+            if(type == 0){
+                //点赞
+                Collections collection = new Collections();
+                collection.setContentId(article.getArticleId());
+                collection.setUserId(user.getUserId());
 
-            article.setLikeNumber(article.getLikeNumber()+1);
-            if(!(articleService.updateArticle(article) && collectionsService.addCollection(collection))){
-                result.setStauts(1);
-                result.setMsg("collect failed");
+                article.setLikeNumber(article.getLikeNumber()+1);
+                if(!(articleService.updateArticle(article) && collectionsService.addCollection(collection))){
+                    result.setStauts(1);
+                    result.setMsg("collect failed");
+                }
+                return Utils.toJson(result);
+            }else{
+                //取消点赞
+                article.setLikeNumber(article.getLikeNumber()-1);
+                if(!(articleService.updateArticle(article) && collectionsService.deleteCollection(user.getUserId(),article.getArticleId()))){
+                    result.setStauts(1);
+                    result.setMsg("uncollect failed");
+                }
+                return Utils.toJson(result);
             }
-            return Utils.toJson(result);
         }
-
     }
 
 

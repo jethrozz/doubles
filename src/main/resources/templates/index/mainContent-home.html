@@ -21,35 +21,35 @@
                                 <strong class="float-left mt-3 ml-3"> 我</strong>
                             @ }else{ @}
                                 <img src="${article.oldUser.userimg}" class="float-left " width="50px" height="50px">
-                                <a href="../article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
+                                <a href="${basePath}/article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
                             @} @}
                         @}else{ @}
                             @if(session.user.userId == article.nowUser.userId){ @}
                                 <img src="${article.nowUser.userimg}" class="float-left " width="50px" height="50px">
                                 <strong class="float-left mt-3 ml-3">我</strong>
                                 <small class="float-left mt-3 ml-3">转发</small>
-                                <a href="../article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
+                                <a href="${basePath}/article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
                             @ }else{ @}
                                 <img src="${article.nowUser.userimg}" class="float-left " width="50px" height="50px">
-                                <a href="../article/getMyArticle?userId=${article.nowUser.userId}"><strong class="float-left mt-3 ml-3">${article.nowUser.nickname}</strong></a>
+                                <a href="${basePath}/article/getMyArticle?userId=${article.nowUser.userId}"><strong class="float-left mt-3 ml-3">${article.nowUser.nickname}</strong></a>
                                 <small class="float-left mt-3 ml-3">转发</small>
-                                <a href="../article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
+                                <a href="${basePath}/article/getMyArticle?userId=${article.oldUser.userId}"><strong class="float-left mt-3 ml-3"> ${article.oldUser.nickname}</strong></a>
                             @} @}
 
                         @ }@}
                     </div>
 
 
-                    <a href="../article/getArticle?articleId=${article.article.articleId}" class="article-link">
+                    <a href="${basePath}/article/getArticle?articleId=${article.article.articleId}" class="article-link">
                         <div class="card-body">
                             <p class="card-text">${article.article.content}</p>
                             <div class="my-underline"></div>
                             <div class="little-tag">
                             @for(tag in article.article.artilceTopics){ @}
                                   @if(!tagLP.last){ @}
-                                        <a href="../${tag.topicId}">#${tag.topic.title}</a>,
+                                        <a href="${basePath}/topic/gettopic/${tag.topicId}">#${tag.topic.title}</a>,
                                     @}else{ @}
-                                        <a href="../${tag.topicId}">#${tag.topic.title}</a>
+                                        <a href="${basePath}/topic/gettopic/${tag.topicId}">#${tag.topic.title}</a>
                                    @ }@}
                               @  }@}
                             </div>
@@ -65,10 +65,17 @@
                                     </li>
                                     <li>
                                         <ul>
+                                            @ if(article.isLike){ @}
+                                            <li>
+                                                <a href="javascript:void(0);"><div  class="fave active">
+                                                </div></a>
+                                            </li>
+                                            @ }else{ @}
                                             <li>
                                                 <a href="javascript:void(0);"><div  class="fave">
                                                 </div></a>
                                             </li>
+                                            @ } @}
                                             <li>
                                                 <div class="like-number">${article.article.collectNumber}</div>
                                             </li>
@@ -105,7 +112,7 @@
                                             </div>
                                             <div class="comment-content user-comment-text ">
                                                 <input name="userid" value="${comment.user.userId}" type="hidden">
-                                                <div class=""><a href="../article/getMyArticle?userId=${comment.user.userId}">
+                                                <div class=""><a href="${basePath}/article/getMyArticle?userId=${comment.user.userId}">
                                                     ${comment.user.nickname}</a>
                                                     ${comment.commentContent}
                                                 </div>
@@ -125,9 +132,9 @@
                                             <div class="comment-content  user-comment-text">
                                                 <input name="userid" value="${comment.user.userId}" type="hidden">
                                                 <div >
-                                                    <a href="../article/getMyArticle?userId=${comment.user.userId}">
+                                                    <a href="${basePath}/article/getMyArticle?userId=${comment.user.userId}">
                                                         ${comment.user.nickname}</a>
-                                                    &nbsp回复&nbsp<a href="../article/getMyArticle?userId=${comment.to.userId}">
+                                                    &nbsp回复&nbsp<a href="${basePath}/article/getMyArticle?userId=${comment.to.userId}">
                                                     ${comment.to.nickname}</a>
                                                     ${comment.commentContent}
                                                 </div>
@@ -144,6 +151,7 @@
                             </ul>
                         </div>
                     </div>
+
                 </div>
                @ }  @}
             </div>

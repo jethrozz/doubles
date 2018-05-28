@@ -47,9 +47,9 @@
 				</div>
 				<div class="btncl">
 					@if(session.user.userId != object.userId){@}
-					<a href="../chatRecord/privateletter/${object.userId}" class="btn btn-secondary letters">私信</a>
+					<a href="${basePath}/chatRecord/privateletter/${object.userId}" class="btn btn-secondary letters">私信</a>
 					@}@}
-					<a href="../users/getAlbumImgList?userId=${object.userId}" class="btn btn-secondary img_file">图集</a>
+					<a href="${basePath}/users/getAlbumImgList?userId=${object.userId}" class="btn btn-secondary img_file">图集</a>
 				</div>
 				
 			</div>
@@ -90,22 +90,22 @@
 								<div class="little-tag">
 									@for(tag in article.artilceTopics){ @}
 										@if(!tagLP.last){ @}
-										<a href="../${tag.topicId}">#${tag.topic.title}</a>,
+										<a href="${basePath}/topic/gettopic/${tag.topicId}">#${tag.topic.title}</a>,
 										@}else{ @}
-										<a href="../${tag.topicId}">#${tag.topic.title}</a>
+										<a href="${basePath}/topic/gettopic/${tag.topicId}">#${tag.topic.title}</a>
 										@ }@}
 									@  }@}
 								</div>
 								<div class="little-tip">
 									<ul>
 										<li>
-											<a href="../article/getArticle?articleId=${article.articleId}">评论(<small>${length}</small>)</a>
+											<a href="${basePath}/article/getArticle?articleId=${article.articleId}">评论(<small>${length}</small>)</a>
 										</li>
 										<li>
-											<a href="../article/getArticle?articleId=${article.articleId}">热度(<small>${article.collectNumber}</small>)</a>
+											<a href="${basePath}/article/getArticle?articleId=${article.articleId}">热度(<small>${article.collectNumber}</small>)</a>
 										</li>
 										<li>
-											<a href="../article/getArticle?articleId=${article.articleId}">全文链接</a>
+											<a href="${basePath}/article/getArticle?articleId=${article.articleId}">全文链接</a>
 										</li>
 										<li><span class="article-time">${article.createTime,dateFormat="yyyy-MM-dd hh:mm:ss"}</span></li>
 									</ul>

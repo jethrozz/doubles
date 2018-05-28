@@ -2,10 +2,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>某某话题</title>
-		<link rel="stylesheet" href="css/bootstrap.css" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/innertopic.css" />
+		<title>话题-${topic.title}</title>
+		<link rel="stylesheet" href="/css/bootstrap.css" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/innertopic.css" />
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -15,89 +15,274 @@
 						<div class="top">
 							<div class="w">
 								<div style="padding:1rem 0;">
-									<h4>最美的风景</h4>
-									<p>+订阅</p>
-								</div>
+									<h4>${topic.title}</h4>
+                                    <input type="hidden" name="topicId" id="topicId" value="${topic.topicId}"/>
+                                    @if(subscribe){ @}
+                                        <button type="button" class="btn btn-info btn-sm" id="subscribeTopic">已订阅</button>
+                                    @}else{ @}
+                                        <button type="button" class="btn btn-info btn-sm" id="subscribeTopic">订阅</button>
+                                    @ } @}
+                                </div>
 							</div>
 						</div>
 						<div class="middle">
 							<div class="w">
 								<div>
-									<p>你说把爱渐渐放下会走根源哈哈哈哈哈哈哈哈哈哈哈哈案发的说法发哈事件的看法和垃圾和发动机啊回复打卡，又何必去哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈白粉丝卡里的后方可；阿訇地方；啊回复看到啦</p>
+									<p>${topic.descirbe}</p>
 								</div>
 								<div>
-									<p>参与量:<span>7072</span></p>
+									<p>参与量:<span>${topic.discussionNumber}</span></p>
 								</div>
 								<div>
-									<button type="button">参与话题</button>
+									<button type="button" data-toggle="modal" data-target="#showArticle">参与话题</button>
 								</div>
 							</div>
 						</div>
-						<div class="bottom">
+<!-- 						<div class="bottom">
 							<div class="w">
 								<div><strong>最新</strong><strong>热门</strong></div>
 							</div>
-						</div>
+						</div> -->
 					</div>
+                    @
+                        var regex = "<img[^<>]*?\\ssrc=['\"]?(.*?)['\"].*?>";
+                    @}
+                    @ for(article in articleList){@}
 					<div class="others">
-						<div class="w">
+                        @
+                        var text = article.article.content;
+
+                        var src = reg.find(text,regex);
+
+                        text = reg.replace(text,regex,"");
+                        @}
+                        <div class="w">
 							<div class="top">
-								<img src="" alt="" /><p>kdfha15</p><span>+</span>
+                                <a href="${basePath}/article/getMyArticle?userId=${article.article.user.userId}">
+                                    <img src="${article.article.user.userimg}" alt="" /></a>
+                                <a href="${basePath}/article/getMyArticle?userId=${article.article.user.userId}">
+                                    <p>${article.article.user.nickname}</p>
+                                </a>
+                                @if(article.isFollow == 0){ @}
+                                    <button type="button" class="btn btn-info btn-sm">取消关注</button>
+                                @} else if(article.isFollow == 1){ @}
+                                    <button type="button" class="btn btn-info btn-sm">关注</button>
+                                @} else if(article.isFollow == 2){ @}
+                                    <button type="button" class="btn btn-info btn-sm">相互关注</button>
+                                @} @}
 							</div>
 							<div class="middle">
-								<p>去年中秋从香格里拉返回丽江的途中 月亮升起来了 下车爬上一个山坡第一次尝试单反拍月亮 
-升太快 胡乱调了三参数 手持拍摄按下快门</p>
+								<a href="${basePath}/article/getArticle?articleId=${article.article.articleId}"><p>${article.article.content}</p></a>
 							</div>
 							<div class="bottom">
-								<div><span>最美的风景在路上</span><span>摄影</span></div>
-								<div><span>热度<i>(2)</i></span><span>评论</span><span>喜欢</span></div>
+								<div>
+                                    @ for(t in article.article.artilceTopics){ @}
+                                    <a href="${basePath}/topic/gettopic/${t.topic.topicId}"><span>#${t.topic.title}</span></a>
+									@ } @}
+								</div>
+								<div>
+									<span>热度<i>(${article.article.collectNumber})</i></span>
+									<span onclick="subComment(this)">评论</span>
+                                    
+                                    <span >
+                                        @if(article.isLike){ @}
+                                        <div  class="fave active"></div>
+                                        <i>${article.article.collectNumber}</i>
+                                        @}else{ @}
+                                        <div  class="fave "></div>
+                                        <i>${article.article.collectNumber}</i>
+                                        @} @}
+                                    </span>
+								</div>
 							</div>
+							             <div class="my-shadow"></div>
+                            <div id="article-comment" class="mt-3">
+                            <form class="mt-3 ">
+                                <div class="row">
+                                    <div class="col-7 col-lg-9 col-sm-7 mb-3">
+                                        <input type="text" class="form-control reply-input" placeholder="发表评论">
+
+                                    </div>
+                                    <div class="col col-lg col-sm">
+                                        <button type="button" class="btn btn-primary " id="btn-reply-input" onclick="addArticleComment(this)">发表评论</button>
+                                        <input value="${article.article.user.userId}" type="hidden" name="toUser" />
+                                        <input value="${article.article.articleId}" type="hidden" name="objectId" />
+                                    </div>
+                                </div>
+                            </form>
+                            <div id="comment-list">
+                                <ul class="list-group my-comment-ul list-group-flush">
+                                    @for(comment in article.article.commentsList){ @}
+                                    @if(comment.type == 0){ @}
+                                    <li class="list-group-item">
+                                            <div class="user-comment">
+                                                <div class="user-comment-img comment-img">
+                                                    <img src="${comment.user.userimg}" width="20px" height="20px" />
+                                                </div>
+                                                <div class="comment-content user-comment-text ">
+                                                    <input name="userid" value="${comment.user.userId}" type="hidden">
+                                                    <div class=""><a href="${basePath}/article/getMyArticle?userId=${comment.user.userId}">
+                                                        ${comment.user.nickname}</a>
+                                                        ${comment.commentContent}
+                                                    </div>
+                                                </div>
+                                                <div class="btn-reply">
+                                                    <a href="javascript:void(0);" onclick="reply(this)">回复</a>
+                                                    <input type="hidden" value="${comment.user.userId}" name="replyTo"/>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @}else{ @}
+                                        <li class="list-group-item">
+                                            <div class="user-comment">
+                                                <div class="user-comment-img comment-img">
+                                                    <img src="${comment.user.userimg}" width="20px" height="20px" />
+                                                </div>
+                                                <div class="comment-content  user-comment-text">
+                                                    <input name="userid" value="${comment.user.userId}" type="hidden">
+                                                    <div >
+                                                        <a href="/article/getMyArticle?userId=${comment.user.userId}">
+                                                            ${comment.user.nickname}</a>
+                                                        &nbsp回复&nbsp<a href="${basePath}/article/getMyArticle?userId=${comment.to.userId}">
+                                                        ${comment.to.nickname}</a>
+                                                        ${comment.commentContent}
+                                                    </div>
+                                                </div>
+                                                <div class="btn-reply">
+                                                    <a href="javascript:void(0);" onclick="reply(this)">回复</a>
+                                                    <input type="hidden" value="${comment.user.userId}" name="replyTo"/>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @} @}
+                                    @} @}
+                                </ul>
+                            </div>
+                            </div>
 						</div>
-						
-					</div>
+
+
+                    </div>
+                    @} @}
 				</div>
 				<div class="contentright">
 					<ul>
+                        <li><strong>活跃用户</strong></li>
+                        @for(user in userList){ @}
 						<li>
 							<div class="peopleleft">
 								<div>
-									<img src="" alt="" />
+                                    <a href="${basePath}/article/getMyArticle?userId=${user.user.userId}"><img src="${user.user.userimg}" alt="${user.user.nickname}" /></a>
 								</div>
 								<div>
-									<p>hahah</p>
-									<span>yonghu</span>
+                                    <a href="${basePath}/article/getMyArticle?userId=${user.user.userId}"><p>${user.user.nickname}</p></a>
+									<!--<span>yonghu</span>-->
 								</div>
 							</div>
-							<div class="guanzhu">+</div>
+                            @if(user.isFollow == 0){ @}
+                            <button type="button" class="btn btn-info btn-sm">取消关注</button>
+                            <input type="hidden" name="userId" value="${user.user.userId}">
+                            @} else if(user.isFollow == 1){ @}
+                            <button type="button" class="btn btn-info btn-sm">关注</button>
+                            <input type="hidden" name="userId" value="${user.user.userId}">
+                            @} else if(user.isFollow == 2){ @}
+                            <button type="button" class="btn btn-info btn-sm">相互关注</button>
+                            <input type="hidden" name="userId" value="${user.user.userId}">
+                            @} @}
 						</li>
-						<li>
-							<div class="peopleleft">
-								<div>
-									<img src="" alt="" />
-								</div>
-								<div>
-									<p>hahah</p>
-									<span>yonghu</span>
-								</div>
-							</div>
-							<div class="guanzhu">+</div>
-						</li>
-						<li>
-							<div class="peopleleft">
-								<div>
-									<img src="" alt="" />
-								</div>
-								<div>
-									<p>hahah</p>
-									<span>yonghu</span>
-								</div>
-							</div>
-							<div class="guanzhu">+</div>
-						</li>
+                        @} @}
 					</ul>
 				</div>
 			</div>
-			
 		</div>
+<!-- Modal -->
+<div class="modal fade" id="showArticle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">参与话题</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" onclick="clearContent()">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="my-editor">
+                    <div id="div1" class="toolbar" >
+                    </div>
+                    <div id="div2" class="text" > <!--可使用 min-height 实现编辑区域自动增加高度-->
+
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00001"  class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label" for="customCheck1">摄影</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00002" class="custom-control-input" id="customCheck2">
+                        <label class="custom-control-label" for="customCheck2">运动</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00003" class="custom-control-input" id="customCheck3">
+                        <label class="custom-control-label" for="customCheck3">萌宠</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00004" class="custom-control-input" id="customCheck4">
+                        <label class="custom-control-label" for="customCheck4">音乐</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00005" class="custom-control-input" id="customCheck5">
+                        <label class="custom-control-label" for="customCheck5">美食</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00006" class="custom-control-input" id="customCheck6">
+                        <label class="custom-control-label" for="customCheck6">绘画</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00007" class="custom-control-input" id="customCheck7">
+                        <label class="custom-control-label" for="customCheck7">电影</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00008" class="custom-control-input" id="customCheck8">
+                        <label class="custom-control-label" for="customCheck8">男神</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00009" class="custom-control-input" id="customCheck9">
+                        <label class="custom-control-label" for="customCheck9">女神</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00010" class="custom-control-input" id="customCheck10">
+                        <label class="custom-control-label" for="customCheck10">美妆</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00011" class="custom-control-input" id="customCheck11">
+                        <label class="custom-control-label" for="customCheck11">穿搭</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="topic" value="test_00012" class="custom-control-input" id="customCheck12">
+                        <label class="custom-control-label" for="customCheck12">旅行</label>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <button type="button" onclick="clearContent()" class="btn btn-primary btn-sm " >清空</button>
+                            <button type="button" id="sub-article" class="btn btn-primary btn-sm " >发布</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 	</body>
+	<script src="/js/jquery-3.1.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/exif.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/wangEditor.min.css">
+    <script src="/js/wangEditor.min.js"></script>
+    <script type="text/javascript" src="/js/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/js/plupload/i18n/zh_CN.js"></script>
+    <script type="text/javascript" src="/js/qiniu.js"></script>
+
+	<script src="/js/innertopic.js"></script>
+
 </html>

@@ -43,6 +43,16 @@ public class CollectionsServiceImpl implements CollectionsService {
     }
 
     @Override
+    public boolean deleteCollection(String userId, String articleId) {
+        CollectionsExample example = new CollectionsExample();
+        example.or().andUserIdEqualTo(userId).andContentIdEqualTo(articleId);
+        if(collectionsDao.deleteByExample(example) >= 1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public Collections getOneCollection(String collectionId) {
         return collectionsDao.selectByPrimaryKey(collectionId);
     }
@@ -69,5 +79,17 @@ public class CollectionsServiceImpl implements CollectionsService {
         PageHelper.startPage(pageNo,pageSize);
 
         return collectionsDao.getCollectionPage(userId);
+    }
+
+    @Override
+    public boolean isCollection(String userId, String articleId) {
+        CollectionsExample example = new CollectionsExample();
+        example.or().andUserIdEqualTo(userId).andContentIdEqualTo(articleId);
+        List<Collections> list = collectionsDao.selectByExample(example);
+
+        if(list != null && list.size() != 0){
+            return true;
+        }
+        return false;
     }
 }

@@ -41,7 +41,8 @@ public class MainController {
 	private UserTopicService userTopicService;
 	@Autowired
 	private TransmitService transmitService;
-
+	@Autowired
+	private CollectionsService collectionsService;
 	@Autowired
 	private PushService pushService;
 
@@ -60,6 +61,7 @@ public class MainController {
 		CommonResult<IndexResult> result = new CommonResult<IndexResult>(0,"success");
 		IndexResult indexResult = new IndexResult();
 		indexResult.setList(getIndexData(request,pageNo,pageSize));
+
 		result.setData(indexResult);
 		return Utils.toJson(result);
 	}
@@ -90,6 +92,7 @@ public class MainController {
 			resultArticle.setArticle(p.getArticle());
 			resultArticle.setIsTransmit(p.getType());
 			resultArticle.setOldUser(p.getOld());
+			resultArticle.setLike(collectionsService.isCollection(user.getUserId(),p.getArticle().getArticleId()));
 			if(p.getType() == 2){
 				resultArticle.setNowUser(p.getNow());
 			}

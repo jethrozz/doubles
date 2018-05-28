@@ -125,7 +125,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.doubles.entity.ChatRecord" >
+  <insert id="insert" parameterType="com.doubles.entity.ChatRecord" flushCache="true">
     <selectKey keyProperty="crId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
@@ -136,7 +136,7 @@
       #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.doubles.entity.ChatRecord" >
+  <insert id="insertSelective" parameterType="com.doubles.entity.ChatRecord" flushCache="true">
     <selectKey keyProperty="crId" resultType="String" order="BEFORE">
       select replace(uuid(),'-','') from dual
     </selectKey>
