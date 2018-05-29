@@ -4,9 +4,10 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.doubles.util.SecretUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Users {
+public class Users implements Serializable {
     @Override
     public String toString() {
         return "Users{" +

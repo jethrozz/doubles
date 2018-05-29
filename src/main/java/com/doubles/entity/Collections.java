@@ -3,9 +3,10 @@ package com.doubles.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Collections {
+public class Collections implements Serializable {
     private String collectionId;
 
     private String userId;

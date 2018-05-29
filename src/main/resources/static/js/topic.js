@@ -63,7 +63,7 @@ function pinjieTopic(container,data) {
         var k = i+1;
         var img = "";
         var j=1;
-        html = html + "<div class=\"card\" style=\"border: 1px solid #F2F2F2;margin-top: 0rem;\"><div class=\"card-body\">" +"<h4 class=\"card-title\"><a href=\"../topic/getArticleList?topicId=\">" +data[i].topic.title+"</a></h4>" + "<small class=\"joinPers\">"+data[i].topic.fanNumber+"人参加</small>" ;
+        html = html + "<div class=\"card\" style=\"border: 1px solid #F2F2F2;margin-top: 0rem;\"><div class=\"card-body\">" +"<h4 class=\"card-title\"><a href=\"../topic/gettopic/"+data[i].topic.topicId+"\">" +data[i].topic.title+"</a></h4>" + "<small class=\"joinPers\">"+data[i].topic.fanNumber+"人参加</small>" ;
 
         var size = Object.keys(data[i].imgList).length;
         $.map(data[i].imgList,function (value,key) {
@@ -77,7 +77,7 @@ function pinjieTopic(container,data) {
 
         html = html + imgBegin + img + end +end;
         html = html + end +end;
-
+        //
         if(k == data.length){
             html = html +end;
             container.append(html);

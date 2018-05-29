@@ -221,6 +221,7 @@ public class UsersController {
 			result.setMsg("the request is null");
 			return Utils.toJson(result);
 		}else{
+			//relationshipService.followOrUnfollow() 会返回一个数字，该数字表示这两个用户执行了该方法后的关系
 			relationshipService.followOrUnfollow(relationship);
 			return Utils.toJson(result);
 		}

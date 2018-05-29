@@ -1,9 +1,104 @@
+//关注/取消关注用户
+
+//关注按钮只会显示 已关注 和 关注 两个字样
+//当为 已关注 时
+// 鼠标移入时 显示为取消关注
+// 鼠标点击时  如果字为 取消关注，则表示 此操作为取消关注
+var innerTopic_followText = "";
+var innerTopic_followisClick = false;
+$(".friend_btn").mouseover(function () {
+    console.log($(this).text());
+    innerTopic_followText = $(this).text();
+    if(innerTopic_followText == "已关注" || innerTopic_followText == "相互关注"){
+        $(this).text("取消关注");
+    }
+});
+$(".friend_btn").click(function () {
+    var userId = sessionStorage.getItem("userId");
+    var friendId = $(this).next().val();
+    if($(this).text() == "取消关注"){
+        innerTopic_followisClick = true;
+        followUser(userId,friendId,1,$(this),"关注");
+    }else if($(this).text() == "关注"){
+        innerTopic_followisClick = true;
+        followUser(userId,friendId,0,$(this),"已关注");
+    }
+});
+$(".friend_btn").mouseout(function () {
+    console.log($(this).text());
+    if(!innerTopic_followisClick){
+        $(this).text(innerTopic_followText);
+    }
+    innerTopic_followisClick = false;
+})
+function followUser(userId,friendId,type,container,text) {
+    $.ajax({
+        url:"/users/followOrUnfollowUser",
+        type:"post",
+        async:true,
+        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+        data:{
+            userId:userId,
+            friendId:friendId,
+            isFriend:type
+        },
+        success: function (data,stauts,result) {
+            var res = JSON.parse(data);
+            console.log(res);
+            if(res.status == 0){
+                container.text(text);
+                var box = $(":input[name='friendId']");
+                box.each(function(){
+                    if($(this).val() == friendId){
+                        $(this).prev().text(text);
+                    }
+                });
+            }
+        }
+    });
+}
 //点赞
 $(function() {
     $('.fave').on('click', function() {
-        $(this).toggleClass("active");
+        if($(this).hasClass("active")){
+            //有active 点击表示取消点赞
+            likeOrUnlike($(this),$(this).next().val(),1)
+        }else{
+            //无active 点击表示点赞
+            likeOrUnlike($(this),$(this).next().val(),0)
+        }
+
     })
 })
+function likeOrUnlike(container,objectId,opt) {
+    console.log(objectId);
+    console.log(opt);
+    $.ajax({
+        url:"/article/addArtLike",
+        type:"post",
+        async:true,
+        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+        data:{
+            type:opt,
+            articleId:objectId
+        },
+        success: function (data,stauts,result) {
+            var res = JSON.parse(data);
+            console.log(res);
+            if(res.status == 0){
+                container.toggleClass("active");
+                var number = parseInt(container.next().next().text());
+                if(opt == 0){
+                    number = number+1;
+                }else{
+                    number = number-1;
+                }
+                container.next().next().text(number);
+
+            }
+        }
+    });
+}
 //订阅话题
 var innerTopic_subsscribeText = "";
 var innerTopic_isClick = false;
@@ -19,10 +114,10 @@ $("#subscribeTopic").click(function () {
     var topicId = $("#topicId").val();
     if($(this).text() == "取消订阅"){
         innerTopic_isClick = true;
-        subscribe(userId,topicId,"unFollow",$(this),"已订阅");
+        subscribe(userId,topicId,"unFollow",$(this),"订阅");
     }else if($(this).text() == "订阅"){
         innerTopic_isClick = true;
-        subscribe(userId,topicId,"follow",$(this),"订阅");
+        subscribe(userId,topicId,"follow",$(this),"已订阅");
     }
 });
 $("#subscribeTopic").mouseout(function () {

@@ -3,16 +3,17 @@ package com.doubles.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Relationship {
+public class Relationship implements Serializable {
     private String relationshipId;
 
     private String userId;
 
     private String friendId;
 
-    private Byte isFriend;
+    private byte isFriend;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @JSONField(format="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
@@ -63,11 +64,11 @@ public class Relationship {
         this.friendId = friendId == null ? null : friendId.trim();
     }
 
-    public Byte getIsFriend() {
+    public byte getIsFriend() {
         return isFriend;
     }
 
-    public void setIsFriend(Byte isFriend) {
+    public void setIsFriend(byte isFriend) {
         this.isFriend = isFriend;
     }
 

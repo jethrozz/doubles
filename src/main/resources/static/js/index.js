@@ -150,12 +150,12 @@ function indexText(container,data) {
 			}
 		}
 		html = html + end;
-		html = html + "<a href=\"../article/getArticle?articleId="+data[i].article.articleId+"\" class=\"article-link\">";
+		html = html + "<a href=\"/article/getArticle?articleId="+data[i].article.articleId+"\" class=\"article-link\">";
 		html = html + " <div class=\"card-body\"><p class=\"card-text\">"+data[i].article.content+"</p><div class=\"my-underline\"></div><div class=\"little-tag\">";
 
 		//拼接话题标签
 		for(var j=0;j<data[i].article.artilceTopics.length;j++){
-        	html = html +"<a href=\"../"+data[i].article.artilceTopics[j].topic.topicId+"\">#"+data[i].article.artilceTopics[j].topic.title+"</a>";
+        	html = html +"<a href=\"/topic/gettopic/"+data[i].article.artilceTopics[j].topic.topicId+"\">#"+data[i].article.artilceTopics[j].topic.title+"</a>";
         	if(j != data[i].article.artilceTopics.length){
                 html = html + ",";
 			}

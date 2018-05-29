@@ -111,7 +111,7 @@ public class ArticleController {
         return Utils.toJson(result);
     }
 
-    //根据文章id，点赞
+    //根据文章id，点赞/取消点赞
     @RequestMapping("/addArtLike")
     @ResponseBody
     public String addLike(HttpServletRequest request,String articleId,Integer type){
@@ -141,6 +141,7 @@ public class ArticleController {
                 collection.setUserId(user.getUserId());
 
                 article.setLikeNumber(article.getLikeNumber()+1);
+                article.setCollectNumber(article.getCollectNumber()+1);
                 if(!(articleService.updateArticle(article) && collectionsService.addCollection(collection))){
                     result.setStauts(1);
                     result.setMsg("collect failed");
@@ -149,6 +150,7 @@ public class ArticleController {
             }else{
                 //取消点赞
                 article.setLikeNumber(article.getLikeNumber()-1);
+                article.setCollectNumber(article.getCollectNumber()-1);
                 if(!(articleService.updateArticle(article) && collectionsService.deleteCollection(user.getUserId(),article.getArticleId()))){
                     result.setStauts(1);
                     result.setMsg("uncollect failed");

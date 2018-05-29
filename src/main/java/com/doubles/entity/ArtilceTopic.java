@@ -2,7 +2,9 @@ package com.doubles.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-public class ArtilceTopic {
+import java.io.Serializable;
+
+public class ArtilceTopic implements Serializable {
     private String atId;
 
     private String articleId;

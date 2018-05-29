@@ -1,6 +1,8 @@
 package com.doubles.entity;
 
-public class UserTopic {
+import java.io.Serializable;
+
+public class UserTopic implements Serializable {
     private String upId;
 
     private String userId;

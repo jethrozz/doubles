@@ -3,10 +3,11 @@ package com.doubles.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Album {
+public class Album implements Serializable {
     private String albumId;
 
     private String userId;

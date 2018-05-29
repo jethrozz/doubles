@@ -47,6 +47,7 @@ public class RelationshipServiceImpl implements RelationshipService {
 
     @Override
     public boolean followOrUnfollow(Relationship relationship) {
+        int status = 1;
         //业务逻辑
         //关注之后去查看对方对我的状态，如果也是关注，则变为相互关注
         //否则只是单方面关注
@@ -58,7 +59,7 @@ public class RelationshipServiceImpl implements RelationshipService {
         //先查询这两人之前是否在表中有过关注或者拉黑记录，如果有记录，则改变这条记录的好友状态即可。如没有，则插入一条记录
         List<Relationship> rslist = relationshipDao.selectByExample(example);
 
-        if(rslist.size() != 0 || null != rslist){
+        if(rslist.size() != 0 && null != rslist){
             Relationship rs = rslist.get(0);
             //将这条记录的状态变成新的
             rs.setIsFriend(relationship.getIsFriend());
@@ -67,7 +68,7 @@ public class RelationshipServiceImpl implements RelationshipService {
             example.clear();
             example.or().andUserIdEqualTo(relationship.getFriendId()).andFriendIdEqualTo(relationship.getUserId());
             List<Relationship> rslist1 = relationshipDao.selectByExample(example);
-            if(rslist1.size() != 0 || null != rslist1){
+            if(rslist1.size() != 0 && null != rslist1){
                 Relationship oldrs = rslist1.get(0);
                 cheeckFriendStauts(oldrs,rs);
             }
@@ -80,12 +81,14 @@ public class RelationshipServiceImpl implements RelationshipService {
             example.clear();
             example.or().andUserIdEqualTo(relationship.getFriendId()).andFriendIdEqualTo(relationship.getUserId());
             List<Relationship> rslist1 = relationshipDao.selectByExample(example);
-            if(rslist1.size() != 0 || null != rslist1){
+            if(rslist1.size() != 0 && null != rslist1){
                 Relationship oldrs = rslist1.get(0);
                 cheeckFriendStauts(oldrs,relationship);
             }
             return true;
         }
+
+
     }
 
     @Override

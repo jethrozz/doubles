@@ -3,9 +3,10 @@ package com.doubles.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Transmit {
+public class Transmit implements Serializable {
     private String transmitId;
 
     private String userId;

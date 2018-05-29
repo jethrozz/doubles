@@ -64,11 +64,14 @@
                                     <p>${article.article.user.nickname}</p>
                                 </a>
                                 @if(article.isFollow == 0){ @}
-                                    <button type="button" class="btn btn-info btn-sm">取消关注</button>
+                                    <button type="button" class="btn btn-info btn-sm friend_btn">已关注</button>
+                                    <input type="hidden" name="friendId" value="${article.article.user.userId}" />
                                 @} else if(article.isFollow == 1){ @}
-                                    <button type="button" class="btn btn-info btn-sm">关注</button>
+                                    <button type="button" class="btn btn-info btn-sm friend_btn">关注</button>
+                                    <input type="hidden" name="friendId" value="${article.article.user.userId}" />
                                 @} else if(article.isFollow == 2){ @}
-                                    <button type="button" class="btn btn-info btn-sm">相互关注</button>
+                                    <button type="button" class="btn btn-info btn-sm friend_btn">相互关注</button>
+                                    <input type="hidden" name="friendId" value="${article.article.user.userId}" />
                                 @} @}
 							</div>
 							<div class="middle">
@@ -87,9 +90,11 @@
                                     <span >
                                         @if(article.isLike){ @}
                                         <div  class="fave active"></div>
+                                        <input type="hidden" name="articleId" value="${article.article.articleId}" />
                                         <i>${article.article.collectNumber}</i>
                                         @}else{ @}
                                         <div  class="fave "></div>
+                                        <input type="hidden" name="articleId" value="${article.article.articleId}" />
                                         <i>${article.article.collectNumber}</i>
                                         @} @}
                                     </span>
@@ -180,14 +185,14 @@
 								</div>
 							</div>
                             @if(user.isFollow == 0){ @}
-                            <button type="button" class="btn btn-info btn-sm">取消关注</button>
-                            <input type="hidden" name="userId" value="${user.user.userId}">
+                            <button type="button" class="btn btn-info btn-sm friend_btn">已关注</button>
+                            <input type="hidden" name="friendId" value="${user.user.userId}">
                             @} else if(user.isFollow == 1){ @}
-                            <button type="button" class="btn btn-info btn-sm">关注</button>
-                            <input type="hidden" name="userId" value="${user.user.userId}">
+                            <button type="button" class="btn btn-info btn-sm friend_btn">关注</button>
+                            <input type="hidden" name="friendId" value="${user.user.userId}">
                             @} else if(user.isFollow == 2){ @}
-                            <button type="button" class="btn btn-info btn-sm">相互关注</button>
-                            <input type="hidden" name="userId" value="${user.user.userId}">
+                            <button type="button" class="btn btn-info btn-sm friend_btn">相互关注</button>
+                            <input type="hidden" name="friendId" value="${user.user.userId}">
                             @} @}
 						</li>
                         @} @}
