@@ -1,50 +1,79 @@
-//关注
-var homePagefirstText = "";
-var homePageisClick = false;
+//点赞
+$(".like").on("click",function () {
 
-$(".fllow_btn").mouseover(function(){
-    console.log("mouseover");
-    homePagefirstText = $(this).text();
-    homePageisClick = false;
-    if($(this).text() == '已关注' || $(this).text() == '相互关注'){
-        $(this).text("取消关注");
-    }
+    if($(this).text() == "已喜欢"){
+        //取消喜欢
+        likeOrUnlike($(this),$("#hp_articleId").val(),1);
+   }else if($(this).text() == "喜欢"){
+        //喜欢
+        likeOrUnlike($(this),$("#hp_articleId").val(),0)
+   }
 });
-
-$(".fllow_btn").mouseout(function(){
-    console.log("mouseleave");
-    if(!homePageisClick) {
-        $(this).text();
-    }
-});
-$(".fllow_btn").click(function () {
-    console.log("click");
-    homePageisClick = true;
-    var isFriend = 1;
-    var friend = $(this).next().val();
-    if($(this).text() == '取消关注'){
-        isFriend = 1;
-    }else if($(this).text() == "关注"){
-        isFriend = 0;
-    }
+function likeOrUnlike(container,objectId,opt) {
     $.ajax({
-        url:"../users/followOrUnfollowUser",
+        url:"/article/addArtLike",
         type:"post",
+        async:true,
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
         data:{
-            friendId:friend,
-            isFriend:isFriend,
-            userId:sessionStorage.getItem("userId")
+            type:opt,
+            articleId:objectId
         },
-        success:function(data,result,stauts){
+        success: function (data,stauts,result) {
             var res = JSON.parse(data);
-            console.log(res);
+            if(res.status == 0){
+                if(opt == 0){
+                    container.text("已喜欢");
+                }else{
+                    container.text("喜欢");
+                }
+            }
         }
-    })
+    });
+}
+//转发js
+$(".transmit").on("click",function () {
+    if($(this).text() == "转载"){
+        transmit($("#hp_articleId").val(),$(this));
+    }else if($(this).text() == "已转载"){
+        unTransmit($("#hp_articleId").val(),$(this));
+    }
 });
-
-
-
+function transmit(objectId,container) {
+    $.ajax({
+        url:"/article/transmit",
+        type:"post",
+        async:true,
+        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+        data:{
+            type:0,
+            contentId:objectId
+        },
+        success: function (data,stauts,result) {
+            var res = JSON.parse(data);
+            if(res.status == 0){
+                container.text("已转发");
+            }
+        }
+    });
+}
+function unTransmit(objectId,container) {
+    $.ajax({
+        url:"/article/deleteTransmit",
+        type:"post",
+        async:true,
+        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+        data:{
+            articleId:objectId
+        },
+        success: function (data,stauts,result) {
+            var res = JSON.parse(data);
+            if(res.status == 0){
+                container.text("转发");
+            }
+        }
+    });
+}
 //返回首页
 $(".back_btn").bind("click",function(){
 	$(location).attr('href', 'index.html'); 
@@ -173,20 +202,7 @@ function addComment(data) {
         return str;
     }
 }
-//私信
-$(".letters").bind("click",function(){
-	$(location).attr('href', 'privateletter.html'); 
-})
 
-
-// $(".img_file").bind("click",function(){
-// 	$(location).attr('href','file.html')
-// })
-//
 function backIndex(){
 	window.location.href = "../index";
-}
-//图集
-function toAlbum(userId) {
-    window.location.href = "";
 }

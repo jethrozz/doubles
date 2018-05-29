@@ -17,7 +17,6 @@ $("#userName").blur(function (e) {
             success: function (data,status,result) {
                 console.log(result);
                 var res = JSON.parse(data);
-                console.log(res);
                 if(res.stauts != 0){
                     alert("该用户名已存在")
                 }
@@ -45,7 +44,6 @@ $("#myBtn").click(function (e) {
                         },
                         success: function (data,stauts,result) {
                             var res = JSON.parse(data);
-                            console.log(res);
                             if(res.status == 0){
                                 //uid = res.msg;
                                 $("#mymodal").modal("toggle");

@@ -35,6 +35,18 @@ public class RelationshipServiceImpl implements RelationshipService {
     }
 
     @Override
+    public Page<Relationship> findPageFollowFriends(int pageNo, int pageSize, String user_id) {
+        PageHelper.startPage(pageNo,pageSize);
+        return relationshipDao.getFollowFriend(user_id);
+    }
+
+    @Override
+    public Page<Relationship> findPageFansFriends(int pageNo, int pageSize, String user_id) {
+        PageHelper.startPage(pageNo,pageSize);
+        return relationshipDao.getFanFriend(user_id);
+    }
+
+    @Override
     public List<Relationship> findFriends(String user_id,Integer is_friend, int isFollowMe) {
         RelationshipExample example = new RelationshipExample();
         if(isFollowMe == 0){

@@ -5,48 +5,48 @@ var isClick = false;
  * 关注
  * 
  * */
-var isClick = false;
-var firstText = "";
-$(".fllow_btn").bind("mouseenter",function(){
-	isClick = false;
-	firstText = $(this).text();
-	if($(this).text() == "已关注"){
-		$(this).text("取消关注");
-	}
-}).bind("click",function(){
-	if($(this).text() == "关注"){
-		$(this).text("已关注");
-		isClick = true;
-		/*
-		var fllow_btn_parent = $(this).parent().parent().parent();
-		console.log(fllow_btn_parent);
-		fllow_btn_parent[0].remove()
-		*/
-		/*$.ajax({
-			url:"url",
-			type:POST,
-			data:{},
-			success:function(data,result,stauts){
-				
-			}
-		})*/
-	}else if($(this).text() == "取消关注"){
-		$(this).text("关注")
-		isClick = true;
-		/*$.ajax({
-			url:"url",
-			type:POST,
-			data:{},
-			success:function(data,result,stauts){
-				
-			}
-		})*/
-	}
-}).bind("mouseleave",function(){
-	if(!isClick){
-		$(this).text(firstText);
-	}
-})
+// var isClick = false;
+// var firstText = "";
+// $(".fllow_btn").bind("mouseenter",function(){
+// 	isClick = false;
+// 	firstText = $(this).text();
+// 	if($(this).text() == "已关注"){
+// 		$(this).text("取消关注");
+// 	}
+// }).bind("click",function(){
+// 	if($(this).text() == "关注"){
+// 		$(this).text("已关注");
+// 		isClick = true;
+// 		/*
+// 		var fllow_btn_parent = $(this).parent().parent().parent();
+// 		console.log(fllow_btn_parent);
+// 		fllow_btn_parent[0].remove()
+// 		*/
+// 		/*$.ajax({
+// 			url:"url",
+// 			type:POST,
+// 			data:{},
+// 			success:function(data,result,stauts){
+//
+// 			}
+// 		})*/
+// 	}else if($(this).text() == "取消关注"){
+// 		$(this).text("关注")
+// 		isClick = true;
+// 		/*$.ajax({
+// 			url:"url",
+// 			type:POST,
+// 			data:{},
+// 			success:function(data,result,stauts){
+//
+// 			}
+// 		})*/
+// 	}
+// }).bind("mouseleave",function(){
+// 	if(!isClick){
+// 		$(this).text(firstText);
+// 	}
+// })
 
 /*鼠标移入检查
 	关注显示:取消关注
@@ -83,8 +83,7 @@ $("#myTab4").bind("click",function(){
 	
 	
 		$(".home_btn").removeClass("active");
-		console.log('645');
-	
+
 });
 
 $(".home_btn").bind("click",function(){
@@ -106,19 +105,14 @@ function subComment(e) {
 function getIndex() {
     $('#loading').modal('show');
 	$.ajax({
-        url:"../getIndex",
+        url:"/getIndex",
         type:"post",
         async:true,
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-/*        data:{
-            userId:userId
-        },*/
         success: function (data,stauts,result) {
             var res = JSON.parse(data);
 
             if(res.status == 0){
-                // followUserText($("#fllow"),res.data);
-                // //$("#mymodal").modal("toggle");
                 indexText($("#user-article-content-text"),res.data.list.list)
 				$('#loading').modal('hide');
             }
@@ -174,9 +168,9 @@ function indexText(container,data) {
 		}
 		html = html + "<li><a href=\"javascript:void(0);\" onclick=\"subComment(this)\">评论</a></li> <li> <ul>";
 		if(data[i].isLike){
-		  html = html + "<li><a href=\"javascript:void(0);\"><div  class=\"fave active\"></div></a></li>";
+		  html = html + "<li><div  class=\"fave active\"></div>"+"<input type=\"hidden\" name=\"articleId\" value=\""+data[i].article.articleId+"\" />"+"</li>";
 		}else{
-          html = html + "<li><a href=\"javascript:void(0);\"><div  class=\"fave\"></div></a></li>";
+          html = html + "<li><div  class=\"fave\"></div>"+"<input type=\"hidden\" name=\"articleId\" value=\""+data[i].article.articleId+"\" />"+"</li>";
 		}
 
 

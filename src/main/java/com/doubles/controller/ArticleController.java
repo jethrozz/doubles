@@ -51,7 +51,8 @@ public class ArticleController {
     private AlbumService albumService;
     @Autowired
     private ImageService imageService;
-
+    @Autowired
+    private TransmitService transmitService;
 
     @RequestMapping("/submitArticle")
     @ResponseBody
@@ -190,12 +191,31 @@ public class ArticleController {
 
     //获取单个动态详情
     @RequestMapping("/getArticle")
-    public ModelAndView getArticle(String articleId){
+    public ModelAndView getArticle(HttpServletRequest request,String articleId){
         ModelAndView modelAndView = new ModelAndView("/hpdynamic");
+        Users user = (Users)request.getSession().getAttribute("user");
         Article article = articleService.getOneArticle(articleId);
         List<Article> articleList = articleService.selectArticleListByUid(article.getUserId());
 
         List<Collections>  list = collectionsService.getListCollectionByArtcile(articleId);
+        Relationship relationship = relationshipService.isFriend(user.getUserId(),article.getUserId());
+        int isFriend = 3;
+        int isLike = 1;
+        int isTransmit = 1;
+        if(transmitService.isTransmit(articleId,user.getUserId())){
+            isTransmit = 0;
+        }
+        if(collectionsService.isCollection(user.getUserId(),articleId)){
+            isLike = 0;
+        }
+        if(user.getUserId().equals(article.getUserId()) && relationship == null){
+            isFriend = 3;
+        }else if(relationship == null){
+            isFriend = 1;
+        }else {
+            isFriend = (int)relationship.getIsFriend();
+        }
+
         Article pre = null;
         Article next = null;
         int index = articleList.indexOf(article);
@@ -214,6 +234,9 @@ public class ArticleController {
         modelAndView.addObject("collectionsList",list);
         modelAndView.addObject("pre",pre);
         modelAndView.addObject("next",next);
+        modelAndView.addObject("isFriend",isFriend);
+        modelAndView.addObject("isLike",isLike);
+        modelAndView.addObject("isTransmit",isTransmit);
         return modelAndView;
     }
 

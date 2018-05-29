@@ -4,12 +4,9 @@
 
 $("#getDate").on("change",function () {
    if($(this).val() != ""){
-       //console.log( );
        var objectId = $(this).next().val();
-       //console.log(objectId );
-
        $.ajax({
-           url:"../users/getAlbumImgJson",
+           url:"/users/getAlbumImgJson",
            type: "post",
            async:true,
            data: {
@@ -21,10 +18,10 @@ $("#getDate").on("change",function () {
                console.log(res);
                $("#album").empty();
                var html = "";
-               for(i = 0;i<res.data[i].length;i++){
+               for(i = 0;i<res.data.length;i++){
                    html += "<div class=\"card bg-light\" ><div class=\"card-header\">"+res.data[i].albumTime+" 图集</div><div class=\"card-body\"><div class=\"card-text\">";
-                   for(j=0;j<res.data.albumList.length;j++){
-                       html += "<a href=\"../article/getArticle?articleId="+res.data.albumList[j].articleId+"\" >"+res.data.albumList[j].imgSrc+"</a>";
+                   for(j=0;j<res.data[i].albumList.length;j++){
+                       html += "<a href=\"../article/getArticle?articleId="+res.data[i].albumList[j].articleId+"\" >"+res.data[i].albumList[j].imgSrc+"</a>";
                    }
                     html += "</div></div></div>";
                }

@@ -2,21 +2,35 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>动态详情</title>
 		<link rel="stylesheet" href="/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/css/homepage.css" />
+		<link rel="stylesheet" type="text/css" href="/css/tip.css" />
 	</head>
 	<body>
 		<div class="container-fluid">
 			<div class="pmark">
-				<button type="button" class="btn btn-secondary like">喜欢</button>
-				<button type="button" class="btn btn-secondary thumb_up">点赞</button>
+				<input type="hidden" name="hp_articleId" id="hp_articleId" value="${article.articleId}" />
+				@if(isLike == 0){ @}
+					<button type="button" class="btn btn-secondary like">已喜欢</button>
+				@}else{ @}
+					<button type="button" class="btn btn-secondary like">喜欢</button>
+				@} @}
 				@ if(session.user.userId != article.user.userId){ @}
-				<button type="button" class="btn btn-secondary reprinted " onclick="transmit('${article.articleId}')">转载</button>
-				@ } @}
-				<!--<button type="button" class="btn btn-secondary tip_off" onclick="transmit('${article.articleId}')">举报</button>-->
-				@ if(session.user.userId != article.user.userId){ @}
-				<button type="button" class="btn btn-secondary fllow_btn">添加关注</button>
+					@if(isTransmit == 0){ @}
+						<button type="button" class="btn btn-secondary reprinted transmit">已转载</button>
+				@}else{ @}
+						<button type="button" class="btn btn-secondary reprinted transmit">转载</button>
+				@} @}
+				@if(isFriend == 0){ @}
+					<button type="button" class="btn btn-secondary fllow_btn friend_btn">已关注</button>
+
+					@}else if(isFriend == 1){ @}
+					<button type="button" class="btn btn-secondary fllow_btn friend_btn">关注</button>
+					@}else if(isFriend == 2){ @}
+					<button type="button" class="btn btn-secondary fllow_btn friend_btn">相互关注</button>
+					@} @}
+				<input type="hidden" name="friendId" value="${article.user.userId}">
 				@ } @}
 				<button type="button" class="btn btn-secondary back_btn">返回首页</button>
 			</div>
@@ -205,9 +219,17 @@
 
 		</div>
 
+		<div id="tip">
 
+		</div>
 	</body>
 	<script src="/js/jquery-3.1.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="https://cdn-hangzhou.goeasy.io/goeasy.js​"></script>
+	<!--该页面的js-->
 	<script type="text/javascript" src="/js/homepage.js"></script>
+	<!--接收推送消息的js-->
+	<script type="text/javascript" src="/js/subscribe.js"></script>
+	<!--关注专用js-->
+	<script type="text/javascript" src="/js/follow_user.js"></script>
 </html>

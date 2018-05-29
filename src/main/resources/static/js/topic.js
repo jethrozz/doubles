@@ -1,11 +1,37 @@
-//最新话题 按时间逆序排序
+//发起话题
+$("#topic_addTopic").click(function () {
+    var title = $("#topic_title").val();
+    var describe = $("#topic_describe").val();
+    console.log("topic_addTopic is click")
+    if(title == ""){
+        alert("标题不能为空");
+    }else{
+        $.ajax({
+            url:"/topic/addTopic",
+            type:"post",
+            async:true,
+            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            data:{
+                title:title,
+                descirbe:describe
+            },
+            success: function (data,stauts,result) {
+                var res = JSON.parse(data);
+                if(res.status == 0){
+                    alert("发布成功");
+                    $("#addTopic").modal("toggle");
+                }
+            }
+        });
+    }
+});
 
+//最新话题 按时间逆序排序
 function NewTopic() {
     $('#loading').modal('show');
-    var d1 = new Date();
 
     $.ajax({
-        url:"../topic/getNewTopic",
+        url:"/topic/getNewTopic",
         type:"post",
         async:true,
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
@@ -13,9 +39,6 @@ function NewTopic() {
             var res = JSON.parse(data);
             if(res.status == 0){
                 var topicList = res.data;
-                console.log(topicList);
-                var d2 = new Date();
-                console.log(parseInt(d2 - d1) / 1000);//两个时间相差的秒数
                 pinjieTopic($("#newTopic"),topicList.list);
                 $('#loading').modal('hide');
             }
@@ -30,7 +53,7 @@ function HotTopic() {
 
     $('#loading').modal('show');
     $.ajax({
-        url:"../topic/getHotTopic",
+        url:"/topic/getHotTopic",
         type:"post",
         async:true,
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
@@ -38,7 +61,6 @@ function HotTopic() {
             var res = JSON.parse(data);
             if(res.status == 0){
                 var topicList = res.data;
-                console.log(topicList);
                 pinjieTopic($("#hotTopic"),topicList.list);
                 $('#loading').modal('hide');
 

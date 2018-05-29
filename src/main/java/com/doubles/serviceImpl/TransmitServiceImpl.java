@@ -33,8 +33,23 @@ public class TransmitServiceImpl implements TransmitService {
 	}
 
 	@Override
-	public boolean deleteTransmit(String transmitId) {
-		if(transmitMapper.deleteByPrimaryKey(transmitId) >= 1){
+	public boolean deleteTransmit(String articleId,String userId) {
+		TransmitExample example = new TransmitExample();
+		example.or().andContentIdEqualTo(articleId).andUserIdEqualTo(userId);
+
+		if(transmitMapper.deleteByExample(example) >= 1){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isTransmit(String articleId, String userId) {
+		TransmitExample example = new TransmitExample();
+		example.or().andContentIdEqualTo(articleId).andUserIdEqualTo(userId);
+		List<Transmit> list = transmitMapper.selectByExample(example);
+
+		if(list != null && list.size() != 0 ){
 			return true;
 		}
 		return false;

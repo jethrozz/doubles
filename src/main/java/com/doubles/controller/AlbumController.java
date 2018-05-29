@@ -12,6 +12,7 @@ import com.doubles.model.ResultAlbum;
 import com.doubles.service.AlbumService;
 import com.doubles.service.ArticleService;
 import com.doubles.service.RelationshipService;
+import com.doubles.service.UsersService;
 import com.doubles.util.Utils;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ import java.util.regex.Pattern;
 @RequestMapping("/users")
 public class AlbumController {
 
+	@Autowired
+	private UsersService userService;
 	@Autowired
 	private AlbumService albumService;
 	@Autowired
@@ -127,9 +130,10 @@ public class AlbumController {
 		}
 		Collections.reverse(resultAlbumList);
 		Relationship relationship = relationshipService.isFriend(user.getUserId(),userId);
-
+		Users object = userService.getOne(userId);
 		modelAndView.addObject("albumList",resultAlbumList);
-		modelAndView.addObject("objectId",userId);
+		modelAndView.addObject("object",object);
+
 		if(user.getUserId().equals(userId) && relationship == null){
 			modelAndView.addObject("relationship",3);
 		}else if(relationship == null){

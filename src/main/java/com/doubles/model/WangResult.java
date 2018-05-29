@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by Shuang on 2018/5/15.
+ * wangEditor 富文本编辑器的返回结果封装
  */
 public class WangResult {
 	@JsonProperty("error")

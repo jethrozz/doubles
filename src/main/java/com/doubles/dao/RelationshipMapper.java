@@ -32,4 +32,6 @@ public interface RelationshipMapper {
     int updateByPrimaryKey(Relationship record);
 
     Page<Relationship> getPageFriend(@Param("userId") String userId,@Param("isFriend") int is_friend,@Param("isFollowMe") int isFollowMe);
+    Page<Relationship> getFollowFriend(@Param("userId") String userId);
+    Page<Relationship> getFanFriend(@Param("userId") String userId);
 }

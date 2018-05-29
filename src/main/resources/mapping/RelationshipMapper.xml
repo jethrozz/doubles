@@ -74,6 +74,18 @@
     relationship_id, user_id, friend_id, is_friend, create_time, update_time
   </sql>
 
+  <select id="getFollowFriend" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from relationship
+    where user_id = #{userId} and (is_friend = 0 or is_friend = 2) ORDER BY create_time DESC
+  </select>
+  <select id="getFanFriend" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from relationship
+    where friend_id = #{userId} and (is_friend = 0 or is_friend = 2) ORDER BY create_time DESC
+  </select>
   <select id="getPageFriend" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />

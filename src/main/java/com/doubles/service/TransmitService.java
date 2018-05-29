@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface TransmitService{
 	boolean addTransmit(Transmit transmit);
-	boolean deleteTransmit(String transmitId);
-
+	boolean deleteTransmit(String articleId,String userId);
+	boolean isTransmit(String articleId,String userId);
 	List<Transmit> getListArticleByUid(String userId);
 }

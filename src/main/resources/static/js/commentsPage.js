@@ -38,7 +38,7 @@ function getComments() {
              if(x == data[i].createTime){
                 html = html + "<div class=\"message\"><div class=\"left\"> <img src=\""+data[i].user.userimg+"\" alt=\"\"><span class=\"name\">"
                  + data[i].user.nickname +"</span><span>评论了你</span> <a href=\"../article/getArticle?articleId="+data[i].objectId+"\"><span class=\"topic\">" +subContent(data[i].commentContent)+ "</span></a></div><div class=\"right\"><span class=\"hui\">回复</span></div>"
-                 + "<div class=\"repeat\"><input type=\"text\" id=\"repeatTxt\"><button type=\"button\" id=\"repeat_btn\">回复</button>" + end + end;
+                 + "<div class=\"repeat\"><input type=\"text\" name='repeatTxt' id=\"repeatTxt\"><button type=\"button\" id=\"repeat_btn\">回复</button><input type='hidden' name='objectId' value='"+data[i].objectId+"'><input type='hidden' name='toUserId' value='"+data[i].user.userId+"' />" + end + end;
              }
          }
          html = html + end;
@@ -62,34 +62,40 @@ function subContent(data) {
     }
     return data;
 }
+//通知页回复
+$(document).on("click",".hui",function () {
+    if($(this).parent().next().css("display")=="none"){
+        $(this).parent().next().css({"display":"block"});
+        $(this).parent().parent().css({"paddingBottom":"4rem"});
+    }else{
+        $(this).parent().next().css({"display":"none"});
+        $(this).parent().parent().css({"paddingBottom":"1rem"});
+    }
+}).on("click","#repeat_btn",function () {
+    var toUser = $(this).next().next().val();
+    var object = $(this).next().val();
+    var content = $(this).prev().val();
+    if(content != ""){
+        $.ajax({
+            url:"../article/addComment",
+            type: "post",
+            async:true,
+            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            data: {
+                objectType:0,
+                objectId:object,
+                toUser:toUser,
+                commentContent:content,
+                type:1
+            },
+            success: function (data,stauts,result) {
+                var res = JSON.parse(data);
+                if(res.status == 0){
+                    alert("回复成功");
+                    $(this).prev().val("");
+                }
+            }
+        });
+    }
+});
 
-
-/*
-
-
-
-                我有一头没毛驴
-<img src="img/1212741.jpg" alt="">
-                啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦...<!-- <span>动态：</span> -->
-
-
-
-
-
-        <div class="message">
-            <div class="left">
-                <img src="img/1130596.jpg" alt="">
-                <span class="name">我有一头没毛驴</span>
-                <span>评论了你</span>
-                <span class="topic">啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦...<!-- <span>动态：</span> --></span>
-            </div>
-            <div class="right">
-                <img src="img/1212741.jpg" alt="">
-                <span class="hui">回复</span>
-            </div>
-            <div class="repeat">
-                <input type="text" id="repeatTxt">
-                <button type="button" id="repeat_btn">回复</button>
-            </div>
-        </div>
-    </div>*/

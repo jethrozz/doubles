@@ -6,19 +6,20 @@
 		<link rel="stylesheet" href="/css/bootstrap.css" />
 		<link rel="stylesheet" href="/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/css/homepage.css" />
+		<link rel="stylesheet" type="text/css" href="/css/tip.css" />
 	</head>
 	<body>
 		<div class="container-fluid">
 			<div class="pmark">
 				@ if(session.user.userId != object.userId){@}
 					@ if(relationship == 1){ @}
-						<button type="button" class="btn btn-secondary fllow_btn">添加关注</button>
-						<input name="friendId" type="hidden" value="${object.userId}" />
+						<button type="button" class="btn btn-secondary fllow_btn friend_btn">关注</button>
+						<input name="friendId" type="hidden" value="${object.userId} " />
 					@ }else if(relationship == 2){ @}
-						<button type="button" class="btn btn-secondary fllow_btn">相互关注</button>
+						<button type="button" class="btn btn-secondary fllow_btn friend_btn">相互关注</button>
 						<input name="friendId" type="hidden" value="${object.userId}" />
 					@ }else if(relationship == 0){ @}
-						<button type="button" class="btn btn-secondary fllow_btn">已关注</button>
+						<button type="button" class="btn btn-secondary fllow_btn friend_btn">已关注</button>
 						<input name="friendId" type="hidden" value="${object.userId}" />
 					@ } @}
 				@ } @}
@@ -121,8 +122,14 @@
 
 			@}@}
 		</div>
+		<div id="tip">
+
+		</div>
 	</body>
 	<script src="/js/jquery-3.1.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script src="https://cdn-hangzhou.goeasy.io/goeasy.js​"></script>
 	<script type="text/javascript" src="/js/homepage.js"></script>
+	<script type="text/javascript" src="/js/subscribe.js"></script>
+	<script type="text/javascript" src="/js/follow_user.js"></script>
 </html>

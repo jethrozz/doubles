@@ -11,7 +11,7 @@ function sendMsg(id) {
         var text = $.trim($("#letter-input").val());
     	$.ajax({
             url:"../sendMsg",
-            type:POST,
+            type:"post",
             contentType : "application/x-www-form-urlencoded; charset=UTF-8",
             data:{
                 toUser:id,

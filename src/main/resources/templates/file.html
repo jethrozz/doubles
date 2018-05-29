@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>我的图集-${session.user.nickname}</title>
+		<title>我的图集-${object.nickname}</title>
 		<link rel="stylesheet" href="/css/bootstrap.css" />
 		<link rel="stylesheet" href="/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/css/file.css" />
@@ -10,15 +10,23 @@
 		<div class="container-fluid bg-dark" >
 			<div class="row">
 				<div class="col col-lg-1 info">
-					<img class="header_img" src="${session.user.userimg}">
+					<img class="header_img" src="${object.userimg}">
 				</div>
 				<div class="col col-lg-6 info">
-					<h5 class="nickname">${session.user.nickname}</h5>
+					<h5 class="nickname">${object.nickname}</h5>
 				</div>
 
 				<div class=" col col-lg-4 pmark">
-					@ if(session.user.userId != objectId){ @}
-						<button type="button" class="btn btn-secondary fllow_btn">添加关注</button>
+					@ if(session.user.userId != object.userId){ @}
+						@if(relationship == 0){ @}
+						<button type="button" class="btn btn-secondary fllow_btn friend_btn">已关注</button>
+
+						@}else if(relationship == 1){ @}
+						<button type="button" class="btn btn-secondary fllow_btn friend_btn">关注</button>
+						@}else if(relationship == 2){ @}
+						<button type="button" class="btn btn-secondary fllow_btn friend_btn">相互关注</button>
+					@} @}
+					<input type="hidden" name="friendId" value="${object.userId}">
 					@ } @}
 						<button type="button" onclick="backIndex()" class="btn btn-secondary back_btn">返回首页</button>
 
@@ -37,7 +45,7 @@
 
 									<form>
 										<input type="date"  id="getDate"/>
-										<input type="hidden" value="${objectId}" name="objectId">
+										<input type="hidden" value="${object.userId}" name="objectId">
 									</form>
 								</div>
 							</li>
@@ -85,4 +93,5 @@
 	<script src="/js/jquery-3.1.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/file.js" ></script>
+	<script type="text/javascript" src="/js/follow_user.js"></script>
 </html>

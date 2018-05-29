@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2018-04-24
  */
 @Controller
-@RequestMapping("/artcile")
+@RequestMapping("/article")
 public class TransmitController {
 
 	@Autowired
@@ -63,16 +63,11 @@ public class TransmitController {
 			result.setMsg("the contentId is null");
 			return Utils.toJson(result);
 		}
-
-//		Users user = usersService.getOne(transmit.getUserId());
-//		if(user == null){
-//			result.setStauts(1);
-//			result.setMsg("the user is not exist");
-//			return Utils.toJson(result);
-//		}
 		if(transmit.getType() == 0){
 			//动态
 			Article article = articleService.getOneArticle(transmit.getContentId());
+			article.setTransmitNumber(article.getTransmitNumber()+1);
+			articleService.updateArticle(article);
 			if(null == article){
 				result.setStauts(1);
 				result.setMsg("the article is not exist");
@@ -101,18 +96,22 @@ public class TransmitController {
 
 	@RequestMapping("/deleteTransmit")
 	@ResponseBody
-	public String delete(String transmitId){
+	public String delete(HttpServletRequest request,String articleId){
 		CommonResult<String> result = new CommonResult<>(0,"transmit success");
-		if(StringUtils.isEmpty(transmitId)){
+		Users user = (Users) request.getSession().getAttribute("user");
+		Article article = articleService.getOneArticle(articleId);
+		article.setTransmitNumber(article.getTransmitNumber()-1);
+		if(StringUtils.isEmpty(articleId)){
 			result.setStauts(1);
-			result.setMsg("the transmitId is empty");
+			result.setMsg("the articleId is empty");
 			return Utils.toJson(result);
 		}
-		if(!transmitService.deleteTransmit(transmitId)){
+		if(!transmitService.deleteTransmit(articleId,user.getUserId())){
 			result.setStauts(1);
 			result.setMsg("delete failed");
 			return Utils.toJson(result);
 		}
+		articleService.updateArticle(article);
 		return Utils.toJson(result);
 	}
 }

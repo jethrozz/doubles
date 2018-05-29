@@ -67,13 +67,13 @@
                                         <ul>
                                             @ if(article.isLike){ @}
                                             <li>
-                                                <a href="javascript:void(0);"><div  class="fave active">
-                                                </div></a>
+                                                <div  class="fave active"></div>
+                                                <input type="hidden" name="articleId" value="${article.article.articleId}" />
                                             </li>
                                             @ }else{ @}
                                             <li>
-                                                <a href="javascript:void(0);"><div  class="fave">
-                                                </div></a>
+                                                <div  class="fave"></div>
+                                                <input type="hidden" name="articleId" value="${article.article.articleId}" />
                                             </li>
                                             @ } @}
                                             <li>

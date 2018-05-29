@@ -231,19 +231,30 @@ public class UsersController {
 	@ResponseBody
 	public String getFans(HttpServletRequest request, String userId,@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
 		//我的粉丝列表
-		CommonResult<PageInfo<Users>> result = new CommonResult<>(0,"success");
+		CommonResult<PageInfo<FollowResult>> result = new CommonResult<>(0,"success");
 		if(StringUtils.isEmpty(userId)){
 			result.setStauts(1);
 			result.setMsg("userId is empty");
 			return Utils.toJson(result);
 		}
-		//Users user = (Users)request.getSession().getAttribute("user");
-		Page<Relationship> relationship = relationshipService.findPageFriends(pageNo,pageSize,userId,0,1);
-		List<Users> usersList = new ArrayList<>();
-		for (Relationship r: relationship ) {
-			usersList.add(r.getFriend());
+
+		Users user = (Users)request.getSession().getAttribute("user");
+		Page<Relationship> relationship = relationshipService.findPageFansFriends(pageNo,pageSize,userId);
+		List<FollowResult> resultList = new ArrayList<>();
+
+		for (Relationship r : relationship) {
+			FollowResult followUser = new FollowResult();
+			followUser.setUser(r.getMe());
+			Relationship re = relationshipService.isFriend(user.getUserId(),r.getUserId());
+			if(re == null){
+				followUser.setIsFriend(1);
+			}else{
+				followUser.setIsFriend(r.getIsFriend());
+			}
+			resultList.add(followUser);
 		}
-		PageInfo<Users> usersPageInfo = new PageInfo<>(usersList);
+
+		PageInfo<FollowResult> usersPageInfo = new PageInfo<>(resultList);
 		result.setData(usersPageInfo);
 
 		return Utils.toJson(result);
@@ -253,20 +264,30 @@ public class UsersController {
 	@ResponseBody
 	public String getFollow(HttpServletRequest request, String userId, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
 		//我的关注列表
-		CommonResult<PageInfo<Users>> result = new CommonResult<>(0,"success");
+		CommonResult<PageInfo<FollowResult>> result = new CommonResult<>(0,"success");
 		if(StringUtils.isEmpty(userId)){
 			result.setStauts(1);
 			result.setMsg("userId is empty");
 			return Utils.toJson(result);
 		}
 
-		//Users user = (Users)request.getSession().getAttribute("user");
-		Page<Relationship> relationship = relationshipService.findPageFriends(pageNo,pageSize,userId,0,0);
-		List<Users> usersList = new ArrayList<>();
-		for (Relationship r: relationship ) {
-			usersList.add(r.getFriend());
+		Users user = (Users)request.getSession().getAttribute("user");
+		Page<Relationship> relationship = relationshipService.findPageFollowFriends(pageNo,pageSize,userId);
+		List<FollowResult> resultList = new ArrayList<>();
+
+		for (Relationship r : relationship) {
+			FollowResult followUser = new FollowResult();
+			followUser.setUser(r.getFriend());
+			Relationship re = relationshipService.isFriend(user.getUserId(),r.getFriendId());
+			if(re == null){
+				followUser.setIsFriend(1);
+			}else{
+				followUser.setIsFriend(r.getIsFriend());
+			}
+			resultList.add(followUser);
 		}
-		PageInfo<Users> usersPageInfo = new PageInfo<>(usersList);
+
+		PageInfo<FollowResult> usersPageInfo = new PageInfo<>(resultList);
 		result.setData(usersPageInfo);
 
 		return Utils.toJson(result);
