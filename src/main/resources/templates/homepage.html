@@ -23,6 +23,9 @@
 						<input name="friendId" type="hidden" value="${object.userId}" />
 					@ } @}
 				@ } @}
+				@ if(session.user.userId == object.userId){@}
+				<button type="button" id="myself" class="btn btn-secondary">个人资料</button>
+				@ } @}
 				<button type="button"  class="btn btn-secondary back_btn">返回首页</button>
 			</div>
 			<div class="home_header">

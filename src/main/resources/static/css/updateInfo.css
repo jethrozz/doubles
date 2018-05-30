@@ -1,0 +1,127 @@
+body{
+	background-color: gainsboro;
+}
+.updContent{
+	
+	width: 60%;
+	margin: 20px 20% 0px 20%;
+	
+}
+.left{
+	width: 100%;
+	float: left;
+	
+	font-size: 16px;
+	background-color: white;
+	
+}
+.right{
+	width: 30%;
+	/*border: 1px solid dimgray;*/
+	float: right;
+	background-color: white;
+	opacity: 0.8;
+}
+.col-sm-3{
+	text-align: right;
+	
+}
+
+.s{
+	margin-left: -1.5rem;
+}
+.userSex1{
+	margin-left: 3rem;
+}
+.userSex2{
+	margin-left: 4rem;
+}
+.male{
+	padding-left: 4rem;
+}
+.female{
+	padding-left: 5rem;
+}
+#imgContainer{
+	position: relative;
+}
+.timg{
+	width: 100px;
+	height: 100px;
+	margin-left: 6rem;
+}
+.timg:hover{
+	cursor: pointer;
+}
+.mask{
+	display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color:transparent;
+    margin-left: 6rem;
+    opacity: .7;
+    text-align: center;
+    line-height: 100px;
+    z-index: 999;
+    color:#fff;
+}
+.mask.active{
+	cursor: pointer;
+	background-color: #000;
+}
+#up_btn{
+	height: 40px;
+	margin-top: 45px;
+	margin-left: -6rem;
+	margin-top: 3.75rem;
+}
+
+#psw{
+	padding-top: 60px;
+	background-image: url(../img/img-460675895f9fbc6470477d9bd72f68b8.jpg);
+	margin-bottom: 0px;
+}
+.a,.b{
+	margin-left: 5rem;
+	font-size: 12px;
+}
+.b{
+	width: 70%;
+}
+.form-control-file, .form-control-range {
+    color: red;
+    font-size: 8px;
+    background-color: lightgrey;
+}
+.reser_btn{
+	margin-left: 65%;
+	background-color: #7EA800;
+	
+}
+.btn{
+	border-radius: 0px;
+	border: 0px;
+	margin-bottom: 20px;
+	font-size: 12px;
+}
+.btn-primary:hover {
+    color: #7EA800;
+    background-color: white;
+    border-color: #7EA800;
+}
+.btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem #7EA800;
+}
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #7EA800;
+    border-color: #7EA800;
+}
+.right img{
+	width: 80%;
+	height: 100px;
+	margin: 5px 10%;
+}

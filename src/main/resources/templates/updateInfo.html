@@ -1,12 +1,125 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>修改信息</title>
-		<link rel="stylesheet" href="css
-			/bootstrap.min.css" />
-	</head>
-	<body>
-		
-	</body>
+<head>
+	<meta charset="UTF-8">
+	<title>修改信息</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/bootstrap.css" />
+	<link rel="stylesheet" href="/css/updateInfo.css" />
+
+</head>
+<body>
+<div class="container-fluid">
+	<div class="updContent">
+
+		<p id="psw">
+			<!--<a href="#" id="mt" ></a>-->
+			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" style="color: white;margin-left: 91%;margin-bottom: 0px; font-size: 8px;">
+				修改密码
+			</button>
+		</p>
+
+		<form class="left">
+
+			<p style="margin-bottom: 0px;margin-left: 5rem;">头像</p>
+			<div class="form-group row ">
+				<div id="imgContainer">
+					<img class=" timg" src="${user.userimg}" id="userimg" />
+					<div class="mask" id="mask"></div>
+				</div>
+				<small style="color: grey;margin-left: 1rem;">支持jpg\png格式</small>
+				<button type="button" id="up_btn" > 保存头像</button>
+			</div>
+			<hr />
+			<div class="form-group ">
+				<label for="nickName"  class="a">昵称</label>
+				<div class="">
+					<input type="text" class="b" name="nickName" id="nickName" value="${user.nickname}" placeholder="请输入您的昵称"  />
+				</div>
+			</div>
+
+			<div class="form-check row">
+				<label for="userSex1" class="col-sm-3 col-form-label s">性别</label>
+				@if(user.usersex == "男"){ @}
+				<input class="form-check-input userSex1" type="radio" name="sexRadios" id="userSex1" value="男" checked/>
+				<label class="male">男</label>
+				<input class="form-check-input userSex2" type="radio" name="sexRadios" id="userSex2" value="女" />
+				<label class="female">女</label>
+				@}else{ @}
+				<input class="form-check-input userSex1" type="radio" name="sexRadios" id="userSex1" value="男" />
+				<label class="male">男</label>
+				<input class="form-check-input userSex2" type="radio" name="sexRadios" id="userSex2" value="女" checked />
+				<label class="female">女</label>
+				@} @}
+			</div>
+			<div class="form-group ">
+				<label for="userBirthday" class="a">出生日期</label>
+				<div class="">
+					<input type="date" class="b" id="userBirthday" value='${user.birthday,dateFormat="yyyy-MM-dd"}' />
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<label for="userInfo" class="a">个人简介</label>
+				<div class="">
+					<textarea class="b" id="userInfo" rows="5" placeholder="请输入……" >${user.userinfo}</textarea>
+				</div>
+			</div>
+			<button type="button" class="btn btn-primary reser_btn">保存并关闭</button>
+			<button  class="btn btn-secondary cancel_btn">取消</button>
+		</form>
+
+	</div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">修改密码</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="background-image: url(../img/brow1.jpg);">
+				<form>
+					<div class="form-group ">
+						<label for="oldPSW" class="a">旧密码</label>
+						<div class="">
+							<input type="text" class="b" id="oldPSW" placeholder="请输入您的旧密码" />
+							<input type="hidden" name="oldPassword" id="oldPassword" value="${user.password}"/>
+						</div>
+					</div>
+					<div class="form-group ">
+						<label for="newPSW" class="a">新密码</label>
+						<div class="">
+							<input type="text" class="b" id="newPSW" placeholder="请输入您的新密码" />
+						</div>
+					</div>
+					<div class="form-group ">
+						<label for="newPSW1" class="a">请再次输入您的新密码</label>
+						<div class="">
+							<input type="text" class="b" id="newPSW1" placeholder="请再次输入您的新密码" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary s_update">确定修改</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script src="/js/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/js/qiniu.js"></script>
+<script type="text/javascript" src="/js/updateInfo.js" ></script>
+</body>
+
 </html>

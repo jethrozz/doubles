@@ -14,6 +14,7 @@ import com.doubles.util.Utils;
 import com.github.pagehelper.Page;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -88,6 +90,26 @@ public class ImageController {
             return Utils.toJson(result);
         }
     }
+    @RequestMapping(value = "/uploadImg",method = RequestMethod.POST)
+    @ResponseBody
+    public String uploadImg(MultipartFile file ,HttpServletRequest request ,HttpServletResponse response){
+        CommonResult<String> result = new CommonResult<>(0,"update img success");
+        Users user = (Users)request.getSession().getAttribute("user");
+
+        if(file != null){
+            String filename = SecretUtils.uuid32() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+            String url = qiniuUtil.uploadImg(filename, file);
+            user.setUserimg(url);
+            userService.updateUserInfo(user);
+            return Utils.toJson(result);
+        }else{
+            result.setStauts(1);
+            result.setMsg("file is empty");
+            return Utils.toJson(result);
+        }
+
+    }
+
 
     @RequestMapping(value = "/uploadArticleImg",method = RequestMethod.POST)
     @ResponseBody

@@ -10,11 +10,13 @@ import com.doubles.util.Utils;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -65,8 +67,16 @@ public class UsersController {
 		return "register";
 	}
 
-	ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
 
+	ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
+	@RequestMapping("/myself")
+	public ModelAndView myself(HttpServletRequest request){
+		Users user = (Users)request.getSession().getAttribute("user");
+		ModelAndView modelAndView = new ModelAndView("updateInfo");
+		modelAndView.addObject("user",user);
+
+		return modelAndView;
+	}
 	/**
 	 * 用户登录接口
 	 * @param request
@@ -193,11 +203,7 @@ public class UsersController {
 			result.setStauts(1);
 			result.setMsg("user is null");
 			return Utils.toJson(result);
-		}/*else if(StringUtils.isEmpty(user.getUserId())){
-			result.setStauts(1);
-			result.setMsg("request is not contain userId");
-			return Utils.toJson(result);
-		}*/else {
+		}else {
 			if (!usersService.updateUserInfo(user)) {
 				result.setStauts(1);
 				result.setMsg("update failed");

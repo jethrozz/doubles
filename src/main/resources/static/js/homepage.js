@@ -1,3 +1,7 @@
+$("#myself").click(function () {
+   window.location.href = "/users/myself";
+});
+
 //点赞
 $(".like").on("click",function () {
 
