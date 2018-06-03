@@ -100,6 +100,12 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
+  <select id="getRecomend" resultType="java.util.Map">
+    SELECT distinct article.content as content, article.article_id AS articleId ,DATE_FORMAT(article.create_time,   '%Y-%m-%d %H:%i:%S') as createTime
+,users.nickname as nickname,users.user_id as userId,users.userImg from article inner join users inner join artilce_topic on article.user_id = users.user_id and article.article_id = artilce_topic.article_id
+  </select>
+
+
   <select id="getArticleByTime" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />

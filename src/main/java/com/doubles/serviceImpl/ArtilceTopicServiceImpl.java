@@ -64,7 +64,6 @@ public class ArtilceTopicServiceImpl implements ArtilceTopicService {
 		ArtilceTopicExample example = new ArtilceTopicExample();
 		for (String topic:topicList ) {
 			example.or().andTopicIdEqualTo(topic);
-
 			List<ArtilceTopic> atList = artilceTopicDao.selectByExample(example);
 			if(atList != null && atList.size() != 0){
 				List<Article> articleList = new ArrayList<>();

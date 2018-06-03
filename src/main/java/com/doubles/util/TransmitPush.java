@@ -93,11 +93,13 @@ public class TransmitPush implements Runnable {
 		}
 	}
 
+	//
 	private void addToMyPush(Transmit transmit,Article article){
 		PushData pushData = new PushData();
-		pushData.setBelongUser(transmit.getUserId());
+		pushData.setBelongUser(article.getUserId());
+		pushData.setNowUser(transmit.getUserId());
 		pushData.setPushUser(transmit.getUserId());
-		pushData.setType(0);
+		pushData.setType(2);
 		pushData.setContentId(article.getArticleId());
 		pushData.setIsPush(0);
 		pushService.addData(pushData);

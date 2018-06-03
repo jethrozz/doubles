@@ -1,3 +1,4 @@
+/*
 
 $("#btn-lg").click(function(){
 	if("" != $("#userName").val()){
@@ -28,13 +29,15 @@ function login(user,pwd){
             var res = JSON.parse(data);
             var user = res.data;
             console.log(res);
-            var id =user.userId;
-            sessionStorage.setItem("userId", id);
+
             if(res.status == 0){
-               window.location.href = "../index"
+                var id =user.userId;
+                sessionStorage.setItem("userId", id);
+                window.location.href = "/index"
             }else{
-                //alert("用户名或密码错误")
+                alert("用户名或密码错误")
             }
         }
     });
 }
+*/

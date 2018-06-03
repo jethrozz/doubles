@@ -43,6 +43,67 @@ public class TopicController {
 	private ArtilceTopicService artilceTopicService;
 	@Autowired
 	private CollectionsService collectionsService;
+	@Autowired
+	private ArticleService articleService;
+	@Autowired
+	private ArticlImgService articlImgService;
+	@Autowired
+	private AlbumService albumService;
+	@Autowired
+	private ImageService imageService;
+
+	@RequestMapping("/submitArticle")
+	@ResponseBody
+	public String submitArticle(HttpServletRequest request, Article article,String image){
+		CommonResult<String> result = new CommonResult<>(0,"success");
+		if(StringUtils.isEmpty(image)&&article.getIsHaveimg() == 1){
+			result.setStauts(1);
+			result.setMsg("failed");
+			return Utils.toJson(result);
+		}
+
+		//发表动态时要先去遍历该动态的type
+		Users user = (Users)request.getSession().getAttribute("user");
+		article.setUserId(user.getUserId());
+		//直接插入表中，如有图片再进行后续处理
+		articleService.addArticleNoImg(article);
+
+		if(article.getIsHaveimg() == 1){
+			//如果有图片，则先插入动态，再处理图片
+			String imgUrl[] = image.split("\\|\\|");
+			//先根据用户id 获取到动态相册
+			Album album = albumService.getAlbumByuserIdAndName(user.getUserId());
+			for(int i=0;i<imgUrl.length;i++){
+				//然后遍历每个图片链接进行处理
+				//将图片放入动态相册中
+				Image img = new Image();
+				img.setImgPath(imgUrl[i]);
+				img.setAlbumId(album.getAlbumId());
+				img.setImgDescribe("");
+				imageService.addImage(img);
+				//再将图片与该动态对应放入动态表中
+				ArticlImg articlImg = new ArticlImg();
+				articlImg.setArticleId(article.getArticleId());
+				articlImg.setImgId(img.getImgId());
+				articlImgService.addImage(articlImg);
+			}
+		}
+
+
+		Topic topic = topicService.getOneById(article.getType());
+		ArtilceTopic artilceTopic = new ArtilceTopic();
+		artilceTopic.setArticleId(article.getArticleId());
+		artilceTopic.setTopicId(article.getType());
+		artilceTopicService.insertOne(artilceTopic);
+		if(topic != null){
+			topic.setDiscussionNumber(topic.getDiscussionNumber()+1);
+			topicService.updateTopic(topic);
+			SingletonTopicQueue.getInstance().addUserIntoPushQueue(artilceTopic);
+		}
+		//将当前发表动态的用户放入阻塞队列中，在另一个线程中进行推送操作
+		SingletonArticleQueue.getInstance().addUserIntoPushQueue(article);
+		return Utils.toJson(result);
+	}
 
 	@RequestMapping("/addTopic")
 	@ResponseBody
@@ -252,15 +313,11 @@ public class TopicController {
 			for (Article article :entry.getValue()){
 				String img = Utils.getOneImgTag(article.getContent());
 				//判断是否有图
-				if(img == null){
-					continue;
-				}else{
-					//有图
-					String src = Utils.getOneImgSrc(img);
-					//将该动态与图片关联起来
-					imgList.put(article.getArticleId(),src);
-					resultTopic.setImgList(imgList);
-				}
+				String src = Utils.getOneImgSrc(img);
+				//将该动态与图片关联起来
+				imgList.put(article.getArticleId(),src);
+				resultTopic.setImgList(imgList);
+
 				if(imgList.size() >= 6){
 					break;
 				}

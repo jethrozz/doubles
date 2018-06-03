@@ -29,7 +29,7 @@ public class TopicServiceImpl implements TopicService {
 	public Topic getOneById(String topicId) {
 
 		return topicMapper.selectByPrimaryKey(topicId);
-	}
+}
 
 	@Override
 	public Topic getOneByTitle(String title) {

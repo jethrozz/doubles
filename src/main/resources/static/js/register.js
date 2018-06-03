@@ -18,7 +18,10 @@ $("#userName").blur(function (e) {
                 console.log(result);
                 var res = JSON.parse(data);
                 if(res.stauts != 0){
-                    alert("该用户名已存在")
+                    var str = "该用户名已存在";
+                    $("#tip").text(str);
+                    $("#tip").fadeIn(1500).fadeOut(1500);
+                    $("#userName").focus();
                 }
             }
         })
@@ -29,29 +32,7 @@ $("#myBtn").click(function (e) {
         if($("#nickName").val() != ""){
             if($("#userPW").val() != ""){
                 if($("#userBirthday").val() != ""){
-                    $.ajax({
-                        url: "./userregist",
-                        type: "post",
-                        async:true,
-                        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-                        data: {
-                            username:$("#userName").val(),
-                            nickname:$("#nickName").val(),
-                            password:$("#userPW").val(),
-                            usersex: $("input[name='userSex']:checked").val(),
-                            birthday:$("#userBirthday").val(),
-                            usermail:$("#userEmail").val()
-                        },
-                        success: function (data,stauts,result) {
-                            var res = JSON.parse(data);
-                            if(res.status == 0){
-                                //uid = res.msg;
-                                $("#mymodal").modal("toggle");
-                            }else{
-                                alert("注册失败，请重试");
-                            }
-                        }
-                    });
+                    $("#mymodal").modal("toggle");
                 }else{
                     $("#userBirthday").focus();
                     alert("生日不能为空");
@@ -76,29 +57,36 @@ function getTheCheckBoxValue() {
     test.each(function () {
         checkBoxValue += $(this).val() + "||";
     })
-    checkBoxValue = checkBoxValue.substring(0, checkBoxValue.length - 1);
+    checkBoxValue = checkBoxValue.substring(0, checkBoxValue.length - 2);
 
     return checkBoxValue;
 }
 function sublike() {
     var like = getTheCheckBoxValue();
-    $.ajax({
-        url: "./addLike",
-        type: "post",
-        async:true,
-        data: {
-            userId:uid,
-            userlike:like,
-        },
-        success: function (data,stauts,result) {
-            var res = JSON.parse(data);
-            if(res.stauts == 0){
-                window.location.href = "../index";
-            }else{
-                alert("添加失败")
-                window.location.href = "../index";
-            }
-        }
-    });
-
+                      $.ajax({
+                        url: "./userregist",
+                        type: "post",
+                        async:true,
+                        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+                        data: {
+                            username:$("#userName").val(),
+                            nickname:$("#nickName").val(),
+                            password:$("#userPW").val(),
+                            usersex: $("input[name='userSex']:checked").val(),
+                            birthday:$("#userBirthday").val(),
+                            usermail:$("#userEmail").val(),
+                            userlike:like
+                        },
+                        success: function (data,stauts,result) {
+                            var res = JSON.parse(data);
+                            if(res.status == 0){
+                                var user = res.data;
+                                var id =user.userId;
+                                sessionStorage.setItem("userId", id);
+                                window.location.href = "/index";
+                            }else{
+                                alert("注册失败，请重试");
+                            }
+                        }
+                    });
 }

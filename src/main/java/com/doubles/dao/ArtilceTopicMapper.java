@@ -3,6 +3,7 @@ package com.doubles.dao;
 import com.doubles.entity.ArtilceTopic;
 import com.doubles.entity.ArtilceTopicExample;
 import java.util.List;
+import java.util.Map;
 
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
@@ -33,4 +34,6 @@ public interface ArtilceTopicMapper {
     Page<ArtilceTopic> getArticlePageByTopicId(@Param("topicId") String topicId);
 
     List<String> getTopicListByArticleNumber();
+
+    List<Map<String,Object>> getTopicByArticle(@Param("articleId")String articleId);
 }

@@ -85,12 +85,12 @@ public class TransmitController {
 
 		if(!transmitService.addTransmit(transmit)){
 			if(transmit.getType() != 1){
-				SingletonTransmitQueue.getInstance().addTransmitIntoPushQueue(transmit);
+
 			}
 			result.setStauts(1);
 			result.setMsg("the transmit failed");
 		}
-
+		SingletonTransmitQueue.getInstance().addTransmitIntoPushQueue(transmit);
 		return Utils.toJson(result);
 	}
 

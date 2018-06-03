@@ -119,9 +119,8 @@ public class UsersController {
 	 */
 	@RequestMapping("/userregist")
 	@ResponseBody
-	public String userRegist(HttpServletRequest request,Users user) {
+	public String userRegist(HttpSession session,HttpServletResponse response,HttpServletRequest request,Users user) {
 		CommonResult<Users> result = new CommonResult<Users>(0,"regist success");
-		//user.setUserId(SecretUtils.uuid32());
 		user.setUserimg("http://p8jz8nm27.bkt.clouddn.com/kenan.png");
 		if (usersService.registUser(user)) {
 			//注册成功为其创建一个存放动态的相册
@@ -130,6 +129,18 @@ public class UsersController {
 			album.setAlbumName("动态相册");
 			album.setUserId(user.getUserId());
 			albumService.addAlbum(album);
+			String like[] = user.getUserlike().split("\\|\\|");
+			for(String topicId : like){
+				Topic t = topicService.getOneById(topicId);
+				UserTopic userTopic = new UserTopic();
+				userTopic.setUserId(user.getUserId());
+				userTopic.setTopicId(topicId);
+				userTopicService.followTopic(userTopic);
+				t.setFanNumber(t.getFanNumber()+1);
+				topicService.updateTopic(t);
+			}
+			session.setAttribute("user", user);
+			addCooike(session,response);
 			result.setData(user);
 			return Utils.toJson(result);
 		}else{
@@ -140,38 +151,6 @@ public class UsersController {
 	}
 
 	/**
-	 * 用户注册后添加标签接口
-	 * @param session
-	 * @param response
-	 * @param user
-	 * @return
-	 */
-	@RequestMapping("/addLike")
-	@ResponseBody
-	public String userLike(HttpSession session,HttpServletResponse response, Users user) {
-		usersService.updateUserInfo(user);
-		String like[] = user.getUserlike().split("\\|\\|");
-		for(String topic : like){
-			Topic t = topicService.getOneById(topic);
-			UserTopic userTopic = new UserTopic();
-			userTopic.setUserId(user.getUserId());
-			userTopic.setTopicId(topic);
-			userTopicService.followTopic(userTopic);
-			t.setFanNumber(t.getFanNumber()+1);
-			topicService.updateTopic(t);
-		}
-		user = usersService.getOne(user.getUserId());
-		session.setAttribute("user", user);
-		CommonResult<Users> res = new CommonResult();
-		res.setData(user);
-		res.setStauts(0);
-		res.setMsg("登录成功");
-		addCooike(session,response);
-		return Utils.toJson(res);
-	}
-
-
-	/**
 	 * 检查用户名是否重复接口
 	 * @param username
 	 * @return
@@ -179,7 +158,7 @@ public class UsersController {
 	@RequestMapping("/checkName")
 	@ResponseBody
 	public String checkName(String username) {
-		ResLogin res = new ResLogin(1, "default failed");
+		ResLogin res = new ResLogin(1, "default failed");//封装的返回结果
 		if (usersService.checkUserName(username)) {
 			res.setMsg("success");
 			res.setStauts(0);
@@ -322,7 +301,7 @@ public class UsersController {
 		List<HotPerson> hotPeople = new ArrayList<>();
 		Users user = (Users)request.getSession().getAttribute("user");
 		//获取到所有用户
-		List<Users> usersList = usersService.getHotPerson();
+		List<Users> usersList = usersService.getHotPerson();/*发了动态的用户*/
 
 		setHotPerson(user,usersList,hotPeople);
 

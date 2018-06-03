@@ -1,22 +1,38 @@
 package com.doubles.controller;
 
+import com.doubles.dao.TopicMapper;
+import com.doubles.dao.UsersMapper;
+import com.doubles.entity.Topic;
+import com.doubles.entity.TopicExample;
+import com.doubles.entity.Users;
+import com.doubles.entity.UsersExample;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-/**
- * @时间: 2018/4/25
- * @描述：
- */
-@Controller()
-@RequestMapping("/test")
+@Controller
+
 public class TestController {
+    @Autowired
+    TopicMapper topicMapper;
 
-    @RequestMapping("/index")
-    public String index(HttpServletRequest request){
-        request.setAttribute("name","jethro");
-        return "index";
+    @RequestMapping("/zs")
+    public ModelAndView getTheworld( Users users,String pd){
+        ModelAndView modelAndView=new ModelAndView("/test");
+
+        TopicExample example = new TopicExample();
+        example.or().andTopicIdEqualTo(pd);
+        List<Topic> list=topicMapper.selectByExample(example);
+        if (list==null||list.size()==0)
+        {
+            return modelAndView;
+        }
+        modelAndView.addObject("zs",list.get(0));
+        return modelAndView;
     }
+
 }

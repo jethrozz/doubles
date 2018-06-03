@@ -70,6 +70,10 @@
   <sql id="Base_Column_List" >
     at_id, article_id, topic_id
   </sql>
+<select id="getTopicByArticle" resultType="java.util.Map">
+  select topic.title as title ,topic.topic_id as topicId from topic inner join artilce_topic on topic.topic_id = artilce_topic.topic_id where artilce_topic.article_id = #{articleId};
+</select>
+
 
   <select id="getTopicListByArticleNumber" resultType="java.lang.String">
     select

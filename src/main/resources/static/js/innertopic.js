@@ -321,17 +321,17 @@ $("#sub-article").bind("click",function () {
     var content = editor.txt.html();  // 获取 Html 格式的内容
 
     var topicId = $("#topicId").val();
-    var tag = getTheCheckBoxValue();
+//    var tag = getTheCheckBoxValue();
     var userId = sessionStorage.getItem("userId");
-    if(tag.indexOf(topicId) == -1){
+/*    if(tag.indexOf(topicId) == -1){
         tag = tag + "||" + topicId;
-    }
+    }*/
     if(imageurl != ""){
         isHave = 1;
     }
     if(content != null){
         $.ajax({
-            url: "/article/submitArticle",
+            url: "/topic/submitArticle",
             type: "post",
             async:true,
             contentType : "application/x-www-form-urlencoded; charset=UTF-8",
@@ -339,7 +339,7 @@ $("#sub-article").bind("click",function () {
                content:content
                ,userId:userId
                 ,image:imageurl
-                ,type:tag
+                ,type:topicId
                 ,isHaveimg:isHave
             },
             success: function (data,stauts,result) {

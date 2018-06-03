@@ -63,33 +63,54 @@ $(".messages").bind("click",function(){
 	$('#myLeft').hide();
 	$("#myRight").removeClass("col-lg-9").addClass("col-lg-12");
 	$("#myRight").css("padding-left","200px");
-	$("#myRight").css("padding-right","200px");
+    $("#myRight").css("padding-right","200px");
 });
 $(".settings").bind("click",function(){
 	$('#myLeft').hide();
+    $("#myRight").css("padding-left","200px");
+    $("#myRight").css("padding-right","200px");
 	$("#myRight").removeClass("col-lg-9").addClass("col-lg-12");
 });
 
 $(".home_btn").bind("click",function(){
-	
 	if($('#myLeft').is(":hidden")){
 		$('#myLeft').show();
+        $("#myRight").css("padding-left","0");
+        $("#myRight").css("padding-right","0");
 		$("#myRight").removeClass("col-lg-12").addClass("col-lg-9");
 	}
-	
 });
 
 $("#myTab4").bind("click",function(){
-	
-	
-		$(".home_btn").removeClass("active");
+    if($(".home_btn").hasClass("active")){
+        $(".home_btn").removeClass("active");
+    }
+    if($(".settingss").hasClass("active")){
+        $(".settingss").removeClass("active");
+    }
+    console.log('645');
 
 });
 
-$(".home_btn").bind("click",function(){
-	
-	
+$("#myTabR").bind("click",function(){
+
+    if($("#fllow-tab").hasClass("active")){
+        $("#fllow-tab").removeClass("active");
+    }
+    if($("#fans-tab").hasClass("active")){
+        $("#fans-tab").removeClass("active");
+    }
+    if($("#article-tab").hasClass("active")){
+        $("#article-tab").removeClass("active");
+    }
+    if($("#like-tab").hasClass("active")){
+        $("#like-tab").removeClass("active");
+    }
+    if($("#information-tab").hasClass("active")){
+        $("#information-tab").removeClass("active");
+    }
 });
+
 function subComment(e) {
     var commentBox = $(e).parent().parent().parent().parent().next();
     if(commentBox.is(':hidden')){

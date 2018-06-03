@@ -35,6 +35,16 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Users userLogin(Users user) {
+/*        UsersExample example = new UsersExample();
+        example.setOrderByClause("username desc");
+        example.or().andUsernameEqualTo(user.getUsername()).andPasswordEqualTo(user.getPassword());
+        List<Users> list=userDao.selectByExample(example);
+        if (list==null&&list.size()==0)
+        {
+            return null;
+        }else {
+            return list.get(0);
+        }*/
         Users u = userDao.isUser(user.getUsername(),user.getPassword());
         if(u != null){
             return u;
@@ -72,6 +82,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Users getAdmin() {
         UsersExample example = new UsersExample();
+        example.setOrderByClause("create_time desc");
         example.or().andUsernameEqualTo("admin").andPasswordEqualTo("admin").andNicknameEqualTo("admin");
         List<Users> list = userDao.selectByExample(example);
         if(null == list || list.size() == 0)

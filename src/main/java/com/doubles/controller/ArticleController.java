@@ -1,11 +1,10 @@
 package com.doubles.controller;
 
 
+import com.doubles.dao.ArticleMapper;
+import com.doubles.dao.ArtilceTopicMapper;
 import com.doubles.entity.*;
-import com.doubles.model.CommonResult;
-import com.doubles.model.PageInfo;
-import com.doubles.model.SingletonArticleQueue;
-import com.doubles.model.SingletonTopicQueue;
+import com.doubles.model.*;
 import com.doubles.service.*;
 import com.doubles.util.Utils;
 import com.github.pagehelper.Page;
@@ -18,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.rmi.CORBA.Util;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -53,12 +54,15 @@ public class ArticleController {
     private ImageService imageService;
     @Autowired
     private TransmitService transmitService;
-
+    @Autowired
+    private ArticleMapper articleMapper;
+    @Autowired
+    private ArtilceTopicMapper artilceTopicMapper;
     @RequestMapping("/submitArticle")
     @ResponseBody
     public String submitArticle(HttpServletRequest request, Article article,String image){
         CommonResult<String> result = new CommonResult<>(0,"success");
-        if(StringUtils.isEmpty(image)){
+        if(StringUtils.isEmpty(image)&&article.getIsHaveimg() == 1){
             result.setStauts(1);
             result.setMsg("failed");
             return Utils.toJson(result);
@@ -194,10 +198,10 @@ public class ArticleController {
     public ModelAndView getArticle(HttpServletRequest request,String articleId){
         ModelAndView modelAndView = new ModelAndView("/hpdynamic");
         Users user = (Users)request.getSession().getAttribute("user");
-        Article article = articleService.getOneArticle(articleId);
-        List<Article> articleList = articleService.selectArticleListByUid(article.getUserId());
+        Article article = articleService.getOneArticle(articleId);/*当前动态的信息和评论*/
+        List<Article> articleList = articleService.selectArticleListByUid(article.getUserId());/*当前达人的所有动态*/
 
-        List<Collections>  list = collectionsService.getListCollectionByArtcile(articleId);
+        List<Collections>  list = collectionsService.getListCollectionByArtcile(articleId);/*收藏列表*/
         Relationship relationship = relationshipService.isFriend(user.getUserId(),article.getUserId());
         int isFriend = 3;
         int isLike = 1;
@@ -297,7 +301,26 @@ public class ArticleController {
 
         return Utils.toJson(result);
     }
+    @RequestMapping("/getRecomend")
+    @ResponseBody
+    public String getRecomend(HttpServletRequest request){
+        Users user = (Users)request.getSession().getAttribute("user");
+        CommonResult<Object> result = new CommonResult<>(0,"success");
+        List<RecommendResult> recommendResults = new ArrayList<>();
+        List<Map<String,Object>> list = articleMapper.getRecomend();
 
+        for(Map<String,Object> map : list){
+            List<Map<String,Object>> topics = artilceTopicMapper.getTopicByArticle((String) map.get("articleId"));
+
+            RecommendResult recommendResult = new RecommendResult();
+            recommendResult.setArt(map);
+            recommendResult.setTag(topics);
+            recommendResult.setLike(collectionsService.isCollection(user.getUserId(),(String) map.get("articleId")));
+            recommendResults.add(recommendResult);
+        }
+        result.setData(recommendResults);
+        return Utils.toJson(result);
+    }
     //    //获取单个动态
 //    @RequestMapping("/getOneArticle")
 //    @ResponseBody

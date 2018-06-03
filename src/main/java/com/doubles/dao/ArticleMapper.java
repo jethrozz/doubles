@@ -5,6 +5,7 @@ import com.doubles.entity.ArticleExample;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
@@ -42,4 +43,6 @@ public interface ArticleMapper {
 
     List<Date> getTimeGroup(@Param("userId")String userId);
     List<Article> getArticleByTime(@Param("date")String date,@Param("userId") String userId);
+
+    List<Map<String,Object>> getRecomend();
 }

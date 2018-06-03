@@ -80,7 +80,7 @@ function unTransmit(objectId,container) {
 }
 //返回首页
 $(".back_btn").bind("click",function(){
-	$(location).attr('href', 'index.html'); 
+	$(location).attr('href', '/index');
 })
 
 

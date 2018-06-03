@@ -299,7 +299,7 @@ p{
 	margin-top: 10px;
 }
 .topic_img img{
-	width: 132px;
+	width: 90px;
 	height: 105px;
 }
 .list-group-item.active{
@@ -455,3 +455,6 @@ a :hover{
 	margin-top: 0px;
 	background-color: #fafafa;
 }
+.card-img-top {
+	  height: 204.28px;
+  }

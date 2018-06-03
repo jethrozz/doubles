@@ -59,6 +59,7 @@ function HotTopic() {
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
         success: function (data,stauts,result) {
             var res = JSON.parse(data);
+            console.log(res.data);
             if(res.status == 0){
                 var topicList = res.data;
                 pinjieTopic($("#hotTopic"),topicList.list);

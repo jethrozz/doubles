@@ -1,51 +1,76 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>用户登录</title>
-		<link rel="stylesheet" href="/css/bootstrap.css"/>
-		<link rel="stylesheet" href="/css/register.css" />
-	</head>
-	<body>
-		<div class="container-fluid" id="regMain" >	
-			<div class="container" >
-				<div id="mainContent"style="margin-top: 10%; margin-bottom: 10%;">
-					<form>
-					<h2><b>用户登录</b></h2>
-					<hr />
-					<p style="color:red;text-align: right;font-size: 8px;">----<a href="#" >忘记密码？</a></p>
-					<div class="form-group row">
-					    <label for="userName"  class="col-sm-3 col-form-label">用户名：</label>
-					    <div class="col-sm-9">
-						<input type="text" class="form-control" id="userName" name="username" placeholder="用户名或这邮箱地址" style="width: 80%;"/>
-					    </div>
-				    </div>
-				    
-				<div class="form-group row">
-					<label for="userPW" class="col-sm-3 col-form-label">密码：</label>
-					<div class="col-sm-9">
-						<input type="password" class="form-control" id="userPW"  placeholder="请您的输入密码"style="width: 80%;"/>
-					</div>					
-				</div>
-				
-				
-				<button type="button" id="btn-lg" class="btn btn-primary btn-lg btn-block">立即登录</button>
-				
-			    <hr />
-				<p id="pig">没有账号，<a href="register.html">立即注册</a></p>
-				<hr />
-				</div>	
-				
-			</form>
-			</div>	
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/reset.css"/>
+	<link rel="stylesheet" href="/css/index_1.css"/>
+	<link rel="stylesheet" href="/css/login.css"/>
+
+
+	<title>doubleS图片社交网站</title>
+</head>
+<body>
+<div class="user_error">
+	<span>用户名或密码不正确</span>
+</div>
+<div class="container">
+	<div class="login_title"><h1><a href="javascript:void(0)">Doubles</a></h1></div>
+	<div class="box">
+		<div class="tab">
+			<ul >
+				<li class="tab1">用户登录</li>
+			</ul>
 		</div>
-		<div class="panel-footer">
-				版权归个人所有----------Chongqin Scien and technology Univer<br />
-				2018-04-27
+		<div class="box1">
+			<div class="form_1">
+				<form action="" method="get">
+					<div class="warn1">
+						<span>请输入帐号</span>
+					</div>
+
+					<div class="warn2">
+						<span>请输入密码</span>
+					</div>
+					<div class="warn3">
+						<span>帐号格式有误</span>
+					</div>
+					<input type="num" class="userid" id="userid" name="username" placeholder=" 用户账号">
+					<input type="password" class="userpass" id="userpass" name="password" placeholder=" 请输入密码">
+					<div class="t_left"><a href="">忘记密码</a></div>
+					<div class="t_right">没有帐号？<a href="/users/regist">注册</a></div>
+					<div class="login">登录</div>
+				</form>
 			</div>
+
+		</div>
+	</div>
+</div>
 	</body>
 	<script src="/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="/js/login.js" ></script>
+	<script type="text/javascript" src="/js/app.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $(".tab1").css({'color':'#377afd','border-bottom':' 2px solid #377afd'});
+            /*$(".tab1").bind('click',function(){
+                $(".tab2").css('color','#999999').css('border-bottom',' 2px solid #e4e4e4');
+                $(this).css('color','#377afd').css('border-bottom',' 2px solid #377afd');
+                $(".box2").hide();
+                $(".box1").show();
+            });
+
+            $(".tab2").bind('click',function(){
+                console.log("2");
+                $(".tab1").css('color','#999999').css('border-bottom',' 2px solid #e4e4e4');
+                console.log("2");
+                $(this).css('color','#377afd').css('border-bottom',' 2px solid #377afd');
+                $(".box1").hide();
+                $(".box2").show();
+            })*/
+        });
+/*        $(".user_error").fadeIn(1000).fadeOut(1500);*/
+	</script>
+	</body>
 </html>
 
 

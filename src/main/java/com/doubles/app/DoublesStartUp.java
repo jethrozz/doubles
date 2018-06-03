@@ -31,6 +31,7 @@ public class DoublesStartUp implements CommandLineRunner {
         //在线程池中开启10个线程,用于推送公告，动态，文章等消息
         LOGGER.info("初始化推送线程");
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
+
         fixedThreadPool.submit(messagePush);
         fixedThreadPool.submit(articlePush);
         fixedThreadPool.submit(topicPush);

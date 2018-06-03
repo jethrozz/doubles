@@ -87,6 +87,40 @@ $("#sub-article").bind("click",function () {
     }
 });
 
+/*$("#sub-topic-article").bind("click",function () {
+    var content = editor.txt.html();  // 获取 JSON 格式的内容
+    console.log(content);
+    console.log(imageurl);
+    console.log($("#topicId").val());
+    if(imageurl != ""){
+        isHave = 1;
+    }
+    if(content != null){
+        $.ajax({
+            url: "../article/submitArticle",
+            type: "post",
+            async:true,
+            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+            data: {
+                content:content
+                ,userId:$("#index-user-id").val()
+                ,image:imageurl
+                ,type:$("#topicId").val()
+                ,isHaveimg:isHave
+            },
+            success: function (data,stauts,result) {
+                imageurl = "";
+                var res = JSON.parse(data);
+                if(res.status == 0){
+                    alert("发布成功");
+                    window.location.reload();
+                }
+            }
+        })
+    }
+});*/
+
+
 // 初始化七牛上传
 uploadInit()
 

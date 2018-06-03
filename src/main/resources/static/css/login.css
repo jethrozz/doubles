@@ -1,0 +1,158 @@
+@charset "utf-8";
+body{
+	background-image: url("../img/rebc.gif");
+	/* position: relative; */
+}
+.user_error{
+	text-align: center;
+	position: absolute;
+	margin-top: -80px;
+	margin-left: 42%;
+	width: 160px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 3px;
+	color: #fff;
+	display: none;
+	background-color: #dd514c;
+	z-index: 999;
+}
+.container{
+	text-align: center;
+	width: 520px;
+	height: auto;
+	margin: 0 auto;
+	margin-top:80px;
+}
+.login_title{
+	text-align: center;
+	padding: 5px;
+}
+.login_title h1 a{
+	font-family:'微软雅黑';
+	font-weight: bold;
+	font-size: 30px;
+	color: #377afd;
+}
+.box{
+	height: auto;
+	width: 100%;
+	margin-top: 28px;
+	padding: 5px;
+	border-radius: 5px;
+	box-shadow: 1px 2px 6px #888888;
+	background-color: #fff;
+}
+.tab{
+	width: 320px;
+	height: auto;
+	margin-top: 10px;
+	margin-left: 100px;
+}
+.tab li{
+	font-family: "微软雅黑";
+	display: block;
+	font-size: 17px;
+	float: left;
+	text-align: center;
+	line-height: 45px;
+	height: 45px;
+	width: 320px;
+	color: #999999;
+	cursor: default;
+	border-bottom: 2px solid #e4e4e4; 
+}
+.box1{
+	width: 320px;
+	height: auto;
+	margin-top: 57px;
+	font-size: 12px;
+	margin-left: 100px;
+	margin-bottom: 30px;
+	position: relative;
+}
+.userid,.userpass,.login{
+	font-family: "微软雅黑";
+	width: 315px;
+	height: 35px;
+	font-size: 14px;
+	margin-top: 10px;
+	padding: 2px;
+}
+
+.userid:focus,.userpass:focus{
+	border:1px #377afd solid;
+	box-shadow: 0px 0px 5px #377afd;
+}
+.warning{
+	border:1px #dd514c solid;
+	box-shadow: 0px 0px 5px #dd514c;
+}
+.login{
+	letter-spacing:10px;
+	font-size: 16px;
+	color: #fff;
+	width: 320px;
+	line-height: 35px;
+	border: none;
+	margin-top:27px;
+	background-color: #377afd;
+	cursor: pointer;
+}
+.login:hover{
+	background-color: #286090;
+	cursor: pointer;
+}
+.login:focus{
+	background-color: #286090;
+	cursor: pointer;
+}
+.warn1,.warn2,.warn3{
+	position: absolute;
+	right: 3px;
+	background-color: #dd514c;
+	border-radius: 3px;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 13px;
+	color: #fff;
+	display: none;
+}
+.warn1,.warn3{
+	top:16px;
+}
+.warn2{
+	top:68px;
+}
+.t_left,.t_right{
+	color: #9c9f9f;
+	position: absolute;
+	width: 100px;
+	top:110px;
+}
+.t_left{
+	left: -19px;
+}
+.t_left a{
+	color: #9c9f9f;
+}
+.t_left a:hover,.t_right a:hover{
+	color: #377afd;
+	text-decoration: underline;
+}
+.t_left a:active,.t_right a:active{
+	color: #377afd;
+	text-decoration: underline;
+}
+.t_left a:focus,.t_right a:focus{
+	color: #377afd;
+	text-decoration: underline;
+}
+.t_right{
+	right: 0px;
+}
+.t_right a{
+	font-size: 13px;
+	color: #377afd;
+}
