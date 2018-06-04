@@ -112,13 +112,13 @@
     ,
     <include refid="Blob_Column_List" />
     FROM article
-    where date_format(create_time,'%Y-%m-%d')= #{date} AND user_id = #{userId};
+    where date_format(update_time,'%Y-%m-%d')= #{date} AND user_id = #{userId};
   </select>
   <select id="getTimeGroup" parameterType="java.lang.String" resultType="java.util.Date">
-    SELECT DATE_FORMAT(create_time, "%Y-%m-%d")
+    SELECT DATE_FORMAT(update_time, "%Y-%m-%d")
     FROM article
     WHERE user_id = #{userId}
-    GROUP BY DATE_FORMAT(create_time, "%Y-%m-%d")
+    GROUP BY DATE_FORMAT(update_time, "%Y-%m-%d")
   </select>
   <select id="findPageByUid" resultMap="ResultMapWithBLOBs">
     select

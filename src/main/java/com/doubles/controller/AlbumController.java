@@ -1,10 +1,8 @@
 package com.doubles.controller;
 
 
-import com.doubles.entity.Album;
-import com.doubles.entity.Article;
-import com.doubles.entity.Relationship;
-import com.doubles.entity.Users;
+import com.doubles.dao.ImageMapper;
+import com.doubles.entity.*;
 import com.doubles.model.CommonResult;
 import com.doubles.model.MyAlbum;
 import com.doubles.model.PageInfo;
@@ -25,9 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.awt.font.ImageGraphicAttribute;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,6 +51,9 @@ public class AlbumController {
 	private ArticleService articleService;
 	@Autowired
 	private RelationshipService relationshipService;
+	@Autowired
+	private ImageMapper imageMapper;
+
 	@RequestMapping("/createAlbum")
 	@ResponseBody
 	public String createAlbum(HttpServletRequest request,Album album){
@@ -92,7 +95,9 @@ public class AlbumController {
 
 		//根据时间分组，先获取到所有的时间
 		List<Date> dateList = articleService.getTimeGroup(userId);
+		//获取到该用户的所有相册以及相册下的图片
 
+		//根据日期构建图集，首先先把所有图片按日期分组
 		MyAlbum myAlbum = null;
 		List<MyAlbum> albumList = null;
 		List<ResultAlbum>  resultAlbumList = new ArrayList<>();
@@ -131,6 +136,8 @@ public class AlbumController {
 		Collections.reverse(resultAlbumList);
 		Relationship relationship = relationshipService.isFriend(user.getUserId(),userId);
 		Users object = userService.getOne(userId);
+
+
 		modelAndView.addObject("albumList",resultAlbumList);
 		modelAndView.addObject("object",object);
 
@@ -176,6 +183,7 @@ public class AlbumController {
 			if(articleList != null && articleList.size() != 0){
 				albumList = new ArrayList<>();
 				//再遍历该日期下的动态。封装需要的数据
+				ResultAlbum resultAlbum = null;
 				for (Article article: articleList ) {
 					if(article.getImgList() == null || article.getImgList().size() == 0){
 						continue;
@@ -194,7 +202,7 @@ public class AlbumController {
 					myAlbum.setArticleId(article.getArticleId());
 					albumList.add(myAlbum);
 					//}
-					ResultAlbum resultAlbum = new ResultAlbum();
+					resultAlbum = new ResultAlbum();
 					try {
 						resultAlbum.setAlbumTime(sdf1.format(sdf.parse(date)));
 					} catch (ParseException e) {
@@ -204,9 +212,9 @@ public class AlbumController {
 					}
 
 					resultAlbum.setAlbumList(albumList);
-					resultAlbumList.add(resultAlbum);
-				}
 
+				}
+				resultAlbumList.add(resultAlbum);
 			}
 
 

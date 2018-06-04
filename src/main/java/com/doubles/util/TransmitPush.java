@@ -58,8 +58,8 @@ public class TransmitPush implements Runnable {
 				List<Relationship> relationship2 = relationshipService.findFriends(userId,2,1); //相互关注用户
 				List<String> followUser = new ArrayList<>();
 
-				addtoList(relationship1,followUser);
-				addtoList(relationship2,followUser);
+				addtoList(relationship1,followUser,transmit);
+				addtoList(relationship2,followUser,transmit);
 
 				for(String userid : followUser){
 					PushData pushData = new PushData();
@@ -87,12 +87,19 @@ public class TransmitPush implements Runnable {
 		stopme = true;
 	}
 
-	private void addtoList(List<Relationship> list1,List<String> list2){
+	private void addtoList(List<Relationship> list1,List<String> list2,Transmit transmit){
 		for (Relationship r:list1 ) {
-			list2.add(r.getUserId());
+			if(r.getIsFriend() == 2){
+				if(r.getUserId().equals(transmit.getUserId()) && !r.getFriendId().equals(transmit.getUserId())){
+					list2.add(r.getFriendId());
+				}else{
+					list2.add(r.getUserId());
+				}
+			}else{
+				list2.add(r.getUserId());
+			}
 		}
 	}
-
 	//
 	private void addToMyPush(Transmit transmit,Article article){
 		PushData pushData = new PushData();

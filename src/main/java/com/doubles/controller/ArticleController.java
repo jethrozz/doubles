@@ -1,6 +1,7 @@
 package com.doubles.controller;
 
 
+import com.doubles.dao.AlbumMapper;
 import com.doubles.dao.ArticleMapper;
 import com.doubles.dao.ArtilceTopicMapper;
 import com.doubles.entity.*;
@@ -60,6 +61,10 @@ public class ArticleController {
     private ArticleMapper articleMapper;
     @Autowired
     private ArtilceTopicMapper artilceTopicMapper;
+    @Autowired
+    private AlbumMapper albumMapper;
+
+    private SimpleDateFormat ablumDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     @RequestMapping("/submitArticle")
     @ResponseBody
@@ -74,11 +79,12 @@ public class ArticleController {
         //发表动态时要先去遍历该动态的type
         Users user = (Users)request.getSession().getAttribute("user");
         article.setUserId(user.getUserId());
-        //直接插入表中，如有图片再进行后续处理
+
 
         //调用imgTagList方法，该方法可以判断传入的字符串中是否有img标签，并会返回所有img标签
         List<String> imgList = Utils.getImgTagList(article.getContent());
         if(imgList.size() != 0){
+            //直接插入表中，如有图片再进行后续处理
             articleService.addArticleNoImg(article);
             //不等于0 就表明该条动态是有图的
             Album album = albumService.getAlbumByuserIdAndName(user.getUserId());
@@ -90,6 +96,7 @@ public class ArticleController {
                 src = src.substring(5,src.length()-1);
                 //获取到图片创建时间
                 alt = alt.substring(5,alt.length()-1);
+
 
                 Image img = new Image();
                 img.setAlbumId(album.getAlbumId());
@@ -105,6 +112,13 @@ public class ArticleController {
                 articlImg.setArticleId(article.getArticleId());
                 articlImg.setImgId(img.getImgId());
                 articlImgService.addImage(articlImg);
+
+                try {
+                    article.setUpdateTime(sdf.parse(alt));
+                    articleService.updateArticle(article);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         }else{
             article.setIsHaveimg((byte)1);

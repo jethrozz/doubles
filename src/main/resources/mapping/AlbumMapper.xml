@@ -73,6 +73,8 @@
   <sql id="Base_Column_List" >
     album_id, user_id, album_name, album_describe, create_time, update_time
   </sql>
+
+
   <select id="getAlbumPageByUser" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />

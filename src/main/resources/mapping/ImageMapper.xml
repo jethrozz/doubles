@@ -74,6 +74,8 @@
     img_id, album_id, img_path, img_describe, like_number, collect_number, create_time, 
     update_time
   </sql>
+
+
   <select id="selectByAlbum" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />

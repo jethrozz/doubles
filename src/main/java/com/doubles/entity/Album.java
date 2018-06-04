@@ -27,6 +27,13 @@ public class Album implements Serializable {
     @JSONField(serialize=false)
     private List<Image> imageList;
 
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
+    }
 
     public Users getUser() {
         return user;

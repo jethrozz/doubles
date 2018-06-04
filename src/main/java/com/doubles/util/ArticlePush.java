@@ -54,8 +54,8 @@ public class ArticlePush implements Runnable{
                 List<Relationship> relationship2 = relationshipService.findFriends(userId,2,1); //相互关注用户
                 List<String> followUser = new ArrayList<>();
 
-                addtoList(relationship1,followUser);
-                addtoList(relationship2,followUser);
+                addtoList(relationship1,followUser,article);
+                addtoList(relationship2,followUser,article);
 
                 for(String userid : followUser){
                     PushData pushData = new PushData();
@@ -82,9 +82,17 @@ public class ArticlePush implements Runnable{
         stopme = true;
     }
 
-    private void addtoList(List<Relationship> list1,List<String> list2){
+    private void addtoList(List<Relationship> list1,List<String> list2,Article article){
         for (Relationship r:list1 ) {
-            list2.add(r.getUserId());
+            if(r.getIsFriend() == 2){
+                if(r.getUserId().equals(article.getUserId()) && !r.getFriendId().equals(article.getUserId())){
+                    list2.add(r.getFriendId());
+                }else{
+                    list2.add(r.getUserId());
+                }
+            }else{
+                list2.add(r.getUserId());
+            }
         }
     }
 
