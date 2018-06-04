@@ -302,10 +302,13 @@ public class TopicController {
 	}
 
 	private void getTopic(Map<Topic,List<Article>> artilceTopicList,List<ResultTopic> resultTopicList){
+		//获取当前的map的迭代器，用于程序遍历
 		Iterator iterator = artilceTopicList.entrySet().iterator();
-
+		//遍历查询出来的map List
 		while (iterator.hasNext()){
+			//通过迭代器获取当前map
 			Map.Entry<Topic, List<Article>> entry = (Map.Entry<Topic, List<Article>>) iterator.next();
+
 			ResultTopic resultTopic = new ResultTopic();
 			resultTopic.setTopic(entry.getKey());
 			//获取到该动态的第一张图片

@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -21,4 +22,7 @@ public interface ChatRecordService{
     Page<ChatRecord> getPageChatRecord(String fromUser, String toUser,int pageNo,int pageSize);
     Page<ChatRecord> getChatRecordList(String toUser,int pageNo,int pageSize);
     Integer getNumberOfMeAndFriend(String fromUser, String toUser);
+
+    Page<Map<String,Object>> getChatRecordListCount(String toUser,int pageNo,int pageSize);
+    ChatRecord getTheTopOne(String userId,String toUser);
 }

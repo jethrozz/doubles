@@ -8,9 +8,11 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -36,6 +38,7 @@ public class ChatRecordServiceImpl  implements ChatRecordService {
     }
 
     @Override
+    @Transactional
     public boolean insert(ChatRecord chatRecord) {
         if(chatRecordDao.insertSelective(chatRecord) >= 1){
             return true;
@@ -59,6 +62,20 @@ public class ChatRecordServiceImpl  implements ChatRecordService {
     @Override
     public Integer getNumberOfMeAndFriend(String fromUser, String toUser) {
         return chatRecordDao.getNumberOfMeAndFriend(fromUser,toUser);
+    }
+
+    @Override
+    public Page<Map<String, Object>> getChatRecordListCount(String userId, int pageNo, int pageSize) {
+        Page<Map<String, Object>> page =  PageHelper.startPage(pageNo,pageSize);
+        Page<Map<String, Object>> result = chatRecordDao.getChatRecordListCount(userId);
+        result.setTotal(page.getTotal());
+
+        return result;
+    }
+
+    @Override
+    public ChatRecord getTheTopOne(String userId, String toUser) {
+        return chatRecordDao.getTheTopOne(userId,toUser);
     }
 
 }

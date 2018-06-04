@@ -8,6 +8,7 @@ import com.doubles.entity.Image;
 import com.doubles.service.ArticlImgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class ArticlImgServiceImpl implements ArticlImgService {
 	}
 
 	@Override
+	@Transactional
 	public boolean addImage(ArticlImg articlImg) {
 		if(articlImgDao.insertSelective(articlImg) >= 1){
 			return true;

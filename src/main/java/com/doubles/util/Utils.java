@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +16,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
 public class Utils {
 
@@ -60,6 +62,18 @@ public class Utils {
 		}
 	}
 
+	//返回一个img标签中的alt的内容
+	static public String getOneImgAlt(String content){
+		String regex = "alt\\s*=\\s*\"?(.*?)(\"|>|\\s+ (.*?))";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(content);
+
+		if(matcher.find()){
+			return matcher.group();
+		}else{
+			return null;
+		}
+	}
 
 	/**
 	 * 读取json的值
@@ -95,7 +109,7 @@ public class Utils {
 //			LOGGER.error(e.getStackTrace().toString());
 //
 //		}
-		return JSON.toJSONString(object, SerializerFeature.DisableCircularReferenceDetect);
+		return JSON.toJSONString(object, SerializerFeature.DisableCircularReferenceDetect,SerializerFeature.WriteMapNullValue);
 //		return null;
 	}
 

@@ -12,6 +12,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -35,12 +36,14 @@ public class ArticleServiceImpl implements ArticleService {
     ArtilceTopicMapper artilceTopicMapper;
 
     @Override
+    @Transactional
     public Article addArticleNoImg(Article article) {
         articleDao.insertSelective(article);
         return article;
      }
 
     @Override
+    @Transactional
     public boolean deleteArticle(Article article) {
         if(articleDao.deleteByPrimaryKey(article.getArticleId()) >= 1){
             return true;
@@ -49,6 +52,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Transactional
     public boolean updateArticle(Article article) {
         if(articleDao.updateByPrimaryKeySelective(article) >= 1){
             return true;

@@ -8,7 +8,9 @@ import java.util.Map;
  * Created by Shuang on 2018/5/22.
  */
 public class ResultTopic {
+	//一个topic下的所有图片
 	private Topic topic;
+
 	private Map<String,String> imgList;
 
 	public Topic getTopic() {

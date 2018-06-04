@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by shuang on 2018/5/4.
  */
 public class UserInterceptor implements HandlerInterceptor {
 	@Override

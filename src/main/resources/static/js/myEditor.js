@@ -71,9 +71,7 @@ $("#sub-article").bind("click",function () {
             data: {
                content:content
                ,userId:$("#index-user-id").val()
-                ,image:imageurl
                 ,type:getTheCheckBoxValue()
-                ,isHaveimg:isHave
             },
             success: function (data,stauts,result) {
                 imageurl = "";
@@ -187,11 +185,12 @@ function uploadInit() {
                 var domain = up.getOption('domain');
                 var res = $.parseJSON(info);
                 var sourceLink = domain + res.key; //获取上传成功后的文件的Url
+                var date = (file.lastModifiedDate).Format("yyyy-MM-dd hh:mm:ss");
                 imageurl = sourceLink+"||";
                 printLog(sourceLink);
 
                 // 插入图片到editor
-                editor.cmd.do('insertHtml', '<img src="' + sourceLink + '" style="max-width:50%;max-height: 50%;"/>')
+                editor.cmd.do('insertHtml', '<img alt="'+date+'" src="' + sourceLink + '" style="max-width:50%;max-height: 50%; "/>')
             },
             'Error': function(up, err, errTip) {
                 //上传出错时,处理相关的事情
@@ -230,4 +229,24 @@ function getTheCheckBoxValue() {
     checkBoxValue = checkBoxValue.substring(0, checkBoxValue.length - 2);
     console.log(checkBoxValue);
     return checkBoxValue;
+}
+
+Date.prototype.Format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o){
+        if (new RegExp("(" + k + ")").test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        }
+    }
+    return fmt;
 }

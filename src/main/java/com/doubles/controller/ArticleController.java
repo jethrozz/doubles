@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.rmi.CORBA.Util;
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -58,42 +60,57 @@ public class ArticleController {
     private ArticleMapper articleMapper;
     @Autowired
     private ArtilceTopicMapper artilceTopicMapper;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     @RequestMapping("/submitArticle")
     @ResponseBody
-    public String submitArticle(HttpServletRequest request, Article article,String image){
+    public String submitArticle(HttpServletRequest request, Article article){
         CommonResult<String> result = new CommonResult<>(0,"success");
-        if(StringUtils.isEmpty(image)&&article.getIsHaveimg() == 1){
-            result.setStauts(1);
-            result.setMsg("failed");
-            return Utils.toJson(result);
-        }
+//        if(StringUtils.isEmpty(image)&&article.getIsHaveimg() == 1){
+//            result.setStauts(1);
+//            result.setMsg("failed");
+//            return Utils.toJson(result);
+//        }
 
         //发表动态时要先去遍历该动态的type
         Users user = (Users)request.getSession().getAttribute("user");
         article.setUserId(user.getUserId());
         //直接插入表中，如有图片再进行后续处理
-        articleService.addArticleNoImg(article);
 
-        if(article.getIsHaveimg() == 1){
-            //如果有图片，则先插入动态，再处理图片
-            String imgUrl[] = image.split("\\|\\|");
-            //先根据用户id 获取到动态相册
+        //调用imgTagList方法，该方法可以判断传入的字符串中是否有img标签，并会返回所有img标签
+        List<String> imgList = Utils.getImgTagList(article.getContent());
+        if(imgList.size() != 0){
+            articleService.addArticleNoImg(article);
+            //不等于0 就表明该条动态是有图的
             Album album = albumService.getAlbumByuserIdAndName(user.getUserId());
-            for(int i=0;i<imgUrl.length;i++){
-                //然后遍历每个图片链接进行处理
-                //将图片放入动态相册中
+            for(String imgString : imgList){
+                //分别调用方法获取到图片的地址以及日期(日期是保存在alt中的)
+                String src = Utils.getOneImgSrc(imgString);
+                String alt = Utils.getOneImgAlt(imgString);
+                //获取到图片地址
+                src = src.substring(5,src.length()-1);
+                //获取到图片创建时间
+                alt = alt.substring(5,alt.length()-1);
+
                 Image img = new Image();
-                img.setImgPath(imgUrl[i]);
                 img.setAlbumId(album.getAlbumId());
+                try {
+                    img.setCreateTime(sdf.parse(alt));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                img.setImgPath(src);
                 img.setImgDescribe("");
                 imageService.addImage(img);
-                //再将图片与该动态对应放入动态表中
                 ArticlImg articlImg = new ArticlImg();
                 articlImg.setArticleId(article.getArticleId());
                 articlImg.setImgId(img.getImgId());
                 articlImgService.addImage(articlImg);
             }
+        }else{
+            article.setIsHaveimg((byte)1);
+            articleService.addArticleNoImg(article);
         }
+
         //再遍历该动态所参与的话题
         if(!StringUtils.isEmpty(article.getType())){
             String tag[] = article.getType().split("\\|\\|");

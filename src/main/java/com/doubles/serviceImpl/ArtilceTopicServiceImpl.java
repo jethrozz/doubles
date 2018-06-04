@@ -9,6 +9,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -29,6 +30,7 @@ public class ArtilceTopicServiceImpl implements ArtilceTopicService {
 	@Autowired
 	private TopicMapper topicMapper;
 	@Override
+	@Transactional
 	public boolean insertOne(ArtilceTopic articleTopic) {
 		if(artilceTopicDao.insertSelective(articleTopic) >= 1){
 			return true;
@@ -58,6 +60,7 @@ public class ArtilceTopicServiceImpl implements ArtilceTopicService {
 
 	@Override
 	public Map<Topic,List<Article>> getListByArticleNumber() {
+
 		List<String> topicList = artilceTopicDao.getTopicListByArticleNumber();
 		Map<Topic,List<Article>> listMap = new LinkedHashMap<>();
 
@@ -82,20 +85,23 @@ public class ArtilceTopicServiceImpl implements ArtilceTopicService {
 		TopicExample example = new TopicExample();
 		example.setOrderByClause("create_time desc");
 		List<Topic> list = topicMapper.selectByExample(example);
+
 		Map<Topic,List<Article>> listMap = new LinkedHashMap<>();
 
 		ArtilceTopicExample topicExample = new ArtilceTopicExample();
 		for(Topic topic : list){
+
 			topicExample.or().andTopicIdEqualTo(topic.getTopicId());
+
 			List<ArtilceTopic> atList = artilceTopicDao.selectByExample(topicExample);
 
-			if(atList != null && atList.size() != 0){
-				List<Article> articleList = new ArrayList<>();
-				for(ArtilceTopic artilceTopic : atList){
-					articleList.add(artilceTopic.getArticle());
-				}
-				listMap.put(atList.get(0).getTopic(),articleList);
+			List<Article> articleList = new ArrayList<>();
+
+			for(ArtilceTopic artilceTopic : atList){
+				articleList.add(artilceTopic.getArticle());
 			}
+			listMap.put(topic,articleList);
+
 			topicExample.clear();
 		}
 		return listMap;

@@ -40,7 +40,6 @@ public class ArticlePush implements Runnable{
     public void run() {
         try {
             while (true){
-                LOGGER.info("推送线程");
                 if(stopme || Thread.currentThread().isInterrupted()){
                     LOGGER.trace("CurrentThread IS STOP");
                     break;

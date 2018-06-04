@@ -278,6 +278,7 @@ public class UsersController {
 		return Utils.toJson(result);
 	}
 
+	//获取单个用户信息
 	@RequestMapping("/getUser")
 	@ResponseBody
 	public String getMe(HttpServletRequest request,String userId){
@@ -293,7 +294,7 @@ public class UsersController {
 
 		return Utils.toJson(result);
 	}
-
+	//达人
 	@RequestMapping("/hotPerson")
 	@ResponseBody
 	public String hotPerson(HttpServletRequest request){

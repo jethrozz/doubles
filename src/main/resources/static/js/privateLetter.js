@@ -54,7 +54,7 @@ function showChat(e,id){
     //
     $('#loading').modal('show');
     $.ajax({
-        url:"../chatRecord/getChatDetail",
+        url:"/chatRecord/getChatDetail",
         type:"post",
         async:true,
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
@@ -63,6 +63,7 @@ function showChat(e,id){
                 },
         success: function (data,stauts,result) {
             var res = JSON.parse(data);
+            console.log(res)
             if(res.status == 0){
                 pinjieChatRecord($("#talk .bottom"),res.data.list);
                 target.removeClass("active");
@@ -91,6 +92,17 @@ function pinjieChatRecord(container,data) {
                 "            </div>\n" +
                 "        </div>";
             $("#talkObject").text(data[i].to.nickname);
+            break;
+        }else{
+            htmlBegin = "<div class=\"chat\">\n" +
+                "            <img src=\""+data[i].to.userimg+"\" alt=\"\">\n" +
+                "            <div class=\"chatarea\">\n" +
+                "                <span style=\"float:right;\">你还可以输入500字</span>\n" +
+                "                <textarea name=\"letter-input\" id=\"letter-input\" cols=\"69\" rows=\"3\"></textarea>\n" +
+                "                <button onclick=\"sendMsg('data[i].from.userId')\">发送</button>\n" +
+                "            </div>\n" +
+                "        </div>";
+            $("#talkObject").text(data[i].from.nickname);
             break;
         }
     }

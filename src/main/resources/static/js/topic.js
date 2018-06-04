@@ -37,6 +37,7 @@ function NewTopic() {
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
         success: function (data,stauts,result) {
             var res = JSON.parse(data);
+            console.log(res);
             if(res.status == 0){
                 var topicList = res.data;
                 pinjieTopic($("#newTopic"),topicList.list);
@@ -88,15 +89,18 @@ function pinjieTopic(container,data) {
         var j=1;
         html = html + "<div class=\"card\" style=\"border: 1px solid #F2F2F2;margin-top: 0rem;\"><div class=\"card-body\">" +"<h4 class=\"card-title\"><a href=\"../topic/gettopic/"+data[i].topic.topicId+"\">" +data[i].topic.title+"</a></h4>" + "<small class=\"joinPers\">"+data[i].topic.fanNumber+"人参加</small>" ;
 
-        var size = Object.keys(data[i].imgList).length;
-        $.map(data[i].imgList,function (value,key) {
 
-            img += "<a href='../article/getArticle?articleId="+key+"'><img "+value+"  class=\"rounded-0\"></a>";
-            if(j%3 == 0 || j == size){
-                img = "<div class=\"row\">" + img + end;
-            }
-            j++;
-        });
+        if(data[i].imgList != null){
+            var size = Object.keys(data[i].imgList).length;
+            $.map(data[i].imgList,function (value,key) {
+
+                img += "<a href='../article/getArticle?articleId="+key+"'><img "+value+"  class=\"rounded-0\"></a>";
+                if(j%3 == 0 || j == size){
+                    img = "<div class=\"row\">" + img + end;
+                }
+                j++;
+            });
+        }
 
         html = html + imgBegin + img + end +end;
         html = html + end +end;

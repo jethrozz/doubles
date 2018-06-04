@@ -74,6 +74,12 @@
     cr_id, user_id, to_user, content, create_time, update_time
   </sql>
 
+  <select id="getTheTopOne" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" />
+    FROM doubles.chat_record
+    WHERE  (to_user = #{toUser} AND user_id = #{userId}) OR (to_user = #{userId} AND user_id = #{toUser}) ORDER BY create_time desc limit 1
+  </select>
+
   <select id="getChatRecordPage" resultMap="BaseResultMap">
     SELECT  <include refid="Base_Column_List" />
     FROM doubles.chat_record
@@ -86,8 +92,16 @@
     FROM doubles.chat_record
      WHERE  (to_user = #{toUser} AND user_id = #{userId}) OR (to_user = #{userId} AND user_id = #{toUser})
   </select>
-  
-  
+
+  <select id="getChatRecordListCount" resultType="java.util.Map">
+    SELECT  count(*) as number,chat_record.to_user as toId,chat_record.user_id as fromId
+   from chat_record
+   where chat_record.user_id != 'd39bb990bfa24db4ad58df38e913e9e2'
+   and (chat_record.user_id = #{userId}
+    or chat_record.to_user = #{userId})
+    group by chat_record.user_id,to_user
+  </select>
+
   <select id="getChatRecordList" resultMap="BaseResultMap">
     SELECT  <include refid="Base_Column_List" />
     FROM doubles.chat_record

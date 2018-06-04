@@ -5,6 +5,7 @@ import com.doubles.entity.ChatRecordExample;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
@@ -38,4 +39,6 @@ public interface ChatRecordMapper {
     Page<ChatRecord> getChatRecordList(@Param("toUser")String userId);
     Integer getNumberOfMeAndFriend(@Param("userId")String fromUser, @Param("toUser")String toUser);
 
+    Page<Map<String,Object>> getChatRecordListCount(@Param("userId")String userId);
+    ChatRecord getTheTopOne(@Param("userId")String userId,@Param("toUser")String toUser);
 }

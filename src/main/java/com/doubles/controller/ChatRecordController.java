@@ -23,7 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -51,6 +53,7 @@ public class ChatRecordController {
 
         return modelAndView;
     }
+
     @RequestMapping("/getprivateletter/{id}")
     public ModelAndView getprivateletter(HttpServletRequest request,@PathVariable String id, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
         ModelAndView modelAndView = new ModelAndView("/talk");
@@ -63,6 +66,7 @@ public class ChatRecordController {
         modelAndView.addObject("toUser",toUser);
         return modelAndView;
     }
+
     /**
      * 返回数据时记得把数据库写入结果返回了
      * @param chatRecord
@@ -124,16 +128,42 @@ public class ChatRecordController {
         CommonResult<PageInfo<ChatResult>> result = new CommonResult<>(0,"success");
         Users user = (Users)request.getSession().getAttribute("user");
 
-        Page<ChatRecord> chatRecordPage = chatRecordService.getChatRecordList(user.getUserId(),pageNo,pageSize);
+        Map<String,Integer> chatNumber = new HashMap<>();
+        Page<Map<String,Object>> mapPage = chatRecordService.getChatRecordListCount(user.getUserId(),pageNo,pageSize);
+        //这里开始统计总共的会话数以及每个对话的条数
+        for(Map<String,Object> m :mapPage){
+            String from = (String) m.get("fromId");
+            String to = (String) m.get("toId");
+            long number= (Long) m.get("number");
+            int count = (int)number;
+            if(from.equals(user.getUserId()) && !to.equals(user.getUserId())){
+                if(chatNumber.containsKey(to)){
+                    int num = chatNumber.get(to);
+                    chatNumber.put(to,num+count);
+                }else{
+                    chatNumber.put(to,count);
+                }
+            }else if(!from.equals(user.getUserId()) && to.equals(user.getUserId())){
+                if(chatNumber.containsKey(from)){
+                    int num = chatNumber.get(from);
+                    chatNumber.put(from,num+count);
+                }else{
+                    chatNumber.put(from,count);
+                }
+            }
+        }
+
         List<ChatResult> list = new ArrayList<>();
-        for (ChatRecord chat:chatRecordPage) {
+        //此时chatNumber 中以及有了每个对话者的id以及对话条数，此时只需要根据对话者的id取得最新的那一条返回即可
+        for (Map.Entry<String, Integer> entry : chatNumber.entrySet()) {
             ChatResult chatResult = new ChatResult();
-            chatResult.setFromUser(chat.getFrom());
-            chatResult.setCreate_time(chat.getCreateTime());
-            chatResult.setToUser(chat.getTo());
-            chatResult.setContent(chat.getContent());
-            int number = chatRecordService.getNumberOfMeAndFriend(chat.getUserId(),chat.getToUser());
-            chatResult.setCount(number);
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+            ChatRecord chatRecord = chatRecordService.getTheTopOne(user.getUserId(),entry.getKey());
+            chatResult.setCount(entry.getValue());
+            chatResult.setCreate_time(chatRecord.getCreateTime());
+            chatResult.setFromUser(chatRecord.getFrom());
+            chatResult.setToUser(chatRecord.getTo());
+            chatResult.setContent(chatRecord.getContent());
             list.add(chatResult);
         }
 
