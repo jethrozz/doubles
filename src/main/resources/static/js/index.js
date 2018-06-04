@@ -132,7 +132,7 @@ function getIndex() {
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
         success: function (data,stauts,result) {
             var res = JSON.parse(data);
-
+            console.log(res.data.list.list);
             if(res.status == 0){
                 indexText($("#user-article-content-text"),res.data.list.list)
 				$('#loading').modal('hide');
@@ -188,7 +188,7 @@ function indexText(container,data) {
             }
 		}
 		html = html + "<li><a href=\"javascript:void(0);\" onclick=\"subComment(this)\">评论</a></li> <li> <ul>";
-		if(data[i].isLike){
+		if(data[i].like){
 		  html = html + "<li><div  class=\"fave active\"></div>"+"<input type=\"hidden\" name=\"articleId\" value=\""+data[i].article.articleId+"\" />"+"</li>";
 		}else{
           html = html + "<li><div  class=\"fave\"></div>"+"<input type=\"hidden\" name=\"articleId\" value=\""+data[i].article.articleId+"\" />"+"</li>";

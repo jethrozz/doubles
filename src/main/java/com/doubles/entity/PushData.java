@@ -14,7 +14,9 @@ public class PushData implements Serializable {
 
     private String contentId;
 
-    private Integer type;
+    private Integer type;  //            0——个人动态 1——关注的话题的动态  2——个人转发的动态 3 自己发的动态
+
+
 
     private String belongUser;
 

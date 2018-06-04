@@ -66,15 +66,36 @@ public class MainController {
 		return Utils.toJson(result);
 	}
 
-	//为带图的动态加上图片
-//	private void isHaveImg(List<Article> list){
-//		for (Article article : list) {
-//			if (article.getIsHaveimg() == 0){
-//				article.setImgList(articlImgService.findImgByArticleId(article.getArticleId()));
-//			}
-//		}
-//	}
 
+	@RequestMapping("/getCollection")
+	@ResponseBody
+	public String getCollection(HttpServletRequest request, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "20") int pageSize){
+		CommonResult<IndexResult> result = new CommonResult<IndexResult>(0,"success");
+		IndexResult indexResult = new IndexResult();
+
+		indexResult.setList(getCollectionData(request,pageNo,pageSize));
+
+		result.setData(indexResult);
+		return Utils.toJson(result);
+	}
+
+	private PageInfo<ResultArticle> getCollectionData(HttpServletRequest request,int index,int size){
+		List<ResultArticle> resultArticleList = new ArrayList<>();
+		Users user = (Users)request.getSession().getAttribute("user");
+
+		List<Collections> list = collectionsService.getListCollection(user.getUserId());
+		for(Collections c : list){
+			ResultArticle resultArticle = new ResultArticle();
+			resultArticle.setLike(true);
+			resultArticle.setOldUser(c.getArticle().getUser());
+			resultArticle.setIsTransmit(1);
+			resultArticle.setArticle(c.getArticle());
+			resultArticleList.add(resultArticle);
+		}
+
+		PageInfo<ResultArticle> resultArticlePageInfo = new PageInfo<>(resultArticleList);
+		return  resultArticlePageInfo;
+	}
 
 	private PageInfo<ResultArticle> getIndexData(HttpServletRequest request,int index,int size){
 		List<ResultArticle> resultArticleList = new ArrayList<>();
