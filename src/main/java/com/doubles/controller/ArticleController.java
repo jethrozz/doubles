@@ -182,6 +182,17 @@ public class ArticleController {
         }
     }
 
+   /* @RequestMapping("/getMyCollections")
+    public String  getMyCollections(HttpServletRequest request,String userId){
+        CommonResult<PageInfo<Collections>> result = new CommonResult<>(0,"success");
+        if(StringUtils.isEmpty(userId)){
+            result.setStauts(1);
+            result.setMsg("userId is empty");
+            return Utils.toJson(result);
+        }
+
+        return Utils.toJson(result);
+    }*/
 
     //获取用户id该用户的所有动态，并跳转到用户个人主页
     @RequestMapping("/getMyArticle")

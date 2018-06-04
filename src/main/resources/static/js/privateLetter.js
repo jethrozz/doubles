@@ -1,7 +1,7 @@
 function getPrivateLetter() {
     $('#loading').modal('show');
     $.ajax({
-        url:"../chatRecord/getChatRecordList",
+        url:"/chatRecord/getChatRecordList",
         type:"post",
         async:true,
         contentType : "application/x-www-form-urlencoded; charset=UTF-8",
@@ -10,6 +10,7 @@ function getPrivateLetter() {
                 },*/
         success: function (data,stauts,result) {
             var res = JSON.parse(data);
+            console.log(res.data.list)
             if(res.status == 0){
                 pinjiePrivate($("#private .bottom ul:first"),res.data.list);
                 $('#loading').modal('hide');
@@ -88,7 +89,7 @@ function pinjieChatRecord(container,data) {
                 "            <div class=\"chatarea\">\n" +
                 "                <span style=\"float:right;\">你还可以输入500字</span>\n" +
                 "                <textarea name=\"letter-input\" id=\"letter-input\" cols=\"69\" rows=\"3\"></textarea>\n" +
-                "                <button onclick=\"sendMsg('data[i].to.userId')\">发送</button>\n" +
+                "                <button onclick=\"sendMsg('"+data[i].to.userId+"')\">发送</button>\n" +
                 "            </div>\n" +
                 "        </div>";
             $("#talkObject").text(data[i].to.nickname);
@@ -99,7 +100,7 @@ function pinjieChatRecord(container,data) {
                 "            <div class=\"chatarea\">\n" +
                 "                <span style=\"float:right;\">你还可以输入500字</span>\n" +
                 "                <textarea name=\"letter-input\" id=\"letter-input\" cols=\"69\" rows=\"3\"></textarea>\n" +
-                "                <button onclick=\"sendMsg('data[i].from.userId')\">发送</button>\n" +
+                "                <button onclick=\"sendMsg('"+data[i].from.userId+"')\">发送</button>\n" +
                 "            </div>\n" +
                 "        </div>";
             $("#talkObject").text(data[i].from.nickname);
@@ -119,7 +120,7 @@ function pinjieChatRecord(container,data) {
                 "            </div>";
         }else{
             html = html + "            <div class=\"friend\">\n" +
-                "                <img src=\""+data[i].to.userimg+"\" alt=\"\">\n" +
+                "                <img src=\""+data[i].from.userimg+"\" alt=\"\">\n" +
                 "                <div class=\"frimess\">\n" +
                 "                    <p>"+data[i].content+"</p>\n" +
                 "                    <span>"+data[i].createTime+"</span>\n" +

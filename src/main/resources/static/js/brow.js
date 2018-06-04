@@ -80,13 +80,13 @@ $('.slider-next').bind('click', function() {
  /**
   * 停止轮播
   */
- ?/*unction stop() {
+ /*unction stop() {
   clearInterval(interval);
   hasStarted = false;
  }
  //开始轮播
  start();
- });*/*/*/*/
+ });*/
 
  $(document).ready(function() {
  	$('#myCarousel').carousel({

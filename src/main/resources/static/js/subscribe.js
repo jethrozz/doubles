@@ -23,7 +23,7 @@ goEasy.subscribe({
         var data = message.content;
         var content = JSON.parse(data);
         var me = sessionStorage.getItem("userId");
-
+        console.log(content);
         if(me == content.toUser && me != content.userId){
             var str = "您的好友" + content.from.nickname + "向您发送了私信 \n" + "\""+content.content+"\"";
             $("#tip").text(str);

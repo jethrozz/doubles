@@ -22,6 +22,29 @@ function getMyArticle(userId) {
 
 
 
+/*function getMyCollections() {
+    $('#loading').modal('show');
+    var userId = sessionStorage.getItem("userId");
+
+    $.ajax({
+        url:"/article/getMyCollections",
+        type:"post",
+        async:true,
+        contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+        data:{
+            userId:userId
+        },
+        success: function (data,stauts,result) {
+            var res = JSON.parse(data);
+
+            if(res.status == 0){
+                followUserText($("#like"),res.data);
+                $('#loading').modal('hide');
+            }
+        }
+    });
+}*/
+
 
 
 

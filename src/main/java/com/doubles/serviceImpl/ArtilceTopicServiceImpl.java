@@ -85,14 +85,14 @@ public class ArtilceTopicServiceImpl implements ArtilceTopicService {
 		TopicExample example = new TopicExample();
 		example.setOrderByClause("create_time desc");
 		List<Topic> list = topicMapper.selectByExample(example);
-
+		//创建一个map 用于装最后要返回的结果
 		Map<Topic,List<Article>> listMap = new LinkedHashMap<>();
 
 		ArtilceTopicExample topicExample = new ArtilceTopicExample();
 		for(Topic topic : list){
 
 			topicExample.or().andTopicIdEqualTo(topic.getTopicId());
-
+			//根据TopicId 获取到该ｔｏｐｉｃ下的所有动态
 			List<ArtilceTopic> atList = artilceTopicDao.selectByExample(topicExample);
 
 			List<Article> articleList = new ArrayList<>();
@@ -100,6 +100,7 @@ public class ArtilceTopicServiceImpl implements ArtilceTopicService {
 			for(ArtilceTopic artilceTopic : atList){
 				articleList.add(artilceTopic.getArticle());
 			}
+
 			listMap.put(topic,articleList);
 
 			topicExample.clear();

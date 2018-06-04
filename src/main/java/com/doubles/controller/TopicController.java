@@ -209,6 +209,7 @@ public class TopicController {
 			return Utils.toJson(result);
 		}
 		Page<ArtilceTopic> artilceTopicPage = artilceTopicService.getArticlePageByTopicId(topicId,pageNo,pageSize);
+
 		PageInfo<ArtilceTopic> artilceTopicPageInfo = new PageInfo<>(artilceTopicPage);
 		result.setData(artilceTopicPageInfo);
 		return Utils.toJson(result);

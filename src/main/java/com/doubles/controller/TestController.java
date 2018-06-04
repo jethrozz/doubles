@@ -20,18 +20,10 @@ public class TestController {
     @Autowired
     TopicMapper topicMapper;
 
-    @RequestMapping("/zs")
+    @RequestMapping("/welcome")
     public ModelAndView getTheworld( Users users,String pd){
-        ModelAndView modelAndView=new ModelAndView("/test");
+        ModelAndView modelAndView = new ModelAndView("brow");
 
-        TopicExample example = new TopicExample();
-        example.or().andTopicIdEqualTo(pd);
-        List<Topic> list=topicMapper.selectByExample(example);
-        if (list==null||list.size()==0)
-        {
-            return modelAndView;
-        }
-        modelAndView.addObject("zs",list.get(0));
         return modelAndView;
     }
 

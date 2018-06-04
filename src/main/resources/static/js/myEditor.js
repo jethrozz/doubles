@@ -17,7 +17,7 @@ editor.customConfig.menus = [
     //'list',  // 列表
     //'justify',  // 对齐方式
     'quote',  // 引用
-    'emoticon',  // 表情
+ //   'emoticon',  // 表情
     'image',  // 插入图片
     //'table',  // 表格
     //'video',  // 插入视频
@@ -55,7 +55,7 @@ function clearContent() {
     imageurl = "";
 }
 $("#sub-article").bind("click",function () {
-    var content = editor.txt.html();  // 获取 JSON 格式的内容
+    var content = editor.txt.html();  // 获取 html 格式的内容
     console.log(content);
     console.log(imageurl);
     console.log(getTheCheckBoxValue());
@@ -186,7 +186,7 @@ function uploadInit() {
                 var res = $.parseJSON(info);
                 var sourceLink = domain + res.key; //获取上传成功后的文件的Url
                 var date = (file.lastModifiedDate).Format("yyyy-MM-dd hh:mm:ss");
-                imageurl = sourceLink+"||";
+               // imageurl = sourceLink+"||";
                 printLog(sourceLink);
 
                 // 插入图片到editor

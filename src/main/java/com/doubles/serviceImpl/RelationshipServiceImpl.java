@@ -80,6 +80,7 @@ public class RelationshipServiceImpl implements RelationshipService {
             example.clear();
             example.or().andUserIdEqualTo(relationship.getFriendId()).andFriendIdEqualTo(relationship.getUserId());
             List<Relationship> rslist1 = relationshipDao.selectByExample(example);
+
             if(rslist1.size() != 0 && null != rslist1){
                 Relationship oldrs = rslist1.get(0);
                 cheeckFriendStauts(oldrs,rs);
